@@ -3,7 +3,7 @@ title: Validate Connection
 layout: default
 parent: Setup
 grand_parent: Shopify
-nav_order: 50
+nav_order: 60
 ---
 
 # Validate the Shopify connection
