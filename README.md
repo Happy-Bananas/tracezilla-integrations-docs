@@ -13,9 +13,9 @@ docker compose up --build
 
 Open <http://localhost:4000/>.
 
-Docker Compose overrides the production GitHub Pages base path locally, so the
-site is served directly from `/`. The GitHub workflow continues to publish at
-`/tracezilla-integrations-docs/`.
+Docker Compose loads `_config.local.yml` after the production configuration,
+so the local site is served directly from `/`. The GitHub workflow uses only
+`_config.yml` and continues to publish at `/tracezilla-integrations-docs/`.
 
 The source directory is mounted into the container. Markdown changes are
 rebuilt automatically. Restart the container after changing `_config.yml`.
