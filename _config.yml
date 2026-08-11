@@ -1,0 +1,26 @@
+title: tracezilla Integrations
+description: Practical guides and examples for integrating external services with tracezilla.
+url: "https://happy-bananas.github.io"
+baseurl: "/tracezilla-integrations-docs"
+
+theme: just-the-docs
+color_scheme: dark
+search_enabled: true
+heading_anchors: true
+
+aux_links:
+  "Happy Bananas on GitHub":
+    - "https://github.com/Happy-Bananas"
+
+aux_links_new_tab: true
+
+footer_content: "Maintained by Happy Bananas. Distributed under the MIT License."
+
+exclude:
+  - Dockerfile
+  - compose.yaml
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE
+  - vendor
