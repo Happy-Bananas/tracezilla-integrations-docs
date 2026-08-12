@@ -8,8 +8,17 @@ nav_order: 50
 # Shopify with Python
 
 {: .label .label-yellow }
-Planned
+First workflow available
+
+The framework-neutral
+[`tracezilla-shopify-python`](https://github.com/Happy-Bananas/tracezilla-shopify-python)
+repository runs with Python 3.12 inside Docker; consultants do not need Python
+on the host.
 
 ## Examples
 
-- **Compare Catalogs** — planned migration into a focused Python repository.
+- [Compare Catalogs](./workflows/compare-catalogs.html) — complete-catalog,
+  read-only comparison with table and JSON output.
+
+The repository README contains installation, configuration, execution, test,
+and strict type-check commands. Inventory and order workflows remain planned.

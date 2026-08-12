@@ -62,7 +62,21 @@ docker compose build
 docker compose run --rm app
 ```
 
+## Python implementation
+
+The framework-neutral
+[`tracezilla-shopify-python`](https://github.com/Happy-Bananas/tracezilla-shopify-python)
+implementation follows the same architecture and comparison contract. Python
+3.12 and locked dependencies run inside Docker.
+
+After configuring `.env`, run:
+
+```bash
+docker compose build
+docker compose run --rm app
+```
+
 ## Other implementations
 
-Python is planned. Make.com is deferred. Future implementations will follow
-the same comparison rule and result categories.
+Make.com is deferred. Any future implementation will follow the same comparison
+rule and result categories.
