@@ -107,5 +107,10 @@ docker compose run --rm app
 
 ## Other implementations
 
+The framework-neutral
+[`tracezilla-shopify-java`](https://github.com/Happy-Bananas/tracezilla-shopify-java)
+implementation provides the same workflow as a Java 21 CLI. After configuring
+`.env`, run `docker compose build` followed by `docker compose run --rm app`.
+
 Make.com is deferred. Any future implementation will follow the same comparison
 rule and result categories.
