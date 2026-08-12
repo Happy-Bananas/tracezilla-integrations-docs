@@ -18,12 +18,12 @@ use.
 - [Shopify](./shopify/) — existing material is being migrated and verified.
 - [Getting Started](./getting-started/) — understand how workflows and
   implementations relate.
+- [Integration Workbench](./workbench.html) — validate connections, inspect
+  sample data, and preview controlled Shopify-to-Tracezilla SKU creation.
 
 ## Planned
 
 - **WooCommerce** — service guidance and examples are planned.
-- **Integration Workbench** — a local consultant tool for credentials,
-  inspection, previews, and controlled test-data preparation.
 
 Planned pages describe intended coverage only. They do not represent working
 or supported implementations until marked otherwise.
