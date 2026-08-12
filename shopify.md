@@ -25,4 +25,5 @@ live store.
 | TypeScript | Compare Catalogs maintained |
 | Python | Compare Catalogs maintained |
 | Ruby | Compare Catalogs maintained |
+| C# / .NET | Compare Catalogs maintained |
 | Make.com | Planned review |

@@ -90,6 +90,21 @@ docker compose build
 docker compose run --rm app
 ```
 
+## C# / .NET implementation
+
+The framework-neutral
+[`tracezilla-shopify-dotnet`](https://github.com/Happy-Bananas/tracezilla-shopify-dotnet)
+implementation follows the same architecture and comparison contract. It is a
+.NET 8 console application using built-in HTTP and JSON support, without
+ASP.NET.
+
+After configuring `.env`, run:
+
+```bash
+docker compose build
+docker compose run --rm app
+```
+
 ## Other implementations
 
 Make.com is deferred. Any future implementation will follow the same comparison
