@@ -33,13 +33,17 @@ stylesheets, and scripts:
 
 ```bash
 docker compose run --rm docs sh -c \
-  'JEKYLL_ENV=production bundle exec jekyll build && \
-   bundle exec htmlproofer ./_site --disable-external \
+  'JEKYLL_ENV=production bundle exec jekyll build \
+     --destination /tmp/tracezilla-integrations-docs-site && \
+   bundle exec htmlproofer /tmp/tracezilla-integrations-docs-site \
+   --disable-external \
    --no-enforce-https \
    --swap-urls "^/tracezilla-integrations-docs/:/"'
 ```
 
 HTMLProofer checks generated local content without contacting external sites.
+A separate temporary destination prevents a production build from overwriting
+the files served at `http://localhost:4000/`.
 A broken internal destination blocks the GitHub Pages deployment. External
 links are excluded because rate limits and temporary third-party outages should
 not block publication.
