@@ -21,7 +21,7 @@ live store.
 
 | Platform | Current status |
 |:--|:--|
-| PHP | Planned implementation |
+| PHP | Compare Catalogs maintained |
 | TypeScript | Planned migration |
 | Python | Planned migration |
 | Make.com | Planned review |

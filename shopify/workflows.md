@@ -10,13 +10,14 @@ nav_order: 20
 {: .label .label-yellow }
 Migration in progress
 
-Planned canonical workflows:
+Canonical workflows:
 
-- Compare Shopify and tracezilla catalogs.
+- [Compare Shopify and tracezilla catalogs](./workflows/compare-catalogs.html)
+  — PHP implementation available.
 - Create missing tracezilla SKUs.
 - Create or update Shopify products.
 - Synchronize inventory.
 - Import individual orders.
 - Aggregate or import collected orders.
 
-Each workflow will link to every verified platform implementation.
+Each workflow links to every verified platform implementation.

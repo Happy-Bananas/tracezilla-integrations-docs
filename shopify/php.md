@@ -8,13 +8,14 @@ nav_order: 30
 # Shopify with PHP
 
 {: .label .label-yellow }
-Planned
+First workflow available
 
 The framework-neutral
 [`tracezilla-shopify-php`](https://github.com/Happy-Bananas/tracezilla-shopify-php)
-repository has been created. Its examples will cover verified catalog,
-inventory, and order workflows using Composer and ordinary PHP without an
-application framework.
+repository provides a verified, read-only
+[Compare Catalogs](./workflows/compare-catalogs.html) example using Composer
+and ordinary PHP without an application framework. Inventory and order
+workflows remain planned.
 
 ## Optional Laravel workbench
 
