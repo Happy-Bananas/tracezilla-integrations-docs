@@ -28,11 +28,21 @@ docker compose down
 
 ## Verify
 
-Build the same static site that GitHub Pages receives:
+Build the production site and validate its internal links, anchors, images,
+stylesheets, and scripts:
 
 ```bash
-docker compose run --rm docs bundle exec jekyll build
+docker compose run --rm docs sh -c \
+  'JEKYLL_ENV=production bundle exec jekyll build && \
+   bundle exec htmlproofer ./_site --disable-external \
+   --no-enforce-https \
+   --swap-urls "^/tracezilla-integrations-docs/:/"'
 ```
+
+HTMLProofer checks generated local content without contacting external sites.
+A broken internal destination blocks the GitHub Pages deployment. External
+links are excluded because rate limits and temporary third-party outages should
+not block publication.
 
 ## Publishing
 
