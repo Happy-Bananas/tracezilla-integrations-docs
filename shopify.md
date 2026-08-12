@@ -10,9 +10,6 @@ permalink: /shopify/
 
 Guides and implementations for connecting Shopify with tracezilla.
 
-Existing Shopify material is being copied from the legacy reference project,
-reviewed, and tested before being marked as maintained.
-
 ## Start here
 
 Complete [Shopify Setup](./setup.html) before choosing a catalog, inventory,
@@ -24,7 +21,7 @@ live store.
 
 | Platform | Current status |
 |:--|:--|
-| Laravel | Planned migration |
+| PHP | Planned implementation |
 | TypeScript | Planned migration |
 | Python | Planned migration |
 | Make.com | Planned review |
