@@ -76,6 +76,20 @@ docker compose build
 docker compose run --rm app
 ```
 
+## Ruby implementation
+
+The framework-neutral
+[`tracezilla-shopify-ruby`](https://github.com/Happy-Bananas/tracezilla-shopify-ruby)
+implementation follows the same architecture and comparison contract. Ruby
+3.4 and locked gems run inside Docker.
+
+After configuring `.env`, run:
+
+```bash
+docker compose build
+docker compose run --rm app
+```
+
 ## Other implementations
 
 Make.com is deferred. Any future implementation will follow the same comparison

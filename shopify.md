@@ -24,4 +24,5 @@ live store.
 | PHP | Compare Catalogs maintained |
 | TypeScript | Compare Catalogs maintained |
 | Python | Compare Catalogs maintained |
+| Ruby | Compare Catalogs maintained |
 | Make.com | Planned review |
