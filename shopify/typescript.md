@@ -8,12 +8,17 @@ nav_order: 40
 # Shopify with TypeScript
 
 {: .label .label-yellow }
-Planned
+First workflow available
+
+The framework-neutral
+[`tracezilla-shopify-typescript`](https://github.com/Happy-Bananas/tracezilla-shopify-typescript)
+repository runs with Node.js inside Docker; consultants do not need Node.js on
+the host.
 
 ## Examples
 
-- **Compare Catalogs** — planned migration into a focused TypeScript
-  repository.
+- [Compare Catalogs](./workflows/compare-catalogs.html) — complete-catalog,
+  read-only comparison with table and JSON output.
 
-Example pages will contain installation, configuration, execution,
-verification, and links back to the canonical Shopify workflow.
+The repository README contains installation, configuration, execution, and
+test commands. Inventory and order workflows remain planned.

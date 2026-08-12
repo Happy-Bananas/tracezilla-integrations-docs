@@ -48,7 +48,21 @@ docker compose run --rm php php bin/compare-catalogs
 The default terminal view shows at most ten rows from each result category,
 while comparison and summary counts use the complete catalogs.
 
+## TypeScript implementation
+
+The framework-neutral
+[`tracezilla-shopify-typescript`](https://github.com/Happy-Bananas/tracezilla-shopify-typescript)
+implementation follows the same query, client, service, mapper, workflow, and
+output boundaries as PHP. It uses the Node.js Fetch API and runs inside Docker.
+
+After configuring `.env`, run:
+
+```bash
+docker compose build
+docker compose run --rm app
+```
+
 ## Other implementations
 
-TypeScript, Python, and Make.com versions are planned. They will follow the
-same comparison rule and result categories.
+Python is planned. Make.com is deferred. Future implementations will follow
+the same comparison rule and result categories.
