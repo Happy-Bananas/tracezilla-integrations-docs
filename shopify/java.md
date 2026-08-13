@@ -17,7 +17,7 @@ application framework.
 
 ## Examples
 
-- [Compare Catalogs](./workflows/compare-catalogs.html) — complete-catalog,
-  read-only comparison with table and JSON output.
+- [Compare Catalogs repository](https://github.com/Happy-Bananas/tracezilla-shopify-java) —
+  complete-catalog, read-only comparison with table and JSON output.
 
 The repository README contains setup, execution, and test commands.

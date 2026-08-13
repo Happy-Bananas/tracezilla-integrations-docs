@@ -17,8 +17,8 @@ not need the .NET SDK on the host.
 
 ## Examples
 
-- [Compare Catalogs](./workflows/compare-catalogs.html) — complete-catalog,
-  read-only comparison with table and JSON output.
+- [Compare Catalogs repository](https://github.com/Happy-Bananas/tracezilla-shopify-dotnet) —
+  complete-catalog, read-only comparison with table and JSON output.
 
 The repository README contains installation, configuration, execution, and
 test commands. Inventory and order workflows remain planned.

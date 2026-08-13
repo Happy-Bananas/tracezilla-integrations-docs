@@ -17,8 +17,8 @@ on the host.
 
 ## Examples
 
-- [Compare Catalogs](./workflows/compare-catalogs.html) — complete-catalog,
-  read-only comparison with table and JSON output.
+- [Compare Catalogs repository](https://github.com/Happy-Bananas/tracezilla-shopify-python) —
+  complete-catalog, read-only comparison with table and JSON output.
 
 The repository README contains installation, configuration, execution, test,
 and strict type-check commands. Inventory and order workflows remain planned.

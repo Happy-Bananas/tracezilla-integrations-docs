@@ -3,6 +3,7 @@ title: PHP
 layout: default
 parent: Shopify
 nav_order: 30
+has_children: true
 ---
 
 # Build a Shopify integration with PHP
@@ -16,9 +17,9 @@ repository is a runnable starting point for consultants creating Shopify and
 tracezilla integration commands. It uses PHP 8.3 and Composer without Laravel,
 Symfony, or another application framework.
 
-Its first command is the read-only [Compare Catalogs](./workflows/compare-catalogs.html)
-workflow. The same organization is intended for later catalog, inventory, and
-order commands.
+Its first command is the read-only [Compare Catalogs](./php/compare-catalogs.html)
+integration. Additional catalog, inventory, and order commands will appear as
+child pages beneath PHP.
 
 ## Clone and start the project
 
@@ -53,33 +54,10 @@ The source directory is mounted into the container, so code changes are
 available immediately. Rebuild only after changing the Dockerfile or container
 dependencies.
 
-## Execute Compare Catalogs
+## Available commands
 
-Run the default command:
-
-```bash
-docker compose run --rm php php bin/compare-catalogs
-```
-
-The command retrieves the complete Shopify variant catalog and the complete
-tracezilla SKU catalog. It compares normalized SKU codes and prints at most ten
-rows from each result category.
-
-Change only the number of displayed rows:
-
-```bash
-docker compose run --rm php php bin/compare-catalogs --limit=25
-```
-
-Return complete machine-readable results:
-
-```bash
-docker compose run --rm php php bin/compare-catalogs --json
-```
-
-Catalog differences are a successful result and return exit code `0`.
-Configuration, authentication, transport, or invalid-response errors return a
-non-zero exit code. The command does not write to Shopify or tracezilla.
+- [Compare Catalogs](./php/compare-catalogs.html) — read and compare Shopify
+  variants and tracezilla SKUs without changing either system.
 
 ## Run the tests
 
