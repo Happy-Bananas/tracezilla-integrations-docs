@@ -60,6 +60,8 @@ dependencies.
   variants and tracezilla SKUs without changing either system.
 - [Create tracezilla SKUs](./php/create-tracezilla-skus.html) — preview or
   create missing tracezilla SKUs from Shopify variants.
+- [List Shopify Locations](./php/list-shopify-locations.html) — inspect the
+  locations and IDs available to the configured Shopify app.
 
 ## Run the tests
 
