@@ -5,40 +5,118 @@ parent: Python
 grand_parent: Shopify
 nav_order: 20
 ---
+
 # Create tracezilla SKUs from Shopify
+
 {: .label .label-yellow }
 Writes with explicit confirmation
+
 ## Behavior
-Reads Shopify variants and existing tracezilla SKUs, then reports `would_create`, `created`, `skipped`, `invalid`, or `failed`. The mapper visibly uses example values `pcs`, `colli`, and `1.0`; adapt them to the customer.
+
+The command reads Shopify product variants and existing tracezilla SKUs. It
+previews or creates a tracezilla SKU for each selected Shopify SKU code that is
+missing from tracezilla.
+
+Complete the [Python installation and configuration](../python.html) first.
+Use development and test accounts while adapting the example.
+
+### Mapping
+
+The mapping is deliberately visible in
+`src/tracezilla_shopify/create_skus.py`:
+
+| Shopify source | tracezilla field | Example value |
+|---|---|---|
+| Variant SKU | `sku_code` | Shopify SKU |
+| Variant SKU | `global_name` | Shopify SKU |
+| Example assumption | `weight_factor_net` | `1.0` |
+| Example assumption | `weight_factor_gross` | `1.0` |
+| Example assumption | `unit_of_measure` | `pcs` |
+| Example assumption | `lot_unit` | `colli` |
+| Example assumption | `default_uom_conversion` | `1.0` |
+
+The fixed values are example business assumptions, not universal defaults.
+Review them for the customer's units, weights, and conversions before writing.
+
+Each selected variant becomes `would_create`, `created`, `skipped`, `invalid`,
+or `failed`. Existing tracezilla SKUs and repeated Shopify SKUs are skipped;
+variants without an SKU are invalid. Matching uses trimmed SKU code only.
+
 ## Run the command
+
+Dry run is the default and processes at most ten variants:
+
 ```bash
 docker compose run --rm --entrypoint create-tracezilla-skus app --limit=10
 ```
+
 ## Options
-Use `--limit N` to bound processing and `--json` for JSON output.
+
+Choose another processing limit or request complete JSON:
+
+```bash
+docker compose run --rm --entrypoint create-tracezilla-skus app --limit=25
+docker compose run --rm --entrypoint create-tracezilla-skus app --limit=25 --json
+```
+
+The limit bounds processed Shopify variants, while both complete catalogs are
+read to calculate source counts and prevent duplicates.
+
 ## Safety and exit status
-Dry run is the default. A write requires both flags:
+
+Inspect a dry run before a bounded sandbox write:
+
 ```bash
 docker compose run --rm --entrypoint create-tracezilla-skus app --execute --confirm --limit=1
 ```
-Failures return non-zero; the command never writes to Shopify.
+
+Both confirmation flags are required. Supplying only `--execute` fails without
+writing. Increase the limit only after inspecting the created record.
+
+The command requires Shopify `read_products` plus tracezilla list/create SKU
+permission. It never writes to Shopify. Successful runs without failed writes
+return `0`; option, configuration, API, and individual write failures return
+non-zero. Successfully created SKU codes are skipped on subsequent runs.
+
 ## Architecture
+
 <pre class="mermaid">
 flowchart TB
- subgraph Shopify[Shopify boundary]
-  Query[GraphQL query] --> Service[Catalog service] --> Variant[Variant data]
- end
- subgraph Tracezilla[tracezilla boundary]
-  Client[API client] --> Target[SKU service]
-  Payload[SKU payload] --> Target
- end
- Variant --> Workflow[CreateTracezillaSkus]
- Target --> Workflow --> Payload
+    subgraph Shopify[Shopify boundary]
+        Query[GraphQL query] --> ShopifyService[Catalog service]
+        ShopifyClient[API client] --> ShopifyService
+        ShopifyService --> Variant[Shopify variant data]
+    end
+    subgraph Tracezilla[tracezilla boundary]
+        TracezillaClient[API client] --> TracezillaService[SKU service]
+        Payload[tracezilla SKU payload] --> TracezillaService
+    end
+    Variant --> Workflow[CreateTracezillaSkus workflow]
+    TracezillaService --> Workflow
+    Workflow --> Payload
+    Workflow --> Result[Structured summary and items]
 </pre>
+
 ## Implementation
-Entry point: `create_skus_cli.py`; workflow and mapping: `create_skus.py`; API services: `shopify/` and `tracezilla/`.
+
+| Responsibility | Source |
+|---|---|
+| CLI safety, options, and composition | `src/tracezilla_shopify/create_skus_cli.py` |
+| Shopify variant retrieval | `src/tracezilla_shopify/shopify/service.py` |
+| Customer-specific mapping and decisions | `src/tracezilla_shopify/create_skus.py` |
+| Existing-SKU lookup and creation | `src/tracezilla_shopify/tracezilla/service.py` |
+| Authenticated HTTP writes | `src/tracezilla_shopify/tracezilla/client.py` |
+| Structured summary and items | `src/tracezilla_shopify/create_skus.py` |
+
+The workflow keeps the mapping explicit next to the tracezilla payload; no
+generic configuration or rule engine hides the customer-specific assumptions.
+
 ## Tests
+
 ```bash
 docker compose run --rm --entrypoint pytest app
 docker compose run --rm --entrypoint mypy app src tests
 ```
+
+Tests verify dry-run decisions using in-memory collaborators, and strict mypy
+checks the source and tests. Run against sandbox accounts before any write.

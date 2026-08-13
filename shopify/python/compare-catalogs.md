@@ -13,30 +13,46 @@ Read only
 
 ## Behavior
 
-The command reads the complete Shopify variant and
-tracezilla SKU catalogs and compares their normalized SKU codes. Complete the
-[Python setup](../python.html) first.
+The command retrieves the complete Shopify variant catalog and tracezilla SKU
+catalog, normalizes their SKU codes, and reports differences without writing to
+either API.
+
+Complete the [Python installation and configuration](../python.html) before
+running this command.
 
 ## Run the command
+
+From the cloned `tracezilla-shopify-python` repository, run:
 
 ```bash
 docker compose run --rm app
 ```
 
-Control displayed rows or request the complete JSON result:
+The terminal output contains three categories:
 
-```bash
-docker compose run --rm app --limit=25
-docker compose run --rm app --json
-```
+- SKUs present in both systems;
+- SKUs present only in Shopify;
+- SKUs present only in tracezilla.
 
-The result separates SKUs present in both systems, only Shopify, or only
-tracezilla. `--limit` affects display only; all records contribute to totals.
+SKU is the shared identifier. Product titles, variant names, and internal IDs
+do not determine a match.
 
 ## Options
 
-- `--limit=25` changes the maximum displayed rows per category.
-- `--json` returns the complete structured result.
+Display a different maximum number of rows from each category:
+
+```bash
+docker compose run --rm app --limit=25
+```
+
+Return the complete result as machine-readable JSON:
+
+```bash
+docker compose run --rm app --json
+```
+
+The row limit affects only terminal display. Comparison and summary counts use
+the complete catalogs.
 
 ## Safety and exit status
 
@@ -75,6 +91,11 @@ flowchart TB
 | Comparison | `src/tracezilla_shopify/workflow.py` |
 | Output | `src/tracezilla_shopify/output.py` |
 
+The entry point assembles the command, clients handle APIs, services retrieve
+use-case data, mappers normalize records, and the workflow owns comparison.
+See the [Python architecture guide](../python.html#architecture) before
+adapting the command.
+
 ## Tests
 
 ```bash
@@ -82,4 +103,4 @@ docker compose run --rm --entrypoint pytest app
 docker compose run --rm --entrypoint mypy app src tests
 ```
 
-Neither check contacts a live API.
+The tests use local fixtures and do not contact Shopify or tracezilla.

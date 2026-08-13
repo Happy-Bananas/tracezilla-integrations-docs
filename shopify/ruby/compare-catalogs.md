@@ -13,29 +13,46 @@ Read only
 
 ## Behavior
 
-The command reads the complete catalogs and compares normalized SKU
-codes. Complete the [Ruby setup](../ruby.html) first.
+The command retrieves the complete Shopify variant catalog and tracezilla SKU
+catalog, normalizes their SKU codes, and reports differences without writing to
+either API.
+
+Complete the [Ruby installation and configuration](../ruby.html) before
+running this command.
 
 ## Run the command
+
+From the cloned `tracezilla-shopify-ruby` repository, run:
 
 ```bash
 docker compose run --rm app
 ```
 
-Change the displayed row limit or produce complete JSON:
+The terminal output contains three categories:
 
-```bash
-docker compose run --rm app --limit=25
-docker compose run --rm app --json
-```
+- SKUs present in both systems;
+- SKUs present only in Shopify;
+- SKUs present only in tracezilla.
 
-SKU is the matching identifier. The output groups matches, Shopify-only SKUs,
-and tracezilla-only SKUs. The limit affects display, not comparison totals.
+SKU is the shared identifier. Product titles, variant names, and internal IDs
+do not determine a match.
 
 ## Options
 
-- `--limit=25` changes the maximum displayed rows per category.
-- `--json` returns the complete structured result.
+Display a different maximum number of rows from each category:
+
+```bash
+docker compose run --rm app --limit=25
+```
+
+Return the complete result as machine-readable JSON:
+
+```bash
+docker compose run --rm app --json
+```
+
+The row limit affects only terminal display. Comparison and summary counts use
+the complete catalogs.
 
 ## Safety and exit status
 
@@ -73,10 +90,15 @@ flowchart TB
 | Comparison | `lib/tracezilla_shopify/compare_catalogs.rb` |
 | Output | `lib/tracezilla_shopify/table_renderer.rb` |
 
+The entry point assembles the command, clients handle APIs, services retrieve
+use-case data, mappers normalize records, and the workflow owns comparison.
+See the [Ruby architecture guide](../ruby.html#architecture) before adapting
+the command.
+
 ## Tests
 
 ```bash
 docker compose run --rm --entrypoint bundle app exec rake test
 ```
 
-The tests do not contact either API.
+The tests use local fixtures and do not contact Shopify or tracezilla.
