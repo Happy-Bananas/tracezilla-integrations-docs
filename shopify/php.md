@@ -94,12 +94,26 @@ after changing a mapper, service, or workflow.
 
 The example separates API details from business behavior:
 
-```text
-Shopify GraphQL query ─┐
-Shopify API client ────┼─> Shopify catalog service ─> Shopify mapper ─┐
-                                                                     ├─> CompareCatalogs ─> result ─> output
-tracezilla API client ───> tracezilla catalog service ─> SKU mapper ─┘
-```
+<pre class="mermaid">
+flowchart TB
+    subgraph Shopify[Shopify boundary]
+        ShopifyQuery[GraphQL query] --> ShopifyService[Catalog service]
+        ShopifyClient[API client] --> ShopifyService
+        ShopifyService --> ShopifyMapper[Variant mapper]
+    end
+
+    subgraph Tracezilla[tracezilla boundary]
+        TracezillaClient[API client] --> TracezillaService[Catalog service]
+        TracezillaService --> TracezillaMapper[SKU mapper]
+    end
+
+    ShopifyMapper --> SharedModel[Shared CatalogItem]
+    TracezillaMapper --> SharedModel
+    SharedModel --> Workflow[CompareCatalogs workflow]
+    Workflow --> Result[CatalogComparisonResult]
+    Result --> Table[Table output]
+    Result --> Json[JSON output]
+</pre>
 
 | Layer | Location | Responsibility |
 |---|---|---|
