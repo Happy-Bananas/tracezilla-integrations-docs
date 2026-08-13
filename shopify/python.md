@@ -39,6 +39,7 @@ application is copied into the image.
 
 - [Compare Catalogs](./python/compare-catalogs.html) — compare catalogs by SKU
   without changing either system.
+- [Create tracezilla SKUs](./python/create-tracezilla-skus.html) — preview or create missing tracezilla SKUs.
 
 ## Tests and type checking
 

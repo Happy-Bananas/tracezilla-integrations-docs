@@ -39,6 +39,7 @@ Never commit `.env`. Rebuild after source or gem changes.
 
 - [Compare Catalogs](./ruby/compare-catalogs.html) — compare catalogs by SKU
   without changing either service.
+- [Create tracezilla SKUs](./ruby/create-tracezilla-skus.html) — preview or create missing tracezilla SKUs.
 
 ## Run the tests
 

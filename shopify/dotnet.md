@@ -39,6 +39,7 @@ Never commit `.env`. Rebuild after code or dependency changes.
 
 - [Compare Catalogs](./dotnet/compare-catalogs.html) — compare catalogs by SKU
   without modifying either API.
+- [Create tracezilla SKUs](./dotnet/create-tracezilla-skus.html) — preview or create missing tracezilla SKUs.
 
 ## Run the tests
 

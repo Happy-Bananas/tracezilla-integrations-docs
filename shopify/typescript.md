@@ -40,12 +40,13 @@ dependencies.
 
 - [Compare Catalogs](./typescript/compare-catalogs.html) — compare Shopify
   variants and tracezilla SKUs without changing either system.
+- [Create tracezilla SKUs](./typescript/create-tracezilla-skus.html) — preview or create missing tracezilla SKUs.
 
 ## Tests and type checking
 
 ```bash
-docker compose run --rm app npm test
-docker compose run --rm app npm run typecheck
+docker compose run --rm --entrypoint npm app test
+docker compose run --rm --entrypoint npm app run typecheck
 ```
 
 Tests use in-memory readers and do not contact either API.

@@ -39,6 +39,7 @@ Never commit `.env`. Rebuild after code or Maven dependency changes.
 
 - [Compare Catalogs](./java/compare-catalogs.html) — compare Shopify variants
   and tracezilla SKUs without changing either system.
+- [Create tracezilla SKUs](./java/create-tracezilla-skus.html) — preview or create missing tracezilla SKUs.
 
 ## Run the tests
 
