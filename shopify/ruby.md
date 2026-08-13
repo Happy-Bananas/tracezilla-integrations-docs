@@ -3,22 +3,91 @@ title: Ruby
 layout: default
 parent: Shopify
 nav_order: 55
+has_children: true
 ---
 
-# Shopify with Ruby
+# Build a Shopify integration with Ruby
 
-{: .label .label-yellow }
-First workflow available
+{: .label .label-green }
+Framework neutral
 
-The framework-neutral
 [`tracezilla-shopify-ruby`](https://github.com/Happy-Bananas/tracezilla-shopify-ruby)
-repository runs with Ruby 3.4 inside Docker; consultants do not need Ruby on
-the host.
+is a runnable Ruby 3.4 template without Rails. Its first command is
+[Compare Catalogs](./ruby/compare-catalogs.html).
 
-## Examples
+## Clone and start the project
 
-- [Compare Catalogs repository](https://github.com/Happy-Bananas/tracezilla-shopify-ruby) —
-  complete-catalog, read-only comparison with table and JSON output.
+You need Git and Docker with Docker Compose; Ruby and Bundler are not required
+on the host.
 
-The repository README contains installation, configuration, execution, and
-test commands. Inventory and order workflows remain planned.
+```bash
+git clone https://github.com/Happy-Bananas/tracezilla-shopify-ruby.git
+cd tracezilla-shopify-ruby
+cp .env.example .env
+```
+
+Complete [Shopify Setup](./setup.html) and
+[tracezilla authentication](../fundamentals/authentication.html), then add test
+credentials to `.env` and build the image:
+
+```bash
+docker compose build
+```
+
+Never commit `.env`. Rebuild after source or gem changes.
+
+## Available commands
+
+- [Compare Catalogs](./ruby/compare-catalogs.html) — compare catalogs by SKU
+  without changing either service.
+
+## Run the tests
+
+```bash
+docker compose run --rm --entrypoint bundle app exec rake test
+```
+
+Tests use fake clients and readers and never contact live APIs.
+
+## Architecture
+
+<pre class="mermaid">
+flowchart TB
+    Query[GraphQL query] --> ShopifyService[Shopify catalog service]
+    ShopifyClient[Shopify client] --> ShopifyService
+    ShopifyService --> ShopifyMapper[Variant mapper]
+    TracezillaClient[tracezilla client] --> TracezillaService[tracezilla catalog service]
+    TracezillaService --> TracezillaMapper[SKU mapper]
+    ShopifyMapper --> Model[CatalogItem]
+    TracezillaMapper --> Model
+    Model --> Workflow[CompareCatalogs]
+    Workflow --> Output[Table or JSON]
+</pre>
+
+| Layer | Location | Responsibility |
+|---|---|---|
+| Entry points | `bin/` | Parse CLI options and compose one command |
+| Configuration | `lib/tracezilla_shopify/configuration.rb` | Validate environment and endpoints |
+| HTTP | `http_json.rb` | Provide reusable JSON transport behavior |
+| Shopify boundary | `shopify/query.rb`, `client.rb`, `catalog_service.rb`, `variant_mapper.rb` | Query, authenticate, paginate, and normalize variants |
+| tracezilla boundary | `tracezilla/client.rb`, `catalog_service.rb`, `sku_mapper.rb` | Retrieve, paginate, and normalize SKUs |
+| Shared model | `catalog_item.rb` | Represent the cross-system catalog item |
+| Workflow | `compare_catalogs.rb` | Apply comparison rules without API knowledge |
+| Output | `table_renderer.rb` | Render results for people |
+| Tests | `test/` | Verify isolated behavior with fakes |
+
+This organization keeps Rails, HTTP, and CLI concerns out of business rules.
+Explicit objects also make transformations visible and independently testable.
+
+## Create another command
+
+Reuse the existing HTTP and client boundaries, add named queries and mappers,
+put orchestration in a workflow object, and keep the `bin/` file small. Add
+tests and a child page beneath Ruby. Write commands should be dry-run-first and
+require explicit confirmation.
+
+## Use the code elsewhere
+
+The library classes can be loaded by Rails, Sinatra, a job processor, or a
+scheduled script. The host application should supply configuration and
+composition while retaining tested service, mapper, and workflow objects.

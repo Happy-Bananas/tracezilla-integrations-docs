@@ -3,22 +3,91 @@ title: C# / .NET
 layout: default
 parent: Shopify
 nav_order: 60
+has_children: true
 ---
 
-# Shopify with C# and .NET
+# Build a Shopify integration with C# and .NET
 
-{: .label .label-yellow }
-First workflow available
+{: .label .label-green }
+Framework neutral
 
-The framework-neutral
 [`tracezilla-shopify-dotnet`](https://github.com/Happy-Bananas/tracezilla-shopify-dotnet)
-repository runs as a .NET 8 console application inside Docker; consultants do
-not need the .NET SDK on the host.
+is a runnable .NET 8 console template without ASP.NET. Its first command is
+[Compare Catalogs](./dotnet/compare-catalogs.html).
 
-## Examples
+## Clone and start the project
 
-- [Compare Catalogs repository](https://github.com/Happy-Bananas/tracezilla-shopify-dotnet) —
-  complete-catalog, read-only comparison with table and JSON output.
+You need Git and Docker with Docker Compose; the .NET SDK is not required on
+the host.
 
-The repository README contains installation, configuration, execution, and
-test commands. Inventory and order workflows remain planned.
+```bash
+git clone https://github.com/Happy-Bananas/tracezilla-shopify-dotnet.git
+cd tracezilla-shopify-dotnet
+cp .env.example .env
+```
+
+Complete [Shopify Setup](./setup.html) and
+[tracezilla authentication](../fundamentals/authentication.html), add test
+credentials to `.env`, then build:
+
+```bash
+docker compose build
+```
+
+Never commit `.env`. Rebuild after code or dependency changes.
+
+## Available commands
+
+- [Compare Catalogs](./dotnet/compare-catalogs.html) — compare catalogs by SKU
+  without modifying either API.
+
+## Run the tests
+
+```bash
+docker compose run --rm --entrypoint dotnet app test tests/TracezillaShopify.Tests --no-restore
+```
+
+Tests use fake clients and readers. Nullable reference types and warnings as
+errors are enabled in the project.
+
+## Architecture
+
+<pre class="mermaid">
+flowchart TB
+    Query[GraphQL query] --> ShopifyService[Shopify catalog service]
+    ShopifyClient[Shopify client] --> ShopifyService
+    ShopifyService --> ShopifyMapper[Variant mapper]
+    TracezillaClient[tracezilla client] --> TracezillaService[tracezilla catalog service]
+    TracezillaService --> TracezillaMapper[SKU mapper]
+    ShopifyMapper --> Model[CatalogItem]
+    TracezillaMapper --> Model
+    Model --> Workflow[CompareCatalogs]
+    Workflow --> Output[Table or JSON]
+</pre>
+
+| Layer | Location | Responsibility |
+|---|---|---|
+| Entry point | `src/TracezillaShopify/Program.cs` | Parse options, register dependencies, run the workflow, and select output |
+| Configuration | `Configuration.cs` | Validate environment and endpoints |
+| Shopify boundary | `Shopify/GetProductVariants.cs`, `ShopifyClient.cs`, `ShopifyCatalog.cs` | Query, authenticate, paginate, map variants |
+| tracezilla boundary | `Tracezilla/TracezillaClient.cs`, `TracezillaCatalog.cs` | Retrieve, paginate, and map SKUs |
+| Shared contracts | `Shared/` | Define `CatalogItem` and catalog reader behavior |
+| Workflow | `Workflows/CompareCatalogs.cs` | Compare normalized items independently of APIs |
+| Output | `Output/TableRenderer.cs` | Render results |
+| Tests | `tests/TracezillaShopify.Tests/` | Verify workflow and mappings using fakes |
+
+Interfaces and constructor dependencies keep transport replaceable and make
+workflow tests independent of the network.
+
+## Create another command
+
+Add focused client operations, services, mappers, models, and a workflow. Keep
+`Program.cs` as composition rather than business logic. Add tests and document
+the command beneath C# / .NET. Write operations should default to dry run and
+require an explicit confirmation.
+
+## Use the code elsewhere
+
+The classes can be reused in ASP.NET, a Worker Service, Azure Functions, or a
+scheduled console application. The host should change composition and
+configuration rather than duplicating API and mapping logic.
