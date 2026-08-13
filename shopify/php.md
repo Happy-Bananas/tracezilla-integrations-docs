@@ -58,6 +58,8 @@ dependencies.
 
 - [Compare Catalogs](./php/compare-catalogs.html) — read and compare Shopify
   variants and tracezilla SKUs without changing either system.
+- [Create tracezilla SKUs](./php/create-tracezilla-skus.html) — preview or
+  create missing tracezilla SKUs from Shopify variants.
 
 ## Run the tests
 
@@ -95,14 +97,14 @@ flowchart TB
 
 | Layer | Location | Responsibility |
 |---|---|---|
-| Entry point | `bin/compare-catalogs` | Reads CLI options, constructs dependencies, runs one workflow, selects output, and returns an exit code |
+| Entry points | `bin/` | Read CLI options, construct dependencies, run one workflow, select output, and return an exit code |
 | Configuration | `src/Configuration.php` | Validates environment variables and normalizes endpoint configuration |
 | Queries | `src/Shopify/Queries/` | Stores GraphQL documents separately from HTTP and business logic |
 | Clients | `src/Shopify/ShopifyClient.php`, `src/Tracezilla/TracezillaClient.php` | Own authentication, URLs, headers, HTTP transport, JSON decoding, timeouts, and safe API errors |
 | Services | `ShopifyCatalogService`, `TracezillaCatalogService` | Retrieve use-case data, follow pagination, and pass individual API records to mappers |
 | Mappers | `src/*/Mappers/` | Convert service-specific API records into shared application models |
 | Shared models | `src/Shared/` | Represent concepts used by both systems; `CatalogItem` contains the normalized SKU used for comparison |
-| Workflow | `src/Workflows/CompareCatalogs.php` | Applies the business rule without knowing about HTTP, GraphQL, Docker, or `.env` |
+| Workflows | `src/Workflows/` | Apply business rules without knowing about HTTP, GraphQL, Docker, or `.env` |
 | Result and output | `CatalogComparisonResult`, `src/Output/` | Keep workflow results structured and render them for humans or automation |
 | Tests | `tests/Unit/` | Verify mapping, comparison, and output without live credentials |
 
