@@ -11,7 +11,9 @@ nav_order: 10
 {: .label .label-green }
 Read only
 
-This Java command retrieves both complete catalogs and compares normalized SKU
+## Behavior
+
+The command retrieves both complete catalogs and compares normalized SKU
 codes. Complete the [Java setup](../java.html) first.
 
 ## Run the command
@@ -30,13 +32,35 @@ docker compose run --rm app --json
 SKU is the shared identifier. Results contain matches, Shopify-only SKUs, and
 tracezilla-only SKUs. The limit affects display only, never catalog totals.
 
+## Options
+
+- `--limit=25` changes the maximum displayed rows per category.
+- `--json` returns the complete structured result.
+
 ## Safety and exit status
 
 The command requires Shopify `read_products` and tracezilla read access. It
 writes no data. Differences return exit code `0`; configuration,
 authentication, API, and malformed-response failures return non-zero.
 
-## Implementation map
+## Architecture
+
+<pre class="mermaid">
+flowchart TB
+    subgraph Shopify[Shopify boundary]
+        Query[GraphQL query] --> ShopifyCatalog[Catalog reader]
+        ShopifyClient[API client] --> ShopifyCatalog
+    end
+    subgraph Tracezilla[tracezilla boundary]
+        TracezillaCatalog[Catalog reader]
+    end
+    ShopifyCatalog --> Model[Shared CatalogItem]
+    TracezillaCatalog --> Model
+    Model --> Workflow[CompareCatalogs workflow]
+    Workflow --> Output[Table or JSON output]
+</pre>
+
+## Implementation
 
 All Java paths below are relative to
 `src/main/java/com/happybananas/tracezilla/`.
@@ -51,7 +75,7 @@ All Java paths below are relative to
 | Shared model and contract | `shared/CatalogItem.java`, `shared/CatalogReader.java` |
 | Comparison | `workflow/CompareCatalogs.java` |
 
-## Verify changes
+## Tests
 
 ```bash
 docker compose run --rm --entrypoint mvn app test

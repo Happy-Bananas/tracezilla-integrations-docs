@@ -12,8 +12,7 @@ has_children: true
 Framework neutral
 
 [`tracezilla-shopify-python`](https://github.com/Happy-Bananas/tracezilla-shopify-python)
-is a runnable Python 3.12 template without Django or Flask. Its first command is
-[Compare Catalogs](./python/compare-catalogs.html).
+is a runnable Python 3.12 template without Django or Flask.
 
 ## Clone and start the project
 
@@ -55,11 +54,15 @@ locked in `requirements.lock` and mypy runs in strict mode.
 
 <pre class="mermaid">
 flowchart TB
-    Query[GraphQL query] --> ShopifyService[Shopify service]
-    ShopifyClient[Shopify client] --> ShopifyService
-    ShopifyService --> ShopifyMapper[Shopify mapper]
-    TracezillaClient[tracezilla client] --> TracezillaService[tracezilla service]
-    TracezillaService --> TracezillaMapper[tracezilla mapper]
+    subgraph Shopify[Shopify boundary]
+        Query[GraphQL query] --> ShopifyService[Catalog service]
+        ShopifyClient[API client] --> ShopifyService
+        ShopifyService --> ShopifyMapper[Variant mapper]
+    end
+    subgraph Tracezilla[tracezilla boundary]
+        TracezillaClient[API client] --> TracezillaService[Catalog service]
+        TracezillaService --> TracezillaMapper[SKU mapper]
+    end
     ShopifyMapper --> Model[Shared CatalogItem]
     TracezillaMapper --> Model
     Model --> Workflow[Comparison workflow]

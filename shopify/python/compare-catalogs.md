@@ -11,7 +11,9 @@ nav_order: 10
 {: .label .label-green }
 Read only
 
-This introductory Python command reads the complete Shopify variant and
+## Behavior
+
+The command reads the complete Shopify variant and
 tracezilla SKU catalogs and compares their normalized SKU codes. Complete the
 [Python setup](../python.html) first.
 
@@ -31,13 +33,37 @@ docker compose run --rm app --json
 The result separates SKUs present in both systems, only Shopify, or only
 tracezilla. `--limit` affects display only; all records contribute to totals.
 
+## Options
+
+- `--limit=25` changes the maximum displayed rows per category.
+- `--json` returns the complete structured result.
+
 ## Safety and exit status
 
 Only Shopify `read_products` and tracezilla read access are required. The
 command performs no writes. Catalog differences return `0`; configuration,
 authentication, API, and invalid-response errors return a non-zero exit code.
 
-## Implementation map
+## Architecture
+
+<pre class="mermaid">
+flowchart TB
+    subgraph Shopify[Shopify boundary]
+        Query[GraphQL query] --> ShopifyService[Catalog service]
+        ShopifyClient[API client] --> ShopifyService
+        ShopifyService --> ShopifyMapper[Variant mapper]
+    end
+    subgraph Tracezilla[tracezilla boundary]
+        TracezillaClient[API client] --> TracezillaService[Catalog service]
+        TracezillaService --> TracezillaMapper[SKU mapper]
+    end
+    ShopifyMapper --> Model[Shared CatalogItem]
+    TracezillaMapper --> Model
+    Model --> Workflow[CompareCatalogs workflow]
+    Workflow --> Output[Table or JSON output]
+</pre>
+
+## Implementation
 
 | Responsibility | Source |
 |---|---|
@@ -49,7 +75,7 @@ authentication, API, and invalid-response errors return a non-zero exit code.
 | Comparison | `src/tracezilla_shopify/workflow.py` |
 | Output | `src/tracezilla_shopify/output.py` |
 
-## Verify changes
+## Tests
 
 ```bash
 docker compose run --rm --entrypoint pytest app

@@ -12,8 +12,7 @@ has_children: true
 Framework neutral
 
 [`tracezilla-shopify-java`](https://github.com/Happy-Bananas/tracezilla-shopify-java)
-is a runnable Java 21 command-line template without Spring. Its first command
-is [Compare Catalogs](./java/compare-catalogs.html).
+is a runnable Java 21 command-line template without Spring.
 
 ## Clone and start the project
 
@@ -54,10 +53,15 @@ also compiles with lint warnings treated as errors.
 
 <pre class="mermaid">
 flowchart TB
-    Query[GetProductVariants query] --> ShopifyCatalog[Shopify catalog reader]
-    ShopifyClient[Shopify API client] --> ShopifyCatalog
-    TracezillaCatalog[tracezilla catalog reader] --> Model[Shared CatalogItem]
-    ShopifyCatalog --> Model
+    subgraph Shopify[Shopify boundary]
+        Query[GetProductVariants query] --> ShopifyCatalog[Catalog reader]
+        ShopifyClient[API client] --> ShopifyCatalog
+    end
+    subgraph Tracezilla[tracezilla boundary]
+        TracezillaCatalog[Catalog reader]
+    end
+    ShopifyCatalog --> Model[Shared CatalogItem]
+    TracezillaCatalog --> Model
     Model --> Workflow[CompareCatalogs]
     Workflow --> Main[CLI table or JSON output]
 </pre>
@@ -73,7 +77,7 @@ flowchart TB
 | Workflow | `workflow/CompareCatalogs.java` | Compare normalized records without transport knowledge |
 | Tests | `src/test/` | Verify comparison behavior without live credentials |
 
-The compact hello-world implementation currently performs mapping inside its
+The current compact implementation performs mapping inside its
 catalog readers. As commands grow, extract dedicated mapper and service classes
 instead of adding more responsibilities to those readers. The query, client,
 shared contract, and workflow boundaries already provide the seams for that

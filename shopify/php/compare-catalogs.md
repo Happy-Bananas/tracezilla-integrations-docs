@@ -11,7 +11,9 @@ nav_order: 10
 {: .label .label-green }
 Read only
 
-Compare Catalogs is the introductory PHP integration command. It retrieves the
+## Behavior
+
+The command retrieves the
 complete Shopify variant catalog and tracezilla SKU catalog, normalizes their
 SKU codes, and reports differences without writing to either API.
 
@@ -35,7 +37,7 @@ The terminal output contains three categories:
 SKU is the shared identifier. Product titles, variant names, and internal IDs
 do not determine a match.
 
-## Command options
+## Options
 
 Display a different maximum number of rows from each category:
 
@@ -61,7 +63,26 @@ Catalog differences are a successful result and return exit code `0`.
 Configuration, authentication, transport, or malformed-response errors return
 a non-zero exit code.
 
-## Where the command is implemented
+## Architecture
+
+<pre class="mermaid">
+flowchart TB
+    subgraph Shopify[Shopify boundary]
+        Query[GraphQL query] --> ShopifyService[Catalog service]
+        ShopifyClient[API client] --> ShopifyService
+        ShopifyService --> ShopifyMapper[Variant mapper]
+    end
+    subgraph Tracezilla[tracezilla boundary]
+        TracezillaClient[API client] --> TracezillaService[Catalog service]
+        TracezillaService --> TracezillaMapper[SKU mapper]
+    end
+    ShopifyMapper --> Model[Shared CatalogItem]
+    TracezillaMapper --> Model
+    Model --> Workflow[CompareCatalogs workflow]
+    Workflow --> Result[CatalogComparisonResult]
+</pre>
+
+## Implementation
 
 | Responsibility | Source |
 |---|---|
@@ -78,7 +99,7 @@ handle APIs, services retrieve use-case data, mappers normalize records, and
 the workflow contains the comparison rule. See the [PHP architecture guide](../php.html#architecture)
 before adapting the command.
 
-## Test the command logic
+## Tests
 
 ```bash
 docker compose run --rm php composer test

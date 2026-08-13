@@ -12,8 +12,7 @@ has_children: true
 Framework neutral
 
 [`tracezilla-shopify-ruby`](https://github.com/Happy-Bananas/tracezilla-shopify-ruby)
-is a runnable Ruby 3.4 template without Rails. Its first command is
-[Compare Catalogs](./ruby/compare-catalogs.html).
+is a runnable Ruby 3.4 template without Rails.
 
 ## Clone and start the project
 
@@ -53,11 +52,15 @@ Tests use fake clients and readers and never contact live APIs.
 
 <pre class="mermaid">
 flowchart TB
-    Query[GraphQL query] --> ShopifyService[Shopify catalog service]
-    ShopifyClient[Shopify client] --> ShopifyService
-    ShopifyService --> ShopifyMapper[Variant mapper]
-    TracezillaClient[tracezilla client] --> TracezillaService[tracezilla catalog service]
-    TracezillaService --> TracezillaMapper[SKU mapper]
+    subgraph Shopify[Shopify boundary]
+        Query[GraphQL query] --> ShopifyService[Catalog service]
+        ShopifyClient[API client] --> ShopifyService
+        ShopifyService --> ShopifyMapper[Variant mapper]
+    end
+    subgraph Tracezilla[tracezilla boundary]
+        TracezillaClient[API client] --> TracezillaService[Catalog service]
+        TracezillaService --> TracezillaMapper[SKU mapper]
+    end
     ShopifyMapper --> Model[CatalogItem]
     TracezillaMapper --> Model
     Model --> Workflow[CompareCatalogs]
