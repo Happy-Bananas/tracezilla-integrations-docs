@@ -24,8 +24,16 @@ this command.
 
 From the cloned `tracezilla-shopify-php` repository, run:
 
+### With Docker
+
 ```bash
 docker compose run --rm php php bin/compare-catalogs
+```
+
+### Without Docker
+
+```bash
+php bin/compare-catalogs
 ```
 
 The terminal output contains three categories:

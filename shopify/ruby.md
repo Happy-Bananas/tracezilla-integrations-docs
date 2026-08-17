@@ -16,8 +16,8 @@ is a runnable Ruby 3.4 template without Rails.
 
 ## Clone and start the project
 
-You need Git and Docker with Docker Compose; Ruby and Bundler are not required
-on the host.
+You need Git. Use either Docker with Docker Compose, or install Ruby 3.4 and
+Bundler directly on the host.
 
 ```bash
 git clone https://github.com/Happy-Bananas/tracezilla-shopify-ruby.git
@@ -27,10 +27,20 @@ cp .env.example .env
 
 Complete [Shopify Setup](./setup.html) and
 [tracezilla authentication](../fundamentals/authentication.html), then add test
-credentials to `.env` and build the image:
+credentials to `.env`.
+
+### With Docker
 
 ```bash
 docker compose build
+```
+
+### Without Docker
+
+Install the locked gems directly:
+
+```bash
+bundle install
 ```
 
 Never commit `.env`. Rebuild after source or gem changes.

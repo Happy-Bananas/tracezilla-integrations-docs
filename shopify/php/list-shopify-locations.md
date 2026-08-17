@@ -30,8 +30,16 @@ first and ensure the app has Shopify `read_locations` access.
 
 From the cloned `tracezilla-shopify-php` repository, run:
 
+### With Docker
+
 ```bash
 docker compose run --rm php php bin/list-shopify-locations
+```
+
+### Without Docker
+
+```bash
+php bin/list-shopify-locations
 ```
 
 The terminal table lists every returned location. If the app cannot see any

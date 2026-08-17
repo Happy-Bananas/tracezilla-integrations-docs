@@ -24,8 +24,16 @@ before running this command.
 
 From the cloned `tracezilla-shopify-typescript` repository, run:
 
+### With Docker
+
 ```bash
 docker compose run --rm app
+```
+
+### Without Docker
+
+```bash
+npm run compare
 ```
 
 The terminal output contains three categories:

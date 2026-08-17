@@ -16,8 +16,8 @@ is a runnable Node.js 22 and TypeScript template without a web framework.
 
 ## Clone and start the project
 
-You need Git and Docker with the Docker Compose plugin. Node.js does not need
-to be installed on the host.
+You need Git. Use either Docker with the Docker Compose plugin, or install
+Node.js 22 and npm directly on the host.
 
 ```bash
 git clone https://github.com/Happy-Bananas/tracezilla-shopify-typescript.git
@@ -29,8 +29,18 @@ Complete [Shopify Setup](./setup.html) and
 [tracezilla authentication](../fundamentals/authentication.html), then add the
 test credentials to `.env`. Never commit that file.
 
+### With Docker
+
 ```bash
 docker compose build
+```
+
+### Without Docker
+
+Install the Node.js dependencies directly:
+
+```bash
+npm install
 ```
 
 The source is copied into the image, so rebuild after changing source code or

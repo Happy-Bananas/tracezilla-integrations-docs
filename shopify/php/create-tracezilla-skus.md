@@ -48,8 +48,16 @@ trimmed SKU code, not product names or internal IDs.
 
 Dry run is the default and processes at most ten Shopify variants:
 
+### With Docker
+
 ```bash
 docker compose run --rm php php bin/create-tracezilla-skus
+```
+
+### Without Docker
+
+```bash
+php bin/create-tracezilla-skus
 ```
 
 ## Options

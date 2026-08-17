@@ -28,8 +28,20 @@ Complete the [Java installation and configuration](../java.html) and ensure the 
 
 ## Run the command
 
+### With Docker
+
 ```bash
 docker compose run --rm app list-shopify-locations
+```
+
+### Without Docker
+
+```bash
+set -a
+source .env
+set +a
+mvn package
+java -jar target/tracezilla-shopify-java-0.1.0.jar list-shopify-locations
 ```
 
 An empty location list is reported explicitly and is still successful.

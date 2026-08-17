@@ -40,8 +40,19 @@ sellable-quantity rules before writing.
 Find the target GraphQL ID with [List Shopify Locations](list-shopify-locations.html),
 then run a bounded preview:
 
+### With Docker
+
 ```bash
 docker compose run --rm php php bin/synchronize-inventory \
+  --shopify-location=gid://shopify/Location/123 \
+  --tracezilla-warehouse=2 \
+  --limit=10
+```
+
+### Without Docker
+
+```bash
+php bin/synchronize-inventory \
   --shopify-location=gid://shopify/Location/123 \
   --tracezilla-warehouse=2 \
   --limit=10

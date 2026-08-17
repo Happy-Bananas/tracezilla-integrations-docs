@@ -24,8 +24,16 @@ running this command.
 
 From the cloned `tracezilla-shopify-python` repository, run:
 
+### With Docker
+
 ```bash
 docker compose run --rm app
+```
+
+### Without Docker
+
+```bash
+compare-catalogs
 ```
 
 The terminal output contains three categories:

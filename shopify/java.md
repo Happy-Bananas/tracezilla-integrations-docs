@@ -16,8 +16,8 @@ is a runnable Java 21 command-line template without Spring.
 
 ## Clone and start the project
 
-You need Git and Docker with Docker Compose. Java and Maven do not need to be
-installed on the host.
+You need Git. Use either Docker with Docker Compose, or install Java 21 and
+Maven directly on the host.
 
 ```bash
 git clone https://github.com/Happy-Bananas/tracezilla-shopify-java.git
@@ -27,10 +27,20 @@ cp .env.example .env
 
 Complete [Shopify Setup](./setup.html) and
 [tracezilla authentication](../fundamentals/authentication.html), then add test
-credentials to `.env` and build:
+credentials to `.env`.
+
+### With Docker
 
 ```bash
 docker compose build
+```
+
+### Without Docker
+
+Compile, test, and package the executable JAR:
+
+```bash
+mvn package
 ```
 
 Never commit `.env`. Rebuild after code or Maven dependency changes.

@@ -48,8 +48,16 @@ code, not names or internal IDs.
 
 Dry run is the default and processes at most ten Shopify variants:
 
+### With Docker
+
 ```bash
 docker compose run --rm --entrypoint npm app run create-skus -- --limit=10
+```
+
+### Without Docker
+
+```bash
+npm run create-skus -- --limit=10
 ```
 
 ## Options

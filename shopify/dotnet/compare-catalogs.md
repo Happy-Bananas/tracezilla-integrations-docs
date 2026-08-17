@@ -24,8 +24,19 @@ running this command.
 
 From the cloned `tracezilla-shopify-dotnet` repository, run:
 
+### With Docker
+
 ```bash
 docker compose run --rm app
+```
+
+### Without Docker
+
+```bash
+set -a
+source .env
+set +a
+dotnet run --project src/TracezillaShopify --
 ```
 
 The terminal output contains three categories:

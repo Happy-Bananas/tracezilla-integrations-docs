@@ -28,8 +28,19 @@ Complete the [C# / .NET installation and configuration](../dotnet.html) and ensu
 
 ## Run the command
 
+### With Docker
+
 ```bash
 docker compose run --rm app list-shopify-locations
+```
+
+### Without Docker
+
+```bash
+set -a
+source .env
+set +a
+dotnet run --project src/TracezillaShopify -- list-shopify-locations
 ```
 
 An empty location list is reported explicitly and is still successful.

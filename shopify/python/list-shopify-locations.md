@@ -28,8 +28,16 @@ Complete the [Python installation and configuration](../python.html) and ensure 
 
 ## Run the command
 
+### With Docker
+
 ```bash
 docker compose run --rm --entrypoint list-shopify-locations app
+```
+
+### Without Docker
+
+```bash
+list-shopify-locations
 ```
 
 An empty location list is reported explicitly and is still successful.

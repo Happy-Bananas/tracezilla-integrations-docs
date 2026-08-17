@@ -16,7 +16,8 @@ is a runnable Python 3.12 template without Django or Flask.
 
 ## Clone and start the project
 
-You need Git and Docker with Docker Compose; Python is not required on the host.
+You need Git. Use either Docker with Docker Compose, or install Python 3.12
+directly on the host.
 
 ```bash
 git clone https://github.com/Happy-Bananas/tracezilla-shopify-python.git
@@ -26,10 +27,23 @@ cp .env.example .env
 
 Complete [Shopify Setup](./setup.html) and
 [tracezilla authentication](../fundamentals/authentication.html), add test
-credentials to `.env`, then build:
+credentials to `.env`.
+
+### With Docker
 
 ```bash
 docker compose build
+```
+
+### Without Docker
+
+Create a virtual environment and install the project:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -e .
 ```
 
 Never commit `.env`. Rebuild after source or dependency changes because the

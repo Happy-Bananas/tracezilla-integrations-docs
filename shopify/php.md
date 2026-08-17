@@ -23,8 +23,8 @@ child pages beneath PHP.
 
 ## Clone and start the project
 
-You need Git and Docker with the Docker Compose plugin. PHP and Composer do not
-need to be installed on the host.
+You need Git. Use either Docker with the Docker Compose plugin, or install PHP
+8.3 and Composer directly on the host.
 
 Clone only the PHP implementation:
 
@@ -43,11 +43,21 @@ Complete [Shopify Setup](./setup.html) and
 [tracezilla authentication](../fundamentals/authentication.html), then add the
 test-store and test-team credentials to `.env`. Never commit this file.
 
+### With Docker
+
 Build the PHP container and install the locked Composer dependencies:
 
 ```bash
 docker compose build
 docker compose run --rm php composer install
+```
+
+### Without Docker
+
+Install the locked dependencies with the host PHP installation:
+
+```bash
+composer install
 ```
 
 The source directory is mounted into the container, so code changes are

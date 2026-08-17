@@ -28,8 +28,16 @@ Complete the [TypeScript installation and configuration](../typescript.html) and
 
 ## Run the command
 
+### With Docker
+
 ```bash
 docker compose run --rm --entrypoint npm app run locations --
+```
+
+### Without Docker
+
+```bash
+npm run locations --
 ```
 
 An empty location list is reported explicitly and is still successful.

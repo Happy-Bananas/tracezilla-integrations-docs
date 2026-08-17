@@ -32,8 +32,22 @@ Negative, fractional, or non-finite results fail safely. Review this example bus
 
 Find the target GraphQL ID with List Shopify Locations, then preview:
 
+### With Docker
+
 ```bash
 docker compose run --rm app synchronize-inventory \\\n  --shopify-location=gid://shopify/Location/123 --tracezilla-warehouse=2 --limit=10
+```
+
+### Without Docker
+
+```bash
+set -a
+source .env
+set +a
+dotnet run --project src/TracezillaShopify -- synchronize-inventory \
+  --shopify-location=gid://shopify/Location/123 \
+  --tracezilla-warehouse=2 \
+  --limit=10
 ```
 
 Dry run is the default and changes nothing.
@@ -83,4 +97,3 @@ docker compose run --rm --entrypoint dotnet app test tests/TracezillaShopify.Tes
 ```
 
 Tests verify conversion, dry-run behavior, and guarded updates without live APIs. A sandbox dry run verifies credentials and location mapping before any bounded write.
-

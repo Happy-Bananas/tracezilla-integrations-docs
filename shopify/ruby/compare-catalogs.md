@@ -24,8 +24,16 @@ running this command.
 
 From the cloned `tracezilla-shopify-ruby` repository, run:
 
+### With Docker
+
 ```bash
 docker compose run --rm app
+```
+
+### Without Docker
+
+```bash
+bundle exec ruby bin/compare_catalogs
 ```
 
 The terminal output contains three categories:

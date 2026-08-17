@@ -28,8 +28,16 @@ Complete the [Ruby installation and configuration](../ruby.html) and ensure the 
 
 ## Run the command
 
+### With Docker
+
 ```bash
 docker compose run --rm --entrypoint bundle app exec ruby bin/list_shopify_locations
+```
+
+### Without Docker
+
+```bash
+bundle exec ruby bin/list_shopify_locations
 ```
 
 An empty location list is reported explicitly and is still successful.

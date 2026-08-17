@@ -16,8 +16,8 @@ is a runnable .NET 8 console template without ASP.NET.
 
 ## Clone and start the project
 
-You need Git and Docker with Docker Compose; the .NET SDK is not required on
-the host.
+You need Git. Use either Docker with Docker Compose, or install the .NET 8 SDK
+directly on the host.
 
 ```bash
 git clone https://github.com/Happy-Bananas/tracezilla-shopify-dotnet.git
@@ -27,10 +27,20 @@ cp .env.example .env
 
 Complete [Shopify Setup](./setup.html) and
 [tracezilla authentication](../fundamentals/authentication.html), add test
-credentials to `.env`, then build:
+credentials to `.env`.
+
+### With Docker
 
 ```bash
 docker compose build
+```
+
+### Without Docker
+
+Restore the .NET dependencies directly:
+
+```bash
+dotnet restore src/TracezillaShopify/TracezillaShopify.csproj
 ```
 
 Never commit `.env`. Rebuild after code or dependency changes.

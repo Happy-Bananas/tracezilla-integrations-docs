@@ -46,8 +46,16 @@ Variants without an SKU are invalid. Matching uses the trimmed SKU code.
 
 Dry run is the default and processes at most ten variants:
 
+### With Docker
+
 ```bash
 docker compose run --rm --entrypoint bundle app exec ruby bin/create_tracezilla_skus --limit=10
+```
+
+### Without Docker
+
+```bash
+bundle exec ruby bin/create_tracezilla_skus --limit=10
 ```
 
 ## Options

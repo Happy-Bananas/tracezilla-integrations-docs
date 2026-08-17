@@ -24,8 +24,20 @@ running this command.
 
 From the cloned `tracezilla-shopify-java` repository, run:
 
+### With Docker
+
 ```bash
 docker compose run --rm app
+```
+
+### Without Docker
+
+```bash
+set -a
+source .env
+set +a
+mvn package
+java -jar target/tracezilla-shopify-java-0.1.0.jar
 ```
 
 The terminal output contains three categories:
