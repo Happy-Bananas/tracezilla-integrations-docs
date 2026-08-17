@@ -48,12 +48,82 @@ it does not currently accept them through the browser.
 
 After changing `.env`, reload Laravel configuration:
 
+With Docker:
+
 ```bash
 docker compose exec app php artisan config:clear
 ```
 
+Without Docker:
+
+```bash
+php artisan config:clear
+```
+
 The web interface can validate each connection and retrieve small samples of
 Shopify products and Tracezilla SKUs.
+
+## Run integration commands from the terminal
+
+Run these commands from the workbench repository or deployed Laravel project
+directory. They use the same `.env` configuration as the web interface.
+
+### With Docker
+
+```bash
+# List Shopify locations
+docker compose exec app php artisan shopify:locations
+
+# Compare Shopify and tracezilla catalogs
+docker compose exec app php artisan pull-catalog-from-shopify --limit=10
+
+# Preview creating tracezilla SKUs from Shopify
+docker compose exec app php artisan tracezilla:skus-from-shopify --limit=10
+
+# Preview updating Shopify inventory from tracezilla
+docker compose exec app php artisan shopify:inventory-from-tracezilla --limit=10
+
+# Preview creating individual tracezilla orders from Shopify
+docker compose exec app php artisan tracezilla:orders-from-shopify --limit=10
+
+# Preview collected Shopify orders
+docker compose exec app php artisan pull-orders-from-shopify-collected --days=3 --limit=10
+
+# Report tracezilla SKUs missing from Shopify
+docker compose exec app php artisan push-catalog-to-shopify --limit=10
+```
+
+### Without Docker
+
+Use this form when PHP and the application dependencies are installed directly
+on the server, as with a traditional Laravel hosting account:
+
+```bash
+# List Shopify locations
+php artisan shopify:locations
+
+# Compare Shopify and tracezilla catalogs
+php artisan pull-catalog-from-shopify --limit=10
+
+# Preview creating tracezilla SKUs from Shopify
+php artisan tracezilla:skus-from-shopify --limit=10
+
+# Preview updating Shopify inventory from tracezilla
+php artisan shopify:inventory-from-tracezilla --limit=10
+
+# Preview creating individual tracezilla orders from Shopify
+php artisan tracezilla:orders-from-shopify --limit=10
+
+# Preview collected Shopify orders
+php artisan pull-orders-from-shopify-collected --days=3 --limit=10
+
+# Report tracezilla SKUs missing from Shopify
+php artisan push-catalog-to-shopify --limit=10
+```
+
+The SKU creation, inventory synchronization, and individual-order commands are
+dry runs by default. Review their output before adding `--execute`. Confirm that
+`.env` points to the intended sandbox accounts before enabling any write.
 
 ## Preview or create Tracezilla SKUs
 
