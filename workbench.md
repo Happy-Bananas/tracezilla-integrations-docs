@@ -11,6 +11,13 @@ currently preserves the proven Laravel application from the legacy Shopify
 connector. It is a baseline for checking Shopify and Tracezilla credentials
 before the workbench is separated further.
 
+{: .important }
+The workbench is a Laravel application. Its command entry point is always
+`php artisan`, whether it runs inside Docker or directly on a server. Commands
+such as `php bin/compare-catalogs` belong to the separate framework-neutral
+`tracezilla-shopify-php` repository and are not interchangeable with workbench
+commands.
+
 ## Run it locally
 
 Clone the repository and enter it:
@@ -67,6 +74,13 @@ Shopify products and Tracezilla SKUs.
 
 Run these commands from the workbench repository or deployed Laravel project
 directory. They use the same `.env` configuration as the web interface.
+
+Confirm that the current directory contains the `artisan` file before running
+them:
+
+```bash
+test -f artisan && echo "Laravel workbench detected"
+```
 
 ### With Docker
 

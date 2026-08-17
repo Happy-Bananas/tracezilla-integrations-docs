@@ -17,6 +17,13 @@ repository is a runnable starting point for consultants creating Shopify and
 tracezilla integration commands. It uses PHP 8.3 and Composer without Laravel,
 Symfony, or another application framework.
 
+{: .important }
+This is the standalone `tracezilla-shopify-php` project, not the Laravel
+integration workbench. Its entry points live under `bin/`, so commands use
+`php bin/...` both with and without Docker. A deployed workbench instead uses
+`php artisan ...`; the two command styles belong to different repositories and
+are not interchangeable.
+
 Its first command is the read-only [Compare Catalogs](./php/compare-catalogs.html)
 integration. Additional catalog, inventory, and order commands will appear as
 child pages beneath PHP.
