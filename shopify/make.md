@@ -1,7 +1,7 @@
 ---
 title: Make.com
 layout: default
-parent: Experimental Implementations
+parent: Shopify Labs
 nav_order: 60
 ---
 

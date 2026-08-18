@@ -1,7 +1,7 @@
 ---
 title: Python
 layout: default
-parent: Experimental Implementations
+parent: Shopify Labs
 nav_order: 20
 has_children: true
 ---

@@ -2,7 +2,7 @@
 title: Create tracezilla SKUs
 layout: default
 parent: Ruby
-grand_parent: Experimental Implementations
+grand_parent: Shopify Labs
 nav_order: 20
 ---
 

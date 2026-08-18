@@ -1,12 +1,12 @@
 ---
-title: Experimental Implementations
+title: Shopify Labs
 layout: default
 nav_order: 50
 has_children: true
-permalink: /experimental-implementations/
+permalink: /shopify-labs/
 ---
 
-# Experimental implementations
+# Shopify Labs
 
 {: .label .label-yellow }
 Experimental

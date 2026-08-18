@@ -2,7 +2,7 @@
 title: List Shopify Locations
 layout: default
 parent: TypeScript
-grand_parent: Experimental Implementations
+grand_parent: Shopify Labs
 nav_order: 30
 ---
 

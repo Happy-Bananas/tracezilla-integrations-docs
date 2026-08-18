@@ -1,7 +1,7 @@
 ---
 title: Ruby
 layout: default
-parent: Experimental Implementations
+parent: Shopify Labs
 nav_order: 30
 has_children: true
 ---

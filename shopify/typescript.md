@@ -1,7 +1,7 @@
 ---
 title: TypeScript
 layout: default
-parent: Experimental Implementations
+parent: Shopify Labs
 nav_order: 10
 has_children: true
 ---

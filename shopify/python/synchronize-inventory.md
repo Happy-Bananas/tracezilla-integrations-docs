@@ -2,7 +2,7 @@
 title: Synchronize Inventory
 layout: default
 parent: Python
-grand_parent: Experimental Implementations
+grand_parent: Shopify Labs
 nav_order: 40
 ---
 

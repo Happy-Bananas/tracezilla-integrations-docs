@@ -1,7 +1,7 @@
 ---
 title: Java
 layout: default
-parent: Experimental Implementations
+parent: Shopify Labs
 nav_order: 50
 has_children: true
 ---

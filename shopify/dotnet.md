@@ -1,7 +1,7 @@
 ---
 title: C# / .NET
 layout: default
-parent: Experimental Implementations
+parent: Shopify Labs
 nav_order: 40
 has_children: true
 ---

@@ -22,7 +22,7 @@ live store.
 | Platform | Current status |
 |:--|:--|
 | PHP | Maintained; new commands are implemented and verified here first |
-| TypeScript, Python, Ruby, C# / .NET, and Java | [Experimental implementations](../experimental-implementations/) |
+| TypeScript, Python, Ruby, C# / .NET, and Java | [Shopify Labs](../shopify-labs/) |
 | Make.com | Experimental; planned material only |
 
 The language implementations remain available as reference material, but PHP

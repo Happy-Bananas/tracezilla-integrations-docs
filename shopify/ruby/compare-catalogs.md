@@ -2,7 +2,7 @@
 title: Compare Catalogs
 layout: default
 parent: Ruby
-grand_parent: Experimental Implementations
+grand_parent: Shopify Labs
 nav_order: 10
 ---
 

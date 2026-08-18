@@ -11,7 +11,7 @@ implementation platform.
 
 ```text
 Maintained:   Shopify → PHP → Compare Catalogs
-Experimental: Experimental Implementations → TypeScript → Compare Catalogs
+Experimental: Shopify Labs → TypeScript → Compare Catalogs
 ```
 
 Each workflow explains purpose, data direction, customer decisions, safety,
