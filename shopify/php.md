@@ -83,6 +83,8 @@ dependencies.
   Shopify inventory quantities calculated from a tracezilla warehouse.
 - [Report Collected Orders](./php/report-collected-orders.html) — summarize
   recent Shopify sales by business date, currency, and SKU without writing.
+- [Import Individual Orders](./php/import-individual-orders.html) — preview or
+  create one tracezilla sales order for each selected Shopify order.
 
 ## Run the tests
 
