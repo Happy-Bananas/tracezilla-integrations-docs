@@ -45,6 +45,18 @@ The terminal output contains three categories:
 SKU is the shared identifier. Product titles, variant names, and internal IDs
 do not determine a match.
 
+The output begins by recording the validated application command and its
+execution mode:
+
+```text
+Command: php bin/compare-catalogs
+Mode: READ ONLY
+```
+
+This makes saved terminal and future cron logs self-describing. The displayed
+command is the PHP entry point; when Docker is used, the surrounding
+`docker compose run` invocation remains the responsibility of the shell.
+
 ## Options
 
 Display a different maximum number of rows from each category:
@@ -59,6 +71,19 @@ Return the complete result as machine-readable JSON:
 docker compose run --rm php php bin/compare-catalogs --json
 ```
 
+JSON output remains valid JSON and includes the same execution context around
+the structured workflow result:
+
+```json
+{
+  "command": "php bin/compare-catalogs --json",
+  "mode": "read_only",
+  "result": {
+    "status": "differences"
+  }
+}
+```
+
 The row limit affects only the terminal display. The comparison and summary
 counts always use the complete catalogs.
 
@@ -66,6 +91,10 @@ counts always use the complete catalogs.
 
 The command requires Shopify `read_products` access and read access to the
 configured tracezilla team. It does not create or update data.
+
+Because the command cannot write, it has no `--execute` or `--confirm` flags.
+Commands that can change external data will instead default to `dry_run` and
+require both flags before reporting `execute` mode.
 
 Catalog differences are a successful result and return exit code `0`.
 Configuration, authentication, transport, or malformed-response errors return
