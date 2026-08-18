@@ -1,12 +1,15 @@
 ---
 title: TypeScript
 layout: default
-parent: Shopify
-nav_order: 40
+parent: Experimental Implementations
+nav_order: 10
 has_children: true
 ---
 
 # Build a Shopify integration with TypeScript
+
+{: .label .label-yellow }
+Experimental
 
 {: .label .label-green }
 Framework neutral

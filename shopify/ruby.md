@@ -1,12 +1,15 @@
 ---
 title: Ruby
 layout: default
-parent: Shopify
-nav_order: 55
+parent: Experimental Implementations
+nav_order: 30
 has_children: true
 ---
 
 # Build a Shopify integration with Ruby
+
+{: .label .label-yellow }
+Experimental
 
 {: .label .label-green }
 Framework neutral

@@ -2,11 +2,14 @@
 title: Synchronize Inventory
 layout: default
 parent: Python
-grand_parent: Shopify
+grand_parent: Experimental Implementations
 nav_order: 40
 ---
 
 # Synchronize Shopify inventory from tracezilla
+
+{: .label .label-yellow }
+Experimental
 
 {: .label .label-yellow }
 Writes with explicit confirmation

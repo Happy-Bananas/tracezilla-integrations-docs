@@ -1,12 +1,15 @@
 ---
 title: Python
 layout: default
-parent: Shopify
-nav_order: 50
+parent: Experimental Implementations
+nav_order: 20
 has_children: true
 ---
 
 # Build a Shopify integration with Python
+
+{: .label .label-yellow }
+Experimental
 
 {: .label .label-green }
 Framework neutral

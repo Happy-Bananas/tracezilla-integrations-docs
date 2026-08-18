@@ -2,11 +2,14 @@
 title: List Shopify Locations
 layout: default
 parent: C# / .NET
-grand_parent: Shopify
+grand_parent: Experimental Implementations
 nav_order: 30
 ---
 
 # List Shopify locations
+
+{: .label .label-yellow }
+Experimental
 
 {: .label .label-green }
 Read only

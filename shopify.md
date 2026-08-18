@@ -21,10 +21,10 @@ live store.
 
 | Platform | Current status |
 |:--|:--|
-| PHP | Compare Catalogs maintained |
-| TypeScript | Compare Catalogs maintained |
-| Python | Compare Catalogs maintained |
-| Ruby | Compare Catalogs maintained |
-| C# / .NET | Compare Catalogs maintained |
-| Java | Compare Catalogs maintained |
-| Make.com | Planned review |
+| PHP | Maintained; new commands are implemented and verified here first |
+| TypeScript, Python, Ruby, C# / .NET, and Java | [Experimental implementations](../experimental-implementations/) |
+| Make.com | Experimental; planned material only |
+
+The language implementations remain available as reference material, but PHP
+is the active standalone glue application. Experimental repositories may not
+yet contain the latest PHP workflows or validation improvements.

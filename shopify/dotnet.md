@@ -1,12 +1,15 @@
 ---
 title: C# / .NET
 layout: default
-parent: Shopify
-nav_order: 60
+parent: Experimental Implementations
+nav_order: 40
 has_children: true
 ---
 
 # Build a Shopify integration with C# and .NET
+
+{: .label .label-yellow }
+Experimental
 
 {: .label .label-green }
 Framework neutral

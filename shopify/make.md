@@ -1,11 +1,14 @@
 ---
 title: Make.com
 layout: default
-parent: Shopify
+parent: Experimental Implementations
 nav_order: 60
 ---
 
 # Shopify with Make.com
+
+{: .label .label-yellow }
+Experimental
 
 {: .label .label-yellow }
 Planned

@@ -10,8 +10,8 @@ Choose the external service first, then either choose a workflow or an
 implementation platform.
 
 ```text
-Need-first:     Shopify → Workflows → Compare Catalogs → TypeScript
-Platform-first: Shopify → TypeScript → Examples → Compare Catalogs
+Maintained:   Shopify → PHP → Compare Catalogs
+Experimental: Experimental Implementations → TypeScript → Compare Catalogs
 ```
 
 Each workflow explains purpose, data direction, customer decisions, safety,

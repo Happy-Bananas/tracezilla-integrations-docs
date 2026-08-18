@@ -2,11 +2,14 @@
 title: Compare Catalogs
 layout: default
 parent: C# / .NET
-grand_parent: Shopify
+grand_parent: Experimental Implementations
 nav_order: 10
 ---
 
 # Compare Shopify and tracezilla catalogs
+
+{: .label .label-yellow }
+Experimental
 
 {: .label .label-green }
 Read only

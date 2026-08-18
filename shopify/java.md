@@ -1,12 +1,15 @@
 ---
 title: Java
 layout: default
-parent: Shopify
-nav_order: 65
+parent: Experimental Implementations
+nav_order: 50
 has_children: true
 ---
 
 # Build a Shopify integration with Java
+
+{: .label .label-yellow }
+Experimental
 
 {: .label .label-green }
 Framework neutral

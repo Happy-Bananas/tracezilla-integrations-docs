@@ -2,11 +2,14 @@
 title: Compare Catalogs
 layout: default
 parent: TypeScript
-grand_parent: Shopify
+grand_parent: Experimental Implementations
 nav_order: 10
 ---
 
 # Compare Shopify and tracezilla catalogs
+
+{: .label .label-yellow }
+Experimental
 
 {: .label .label-green }
 Read only
