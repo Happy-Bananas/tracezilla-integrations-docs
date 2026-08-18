@@ -79,6 +79,10 @@ dependencies.
   create missing tracezilla SKUs from Shopify variants.
 - [List Shopify Locations](./php/list-shopify-locations.html) — inspect the
   locations and IDs available to the configured Shopify app.
+- [Synchronize Inventory](./php/synchronize-inventory.html) — preview or write
+  Shopify inventory quantities calculated from a tracezilla warehouse.
+- [Report Collected Orders](./php/report-collected-orders.html) — summarize
+  recent Shopify sales by business date, currency, and SKU without writing.
 
 ## Run the tests
 
