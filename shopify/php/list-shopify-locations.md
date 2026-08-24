@@ -28,12 +28,12 @@ first and ensure the app has Shopify `read_locations` access.
 
 ## Run the command
 
-From the cloned `tracezilla-shopify-php` repository, run:
+From the cloned `tracezilla-integration-php` repository, run:
 
 ### With Docker
 
 ```bash
-docker compose run --rm php php bin/list-shopify-locations
+docker compose exec integration php bin/tracezilla-integration shopify:locations
 ```
 
 ### Without Docker
@@ -50,7 +50,7 @@ locations, the command reports that explicitly and still exits successfully.
 Return the complete structured result as JSON:
 
 ```bash
-docker compose run --rm php php bin/list-shopify-locations --json
+docker compose exec integration php bin/tracezilla-integration shopify:locations --json
 ```
 
 There is no processing limit. The command follows Shopify pagination until all
@@ -101,7 +101,7 @@ those pieces and selects table or JSON output.
 ## Tests
 
 ```bash
-docker compose run --rm php composer test
+docker compose exec integration composer test
 ```
 
 The location tests verify mapping, addresses, activity flags, serialization,

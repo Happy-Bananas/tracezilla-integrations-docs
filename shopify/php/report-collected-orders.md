@@ -34,7 +34,7 @@ next begins.
 ### With Docker
 
 ```bash
-docker compose run --rm php php bin/report-collected-orders \
+docker compose exec integration php bin/tracezilla-integration orders:report-collected \
   --days=3 \
   --timezone=Europe/Copenhagen \
   --limit=10
@@ -69,7 +69,7 @@ limit, skipped orders, and skipped lines.
 For machine-readable output:
 
 ```bash
-docker compose run --rm php php bin/report-collected-orders \
+docker compose exec integration php bin/tracezilla-integration orders:report-collected \
   --days=3 --timezone=Europe/Copenhagen --limit=10 --json
 ```
 
@@ -112,7 +112,7 @@ API credentials.
 ## Tests
 
 ```bash
-docker compose run --rm php composer test
+docker compose exec integration composer test
 ```
 
 Tests verify timezone grouping, revenue totals, limits, skip rules, option

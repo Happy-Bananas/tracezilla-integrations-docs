@@ -43,7 +43,7 @@ then run a bounded preview:
 ### With Docker
 
 ```bash
-docker compose run --rm php php bin/synchronize-inventory \
+docker compose exec integration php bin/tracezilla-integration inventory:sync \
   --shopify-location=gid://shopify/Location/123 \
   --tracezilla-warehouse=2 \
   --limit=10
@@ -75,7 +75,7 @@ Both location arguments are mandatory to prevent an implicit destination.
 After reviewing the dry run, test at most one record in sandbox accounts:
 
 ```bash
-docker compose run --rm php php bin/synchronize-inventory \
+docker compose exec integration php bin/tracezilla-integration inventory:sync \
   --shopify-location=gid://shopify/Location/123 \
   --tracezilla-warehouse=2 \
   --execute --confirm --limit=1
@@ -124,7 +124,7 @@ transport-specific behavior.
 ## Tests
 
 ```bash
-docker compose run --rm php composer test
+docker compose exec integration composer test
 ```
 
 Tests verify quantity conversion, dry-run behavior, guarded execution, and

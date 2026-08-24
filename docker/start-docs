@@ -1,0 +1,58 @@
+#!/bin/sh
+
+set -u
+
+echo ""
+echo "============================================================"
+echo "  Starting tracezilla documentation"
+echo "  The first build can take a little while. Please wait..."
+echo "============================================================"
+echo ""
+
+bundle exec jekyll serve \
+    --config _config.yml,_config.local.yml \
+    --host 0.0.0.0 \
+    --port 4000 \
+    --livereload \
+    --force_polling &
+jekyll_pid=$!
+
+stop_jekyll()
+{
+    kill -TERM "$jekyll_pid" 2>/dev/null || true
+    wait "$jekyll_pid" 2>/dev/null || true
+}
+
+trap stop_jekyll INT TERM
+
+seconds_waited=0
+while kill -0 "$jekyll_pid" 2>/dev/null; do
+    if ruby -rsocket -e 'socket = TCPSocket.new("127.0.0.1", 4000); socket.close' 2>/dev/null; then
+        echo ""
+        echo "============================================================"
+        echo "  DOCUMENTATION IS READY"
+        echo "  Open http://localhost:4000/ in your browser"
+        echo "============================================================"
+        echo ""
+        break
+    fi
+
+    sleep 1
+    seconds_waited=$((seconds_waited + 1))
+
+    if [ $((seconds_waited % 10)) -eq 0 ]; then
+        echo "Still building documentation (${seconds_waited} seconds)..."
+    fi
+done
+
+if ! kill -0 "$jekyll_pid" 2>/dev/null; then
+    wait "$jekyll_pid"
+    status=$?
+    echo ""
+    echo "ERROR: The documentation server stopped before it was ready."
+    echo "Review the messages above for the cause."
+    exit "$status"
+fi
+
+wait "$jekyll_pid"
+

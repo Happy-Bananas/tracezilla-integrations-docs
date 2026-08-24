@@ -70,8 +70,8 @@ Continue only when:
 {: .label .label-yellow }
 Planned
 
-Validated Laravel, TypeScript, Python, and workbench instructions will be added
-as their focused repositories become available.
+Additional platform validation instructions will be added as their focused
+repositories become available.
 
 ## Official Shopify references
 

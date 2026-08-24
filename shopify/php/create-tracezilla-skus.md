@@ -51,7 +51,7 @@ Dry run is the default and processes at most ten Shopify variants:
 ### With Docker
 
 ```bash
-docker compose run --rm php php bin/create-tracezilla-skus
+docker compose exec integration php bin/tracezilla-integration catalog:create-tracezilla-skus
 ```
 
 ### Without Docker
@@ -65,8 +65,8 @@ php bin/create-tracezilla-skus
 Choose another processing limit or request complete JSON:
 
 ```bash
-docker compose run --rm php php bin/create-tracezilla-skus --limit=25
-docker compose run --rm php php bin/create-tracezilla-skus --limit=25 --json
+docker compose exec integration php bin/tracezilla-integration catalog:create-tracezilla-skus --limit=25
+docker compose exec integration php bin/tracezilla-integration catalog:create-tracezilla-skus --limit=25 --json
 ```
 
 Unlike the display limit in Compare Catalogs, this limit controls how many
@@ -78,7 +78,7 @@ and tracezilla catalogs so it can report source counts and avoid duplicates.
 First inspect a dry run. For the first sandbox write, use a limit of one:
 
 ```bash
-docker compose run --rm php php bin/create-tracezilla-skus --execute --confirm --limit=1
+docker compose exec integration php bin/tracezilla-integration catalog:create-tracezilla-skus --execute --confirm --limit=1
 ```
 
 Both `--execute` and `--confirm` are required. Supplying `--execute` alone exits
@@ -134,7 +134,7 @@ and close to the code that creates the API payload.
 ## Tests
 
 ```bash
-docker compose run --rm php composer test
+docker compose exec integration composer test
 ```
 
 The tests use in-memory variants and a fake tracezilla gateway. They verify dry

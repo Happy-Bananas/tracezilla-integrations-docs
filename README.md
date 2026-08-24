@@ -11,7 +11,18 @@ Requirements: Docker with Docker Compose.
 docker compose up --build
 ```
 
-Open <http://localhost:4000/>.
+Keep the terminal open while Docker starts the site. The first build may take
+a little while. The site is ready when the terminal displays:
+
+```text
+============================================================
+  DOCUMENTATION IS READY
+  Open http://localhost:4000/ in your browser
+============================================================
+```
+
+Then open <http://localhost:4000/>. Messages beginning with `DEPRECATION
+WARNING` are build warnings and do not prevent the site from starting.
 
 Docker Compose loads `_config.local.yml` after the production configuration,
 so the local site is served directly from `/`. The GitHub workflow uses only

@@ -22,12 +22,12 @@ this command.
 
 ## Run the command
 
-From the cloned `tracezilla-shopify-php` repository, run:
+From the cloned `tracezilla-integration-php` repository, run:
 
 ### With Docker
 
 ```bash
-docker compose run --rm php php bin/compare-catalogs
+docker compose exec integration php bin/tracezilla-integration catalog:compare
 ```
 
 ### Without Docker
@@ -62,13 +62,13 @@ command is the PHP entry point; when Docker is used, the surrounding
 Display a different maximum number of rows from each category:
 
 ```bash
-docker compose run --rm php php bin/compare-catalogs --limit=25
+docker compose exec integration php bin/tracezilla-integration catalog:compare --limit=25
 ```
 
 Return the complete result as machine-readable JSON:
 
 ```bash
-docker compose run --rm php php bin/compare-catalogs --json
+docker compose exec integration php bin/tracezilla-integration catalog:compare --json
 ```
 
 JSON output remains valid JSON and includes the same execution context around
@@ -139,7 +139,7 @@ before adapting the command.
 ## Tests
 
 ```bash
-docker compose run --rm php composer test
+docker compose exec integration composer test
 ```
 
 The tests use in-memory data and do not contact Shopify or tracezilla.

@@ -17,9 +17,6 @@ not authenticate the request by itself.
 2. Open your account or personal settings.
 3. Open **API Tokens**.
 4. Create a token for the integration.
-5. Select the least privilege that supports the chosen workflow.
-6. Copy the token when it is displayed and store it in a password manager or
-   encrypted secret store.
 
 The exact labels and available permissions can change. Review the current
 [tracezilla API documentation](https://app.tracezilla.com/api/documentation)

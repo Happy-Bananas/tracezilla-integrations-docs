@@ -12,21 +12,50 @@ has_children: true
 Framework neutral
 
 The
-[`tracezilla-shopify-php`](https://github.com/Happy-Bananas/tracezilla-shopify-php)
+[`tracezilla-integration-php`](https://github.com/Happy-Bananas/tracezilla-shopify-php)
 repository is a runnable starting point for consultants creating Shopify and
 tracezilla integration commands. It uses PHP 8.3 and Composer without Laravel,
 Symfony, or another application framework.
 
 {: .important }
-This is the standalone `tracezilla-shopify-php` project, not the Laravel
-integration workbench. Its entry points live under `bin/`, so commands use
-`php bin/...` both with and without Docker. A deployed workbench instead uses
-`php artisan ...`; the two command styles belong to different repositories and
-are not interchangeable.
+This standalone headless integration communicates directly with Shopify and
+tracezilla. Its entry points live under `bin/`, so workflows are executed
+through one console command.
 
-Its first command is the read-only [Compare Catalogs](./php/compare-catalogs.html)
-integration. Additional catalog, inventory, and order commands will appear as
-child pages beneath PHP.
+## The integration at a glance
+
+The normal production driver is cron. Cron starts a bounded workflow; the
+headless PHP application reads from Shopify and tracezilla, applies the
+customer's PHP business rules, performs approved writes, and returns a
+structured result and exit status.
+
+<pre class="mermaid">
+flowchart TB
+    Cron[Cron schedule] --> Command[Console command]
+    Command --> Workflow[Headless PHP workflow]
+    Workflow <--> Shopify[Shopify API]
+    Workflow <--> Tracezilla[tracezilla API]
+    Rules[Customer business rules in PHP] --> Workflow
+    Workflow --> Result[Result, log, and exit code]
+</pre>
+
+The consultant owns the schedule and customer rules. The application owns API
+authentication, pagination, mapping, safety checks, duplicate prevention, and
+workflow results. Shopify and tracezilla remain unaware of cron and of each
+other.
+
+Webhooks can later request a faster run, but they do not replace cron. A
+periodic reconciliation must still revisit a safe overlap window so a missed
+webhook, temporary API failure, or partially completed run is recovered. Safe
+retries depend on stable external references and idempotent workflow rules.
+
+Read [Implement custom business logic](./php/custom-business-logic.html) for a
+practical guide to adding a customer feature and operating it from cron.
+
+The seven catalog, inventory, and order commands are documented as child pages
+beneath PHP. Start with the read-only
+[Compare Catalogs](./php/compare-catalogs.html) command to validate catalog
+access and SKU matching.
 
 ## Clone and start the project
 
@@ -36,8 +65,8 @@ You need Git. Use either Docker with the Docker Compose plugin, or install PHP
 Clone only the PHP implementation:
 
 ```bash
-git clone https://github.com/Happy-Bananas/tracezilla-shopify-php.git
-cd tracezilla-shopify-php
+git clone https://github.com/Happy-Bananas/tracezilla-shopify-php.git tracezilla-integration-php
+cd tracezilla-integration-php
 ```
 
 Create the local configuration file:
@@ -52,11 +81,18 @@ test-store and test-team credentials to `.env`. Never commit this file.
 
 ### With Docker
 
-Build the PHP container and install the locked Composer dependencies:
+Start the headless console application:
 
 ```bash
-docker compose build
-docker compose run --rm php composer install
+docker compose up --build
+```
+
+Docker installs missing Composer dependencies automatically. Wait for
+`TRACEZILLA INTEGRATION IS READY`, keep the terminal open, and run commands
+from a second terminal:
+
+```bash
+docker compose exec integration php bin/tracezilla-integration help
 ```
 
 ### Without Docker
@@ -75,6 +111,9 @@ dependencies.
 
 - [Compare Catalogs](./php/compare-catalogs.html) — read and compare Shopify
   variants and tracezilla SKUs without changing either system.
+- [Report Shopify Product Decisions](./php/report-shopify-product-decisions.html)
+  — list tracezilla SKUs that need an explicit Shopify product or variant
+  decision.
 - [Create tracezilla SKUs](./php/create-tracezilla-skus.html) — preview or
   create missing tracezilla SKUs from Shopify variants.
 - [List Shopify Locations](./php/list-shopify-locations.html) — inspect the
@@ -89,7 +128,7 @@ dependencies.
 ## Run the tests
 
 ```bash
-docker compose run --rm php composer test
+docker compose exec integration composer test
 ```
 
 Tests use in-memory data and do not contact either API. Run them before and
@@ -169,38 +208,16 @@ objects implementing `CatalogReader`, reads them, indexes normalized items by
 SKU, and returns structured differences. Constructor dependencies make it easy
 to reuse in a framework and replace live readers with fakes during tests.
 
-## Create another command
+## Create another scenario
 
-Use the existing command as a template, but keep each responsibility in its
-own layer:
+Generate a platform-specific starting point:
 
-1. Write down the read/write behavior, mapping rule, required scopes, and safe
-   result categories.
-2. Add or update a named GraphQL query when Shopify fields are required.
-3. Add client behavior only when a new HTTP operation is needed.
-4. Create service methods that handle pagination and return mapped models.
-5. Add shared or workflow-specific models rather than passing raw arrays
-   through the application.
-6. Put transformation rules in mappers.
-7. Implement a workflow that depends on interfaces or focused services.
-8. Add a small file in `bin/` that constructs dependencies and invokes the
-   workflow.
-9. Add unit tests before running against test accounts.
-10. For writes, default to dry run, display the intended changes, impose a
-    limit, and require explicit confirmation.
+```bash
+php bin/tracezilla-integration scenario:create customer-feature --platform=shopify
+```
 
-Do not copy authentication, pagination, or mapping code into each command.
-Extend the existing clients and services so later commands reuse the same
-tested boundaries.
-
-## Use the code in another application
-
-The `src/` classes are ordinary Composer-autoloaded PHP. A consultant can reuse
-them in Laravel, Symfony, WordPress, a queue worker, or a scheduled CLI. The
-host application should replace only composition, configuration, and output;
-the clients, services, mappers, and workflow rules can remain unchanged.
-
-The optional
-[`tracezilla-integration-workbench`](https://github.com/Happy-Bananas/tracezilla-integration-workbench)
-is a Laravel interface for credential checks and controlled experiments. It is
-not the canonical PHP template.
+Edit the generated GraphQL request, tracezilla request, business rules, and
+test. Authentication, locking, retries, history, and console execution remain
+framework responsibilities. See
+[Implement Custom Business Logic](./php/custom-business-logic.html) for the
+complete workflow.
