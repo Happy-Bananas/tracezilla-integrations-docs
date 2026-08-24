@@ -18,6 +18,8 @@ the same console command manually or from cron.
 - [Shopify](./shopify/) — existing material is being migrated and verified.
 - [Getting Started](./getting-started/) — clone, configure, generate, test,
   and run the first Shopify scenario.
+- [Implementations](./implementations.html) — find the primary PHP project or
+  a platform-specific repository.
 - [Deployment](./deployment/) — schedule the headless integration with cron,
   prevent overlapping runs, and recover failed work.
 
