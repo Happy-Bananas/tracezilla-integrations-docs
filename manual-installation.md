@@ -6,13 +6,32 @@ nav_order: 11
 
 # Manual installation
 
-This is the step-by-step alternative to the one-command setup in
-[Getting Started](./getting-started.html).
+This is the native PHP alternative to the one-command setup in
+[Getting Started](./getting-started.html). It covers obtaining the project
+files and preparing the development environment. It does not explain how to
+install system tools.
 
-You need Docker with Docker Compose and Git. A GitHub account is not required
-to download or run the public project.
+## Requirements
 
-## 1. Choose a project name
+- PHP 8.3 or newer
+- Composer 2
+- Git
+- A terminal and code editor
+- [tracezilla and Shopify test credentials](./getting-started.html#prerequisites)
+
+A GitHub account is not required to download or run the public project.
+
+## Required files
+
+The development project consists of:
+
+- The integration source files from the public Git repository.
+- A local `.env` configuration created from `.env.example`.
+- PHP packages installed by Composer into `vendor/`.
+
+Do not copy `vendor/` from another computer and do not commit `.env`.
+
+## 1. Get the source files
 
 Run the following from the directory where you keep development projects.
 Replace `my-shopify-integration` with the folder name you want:
@@ -23,51 +42,47 @@ cd my-shopify-integration
 git remote rename origin template
 ```
 
-## 2. Prepare the local configuration
+This downloads the application into the new folder. The public source is named
+`template` in Git so it cannot be confused with a future private customer
+repository.
 
-Create your `.env` file and tell Docker which local user owns the project:
+## 2. Install the PHP packages
+
+```bash
+composer install
+```
+
+Composer reads `composer.lock` and installs the tested package versions into
+`vendor/`.
+
+## 3. Create the local configuration
+
+Create `.env` from the included safe template:
 
 ```bash
 cp .env.example .env
-printf '\nTRACEZILLA_DOCKER_UID=%s\nTRACEZILLA_DOCKER_GID=%s\n' "$(id -u)" "$(id -g)" >> .env
 ```
 
 Open `.env` in your editor and add the Shopify and tracezilla credentials.
-Git ignores `.env`, so credentials are not included when you commit.
-See the [Getting Started prerequisites](./getting-started.html#prerequisites)
-if the two test systems are not ready yet.
+Git ignores this file automatically.
 
-## 3. Check the connections
+## 4. Check the credentials
 
 ```bash
-./check-connection
+php bin/tracezilla-integration connection:check
 ```
 
-The first run can take a little while because Docker builds the development
-environment and Composer installs the PHP packages. A successful check names
-the Shopify store and confirms the tracezilla connection.
+The command makes one small read-only request to each service. A successful
+result looks like:
 
-## 4. Decide where the code should live
-
-The integration now works locally. You can continue without creating an online
-repository.
-
-For backup, collaboration, or deployment, create an empty **private**
-repository in GitHub, GitLab, or another Git service. Then connect and push the
-project using the instructions shown by that service. For GitHub over SSH, the
-commands normally look like:
-
-```bash
-git remote add origin git@github.com:YOUR-ACCOUNT/YOUR-PRIVATE-REPOSITORY.git
-git push -u origin main
+```text
+Connection check passed.
+Shopify: Example Shop (example-shop.myshopify.com)
+tracezilla: connected
 ```
 
-After this, `origin` is your private customer project. `template` is the public
-Happy Bananas project from which you can retrieve future framework updates.
-Having a public template remote does not give you permission to push customer
-code to the Happy Bananas repository.
+No products, orders, inventory, or settings are changed.
 
 ## Next
 
-- [Generate custom business logic](./shopify/php/custom-business-logic.html)
-- [Deploy and schedule with cron](./deployment/)
+[Create Custom Business Logic](./shopify/php/custom-business-logic.html).
