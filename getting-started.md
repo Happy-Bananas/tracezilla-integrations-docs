@@ -21,48 +21,76 @@ flowchart TB
 It runs manually during development and from cron in production. Customer
 business rules are ordinary PHP files generated from a safe starting point.
 
-## 1. Clone
+## Before you start
+
+Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) or
+Docker Engine with the Compose plugin. You also need Git and `curl`.
+
+Use credentials for a Shopify test store and a tracezilla test team while
+developing an integration.
+
+## 1. Create the project
 
 ```bash
-git clone https://github.com/Happy-Bananas/tracezilla-shopify-php.git tracezilla-integration-php
-cd tracezilla-integration-php
-cp .env.example .env
+curl -fsSL https://raw.githubusercontent.com/Happy-Bananas/tracezilla-shopify-php/main/create-shopify-project | sh -s -- my-shopify-integration
 ```
 
-Add the Shopify test-store and tracezilla test-team credentials to `.env`.
-Never commit this file.
+This creates `my-shopify-integration/`, copies the safe configuration template
+to `.env`, and retains the source repository as a Git remote named `template`.
+It refuses to overwrite an existing directory. The
+[installer source](https://github.com/Happy-Bananas/tracezilla-shopify-php/blob/main/create-shopify-project)
+is available for review before running it.
 
-## 2. Start
+## 2. Add credentials
 
 ```bash
-docker compose up --build
+cd my-shopify-integration
 ```
 
-Wait until the terminal displays `TRACEZILLA INTEGRATION IS READY`. Keep it
-running and open a second terminal in the same directory.
+Open `.env` in your editor and complete the Shopify and tracezilla values.
+Never commit this file; Git ignores it automatically.
 
-## 3. Generate the first scenario
+## 3. Check both connections
+
+```bash
+./check-connection
+```
+
+The first run builds and starts the development container, so it can take a
+little while. The command prints progress, waits until the integration is
+ready, and then performs one small read-only request against each service.
+
+A successful result looks like:
+
+```text
+Connection check passed.
+Shopify: Example Shop (example-shop.myshopify.com)
+tracezilla: connected
+```
+
+No products, orders, inventory, or settings are changed.
+
+## 4. Generate the first business scenario
 
 ```bash
 docker compose exec integration php bin/tracezilla-integration \
-  scenario:create confirm-credentials --platform=shopify
+  scenario:create my-first-scenario --platform=shopify
 ```
 
 This creates four consultant-owned files under
-`custom/Scenarios/Shopify/ConfirmCredentials/`: the Shopify request, the
+`custom/Scenarios/Shopify/MyFirstScenario/`: the Shopify request, the
 tracezilla request, PHP business rules, and a test.
 
-## 4. Test and run
+## 5. Test and run the scenario
 
 ```bash
 docker compose exec integration composer test
 docker compose exec integration php bin/tracezilla-integration \
-  scenario:run confirm-credentials --platform=shopify
+  scenario:run my-first-scenario --platform=shopify
 ```
 
-The generated scenario is read-only. A successful result confirms that both
-API credentials work. You can now copy its shape for the customer's business
-rule.
+The generated scenario is read-only. Customize its four files for the
+customer's business rule after the example passes unchanged.
 
 ## Next
 

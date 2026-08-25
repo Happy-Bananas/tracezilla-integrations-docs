@@ -67,11 +67,27 @@ Continue only when:
 
 ## Implementations
 
-{: .label .label-yellow }
-Planned
+### PHP
 
-Additional platform validation instructions will be added as their focused
-repositories become available.
+From the generated project directory, run:
+
+```bash
+./check-connection
+```
+
+This starts the Docker development service when needed, waits for dependencies
+to be ready, and runs the read-only `connection:check` console command. For an
+already-running container, the equivalent command is:
+
+```bash
+docker compose exec integration php bin/tracezilla-integration connection:check
+```
+
+Add `--json` to either form for structured output. The command never displays
+the Shopify access token, client secret, or tracezilla API key.
+
+Additional platform instructions will be added as their focused repositories
+become available.
 
 ## Official Shopify references
 
