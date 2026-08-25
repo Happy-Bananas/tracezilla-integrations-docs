@@ -1,63 +1,37 @@
 ---
-title: Safe Test Team
+title: Test Account and Credentials
 layout: default
 parent: tracezilla Fundamentals
 nav_order: 10
 ---
 
-# Prepare a safe tracezilla test team
+# Create a test account and acquire credentials
 
-Use a demo or otherwise isolated team while learning, testing mappings, and
-validating write operations. This keeps test partners, SKUs, orders, and
-inventory separate from customer production records.
+## 1. Create or select a test account
 
 Use the official [tracezilla tutorials](https://www.tracezilla.com/en/tutorials)
-to create and configure the account. This page only defines the integration
-safety requirements.
-
-Before development, confirm that:
-
-- The selected team contains no customer production data.
-- The developer is allowed to create and remove test records.
-- Company settings are sufficient for the feature being tested.
-- Everyone can recognize the team as a test environment.
-- Any demo expiration or access-review date is recorded.
+to create the account. Use a demo or otherwise isolated team that contains no
+customer production data.
 
 If an integration project needs a demo extension or account assistance,
 [contact tracezilla](https://www.tracezilla.com/en/contact-us).
 
-## Identify the team slug
+## 2. Acquire the credentials
+
+You need the team slug and an API key.
+
+### Team slug
 
 Open a page inside the intended team and identify the team-specific slug in
-the browser URL. The API client uses this slug as part of its base path:
+the browser URL. The slug identifies the team and is not necessarily the same
+as the displayed company name. Add it to `.env` as `TRACEZILLA_TEAM_SLUG`.
 
-```text
-https://app.tracezilla.com/api/v1/{team-slug}
-```
+### API key
 
-The slug selects a team; it is not a credential. Do not assume that it is
-identical to the displayed company name.
+1. Open your account or personal settings in the intended test team.
+2. Open **API Tokens**.
+3. Create a token for the integration.
+4. Add it to `.env` as `TRACEZILLA_API_KEY`.
 
-## Choose the test data
-
-Different workflows have different prerequisites:
-
-| Workflow | Typical tracezilla test data |
-|:--|:--|
-| Catalog comparison | A small set of known SKUs |
-| Create missing SKUs | A team where test SKUs may safely be created |
-| Inventory synchronization | A warehouse location and received inventory |
-| Order import | A webshop/customer partner, locations, owner, and matching SKUs |
-
-For the quickest shared setup, use the
-[standard test dataset](./test-data.html). A developer working on one narrow
-feature may instead prepare only that feature's prerequisites.
-
-## Readiness checklist
-
-- You are signed in to the intended non-production team.
-- You know the exact team slug.
-- Team and company details are sufficient for the selected workflow.
-- The team contains only deliberate test data.
-
-Continue with [Authentication and Secrets](./authentication.html).
+The team slug is not secret, but the API key is. Never commit or share the
+API key. If it is exposed, rotate it immediately.

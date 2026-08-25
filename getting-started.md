@@ -26,13 +26,17 @@ business rules are ordinary PHP files generated from a safe starting point.
 > [Manual installation](./manual-installation.html) if you prefer to run each
 > setup step separately.
 
+## Prerequisites
+
+Prepare both test systems before creating the project:
+
+1. [tracezilla test account and credentials](./fundamentals/account-and-team.html)
+2. [Shopify test store and credentials](./shopify/setup/authorize-api.html)
+
 ## Before you start
 
 Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) or
 Docker Engine with the Compose plugin. You also need Git and `curl`.
-
-Use credentials for a Shopify test store and a tracezilla test team while
-developing an integration.
 
 ## 1. Create the project
 
@@ -65,20 +69,6 @@ cd my-shopify-integration
 
 Open `.env` in your editor and complete the Shopify and tracezilla values.
 Never commit this file; Git ignores it automatically.
-
-For tracezilla, two values identify and authorize the test team:
-
-- `TRACEZILLA_TEAM_SLUG` identifies the team. Sign in to the intended team,
-  open a page inside it, and copy the team-specific slug from the browser URL.
-  The slug is not necessarily the same as the displayed company name.
-- `TRACEZILLA_API_KEY` authorizes the request. In the intended test team, open
-  your account or personal settings, select **API Tokens**, and create a token
-  for this integration.
-
-The team slug is not secret, but the API key is. Never paste the API key into
-Git, documentation, screenshots, logs, or support messages. See
-[tracezilla Authentication](./fundamentals/authentication.html) for the
-credential-safety rules.
 
 ## 3. Check both connections
 

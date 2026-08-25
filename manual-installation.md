@@ -34,6 +34,8 @@ printf '\nTRACEZILLA_DOCKER_UID=%s\nTRACEZILLA_DOCKER_GID=%s\n' "$(id -u)" "$(id
 
 Open `.env` in your editor and add the Shopify and tracezilla credentials.
 Git ignores `.env`, so credentials are not included when you commit.
+See the [Getting Started prerequisites](./getting-started.html#prerequisites)
+if the two test systems are not ready yet.
 
 ## 3. Check the connections
 

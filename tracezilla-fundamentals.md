@@ -17,14 +17,13 @@ and execution rules shared by integrations.
 
 ## Recommended path
 
-1. [Prepare a safe test team](./fundamentals/account-and-team.html).
-2. [Create and protect API credentials](./fundamentals/authentication.html).
-3. Prepare the [standard test dataset](./fundamentals/test-data.html), or only
+1. [Create a test account and acquire credentials](./fundamentals/account-and-team.html).
+2. Prepare the [standard test dataset](./fundamentals/test-data.html), or only
    the prerequisites needed by the feature:
    - [Catalog prerequisites](./fundamentals/entities.html)
    - [Inventory prerequisites](./fundamentals/locations-and-inventory.html)
    - [Order prerequisites](./fundamentals/sales-orders.html)
-4. Review [pagination](./fundamentals/pagination.html),
+3. Review [pagination](./fundamentals/pagination.html),
    [data mapping](./fundamentals/data-mapping.html), and
    [synchronization results](./fundamentals/synchronization-results.html)
    before implementing a complete workflow.

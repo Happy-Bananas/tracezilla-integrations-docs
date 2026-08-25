@@ -75,8 +75,8 @@ Create the local configuration file:
 cp .env.example .env
 ```
 
-Complete [Shopify Setup](./setup.html) and
-[tracezilla authentication](../fundamentals/authentication.html), then add the
+Complete [Shopify Setup](./setup.html) and prepare a
+[tracezilla test account and credentials](../fundamentals/account-and-team.html), then add the
 test-store and test-team credentials to `.env`. Never commit this file.
 
 ### With Docker
