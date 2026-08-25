@@ -86,31 +86,7 @@ tracezilla: connected
 
 No products, orders, inventory, or settings are changed.
 
-## 4. Generate the first business scenario
-
-```bash
-docker compose exec integration php bin/tracezilla-integration \
-  scenario:create my-first-scenario --platform=shopify
-```
-
-This creates four consultant-owned files under
-`custom/Scenarios/Shopify/MyFirstScenario/`: the Shopify request, the
-tracezilla request, PHP business rules, and a test.
-
-## 5. Test and run the scenario
-
-```bash
-docker compose exec integration composer test
-docker compose exec integration php bin/tracezilla-integration \
-  scenario:run my-first-scenario --platform=shopify
-```
-
-The generated scenario is read-only. Customize its four files for the
-customer's business rule after the example passes unchanged.
-
 ## Next
 
-- [Manual installation](./manual-installation.html)
-- [Implement Custom Business Logic](./shopify/php/custom-business-logic.html)
-- [Deploy and schedule with cron](./deployment/)
-- [Shopify setup](./shopify/setup.html)
+The connections work and the development environment is ready. Continue with
+[Create Custom Business Logic](./shopify/php/custom-business-logic.html).
