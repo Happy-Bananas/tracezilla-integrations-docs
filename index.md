@@ -15,11 +15,8 @@ the same console command manually or from cron.
 
 ## Available now
 
-- [Shopify](./shopify/) — existing material is being migrated and verified.
-- [Getting Started](./getting-started/) — clone, configure, generate, test,
-  and run the first Shopify scenario.
-- [Implementations](./implementations.html) — find the primary PHP project or
-  a platform-specific repository.
+- [Shopify](./shopify/) — connect Shopify and tracezilla with the headless PHP application.
+- [Getting Started](./getting-started/) — create a project and verify both connections.
 - [Deployment](./deployment/) — schedule the headless integration with cron,
   prevent overlapping runs, and recover failed work.
 

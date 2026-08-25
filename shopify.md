@@ -8,23 +8,17 @@ permalink: /shopify/
 
 # Shopify
 
-Guides and implementations for connecting Shopify with tracezilla.
+Connect Shopify with tracezilla through the standalone headless PHP
+application.
 
 ## Start here
 
-Complete [Shopify Setup](./setup.html) before choosing a catalog, inventory,
-or order workflow. Setup uses a Shopify dev store and deliberately small test
-data so credentials and mappings can be validated without touching a merchant's
-live store.
+Start with [Getting Started](../getting-started.html) to create the application
+and verify both connections. Complete [Shopify Setup](./setup.html) when you
+need a development store or help configuring Shopify access.
 
-## Coverage
+## Build an integration
 
-| Platform | Current status |
-|:--|:--|
-| PHP | Maintained; new commands are implemented and verified here first |
-| TypeScript, Python, Ruby, C# / .NET, and Java | [Shopify Labs](../shopify-labs/) |
-| Make.com | Experimental; planned material only |
-
-The language implementations remain available as reference material, but PHP
-is the active standalone glue application. Experimental repositories may not
-yet contain the latest PHP workflows or validation improvements.
+The PHP application contains the console commands, API clients, safe execution
+rules, and tests. Continue with [Create Custom Business Logic](./php/custom-business-logic.html)
+to implement a customer's integration rule.
