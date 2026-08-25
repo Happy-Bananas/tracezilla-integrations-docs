@@ -1,12 +1,11 @@
 ---
-title: Setup
+title: Shopify Prerequisites
 layout: default
-parent: Shopify
-nav_order: 10
+nav_order: 30
 has_children: true
 ---
 
-# Shopify setup
+# Shopify prerequisites
 
 Create a safe Shopify development environment, prepare predictable test data,
 and authorize the minimum Admin API access needed by the integration.
@@ -46,6 +45,3 @@ writes in a customer's production store.
 - [Development stores](https://shopify.dev/docs/apps/build/dev-dashboard/development-stores)
 - [Create apps using the Dev Dashboard](https://shopify.dev/docs/apps/build/dev-dashboard/create-apps-using-dev-dashboard)
 - [Shopify API access scopes](https://shopify.dev/docs/api/usage/access-scopes)
-
-This section will cover development stores, products and locations, inventory
-preparation, API authorization, and safe connection validation.

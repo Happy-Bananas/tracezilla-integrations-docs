@@ -1,8 +1,7 @@
 ---
 title: Validate Connection
 layout: default
-parent: Setup
-grand_parent: Shopify
+parent: Shopify Prerequisites
 nav_order: 60
 ---
 

@@ -1,8 +1,7 @@
 ---
 layout: default
 nav_order: 40
-parent: Setup
-grand_parent: Shopify
+parent: Shopify Prerequisites
 title: Inventory Setup
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Shopify
 layout: default
-nav_order: 30
+nav_order: 40
 has_children: true
 permalink: /shopify/
 ---
@@ -14,7 +14,7 @@ application.
 ## Start here
 
 Start with [Getting Started](../getting-started.html) to create the application
-and verify both connections. Complete [Shopify Setup](./setup.html) when you
+and verify both connections. Complete [Shopify Prerequisites](./setup.html) when you
 need a development store or help configuring Shopify access.
 
 ## Build an integration

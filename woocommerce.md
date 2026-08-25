@@ -1,7 +1,7 @@
 ---
 title: WooCommerce
 layout: default
-nav_order: 40
+nav_order: 50
 has_children: true
 permalink: /woocommerce/
 ---

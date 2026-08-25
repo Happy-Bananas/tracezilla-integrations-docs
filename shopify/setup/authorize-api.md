@@ -1,8 +1,7 @@
 ---
 layout: default
 nav_order: 50
-parent: Setup
-grand_parent: Shopify
+parent: Shopify Prerequisites
 title: Authorize API
 ---
 
