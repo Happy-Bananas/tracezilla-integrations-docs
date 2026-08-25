@@ -7,15 +7,16 @@ has_children: true
 
 # tracezilla fundamentals
 
-What an integration developer needs before connecting another service to
-tracezilla.
+This section is an index of the tracezilla prerequisites needed before
+developing an integration.
 
-The official [tracezilla tutorials](https://www.tracezilla.com/en/tutorials)
-explain how to operate tracezilla. This section does not repeat them. It covers
-the safe test environment, API access, data prerequisites, mapping decisions,
-and execution rules shared by integrations.
+Each subpage explains what must be ready and links to the official
+[tracezilla tutorials](https://www.tracezilla.com/en/tutorials) whenever
+possible. A subpage may also provide importable test data, or a short missing
+instruction when the official documentation is not sufficient for integration
+development.
 
-## Recommended path
+## Prerequisites
 
 1. [Create a test account and acquire credentials](./fundamentals/account-and-team.html).
 2. Prepare the [standard test dataset](./fundamentals/test-data.html), or only
@@ -23,12 +24,10 @@ and execution rules shared by integrations.
    - [Catalog prerequisites](./fundamentals/entities.html)
    - [Inventory prerequisites](./fundamentals/locations-and-inventory.html)
    - [Order prerequisites](./fundamentals/sales-orders.html)
-3. Review [pagination](./fundamentals/pagination.html),
-   [data mapping](./fundamentals/data-mapping.html), and
-   [synchronization results](./fundamentals/synchronization-results.html)
-   before implementing a complete workflow.
 
-The [tracezilla tutorials](https://www.tracezilla.com/en/tutorials) are the
-canonical product guide. The public
-[tracezilla API documentation](https://app.tracezilla.com/api/documentation)
-is the canonical endpoint reference.
+## What this section is not
+
+This section does not explain how to implement an integration and does not
+document the tracezilla API. Implementation guidance belongs with the headless
+application. Endpoint and request details belong in the official
+[tracezilla API documentation](https://app.tracezilla.com/api/documentation).
