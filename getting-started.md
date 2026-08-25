@@ -66,6 +66,20 @@ cd my-shopify-integration
 Open `.env` in your editor and complete the Shopify and tracezilla values.
 Never commit this file; Git ignores it automatically.
 
+For tracezilla, two values identify and authorize the test team:
+
+- `TRACEZILLA_TEAM_SLUG` identifies the team. Sign in to the intended team,
+  open a page inside it, and copy the team-specific slug from the browser URL.
+  The slug is not necessarily the same as the displayed company name.
+- `TRACEZILLA_API_KEY` authorizes the request. In the intended test team, open
+  your account or personal settings, select **API Tokens**, and create a token
+  for this integration.
+
+The team slug is not secret, but the API key is. Never paste the API key into
+Git, documentation, screenshots, logs, or support messages. See
+[tracezilla Authentication](./fundamentals/authentication.html) for the
+credential-safety rules.
+
 ## 3. Check both connections
 
 ```bash
