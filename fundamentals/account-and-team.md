@@ -1,7 +1,7 @@
 ---
 title: Test Account and Credentials
 layout: default
-parent: tracezilla Fundamentals
+parent: tracezilla Prerequisites
 nav_order: 10
 ---
 

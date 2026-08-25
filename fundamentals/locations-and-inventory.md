@@ -1,7 +1,7 @@
 ---
 title: Inventory Prerequisites
 layout: default
-parent: tracezilla Fundamentals
+parent: tracezilla Prerequisites
 nav_order: 50
 ---
 

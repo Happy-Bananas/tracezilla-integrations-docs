@@ -1,11 +1,11 @@
 ---
-title: tracezilla Fundamentals
+title: tracezilla Prerequisites
 layout: default
 nav_order: 20
 has_children: true
 ---
 
-# tracezilla fundamentals
+# tracezilla prerequisites
 
 This section is an index of the tracezilla prerequisites needed before
 developing an integration.
