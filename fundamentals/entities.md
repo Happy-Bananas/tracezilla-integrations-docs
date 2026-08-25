@@ -1,11 +1,26 @@
 ---
-title: SKUs and Products
+title: Catalog Prerequisites
 layout: default
 parent: tracezilla Fundamentals
 nav_order: 40
 ---
 
-# SKUs and products
+# Catalog prerequisites
+
+The integration needs a small, known catalog; it does not need a realistic
+customer catalog. Learn how tracezilla SKUs work from the official
+[SKU tutorial](https://www.tracezilla.com/en/tutorials/stock-keeping-units-sku)
+and use the official
+[SKU import guide](https://www.tracezilla.com/en/tutorials/import-skus) when
+preparing several records.
+
+For integration testing, provide:
+
+- A few active SKUs with stable `TZINT-` codes.
+- At least one SKU that will also exist in the commerce platform.
+- At least one tracezilla-only SKU for difference reporting.
+- Units and weight conversions that are easy to verify by hand.
+- No real customer product names, prices, or identifiers.
 
 An external commerce platform's product model does not automatically map to a
 tracezilla SKU. The integration must define identity, product structure,
@@ -26,7 +41,7 @@ Decide and test:
 
 Never silently choose one duplicate record as the winner.
 
-## Product structure and units
+## Mapping decisions
 
 One external product can contain several variants, while tracezilla represents
 SKU data together with operational units and conversion values. Creating a
@@ -56,6 +71,3 @@ A catalog comparison should remain read-only. A create workflow should:
 
 Consult the current [tracezilla API documentation](https://app.tracezilla.com/api/documentation)
 for supported SKU fields and endpoint schemas.
-
-This page will introduce SKUs, products, locations, inventory, sales orders,
-pagination, and the customer-specific mapping decisions shared by integrations.

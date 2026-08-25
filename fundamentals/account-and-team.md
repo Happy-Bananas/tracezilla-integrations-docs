@@ -1,24 +1,27 @@
 ---
-title: Account and Team
+title: Safe Test Team
 layout: default
 parent: tracezilla Fundamentals
 nav_order: 10
 ---
 
-# Create or select a safe tracezilla team
+# Prepare a safe tracezilla test team
 
 Use a demo or otherwise isolated team while learning, testing mappings, and
 validating write operations. This keeps test partners, SKUs, orders, and
 inventory separate from customer production records.
 
-## Prepare the account
+Use the official [tracezilla tutorials](https://www.tracezilla.com/en/tutorials)
+to create and configure the account. This page only defines the integration
+safety requirements.
 
-1. Register for or sign in to tracezilla.
-2. Select the team that will own the integration test data.
-3. Complete the company details required by the selected workflows.
-4. Confirm that the account contains no customer production data.
-5. Record any expiration or access-review date associated with the test
-   environment.
+Before development, confirm that:
+
+- The selected team contains no customer production data.
+- The developer is allowed to create and remove test records.
+- Company settings are sufficient for the feature being tested.
+- Everyone can recognize the team as a test environment.
+- Any demo expiration or access-review date is recorded.
 
 If an integration project needs a demo extension or account assistance,
 [contact tracezilla](https://www.tracezilla.com/en/contact-us).
@@ -35,7 +38,7 @@ https://app.tracezilla.com/api/v1/{team-slug}
 The slug selects a team; it is not a credential. Do not assume that it is
 identical to the displayed company name.
 
-## Create only the test data you need
+## Choose the test data
 
 Different workflows have different prerequisites:
 
@@ -46,8 +49,9 @@ Different workflows have different prerequisites:
 | Inventory synchronization | A warehouse location and received inventory |
 | Order import | A webshop/customer partner, locations, owner, and matching SKUs |
 
-The relevant workflow page owns the detailed setup. Do not populate partners,
-orders, or stock globally merely because another example needs them.
+For the quickest shared setup, use the
+[standard test dataset](./test-data.html). A developer working on one narrow
+feature may instead prepare only that feature's prerequisites.
 
 ## Readiness checklist
 

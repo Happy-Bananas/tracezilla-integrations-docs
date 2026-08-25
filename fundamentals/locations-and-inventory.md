@@ -1,22 +1,30 @@
 ---
-title: Locations and Inventory
+title: Inventory Prerequisites
 layout: default
 parent: tracezilla Fundamentals
 nav_order: 50
 ---
 
-# Locations and inventory
+# Inventory prerequisites
+
+Inventory tests require more than SKUs. Prepare one known warehouse location
+and a small quantity of stock for selected `TZINT-` records. Use tracezilla's
+official [inventory tutorials](https://www.tracezilla.com/en/tutorials/topic/inventory-management)
+for product operation and the official
+[lot import guide](https://www.tracezilla.com/en/tutorials/import-lots) when
+loading test inventory.
 
 Inventory synchronization needs an explicit relationship between the
 tracezilla warehouse and the external service's location. Display names,
 database IDs, location numbers, and external GraphQL IDs are different
 identifier namespaces.
 
-## Select the tracezilla source location
+## Required state
 
 Create or select a non-production location that can hold warehouse inventory.
 Record its tracezilla location number and verify it resolves to the intended
-internal location through the API.
+internal location through the API. Include at least one SKU with stock and one
+SKU with zero stock.
 
 Do not assume that the first supplier or company location is the inventory
 source. Confirm where received lots actually appear.

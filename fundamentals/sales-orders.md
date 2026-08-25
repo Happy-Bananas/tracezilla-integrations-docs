@@ -1,11 +1,20 @@
 ---
-title: Partners and Sales Orders
+title: Order Prerequisites
 layout: default
 parent: tracezilla Fundamentals
 nav_order: 60
 ---
 
-# Partners and sales orders
+# Order prerequisites
+
+Use tracezilla's official [partner tutorial](https://www.tracezilla.com/en/tutorials/partners),
+[partner import guide](https://www.tracezilla.com/en/tutorials/import-template-for-partners),
+and [sales-order tutorial](https://www.tracezilla.com/en/tutorials/sales-order)
+for product operation.
+
+For an integration test, prepare one clearly named webshop/customer partner,
+its required location and owner, one warehouse source, and matching `TZINT-`
+SKUs. Do not use real customer identities or addresses.
 
 Importing an external order requires more context than its lines. The
 integration must resolve customer, pickup, delivery, ownership, warehouse, SKU,

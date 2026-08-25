@@ -7,25 +7,30 @@ has_children: true
 
 # tracezilla fundamentals
 
-Shared concepts used across Shopify, WooCommerce, and future integrations.
+What an integration developer needs before connecting another service to
+tracezilla.
 
-Complete this foundation once, then apply the service-specific setup and
-mapping guidance for Shopify, WooCommerce, or another external service.
+The official [tracezilla tutorials](https://www.tracezilla.com/en/tutorials)
+explain how to operate tracezilla. This section does not repeat them. It covers
+the safe test environment, API access, data prerequisites, mapping decisions,
+and execution rules shared by integrations.
 
 ## Recommended path
 
-1. [Create or select a safe team](./fundamentals/account-and-team.html).
+1. [Prepare a safe test team](./fundamentals/account-and-team.html).
 2. [Create and protect API credentials](./fundamentals/authentication.html).
 3. [Validate the tracezilla connection](./fundamentals/connection-validation.html).
-4. Review the relevant data concepts:
-   - [SKUs and products](./fundamentals/entities.html)
-   - [Locations and inventory](./fundamentals/locations-and-inventory.html)
-   - [Partners and sales orders](./fundamentals/sales-orders.html)
+4. Prepare the [standard test dataset](./fundamentals/test-data.html), or only
+   the prerequisites needed by the feature:
+   - [Catalog prerequisites](./fundamentals/entities.html)
+   - [Inventory prerequisites](./fundamentals/locations-and-inventory.html)
+   - [Order prerequisites](./fundamentals/sales-orders.html)
 5. Review [pagination](./fundamentals/pagination.html),
    [data mapping](./fundamentals/data-mapping.html), and
    [synchronization results](./fundamentals/synchronization-results.html)
    before implementing a complete workflow.
 
-The public [tracezilla API documentation](https://app.tracezilla.com/api/documentation)
-is the canonical endpoint reference. These guides explain integration design
-and safety; they do not replace the current API schema.
+The [tracezilla tutorials](https://www.tracezilla.com/en/tutorials) are the
+canonical product guide. The public
+[tracezilla API documentation](https://app.tracezilla.com/api/documentation)
+is the canonical endpoint reference.

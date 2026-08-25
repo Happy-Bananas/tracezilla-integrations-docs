@@ -61,10 +61,5 @@ discarded business record.
 - The token can read every prerequisite resource for the selected workflow.
 - Logs and displayed results contain no credentials.
 
-## Implementations
-
-{: .label .label-yellow }
-Planned
-
-Platform-specific commands will be linked after their focused repositories are
-verified.
+The PHP application's `./check-connection` command implements this validation
+without displaying credentials or business records.
