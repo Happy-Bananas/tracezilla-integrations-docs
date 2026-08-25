@@ -21,6 +21,11 @@ flowchart TB
 It runs manually during development and from cron in production. Customer
 business rules are ordinary PHP files generated from a safe starting point.
 
+> **The one-command setup below is optional.** It is the quickest way to get
+> started, but it does not do anything you cannot do yourself. See
+> [Manual installation](./manual-installation.html) if you prefer to run each
+> setup step separately.
+
 ## Before you start
 
 Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) or
@@ -35,11 +40,22 @@ developing an integration.
 curl -fsSL https://raw.githubusercontent.com/Happy-Bananas/tracezilla-shopify-php/main/create-shopify-project | sh -s -- my-shopify-integration
 ```
 
-This creates `my-shopify-integration/`, copies the safe configuration template
-to `.env`, and retains the source repository as a Git remote named `template`.
-It refuses to overwrite an existing directory. The
-[installer source](https://github.com/Happy-Bananas/tracezilla-shopify-php/blob/main/create-shopify-project)
-is available for review before running it.
+`my-shopify-integration` is simply the name of the new project folder. Choose a
+name that describes your customer or integration, for example:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Happy-Bananas/tracezilla-shopify-php/main/create-shopify-project | sh -s -- happy-hanna-shopify
+```
+
+The command downloads a fresh copy of the integration into that folder and
+creates the `.env` configuration file. It will not replace a folder that
+already exists.
+
+You do not need a GitHub account to create or run the integration. Everything
+runs from the new folder on your computer. If you later want backup,
+collaboration, or deployment through Git, push the project to a **private
+repository owned by you or the customer**. Customer business rules should not
+be pushed to the public Happy Bananas repository.
 
 ## 2. Add credentials
 
@@ -94,6 +110,7 @@ customer's business rule after the example passes unchanged.
 
 ## Next
 
+- [Manual installation](./manual-installation.html)
 - [Implement Custom Business Logic](./shopify/php/custom-business-logic.html)
 - [Deploy and schedule with cron](./deployment/)
 - [Shopify setup](./shopify/setup.html)
