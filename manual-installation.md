@@ -34,11 +34,11 @@ Do not copy `vendor/` from another computer and do not commit `.env`.
 ## 1. Get the source files
 
 Run the following from the directory where you keep development projects.
-Replace `my-shopify-integration` with the folder name you want:
+Replace `YOUR_PROJECT_NAME` with the folder name you want:
 
 ```bash
-git clone https://github.com/Happy-Bananas/tracezilla-shopify-php.git my-shopify-integration
-cd my-shopify-integration
+git clone https://github.com/Happy-Bananas/tracezilla-shopify-php.git YOUR_PROJECT_NAME
+cd YOUR_PROJECT_NAME
 git remote rename origin template
 ```
 

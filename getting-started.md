@@ -41,11 +41,12 @@ Docker Engine with the Compose plugin. You also need Git and `curl`.
 ## 1. Create the project
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Happy-Bananas/tracezilla-shopify-php/main/create-shopify-project | sh -s -- my-shopify-integration
+curl -fsSL https://raw.githubusercontent.com/Happy-Bananas/tracezilla-shopify-php/main/create-shopify-project | sh -s -- YOUR_PROJECT_NAME
 ```
 
-`my-shopify-integration` is simply the name of the new project folder. Choose a
-name that describes your customer or integration, for example:
+`YOUR_PROJECT_NAME` is a placeholder. Replace it with the name of the new
+project folder. Choose a name that describes your customer or integration, for
+example:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Happy-Bananas/tracezilla-shopify-php/main/create-shopify-project | sh -s -- happy-hanna-shopify
@@ -64,8 +65,10 @@ be pushed to the public Happy Bananas repository.
 ## 2. Add credentials
 
 ```bash
-cd my-shopify-integration
+cd YOUR_PROJECT_NAME
 ```
+
+Replace `YOUR_PROJECT_NAME` with the same folder name used in step 1.
 
 Open `.env` in your editor and complete the Shopify and tracezilla values.
 Never commit this file; Git ignores it automatically.

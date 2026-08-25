@@ -28,7 +28,7 @@ first and ensure the app has Shopify `read_locations` access.
 
 ## Run the command
 
-From the cloned `tracezilla-integration-php` repository, run:
+From your project directory, run:
 
 ### With Docker
 

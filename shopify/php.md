@@ -11,11 +11,11 @@ has_children: true
 {: .label .label-green }
 Framework neutral
 
-The
-[`tracezilla-integration-php`](https://github.com/Happy-Bananas/tracezilla-shopify-php)
-repository is a runnable starting point for consultants creating Shopify and
-tracezilla integration commands. It uses PHP 8.3 and Composer without Laravel,
-Symfony, or another application framework.
+This guide continues with the project created in
+[Getting Started](../getting-started.html). That project is the consultant's
+runnable starting point for Shopify and tracezilla integration commands. It
+uses PHP 8.3 and Composer without Laravel, Symfony, or another application
+framework.
 
 {: .important }
 This standalone headless integration communicates directly with Shopify and
@@ -57,55 +57,12 @@ beneath PHP. Start with the read-only
 [Compare Catalogs](./php/compare-catalogs.html) command to validate catalog
 access and SKU matching.
 
-## Clone and start the project
+## Continue from your project
 
-You need Git. Use either Docker with the Docker Compose plugin, or install PHP
-8.3 and Composer directly on the host.
-
-Clone only the PHP implementation:
-
-```bash
-git clone https://github.com/Happy-Bananas/tracezilla-shopify-php.git tracezilla-integration-php
-cd tracezilla-integration-php
-```
-
-Create the local configuration file:
-
-```bash
-cp .env.example .env
-```
-
-Complete [Shopify Prerequisites](./setup.html) and prepare a
-[tracezilla test account and credentials](../fundamentals/account-and-team.html), then add the
-test-store and test-team credentials to `.env`. Never commit this file.
-
-### With Docker
-
-Start the headless console application:
-
-```bash
-docker compose up --build
-```
-
-Docker installs missing Composer dependencies automatically. Wait for
-`TRACEZILLA INTEGRATION IS READY`, keep the terminal open, and run commands
-from a second terminal:
-
-```bash
-docker compose exec integration php bin/tracezilla-integration help
-```
-
-### Without Docker
-
-Install the locked dependencies with the host PHP installation:
-
-```bash
-composer install
-```
-
-The source directory is mounted into the container, so code changes are
-available immediately. Rebuild only after changing the Dockerfile or container
-dependencies.
+Complete [Getting Started](../getting-started.html) before using the commands
+on this page. Run them from the project folder you chose there. In command
+examples, uppercase names such as `YOUR_SCENARIO_NAME` are placeholders that
+you replace with your own value.
 
 ## Available commands
 
@@ -213,7 +170,7 @@ to reuse in a framework and replace live readers with fakes during tests.
 Generate a platform-specific starting point:
 
 ```bash
-php bin/tracezilla-integration scenario:create customer-feature --platform=shopify
+php bin/tracezilla-integration scenario:create YOUR_SCENARIO_NAME --platform=shopify
 ```
 
 Edit the generated GraphQL request, tracezilla request, business rules, and
