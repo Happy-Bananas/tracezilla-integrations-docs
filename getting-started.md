@@ -44,9 +44,7 @@ Docker Engine with the Compose plugin. You also need Git and `curl`.
 curl -fsSL https://raw.githubusercontent.com/Happy-Bananas/tracezilla-shopify-php/main/create-shopify-project | sh -s -- YOUR_PROJECT_NAME
 ```
 
-`YOUR_PROJECT_NAME` is a placeholder. Replace it with the name of the new
-project folder. Choose a name that describes your customer or integration, for
-example:
+Replace `YOUR_PROJECT_NAME` with your project name, for example:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Happy-Bananas/tracezilla-shopify-php/main/create-shopify-project | sh -s -- happy-hanna-shopify
