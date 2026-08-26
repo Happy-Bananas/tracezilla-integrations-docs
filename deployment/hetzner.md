@@ -11,6 +11,11 @@ This example installs the headless PHP application in a Hetzner hosting
 account with SSH access. Replace every uppercase value with the value supplied
 for the hosting account.
 
+It assumes that the complete customer project—including the rules under
+`custom/`—has already been tested and pushed to a private Git repository. See
+the [deployment overview](../deployment.html#from-template-to-server) for the
+file flow.
+
 ## Requirements
 
 - SSH access
@@ -18,6 +23,7 @@ for the hosting account.
 - Composer 2
 - Git
 - Cron
+- A private customer repository that the server can read
 - [Shopify and tracezilla credentials](../getting-started.html#prerequisites)
 
 ## 1. Connect with SSH
@@ -31,14 +37,14 @@ ssh -p YOUR_SSH_PORT YOUR_SSH_USER@YOUR_SERVER
 ```bash
 mkdir -p ~/apps
 cd ~/apps
-git clone https://github.com/Happy-Bananas/tracezilla-shopify-php.git YOUR_PROJECT_NAME
+git clone YOUR_PRIVATE_REPOSITORY_URL YOUR_PROJECT_NAME
 cd YOUR_PROJECT_NAME
-git remote rename origin template
-git remote set-url --push template DISABLED
+git remote set-url --push origin DISABLED
 ```
 
-The final command prevents accidental pushes from the server to the public
-template while still allowing future updates to be fetched.
+The deployment server needs read access to that private repository. The final
+command disables pushes from the server while still allowing approved updates
+to be fetched from the private `origin` repository.
 
 ## 3. Install production dependencies
 
