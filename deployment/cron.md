@@ -34,7 +34,7 @@ schedule, working directory, and log destination.
 Consultants normally need only these two pages:
 
 - [Set up a cron task](./cron/setup.html) — copy, test, and schedule the
-  headless command on a PHP host or Docker host.
+  headless command on a PHP host.
 - [Troubleshoot scheduled runs](./cron/troubleshooting.html) — read the history
   first, inspect quarantined files, and identify tasks that need attention.
 
@@ -45,4 +45,3 @@ attention list instead of retrying forever.
 
 Framework maintainers can read [Cron error and retry internals](./cron/errors.html)
 for the file format, atomic-write protocol, locking, and backoff implementation.
-

@@ -18,9 +18,8 @@ The application must remember incomplete work and retry it during later runs.
 
 ## File-based retry spool
 
-A SQL database should not be required for a small single-server integration.
-The default persistence model can be a private file-based spool under a
-configurable runtime directory:
+The integration stores retry state in a private file-based spool under the
+configured runtime directory:
 
 ```text
 var/
@@ -89,9 +88,8 @@ free.
 
 ## Directory permissions
 
-File persistence still requires one writable directory. There is no reliable
-retry mechanism—database or file based—without persistent writable storage.
-The requirement can be kept small and tested during setup.
+Retry state requires one persistent writable directory. The requirement is
+small and can be tested during setup.
 
 Recommended rules:
 
@@ -171,15 +169,8 @@ php bin/tracezilla-integration failures:dismiss --task=<task-id> --reason='Appro
 Every manual retry still uses the global atomic lock and the workflow's normal
 idempotency checks.
 
-## When a database becomes appropriate
+## Deployment boundary
 
-The file spool is intended for one integration instance on one persistent
-filesystem. Use a database or distributed lock service when:
-
-- Commands run on multiple servers or containers without a shared filesystem.
-- Several workers must process tasks concurrently.
-- The hosting platform replaces local files between deployments.
-- Querying, retention, auditing, or operational reporting outgrows files.
-
-The workflow should depend on retry-store and lock interfaces so changing the
-storage implementation does not change customer business rules.
+The file spool supports one integration instance on one persistent filesystem.
+Do not run the same project concurrently from several hosts. The deployment
+check must pass on the same account and filesystem used by cron.

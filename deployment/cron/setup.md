@@ -19,12 +19,6 @@ From the integration project, run:
 php bin/tracezilla-integration deployment:check
 ```
 
-With Docker:
-
-```bash
-docker compose exec integration php bin/tracezilla-integration deployment:check
-```
-
 Continue only when it reports `"ready": true`. This verifies the private
 runtime directory, atomic file replacement, and global process lock.
 
@@ -69,13 +63,6 @@ Use a command like this, replacing every example value and path:
 cd /absolute/path/customer-integration && /absolute/path/php bin/tracezilla-integration orders:import-individual --customer='Webshop customer' --warehouse=2 --days=3 --limit=100 --execute --confirm >> var/log/cron.log 2>&1
 ```
 
-For Docker, schedule the host to invoke the already-running integration
-container without allocating a terminal:
-
-```bash
-docker compose -f /absolute/path/customer-integration/compose.yaml exec -T integration php bin/tracezilla-integration orders:import-individual --customer='Webshop customer' --warehouse=2 --days=3 --limit=100 --execute --confirm >> /absolute/path/customer-integration/var/log/cron.log 2>&1
-```
-
 The application obtains a global atomic lock automatically. If a previous
 workflow is still running, the later invocation exits safely instead of
 running at the same time.
@@ -96,4 +83,3 @@ work missed during an outage. Stable external references prevent duplicates.
 
 If a run does not behave as expected, continue with
 [Troubleshoot scheduled runs](./troubleshooting.html).
-

@@ -7,10 +7,8 @@ has_children: true
 
 # Deployment
 
-The headless integration is designed to run anywhere PHP and cron are
-available, including modest shared-hosting environments. A deployment does not
-require Laravel, a web server, a queue service, Redis, or a SQL database for
-its basic scheduling and retry model.
+The headless integration runs as PHP console commands started manually or by
+cron. It is suitable for a single persistent hosting account with SSH access.
 
 The deployment environment must provide:
 
@@ -21,9 +19,9 @@ The deployment environment must provide:
   that executes the cron command.
 - A way to retain logs or notify an operator when attention is required.
 
-Start with [Cron](./deployment/cron.html) for the scheduling model. Its child
-page [Cron errors and retries](./deployment/cron/errors.html) describes
-failure recovery without requiring a database.
+Follow the [Hetzner deployment example](./deployment/hetzner.html) for a
+complete native PHP installation. Then continue with [Cron](./deployment/cron.html)
+to schedule the required business command.
 
 {: .important }
 Atomic locking, file retry storage, deployment checks, history, and failure

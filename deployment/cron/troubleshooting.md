@@ -54,12 +54,6 @@ Use the supported command rather than opening pending task files:
 php bin/tracezilla-integration failures:list
 ```
 
-With Docker:
-
-```bash
-docker compose exec integration php bin/tracezilla-integration failures:list
-```
-
 Tasks under `pending` have a future or due automatic retry. Tasks under
 `attention` require a correction before another attempt.
 
@@ -108,4 +102,3 @@ Escalate when a corrupt task appears, an unexpected error repeatedly moves to
 attention, valid records remain outside the selected window, or the deployment
 check fails. The implementation details are documented in
 [Cron error and retry internals](./errors.html).
-
