@@ -12,9 +12,8 @@ account with SSH access. Replace every uppercase value with the value supplied
 for the hosting account.
 
 It assumes that the complete customer project—including the rules under
-`custom/`—has already been tested on the developer's computer. See
-the [deployment overview](../deployment.html#from-development-to-server) for the
-file flow.
+`custom/`—has already been tested on the developer's computer. See the
+[deployment overview](../deployment.html) for context.
 
 ## Requirements
 
