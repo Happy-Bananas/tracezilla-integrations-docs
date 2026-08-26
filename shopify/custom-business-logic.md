@@ -15,14 +15,16 @@ rules in cron, an API client, or a future webhook handler.
 
 Generate a scenario instead of copying framework classes by hand:
 
-```bash
-php bin/bifrost-connect scenario:create confirm-credentials --platform=shopify
-```
-
-With Docker, run the same command inside the integration service:
+### With Docker
 
 ```bash
 docker compose exec integration php bin/bifrost-connect scenario:create confirm-credentials --platform=shopify
+```
+
+### Without Docker
+
+```bash
+php bin/bifrost-connect scenario:create confirm-credentials --platform=shopify
 ```
 
 The command creates this consultant-owned feature:
@@ -40,6 +42,15 @@ shop name, reads a one-record page from tracezilla, and reports that both sets
 of credentials work. It never prints credentials or access tokens.
 
 Run the generated test and scenario:
+
+### With Docker
+
+```bash
+docker compose exec integration composer test
+docker compose exec integration php bin/bifrost-connect scenario:run confirm-credentials --platform=shopify
+```
+
+### Without Docker
 
 ```bash
 composer test
