@@ -10,17 +10,17 @@ has_children: true
 The headless integration runs as PHP console commands started manually or by
 cron. It is suitable for a single persistent hosting account with SSH access.
 
-## From template to server
+## From development to server
 
-The server receives the complete customer project from the customer's private
-Git repository. It does not clone the public template directly.
+The developer uploads the exact project that was tested locally. The server
+does not retrieve or track the public template.
 
 <pre class="mermaid">
 flowchart TB
     Template[Public template<br>Framework files]
     Project[Developer's customer project]
     Rules[Customer business rules<br>custom/]
-    Private[Private customer Git repository]
+    Upload[Secure upload over SSH]
     Server[Deployment server<br>apps/YOUR_PROJECT_NAME]
     Secrets[Credentials entered on server<br>.env]
     Packages[Composer installs packages<br>vendor/]
@@ -28,8 +28,8 @@ flowchart TB
 
     Template --> Project
     Rules --> Project
-    Project --> Private
-    Private --> Server
+    Project --> Upload
+    Upload --> Server
     Secrets --> Server
     Packages --> Server
     Server --> Cron
@@ -41,7 +41,7 @@ The files have different origins:
 |:--|:--|
 | Framework files such as `bin/` and `src/` | Initially copied from the public template |
 | Customer rules under `custom/` | Written and tested by the developer |
-| Tracked project files | Pushed together to the private customer repository |
+| Complete tested project | Uploaded from the developer's computer with `rsync` |
 | `.env` | Created directly on the server; never committed |
 | `vendor/` | Created on the server by Composer |
 | `var/` | Created and maintained by the running application |
@@ -57,7 +57,7 @@ The deployment environment must provide:
 
 Before deployment, the developer must have completed
 [Getting Started](./getting-started.html), added and tested the customer rules,
-and pushed the complete project to a private repository.
+and confirmed that the project is ready to run.
 
 Follow the [Hetzner deployment example](./deployment/hetzner.html) for a
 complete native PHP installation. Then continue with [Cron](./deployment/cron.html)
