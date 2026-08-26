@@ -1,8 +1,7 @@
 ---
 title: Report Collected Orders
 layout: default
-parent: PHP
-grand_parent: Shopify
+parent: Shopify
 nav_order: 50
 ---
 
@@ -16,9 +15,6 @@ Read only
 The command reads recently created Shopify orders and groups their reportable
 lines by business date, currency, and SKU. It totals quantity and discounted
 revenue for each group. It never changes Shopify or tracezilla.
-
-Complete the [PHP installation and configuration](../php.html) first. The
-Shopify app needs the `read_orders` scope.
 
 Orders are skipped when they are cancelled or contain more than the 250 lines
 returned by the example query. Lines are skipped when the SKU, positive

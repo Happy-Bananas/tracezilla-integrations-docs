@@ -1,8 +1,7 @@
 ---
 title: Synchronize Inventory
 layout: default
-parent: PHP
-grand_parent: Shopify
+parent: Shopify
 nav_order: 40
 ---
 
@@ -19,8 +18,7 @@ trimmed SKU code. It reports each record as `would_update`, `updated`,
 `unchanged`, `skipped`, or `failed`.
 
 The Shopify location ID and tracezilla warehouse number are required arguments,
-so the relationship is visible whenever the command runs. Complete the
-[PHP installation and configuration](../php.html) first.
+so the relationship is visible whenever the command runs.
 
 ### Quantity mapping
 

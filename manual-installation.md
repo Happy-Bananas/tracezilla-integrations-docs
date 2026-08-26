@@ -86,4 +86,4 @@ No products, orders, inventory, or settings are changed.
 
 ## Next
 
-[Create Custom Business Logic](./shopify/php/custom-business-logic.html).
+[Implement Custom Business Logic](./shopify/custom-business-logic.html).

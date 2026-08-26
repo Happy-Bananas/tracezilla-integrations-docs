@@ -1,8 +1,7 @@
 ---
 title: Implement Custom Business Logic
 layout: default
-parent: PHP
-grand_parent: Shopify
+parent: Shopify
 nav_order: 5
 ---
 
@@ -14,8 +13,7 @@ rules in cron, an API client, or a future webhook handler.
 
 ## Generate the starting point
 
-After cloning and configuring the integration, generate a scenario instead of
-copying framework classes by hand:
+Generate a scenario instead of copying framework classes by hand:
 
 ```bash
 php bin/bifrost-connect scenario:create confirm-credentials --platform=shopify

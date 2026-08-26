@@ -1,8 +1,7 @@
 ---
 title: Import Individual Orders
 layout: default
-parent: PHP
-grand_parent: Shopify
+parent: Shopify
 nav_order: 60
 ---
 
@@ -16,11 +15,6 @@ Writes with explicit confirmation
 The command reads recently created Shopify orders and maps each selected order
 to one tracezilla sales order. It is a dry run by default. Existing tracezilla
 orders are detected by the external reference `SHP<Shopify legacy order ID>`.
-
-Complete the [PHP installation and configuration](../php.html) first. The
-Shopify app needs the `read_orders` scope, and the tracezilla API key must be
-able to read partners, locations, and sales orders. Execution also requires
-permission to create sales orders.
 
 ## Mapping assumptions
 

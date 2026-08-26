@@ -1,8 +1,7 @@
 ---
 title: Create tracezilla SKUs
 layout: default
-parent: PHP
-grand_parent: Shopify
+parent: Shopify
 nav_order: 20
 ---
 
@@ -16,9 +15,6 @@ Writes with explicit confirmation
 The command reads Shopify product variants and the existing tracezilla SKU
 catalog. It previews or creates a tracezilla SKU for each selected Shopify SKU
 code that does not already exist.
-
-Complete the [PHP installation and configuration](../php.html) first. Use a
-development Shopify store and a test tracezilla team while adapting the example.
 
 ### Mapping
 

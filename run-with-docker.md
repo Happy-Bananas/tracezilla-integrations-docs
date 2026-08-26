@@ -73,4 +73,4 @@ No products, orders, inventory, or settings are changed.
 ## Next
 
 The connections work and the development environment is ready. Continue with
-[Create Custom Business Logic](./shopify/php/custom-business-logic.html).
+[Implement Custom Business Logic](./shopify/custom-business-logic.html).

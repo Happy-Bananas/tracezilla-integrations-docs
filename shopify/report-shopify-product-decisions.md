@@ -1,8 +1,7 @@
 ---
 title: Report Shopify Product Decisions
 layout: default
-parent: PHP
-grand_parent: Shopify
+parent: Shopify
 nav_order: 15
 ---
 
@@ -16,10 +15,6 @@ Read only
 The command reads the complete Shopify variant catalog and tracezilla SKU
 catalog. It reports each tracezilla SKU for which no Shopify variant has the
 same trimmed SKU code. It never creates or changes a product, variant, or SKU.
-
-Complete the [PHP installation and configuration](../php.html) before running
-this command. The Shopify app needs `read_products` access, and the tracezilla
-API key must be able to list SKUs.
 
 This report is narrower than [Compare Catalogs](compare-catalogs.html). Compare
 Catalogs diagnoses differences in both directions; this command turns only the

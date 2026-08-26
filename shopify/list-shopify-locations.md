@@ -1,8 +1,7 @@
 ---
 title: List Shopify Locations
 layout: default
-parent: PHP
-grand_parent: Shopify
+parent: Shopify
 nav_order: 30
 ---
 
@@ -23,8 +22,7 @@ For each location it reports:
 - whether it fulfils online orders.
 
 The GraphQL location ID identifies the inventory location in later Shopify
-inventory commands. Complete the [PHP installation and configuration](../php.html)
-first and ensure the app has Shopify `read_locations` access.
+inventory commands.
 
 ## Run the command
 

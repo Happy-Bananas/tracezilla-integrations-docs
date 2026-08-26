@@ -1,8 +1,7 @@
 ---
 title: Compare Catalogs
 layout: default
-parent: PHP
-grand_parent: Shopify
+parent: Shopify
 nav_order: 10
 ---
 
@@ -16,9 +15,6 @@ Read only
 The command retrieves the
 complete Shopify variant catalog and tracezilla SKU catalog, normalizes their
 SKU codes, and reports differences without writing to either API.
-
-Complete the [PHP installation and configuration](../php.html) before running
-this command.
 
 ## Run the command
 
@@ -133,8 +129,7 @@ flowchart TB
 
 This division is intentional: the entry point assembles the command, clients
 handle APIs, services retrieve use-case data, mappers normalize records, and
-the workflow contains the comparison rule. See the [PHP architecture guide](../php.html#architecture)
-before adapting the command.
+the workflow contains the comparison rule.
 
 ## Tests
 
