@@ -7,6 +7,14 @@ nav_order: 5
 
 # Deploy on Hetzner
 
+{: .label .label-red }
+Unsupported
+
+{: .warning }
+This deployment guidance is an optional example. Hosting, security, backups,
+monitoring, and scheduled operation remain the developer's or customer's
+responsibility.
+
 This example installs BifrostConnect in a Hetzner hosting
 account with SSH access. Replace every uppercase value with the value supplied
 for the hosting account.

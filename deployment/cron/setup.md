@@ -8,6 +8,14 @@ nav_order: 10
 
 # Set up a cron task
 
+{: .label .label-red }
+Unsupported
+
+{: .warning }
+This deployment guidance is an optional example. Hosting, security, backups,
+monitoring, and scheduled operation remain the developer's or customer's
+responsibility.
+
 Cron calls the same headless command that you tested manually. It does not call
 a web page and it does not contain customer business rules.
 

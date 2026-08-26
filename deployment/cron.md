@@ -8,6 +8,14 @@ has_children: true
 
 # Schedule BifrostConnect with cron
 
+{: .label .label-red }
+Unsupported
+
+{: .warning }
+This deployment guidance is an optional example. Hosting, security, backups,
+monitoring, and scheduled operation remain the developer's or customer's
+responsibility.
+
 Cron is the primary production trigger. It starts a console command at a
 regular interval; BifrostConnect then communicates with the
 commerce service and tracezilla and applies the customer's PHP business rules.

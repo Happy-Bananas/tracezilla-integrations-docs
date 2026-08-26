@@ -8,8 +8,11 @@ nav_order: 90
 
 # Cron error and retry internals
 
+{: .label .label-red }
+Unsupported
+
 {: .warning }
-This page is for framework maintainers. Consultants should begin with
+This unsupported page is for framework maintainers. Consultants should begin with
 [Troubleshoot scheduled runs](./troubleshooting.html).
 
 Cron does not understand integration tasks and cannot retry an individual

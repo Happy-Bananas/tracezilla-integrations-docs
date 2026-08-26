@@ -8,6 +8,14 @@ nav_order: 20
 
 # Troubleshoot scheduled runs
 
+{: .label .label-red }
+Unsupported
+
+{: .warning }
+This deployment guidance is an optional example. Hosting, security, backups,
+monitoring, and scheduled operation remain the developer's or customer's
+responsibility.
+
 Start with the files written by the integration. Do not begin by changing cron
 or deleting retry files.
 
