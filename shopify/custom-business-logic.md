@@ -27,15 +27,15 @@ docker compose exec integration php bin/bifrost-connect scenario:create confirm-
 php bin/bifrost-connect scenario:create confirm-credentials --platform=shopify
 ```
 
-The command creates this consultant-owned feature:
+The command creates four consultant-owned files under
+`custom/Scenarios/Shopify/ConfirmCredentials/`:
 
-```text
-custom/Scenarios/Shopify/ConfirmCredentials/
-├── ShopifyQuery.graphql
-├── TracezillaRequest.php
-├── BusinessRules.php
-└── BusinessRulesTest.php
-```
+| File | Consultant responsibility |
+|---|---|
+| `ShopifyQuery.graphql` | Request only the Shopify fields required by the feature |
+| `TracezillaRequest.php` | Declare the read-only tracezilla endpoint and query parameters |
+| `BusinessRules.php` | Validate inputs and express the customer's decisions in PHP |
+| `BusinessRulesTest.php` | Turn the customer story into examples that run without live APIs |
 
 The generated “hello world” is deliberately read-only. It requests the Shopify
 shop name, reads a one-record page from tracezilla, and reports that both sets
@@ -56,15 +56,6 @@ docker compose exec integration php bin/bifrost-connect scenario:run confirm-cre
 composer test
 php bin/bifrost-connect scenario:run confirm-credentials --platform=shopify
 ```
-
-The four generated files are the normal consultant editing surface:
-
-| File | Consultant responsibility |
-|---|---|
-| `ShopifyQuery.graphql` | Request only the Shopify fields required by the feature |
-| `TracezillaRequest.php` | Declare the read-only tracezilla endpoint and query parameters |
-| `BusinessRules.php` | Validate inputs and express the customer's decisions in PHP |
-| `BusinessRulesTest.php` | Turn the customer story into examples that run without live APIs |
 
 The initial runner supports read-only scenarios. Write scenarios will be added
 behind explicit preview, `--execute`, and `--confirm` safeguards; do not place
