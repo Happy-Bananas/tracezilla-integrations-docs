@@ -2,6 +2,7 @@
 title: Getting Started
 layout: default
 nav_order: 10
+has_children: true
 ---
 
 # Getting started
@@ -21,11 +22,6 @@ flowchart TB
 It runs manually during development and from cron in production. Customer
 business rules are ordinary PHP files generated from a safe starting point.
 
-> **The one-command setup below is optional.** It is the quickest way to get
-> started, but it does not do anything you cannot do yourself. See
-> [Manual installation](./manual-installation.html) if you prefer to run each
-> setup step separately.
-
 ## Prerequisites
 
 Prepare both test systems before creating the project:
@@ -33,65 +29,12 @@ Prepare both test systems before creating the project:
 1. [tracezilla test account and credentials](./fundamentals/account-and-team.html)
 2. [Shopify test store and credentials](./shopify/setup/authorize-api.html)
 
-## Before you start
+## Choose how to run BifrostConnect
 
-Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) or
-Docker Engine with the Compose plugin. You also need Git and `curl`.
+- [Run with Docker](./run-with-docker.html) — the quickest setup; PHP and its
+  packages run in a prepared development container.
+- [Manual Installation](./manual-installation.html) — run BifrostConnect
+  directly with PHP and Composer installed on your computer.
 
-## 1. Create the project
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/Happy-Bananas/tracezilla-shopify-php/main/create-shopify-project | sh -s -- YOUR_PROJECT_NAME
-```
-
-Replace `YOUR_PROJECT_NAME` with your project name, for example:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/Happy-Bananas/tracezilla-shopify-php/main/create-shopify-project | sh -s -- happy-hanna-shopify
-```
-
-The command downloads a fresh copy of the integration into that folder and
-creates the `.env` configuration file. It will not replace a folder that
-already exists.
-
-You do not need a GitHub account to create or run the integration. Everything
-runs from the new folder on your computer. If you later want backup,
-collaboration, or deployment through Git, push the project to a **private
-repository owned by you or the customer**. Customer business rules should not
-be pushed to the public Happy Bananas repository.
-
-## 2. Add credentials
-
-```bash
-cd YOUR_PROJECT_NAME
-```
-
-Replace `YOUR_PROJECT_NAME` with the same folder name used in step 1.
-
-Open `.env` in your editor and complete the Shopify and tracezilla values.
-Never commit this file; Git ignores it automatically.
-
-## 3. Check both connections
-
-```bash
-./check-connection
-```
-
-The first run builds and starts the development container, so it can take a
-little while. The command prints progress, waits until the integration is
-ready, and then performs one small read-only request against each service.
-
-A successful result looks like:
-
-```text
-Connection check passed.
-Shopify: Example Shop (example-shop.myshopify.com)
-tracezilla: connected
-```
-
-No products, orders, inventory, or settings are changed.
-
-## Next
-
-The connections work and the development environment is ready. Continue with
-[Create Custom Business Logic](./shopify/php/custom-business-logic.html).
+Both paths create the same project and finish by checking the Shopify and
+tracezilla connections. Choose one path; you do not need to complete both.

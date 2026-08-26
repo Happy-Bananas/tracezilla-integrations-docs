@@ -2,12 +2,13 @@
 title: Manual Installation
 layout: default
 nav_order: 11
+parent: Getting Started
 ---
 
 # Manual installation
 
-This is the native PHP alternative to the one-command setup in
-[Getting Started](./getting-started.html). It covers obtaining the project
+This is the native PHP alternative to [Run with Docker](./run-with-docker.html).
+It covers obtaining the project
 files and preparing the development environment. It does not explain how to
 install system tools.
 
