@@ -30,5 +30,6 @@ flowchart TB
     Integration <--> Tracezilla
 </pre>
 
-See the unsupported [Hetzner example](./deployment/hetzner.html) for one
-possible installation and [Cron](./deployment/cron.html) for scheduling.
+See the unsupported [Hetzner example](./deployment/hetzner.html) for a manual
+installation, [Deploy with Ansible](./deployment/ansible.html) for repeatable
+deployments, and [Cron](./deployment/cron.html) for scheduling.
