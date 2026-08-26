@@ -22,9 +22,3 @@ The deployment environment must provide:
 Follow the [Hetzner deployment example](./deployment/hetzner.html) for a
 complete native PHP installation. Then continue with [Cron](./deployment/cron.html)
 to schedule the required business command.
-
-{: .important }
-Atomic locking, file retry storage, deployment checks, history, and failure
-management are implemented. Persistent automatic retry is currently connected
-to individual-order imports. Verify retry coverage on each other workflow
-before relying on it for unattended writes.

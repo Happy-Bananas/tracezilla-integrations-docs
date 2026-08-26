@@ -15,15 +15,13 @@ commerce service and tracezilla and applies the customer's PHP business rules.
 <pre class="mermaid">
 flowchart TB
     Cron[Cron starts scheduled run]
-    Lock[Application acquires global atomic lock]
     Retry[Retry due failed tasks]
     Reconcile[Find new and recently changed records]
     Rules[Apply customer PHP rules]
     APIs[Read from or write to commerce service and tracezilla]
     Result[Store results and failures]
-    Unlock[Release lock and return exit status]
 
-    Cron --> Lock --> Retry --> Reconcile --> Rules --> APIs --> Result --> Unlock
+    Cron --> Retry --> Reconcile --> Rules --> APIs --> Result
 </pre>
 
 Cron contains no integration business logic. It only selects the command,
@@ -44,4 +42,4 @@ reconciliations according to their retry time. Business problems stop in the
 attention list instead of retrying forever.
 
 Framework maintainers can read [Cron error and retry internals](./cron/errors.html)
-for the file format, atomic-write protocol, locking, and backoff implementation.
+for the retry implementation details.

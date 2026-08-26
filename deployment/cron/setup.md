@@ -19,8 +19,8 @@ From the integration project, run:
 php bin/tracezilla-integration deployment:check
 ```
 
-Continue only when it reports `"ready": true`. This verifies the private
-runtime directory, atomic file replacement, and global process lock.
+Continue only when it reports `"ready": true`. This verifies that the
+application can use its private runtime directory safely.
 
 ## 2. Test the workflow manually
 
@@ -63,9 +63,8 @@ Use a command like this, replacing every example value and path:
 cd /absolute/path/customer-integration && /absolute/path/php bin/tracezilla-integration orders:import-individual --customer='Webshop customer' --warehouse=2 --days=3 --limit=100 --execute --confirm >> var/log/cron.log 2>&1
 ```
 
-The application obtains a global atomic lock automatically. If a previous
-workflow is still running, the later invocation exits safely instead of
-running at the same time.
+The application prevents overlapping runs automatically. If a previous
+workflow is still running, the later invocation exits safely.
 
 ## 5. Verify the scheduled run
 
@@ -74,8 +73,7 @@ After the first scheduled time:
 1. Open `var/log/cron.log` and confirm the command started and completed.
 2. Confirm the expected dry-run or execution result.
 3. Run `php bin/tracezilla-integration failures:list`.
-4. Confirm that a second overlapping test invocation is skipped safely.
-5. Check again after the next scheduled time.
+4. Check again after the next scheduled time.
 
 The `--days` lookback must be comfortably longer than the cron interval and
 the complete automatic retry period. That overlap allows a later run to find
