@@ -34,7 +34,7 @@ next begins.
 ### With Docker
 
 ```bash
-docker compose exec integration php bin/tracezilla-integration orders:report-collected \
+docker compose exec integration php bin/bifrost-connect orders:report-collected \
   --days=3 \
   --timezone=Europe/Copenhagen \
   --limit=10
@@ -69,7 +69,7 @@ limit, skipped orders, and skipped lines.
 For machine-readable output:
 
 ```bash
-docker compose exec integration php bin/tracezilla-integration orders:report-collected \
+docker compose exec integration php bin/bifrost-connect orders:report-collected \
   --days=3 --timezone=Europe/Copenhagen --limit=10 --json
 ```
 

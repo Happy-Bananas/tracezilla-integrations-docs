@@ -18,14 +18,14 @@ uses PHP 8.3 and Composer without Laravel, Symfony, or another application
 framework.
 
 {: .important }
-This standalone headless integration communicates directly with Shopify and
+This BifrostConnect application communicates directly with Shopify and
 tracezilla. Its entry points live under `bin/`, so workflows are executed
 through one console command.
 
-## The integration at a glance
+## BifrostConnect at a glance
 
 The normal production driver is cron. Cron starts a bounded workflow; the
-headless PHP application reads from Shopify and tracezilla, applies the
+BifrostConnect reads from Shopify and tracezilla, applies the
 customer's PHP business rules, performs approved writes, and returns a
 structured result and exit status.
 
@@ -170,7 +170,7 @@ to reuse in a framework and replace live readers with fakes during tests.
 Generate a platform-specific starting point:
 
 ```bash
-php bin/tracezilla-integration scenario:create YOUR_SCENARIO_NAME --platform=shopify
+php bin/bifrost-connect scenario:create YOUR_SCENARIO_NAME --platform=shopify
 ```
 
 Edit the generated GraphQL request, tracezilla request, business rules, and

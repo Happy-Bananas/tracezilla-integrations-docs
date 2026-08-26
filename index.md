@@ -4,20 +4,20 @@ layout: home
 nav_order: 1
 ---
 
-# Build tracezilla integrations with confidence
+# BifrostConnect
 
-Practical workflows, examples, and templates for consultants integrating
-commerce services with the tracezilla API.
+BifrostConnect bridges commerce platforms and tracezilla, carrying your custom
+business rules safely between them.
 
-Start with the standalone headless PHP application. Generate a platform
+Start with BifrostConnect, the standalone headless PHP application. Generate a platform
 scenario, write the customer's rules in PHP, verify them with tests, and run
 the same console command manually or from cron.
 
 ## Available now
 
-- [Shopify](./shopify/) — connect Shopify and tracezilla with the headless PHP application.
+- [Shopify](./shopify/) — connect Shopify and tracezilla with BifrostConnect.
 - [Getting Started](./getting-started/) — create a project and verify both connections.
-- [Deployment](./deployment/) — schedule the headless integration with cron,
+- [Deployment](./deployment/) — schedule BifrostConnect with cron,
   prevent overlapping runs, and recover failed work.
 
 ## Planned

@@ -79,7 +79,7 @@ to be ready, and runs the read-only `connection:check` console command. For an
 already-running container, the equivalent command is:
 
 ```bash
-docker compose exec integration php bin/tracezilla-integration connection:check
+docker compose exec integration php bin/bifrost-connect connection:check
 ```
 
 Add `--json` to either form for structured output. The command never displays

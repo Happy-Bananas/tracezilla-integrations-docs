@@ -54,7 +54,7 @@ warehouse is selected by its tracezilla location number.
 ### With Docker
 
 ```bash
-docker compose exec integration php bin/tracezilla-integration orders:import-individual \
+docker compose exec integration php bin/bifrost-connect orders:import-individual \
   --customer='Banana primary webshop' \
   --warehouse=2 \
   --days=3 \
@@ -98,7 +98,7 @@ address, SKUs, quantities, prices, currency, and external reference. Then test
 one order in sandbox accounts:
 
 ```bash
-docker compose exec integration php bin/tracezilla-integration orders:import-individual \
+docker compose exec integration php bin/bifrost-connect orders:import-individual \
   --customer='Banana primary webshop' \
   --warehouse=2 \
   --days=3 \

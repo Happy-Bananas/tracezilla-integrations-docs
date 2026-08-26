@@ -16,7 +16,7 @@ a web page and it does not contain customer business rules.
 From the integration project, run:
 
 ```bash
-php bin/tracezilla-integration deployment:check
+php bin/bifrost-connect deployment:check
 ```
 
 Continue only when it reports `"ready": true`. This verifies that the
@@ -27,7 +27,7 @@ application can use its private runtime directory safely.
 Run the exact workflow in dry-run mode first. For individual Shopify orders:
 
 ```bash
-php bin/tracezilla-integration orders:import-individual \
+php bin/bifrost-connect orders:import-individual \
   --customer='Webshop customer' \
   --warehouse=2 \
   --days=3 \
@@ -60,7 +60,7 @@ For a run every five minutes:
 Use a command like this, replacing every example value and path:
 
 ```bash
-cd /absolute/path/customer-integration && /absolute/path/php bin/tracezilla-integration orders:import-individual --customer='Webshop customer' --warehouse=2 --days=3 --limit=100 --execute --confirm >> var/log/cron.log 2>&1
+cd /absolute/path/customer-integration && /absolute/path/php bin/bifrost-connect orders:import-individual --customer='Webshop customer' --warehouse=2 --days=3 --limit=100 --execute --confirm >> var/log/cron.log 2>&1
 ```
 
 The application prevents overlapping runs automatically. If a previous
@@ -72,7 +72,7 @@ After the first scheduled time:
 
 1. Open `var/log/cron.log` and confirm the command started and completed.
 2. Confirm the expected dry-run or execution result.
-3. Run `php bin/tracezilla-integration failures:list`.
+3. Run `php bin/bifrost-connect failures:list`.
 4. Check again after the next scheduled time.
 
 The `--days` lookback must be comfortably longer than the cron interval and

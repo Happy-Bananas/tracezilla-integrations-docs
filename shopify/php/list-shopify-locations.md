@@ -33,7 +33,7 @@ From your project directory, run:
 ### With Docker
 
 ```bash
-docker compose exec integration php bin/tracezilla-integration shopify:locations
+docker compose exec integration php bin/bifrost-connect shopify:locations
 ```
 
 ### Without Docker
@@ -50,7 +50,7 @@ locations, the command reports that explicitly and still exits successfully.
 Return the complete structured result as JSON:
 
 ```bash
-docker compose exec integration php bin/tracezilla-integration shopify:locations --json
+docker compose exec integration php bin/bifrost-connect shopify:locations --json
 ```
 
 There is no processing limit. The command follows Shopify pagination until all

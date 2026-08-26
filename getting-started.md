@@ -6,12 +6,12 @@ nav_order: 10
 
 # Getting started
 
-The integration is one headless PHP console application:
+BifrostConnect is one headless PHP console application:
 
 <pre class="mermaid">
 flowchart TB
     Shopify[Shopify]
-    Integration[tracezilla Integration]
+    Integration[BifrostConnect]
     Tracezilla[tracezilla]
 
     Shopify <--> Integration

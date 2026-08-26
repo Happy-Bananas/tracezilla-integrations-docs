@@ -27,7 +27,7 @@ From your project directory, run:
 ### With Docker
 
 ```bash
-docker compose exec integration php bin/tracezilla-integration catalog:compare
+docker compose exec integration php bin/bifrost-connect catalog:compare
 ```
 
 ### Without Docker
@@ -62,13 +62,13 @@ command is the PHP entry point; when Docker is used, the surrounding
 Display a different maximum number of rows from each category:
 
 ```bash
-docker compose exec integration php bin/tracezilla-integration catalog:compare --limit=25
+docker compose exec integration php bin/bifrost-connect catalog:compare --limit=25
 ```
 
 Return the complete result as machine-readable JSON:
 
 ```bash
-docker compose exec integration php bin/tracezilla-integration catalog:compare --json
+docker compose exec integration php bin/bifrost-connect catalog:compare --json
 ```
 
 JSON output remains valid JSON and includes the same execution context around

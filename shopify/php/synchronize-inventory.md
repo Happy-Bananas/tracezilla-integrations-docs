@@ -43,7 +43,7 @@ then run a bounded preview:
 ### With Docker
 
 ```bash
-docker compose exec integration php bin/tracezilla-integration inventory:sync \
+docker compose exec integration php bin/bifrost-connect inventory:sync \
   --shopify-location=gid://shopify/Location/123 \
   --tracezilla-warehouse=2 \
   --limit=10
@@ -75,7 +75,7 @@ Both location arguments are mandatory to prevent an implicit destination.
 After reviewing the dry run, test at most one record in sandbox accounts:
 
 ```bash
-docker compose exec integration php bin/tracezilla-integration inventory:sync \
+docker compose exec integration php bin/bifrost-connect inventory:sync \
   --shopify-location=gid://shopify/Location/123 \
   --tracezilla-warehouse=2 \
   --execute --confirm --limit=1

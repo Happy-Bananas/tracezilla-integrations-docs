@@ -69,7 +69,7 @@ Git ignores this file automatically.
 ## 4. Check the credentials
 
 ```bash
-php bin/tracezilla-integration connection:check
+php bin/bifrost-connect connection:check
 ```
 
 The command makes one small read-only request to each service. A successful

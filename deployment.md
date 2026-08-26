@@ -15,14 +15,14 @@ Deployment guidance is an optional example. Hosting, server security, backups,
 monitoring, and scheduled operation are the developer's or customer's
 responsibility.
 
-Cron starts the headless integration. The integration then communicates with
+Cron starts BifrostConnect. BifrostConnect then communicates with
 Shopify and tracezilla and applies the customer's business rules.
 
 <pre class="mermaid">
 flowchart TB
     Cron[Cron]
     Shopify[Shopify]
-    Integration[tracezilla Integration]
+    Integration[BifrostConnect]
     Tracezilla[tracezilla]
 
     Cron --> Integration

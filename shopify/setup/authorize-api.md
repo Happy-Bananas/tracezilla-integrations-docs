@@ -31,7 +31,7 @@ inventory-write access.
 1. Open the [Shopify Dev Dashboard](https://dev.shopify.com/dashboard).
 2. Select the organization used for the development store.
 3. Open **Apps** and choose **Create app**.
-4. Give the app a descriptive name such as `tracezilla integration test`.
+4. Give the app a descriptive name such as `BifrostConnect test`.
 5. Open **Versions** and create a version.
 6. Select the intended Admin API version.
 7. Select the minimum scopes from the table above.

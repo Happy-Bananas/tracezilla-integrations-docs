@@ -6,10 +6,10 @@ nav_order: 10
 has_children: true
 ---
 
-# Schedule the integration with cron
+# Schedule BifrostConnect with cron
 
 Cron is the primary production trigger. It starts a console command at a
-regular interval; the headless PHP application then communicates with the
+regular interval; BifrostConnect then communicates with the
 commerce service and tracezilla and applies the customer's PHP business rules.
 
 <pre class="mermaid">

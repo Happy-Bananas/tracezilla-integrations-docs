@@ -18,13 +18,13 @@ After cloning and configuring the integration, generate a scenario instead of
 copying framework classes by hand:
 
 ```bash
-php bin/tracezilla-integration scenario:create confirm-credentials --platform=shopify
+php bin/bifrost-connect scenario:create confirm-credentials --platform=shopify
 ```
 
 With Docker, run the same command inside the integration service:
 
 ```bash
-docker compose exec integration php bin/tracezilla-integration scenario:create confirm-credentials --platform=shopify
+docker compose exec integration php bin/bifrost-connect scenario:create confirm-credentials --platform=shopify
 ```
 
 The command creates this consultant-owned feature:
@@ -45,7 +45,7 @@ Run the generated test and scenario:
 
 ```bash
 composer test
-php bin/tracezilla-integration scenario:run confirm-credentials --platform=shopify
+php bin/bifrost-connect scenario:run confirm-credentials --platform=shopify
 ```
 
 The four generated files are the normal consultant editing surface:
@@ -125,7 +125,7 @@ the command regularly and make failures observable.
 | Verification | `tests/Unit/` | Business examples using fakes, without live APIs |
 
 Do not put customer rules into `ShopifyClient`, `TracezillaClient`, a GraphQL
-query, cron, or `bin/tracezilla-integration`. Those components should remain
+query, cron, or `bin/bifrost-connect`. Those components should remain
 stable when the customer's rules change.
 
 ## Implement the feature
@@ -143,7 +143,7 @@ Use this order of work:
 6. Default writes to dry run. Require explicit execution flags and a bounded
    limit.
 7. Add the thin entry-point script and register its public name in
-   `bin/tracezilla-integration`.
+   `bin/bifrost-connect`.
 8. Unit-test business decisions and retry behavior with fake readers and
    gateways.
 9. Run a bounded dry run against test accounts, inspect every decision, and
@@ -184,14 +184,14 @@ Run the command manually and verify its dry-run output before adding cron. A
 Docker-based production schedule can use `flock` to prevent overlapping runs:
 
 ```cron
-*/5 * * * * flock -n /tmp/tracezilla-orders.lock docker compose -f /opt/customer-integration/compose.yaml exec -T integration php bin/tracezilla-integration orders:import-individual --customer='WEB-B2C' --warehouse=2 --days=1 --limit=100 --execute --confirm >> /var/log/tracezilla-orders.log 2>&1
+*/5 * * * * flock -n /tmp/tracezilla-orders.lock docker compose -f /opt/customer-integration/compose.yaml exec -T integration php bin/bifrost-connect orders:import-individual --customer='WEB-B2C' --warehouse=2 --days=1 --limit=100 --execute --confirm >> /var/log/tracezilla-orders.log 2>&1
 ```
 
 When PHP and Composer are installed directly on the host, cron can invoke the
 same application without Docker:
 
 ```cron
-*/5 * * * * flock -n /tmp/tracezilla-orders.lock /usr/bin/php /opt/customer-integration/bin/tracezilla-integration orders:import-individual --customer='WEB-B2C' --warehouse=2 --days=1 --limit=100 --execute --confirm >> /var/log/tracezilla-orders.log 2>&1
+*/5 * * * * flock -n /tmp/tracezilla-orders.lock /usr/bin/php /opt/customer-integration/bin/bifrost-connect orders:import-individual --customer='WEB-B2C' --warehouse=2 --days=1 --limit=100 --execute --confirm >> /var/log/tracezilla-orders.log 2>&1
 ```
 
 Use absolute paths because cron has a minimal environment. Ensure failures are

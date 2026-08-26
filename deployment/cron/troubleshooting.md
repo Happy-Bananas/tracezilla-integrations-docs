@@ -51,7 +51,7 @@ tasks continue running.
 Use the supported command rather than opening pending task files:
 
 ```bash
-php bin/tracezilla-integration failures:list
+php bin/bifrost-connect failures:list
 ```
 
 Tasks under `pending` have a future or due automatic retry. Tasks under
@@ -80,7 +80,7 @@ outage.
 Copy the 64-character `task_id` returned by `failures:list`:
 
 ```bash
-php bin/tracezilla-integration failures:retry --task=<task-id>
+php bin/bifrost-connect failures:retry --task=<task-id>
 ```
 
 The task becomes pending immediately. The next reconciliation still performs
@@ -89,7 +89,7 @@ normal duplicate and business-rule checks.
 If the customer deliberately does not want the record processed:
 
 ```bash
-php bin/tracezilla-integration failures:dismiss \
+php bin/bifrost-connect failures:dismiss \
   --task=<task-id> \
   --reason='Customer approved exclusion'
 ```

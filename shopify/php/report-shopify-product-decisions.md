@@ -33,7 +33,7 @@ From your project directory, run:
 ### With Docker
 
 ```bash
-docker compose exec integration php bin/tracezilla-integration catalog:report-shopify-decisions
+docker compose exec integration php bin/bifrost-connect catalog:report-shopify-decisions
 ```
 
 ### Without Docker
@@ -61,7 +61,7 @@ For every reported SKU, decide whether to:
 Display at most 25 candidates while retaining the complete candidate count:
 
 ```bash
-docker compose exec integration php bin/tracezilla-integration catalog:report-shopify-decisions --limit=25
+docker compose exec integration php bin/bifrost-connect catalog:report-shopify-decisions --limit=25
 ```
 
 The default display limit is `10`. Unlike Compare Catalogs JSON, this command's
@@ -69,7 +69,7 @@ JSON candidate list is also bounded by `--limit` so unattended output remains
 manageable:
 
 ```bash
-docker compose exec integration php bin/tracezilla-integration catalog:report-shopify-decisions --limit=25 --json
+docker compose exec integration php bin/bifrost-connect catalog:report-shopify-decisions --limit=25 --json
 ```
 
 JSON remains valid and includes the execution context around the result:

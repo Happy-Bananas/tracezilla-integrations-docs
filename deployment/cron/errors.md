@@ -104,7 +104,7 @@ Recommended rules:
 The application provides a setup check:
 
 ```bash
-php bin/tracezilla-integration deployment:check
+php bin/bifrost-connect deployment:check
 ```
 
 It should create, atomically rename, read, lock, and remove a harmless test file
@@ -161,9 +161,9 @@ The console interface makes persistent failures visible without
 opening JSON files manually:
 
 ```bash
-php bin/tracezilla-integration failures:list
-php bin/tracezilla-integration failures:retry --task=<task-id>
-php bin/tracezilla-integration failures:dismiss --task=<task-id> --reason='Approved exclusion'
+php bin/bifrost-connect failures:list
+php bin/bifrost-connect failures:retry --task=<task-id>
+php bin/bifrost-connect failures:dismiss --task=<task-id> --reason='Approved exclusion'
 ```
 
 Every manual retry still uses the global atomic lock and the workflow's normal

@@ -7,7 +7,7 @@ nav_order: 5
 
 # Deploy on Hetzner
 
-This example installs the headless PHP application in a Hetzner hosting
+This example installs BifrostConnect in a Hetzner hosting
 account with SSH access. Replace every uppercase value with the value supplied
 for the hosting account.
 
@@ -89,8 +89,8 @@ task.
 ## 7. Verify the deployment
 
 ```bash
-php bin/tracezilla-integration deployment:check
-php bin/tracezilla-integration connection:check
+php bin/bifrost-connect deployment:check
+php bin/bifrost-connect connection:check
 ```
 
 Continue only when the deployment reports `"ready": true` and both Shopify
@@ -105,15 +105,15 @@ the server:
 ```bash
 cd ~/apps/YOUR_PROJECT_NAME
 composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
-php bin/tracezilla-integration deployment:check
-php bin/tracezilla-integration connection:check
+php bin/bifrost-connect deployment:check
+php bin/bifrost-connect connection:check
 ```
 
 The server receives only the version currently present in the developer's
 project directory. Nothing changes on an existing customer installation until
 the developer uploads another tested version.
 
-## 9. Schedule the integration
+## 9. Schedule BifrostConnect
 
 The application is installed but does not run continuously. Follow
 [Set up a cron task](./cron/setup.html) after selecting and manually testing
