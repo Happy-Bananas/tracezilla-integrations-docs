@@ -42,8 +42,7 @@ The hosting account does not need root access.
 From the BifrostConnect project root, run:
 
 ```bash
-cp deployment/ansible/inventory.example.yml \
-  deployment/ansible/inventory.yml
+cp deployment/ansible/inventory.example.yml deployment/ansible/inventory.yml
 ```
 
 Open `inventory.yml` and replace `YOUR_SERVER`, `YOUR_SSH_PORT`, and
