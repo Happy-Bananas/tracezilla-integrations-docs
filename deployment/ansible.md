@@ -27,23 +27,15 @@ The playbook does not use Git on the server and does not configure cron.
 On the developer's computer:
 
 - Ansible
-- `rsync`
 - SSH access to the server using a key
 
 On the server:
 
+- Python 3, used by Ansible
 - PHP 8.3 or newer
 - Composer 2
-- `rsync`
 
 The hosting account does not need root access.
-
-Install the small Ansible collection used for file synchronization once:
-
-```bash
-ansible-galaxy collection install \
-  -r deployment/ansible/requirements.yml
-```
 
 ## 1. Create the inventory
 
@@ -115,8 +107,11 @@ ansible-playbook \
 The playbook:
 
 1. Creates the destination and private runtime directory.
-2. Uploads the current source and customer business rules.
-3. Preserves runtime files and excludes local `.env`, `vendor/`, and Git data.
+2. Uploads the current source and customer business rules through Ansible's
+   normal SSH connection. No `rsync`, Git, or interactive server login is
+   required.
+3. Preserves the server's runtime files and installed packages. The local
+   `.env`, `vendor/`, and Git data are never uploaded.
 4. Generates the production `.env` from the encrypted vault.
 5. Installs the locked production Composer packages.
 6. Runs the deployment and read-only connection checks.
