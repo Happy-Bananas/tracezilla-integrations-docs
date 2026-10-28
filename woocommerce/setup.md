@@ -151,21 +151,49 @@ Populate your development company in tracezilla with the
 [standard test dataset](../fundamentals/test-data.html): partners, a
 warehouse, SKUs that match the sandbox, and received stock.
 
-First complete [Create a development company](../fundamentals/development-company.html)
-and add the team slug and API key to `.env`:
+First complete [Create a development company](../fundamentals/development-company.html).
+
+### Create an OAuth client
+
+The WooCommerce integration authenticates with an OAuth client and the
+Resource Owner Password Credentials grant. Unlike a personal access token, it
+receives a refresh token, so the integration renews its own access token and
+never stops because a token expired.
+
+In tracezilla, open **Settings → My account → API Tokens** and create an OAuth
+client. Copy the Client ID and Client Secret into `.env`:
 
 ```dotenv
 TRACEZILLA_TEAM_SLUG=your-development-company
-TRACEZILLA_API_KEY=eyJ...
+TRACEZILLA_CLIENT_ID=...
+TRACEZILLA_CLIENT_SECRET=...
 TRACEZILLA_OWN_COMPANY=Your development company
 ```
 
 The team slug is the first part of the browser URL when the company is open,
 for example `dev-woocommerce-abc1` in
-`https://app.tracezilla.com/dev-woocommerce-abc1/dashboard/home`. Create the API
-key as a personal access token; it starts with `eyJ`. `TRACEZILLA_OWN_COMPANY`
-is the exact partner name of your own company in tracezilla. The seed adds
-its warehouse location to that partner.
+`https://app.tracezilla.com/dev-woocommerce-abc1/dashboard/home`.
+`TRACEZILLA_OWN_COMPANY` is the exact partner name of your own company in
+tracezilla. The seed adds its warehouse location to that partner.
+
+### Log in once
+
+Exchange your tracezilla username and password for tokens:
+
+```bash
+docker compose run --rm php php bin/tracezilla-login
+```
+
+The password is used once and never stored. The tokens are saved in
+`var/tracezilla-token.json`, which must stay out of Git. Every integration
+command renews the access token automatically 30 days before it expires.
+Run the login again only if the command reports that the refresh token was
+rejected, for example after the client was deleted in tracezilla.
+
+In a customer installation, log in as a dedicated integration user instead of
+a personal account, so the integration keeps working when employees leave.
+
+### Run the seed
 
 Preview what would be created. Nothing is written:
 

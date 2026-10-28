@@ -33,5 +33,9 @@ as the displayed company name. Add it to `.env` as `TRACEZILLA_TEAM_SLUG`.
 3. Create a token for the integration.
 4. Add it to `.env` as `TRACEZILLA_API_KEY`.
 
+The WooCommerce integration uses an OAuth client and a one-time login instead
+of an API key, so its token renews automatically. See
+[WooCommerce setup](../woocommerce/setup.html#create-an-oauth-client).
+
 The team slug is not secret, but the API key is. Never commit or share the
 API key. If it is exposed, rotate it immediately.
