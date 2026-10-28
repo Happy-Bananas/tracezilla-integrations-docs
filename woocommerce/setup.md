@@ -143,6 +143,35 @@ docker compose run --rm php php bin/test-connection
 
 A successful check prints the connected store and WooCommerce version.
 
+## Seed tracezilla
+
+Populate your development company in tracezilla with the
+[standard test dataset](../fundamentals/test-data.html): partners, a
+warehouse, SKUs that match the sandbox, and received stock.
+
+First complete [Create a development company](../fundamentals/development-company.html)
+and add the team slug and API key to `.env`:
+
+```dotenv
+TRACEZILLA_TEAM_SLUG=your-development-company
+TRACEZILLA_API_KEY=...
+```
+
+Preview what would be created. Nothing is written:
+
+```bash
+docker compose run --rm php php bin/seed-tracezilla
+```
+
+Check that the output names your development company, then write the data:
+
+```bash
+docker compose run --rm php php bin/seed-tracezilla --execute --confirm
+```
+
+Running the command again reports every record as `exists`. To use another
+dataset, pass the path of its YAML file as the first argument.
+
 ## Expected result
 
 At the end of setup, you should have:
@@ -151,6 +180,7 @@ At the end of setup, you should have:
 - A WooCommerce REST API Consumer Key and Consumer Secret.
 - Credentials stored in the untracked `.env` file.
 - A successful connection test from the standalone PHP container.
+- A development company in tracezilla seeded with the standard test dataset.
 
 ## Stop the local sandbox
 
