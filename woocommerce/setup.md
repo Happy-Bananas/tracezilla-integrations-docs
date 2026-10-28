@@ -66,12 +66,14 @@ The sandbox setup automatically creates deterministic WooCommerce data:
 
 In WordPress administration, use **Products → All Products**,
 **WooCommerce → Customers**, and **WooCommerce → Orders** to inspect the
-fixtures. The catalog includes simple, sale-priced, out-of-stock, and variable
-products.
+fixtures. The catalog contains food products in ten categories and includes
+simple, sale-priced, out-of-stock, and variable products.
 
-The products have stable `TZ-...` SKUs so that integration examples and tests
-can refer to predictable catalog data. Running the product seeder again updates
-the existing fixtures instead of creating duplicates:
+The products have stable `TZ-<CATEGORY>-<NNN>` SKUs, such as `TZ-DAIRY-001`,
+so that integration examples and tests can refer to predictable catalog data.
+Running the product seeder again updates the existing fixtures instead of
+creating duplicates, and removes `TZ-` products that are no longer part of the
+catalog:
 
 ```bash
 docker compose run --rm \
