@@ -25,7 +25,8 @@ use customer names, addresses, product codes, or other production information.
 
 ## Version 1 catalog
 
-SKUs follow the pattern `TZ-<CATEGORY>-<NNN>`. The commerce sandboxes contain
+SKUs follow the pattern `TZ-<CATEGORY>-<NNN>`, and variations add `-<NN>`.
+tracezilla allows at most 17 characters in an SKU code. The commerce sandboxes contain
 200 food products in ten categories: `FRUIT`, `VEG`, `DAIRY`, `BAKERY`, `MEAT`,
 `FISH`, `COFFEE`, `TEA`, `PANTRY`, and `SNACK`. tracezilla receives a
 subset:
@@ -35,7 +36,7 @@ subset:
 | `TZ-FRUIT-001` | Fairtrade Bananas 1 kg | Matched, with stock |
 | `TZ-FRUIT-002` | Golden Pineapple | Matched, with stock, on sale in the shop |
 | `TZ-FRUIT-003` | Ripe Mango | Matched, zero inventory |
-| `TZ-COFFEE-001-250G`, `TZ-COFFEE-001-1KG` | House Blend Coffee Beans | Matched variations, with stock |
+| `TZ-COFFEE-001-01`, `TZ-COFFEE-001-02` | House Blend Coffee Beans 250 g and 1 kg | Matched variations, with stock |
 | `TZ-DAIRY-001` | Aged Gouda 500 g | Matched, with stock |
 | `TZ-DAIRY-002` | Organic Whole Milk 1 L | Matched, stored in crates of 12 (unit conversion) |
 | `TZ-RAW-001` | Raw Cocoa Beans 25 kg | Raw material that exists only in tracezilla |
