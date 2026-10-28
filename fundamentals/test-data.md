@@ -13,7 +13,7 @@ inventory, and order examples can use the same recognizable records.
 
 The dataset is described in a YAML seed file and applied through the tracezilla
 API. The first seed file ships with the WooCommerce PHP integration:
-[`seeds/woocommerce-sandbox.yaml`](https://github.com/Happy-Bananas/tracezilla-woocommerce-php/blob/main/seeds/woocommerce-sandbox.yaml).
+[`seeds/tracezilla.yaml`](https://github.com/Happy-Bananas/tracezilla-woocommerce-php/blob/main/seeds/tracezilla.yaml).
 See [Seed tracezilla](../woocommerce/setup.html#seed-tracezilla) for how to run
 it.
 
