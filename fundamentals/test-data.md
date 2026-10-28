@@ -49,7 +49,7 @@ missing from tracezilla so the create-SKUs workflow has records to create.
 |:--|:--|
 | `TZ-SUPPLIER` partner | Supplier of the stock purchase order |
 | `TZ-WEBSHOP` partner | Customer partner for imported webshop orders |
-| `TZ-WAREHOUSE` partner, `TZ-WAREHOUSE-MAIN` location | Warehouse that holds the stock |
+| `TZ-WAREHOUSE-MAIN` location on your own company | Warehouse that holds the stock |
 | `TZ-STOCK-001` purchase order | Received order that puts stock in the warehouse |
 
 Stock quantities differ from the commerce sandbox on purpose, so inventory

@@ -156,8 +156,16 @@ and add the team slug and API key to `.env`:
 
 ```dotenv
 TRACEZILLA_TEAM_SLUG=your-development-company
-TRACEZILLA_API_KEY=...
+TRACEZILLA_API_KEY=eyJ...
+TRACEZILLA_OWN_COMPANY=Your development company
 ```
+
+The team slug is the first part of the browser URL when the company is open,
+for example `dev-woocommerce-abc1` in
+`https://app.tracezilla.com/dev-woocommerce-abc1/dashboard/home`. Create the API
+key as a personal access token; it starts with `eyJ`. `TRACEZILLA_OWN_COMPANY`
+is the exact partner name of your own company in tracezilla. The seed adds
+its warehouse location to that partner.
 
 Preview what would be created. Nothing is written:
 
