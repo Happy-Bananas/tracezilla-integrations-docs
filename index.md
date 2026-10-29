@@ -35,7 +35,9 @@ flowchart LR
 
 1. **Build the connection.** Start from the template project for the external
    service, write the customer's business rules in PHP, and verify them with
-   tests on your own computer.
+   tests on your own computer. A scaffold command, `scenario:create`, generates
+   the files for a new feature with a working example and its test
+   ([Shopify](./shopify/custom-business-logic.html); planned for WooCommerce).
 2. **Host it yourself.** Copy the finished project to a server you or the
    customer control. It is a plain console application: PHP and a `.env` file
    with the credentials; no web server, database, or open port is required.
