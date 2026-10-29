@@ -70,7 +70,7 @@ commit it.
 ## 4. Log in to tracezilla
 
 ```bash
-php bin/tracezilla-login
+php bin/bifrost-connect tracezilla:login
 ```
 
 Enter your tracezilla username and password. The password is used once and
@@ -79,7 +79,7 @@ never stored; see [Credentials](../fundamentals/account-and-team.html#oauth-clie
 ## 5. Check both connections
 
 ```bash
-php bin/check-connection
+php bin/bifrost-connect connection:check
 ```
 
 A successful result looks like:

@@ -47,8 +47,7 @@ From the new project folder, run:
 ./check-connection
 ```
 
-Without Docker, run `php bin/bifrost-connect connection:check` (Shopify) or
-`php bin/check-connection` (WooCommerce).
+Without Docker, run `php bin/bifrost-connect connection:check`.
 
 The command makes one small read-only request to the commerce platform and one
 to tracezilla, and reports both. **Nothing else works until both connections

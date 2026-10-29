@@ -23,7 +23,7 @@ platform-neutral and can be used with any integration.
 - A [development company](./development-company.html). Never seed a
   production team.
 - [Credentials](./account-and-team.html) with the OAuth client, and a completed
-  `bin/tracezilla-login`.
+  `tracezilla:login`.
 - The WooCommerce PHP integration installed with
   [Docker](../woocommerce/install-with-docker.html) or
   [without Docker](../woocommerce/install-without-docker.html).
@@ -42,20 +42,20 @@ Preview what would be created. Nothing is written:
 ### With Docker
 
 ```bash
-docker compose run --rm php php bin/seed-tracezilla
+docker compose run --rm php php bin/bifrost-connect tracezilla:seed
 ```
 
 ### Without Docker
 
 ```bash
-php bin/seed-tracezilla
+php bin/bifrost-connect tracezilla:seed
 ```
 
 Check that the first line names your development company, then write the
 data:
 
 ```bash
-docker compose run --rm php php bin/seed-tracezilla --execute --confirm
+docker compose run --rm php php bin/bifrost-connect tracezilla:seed --execute --confirm
 ```
 
 Both `--execute` and `--confirm` are required. Running the command again
@@ -87,3 +87,7 @@ The seed handles some tracezilla defaults for you:
 
 Runs without failed or invalid records return exit code `0`. Configuration
 errors, API errors, and failed or invalid records return a non-zero exit code.
+
+The seed takes the integration's run lock. If another command that writes is
+already running, the seed is skipped with exit code `75` and changes nothing;
+run it again when the other command has finished.

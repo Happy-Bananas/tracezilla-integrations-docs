@@ -27,8 +27,15 @@ does not need to be installed as a WordPress plugin.
 
 ## Coverage
 
-| Command | Status |
-|:--|:--|
-| [Check Connections](./check-connections.html) | Available |
-| [Seed the Test Dataset](../fundamentals/seed.html) | Available |
-| Catalog, inventory, and order commands | Planned, matching the Shopify commands |
+Every command runs through one entry point, `bin/bifrost-connect`. Run
+`php bin/bifrost-connect help` to list them.
+
+| Command | Purpose | Status |
+|:--|:--|:--|
+| `connection:check` | [Check Connections](./check-connections.html) | Available |
+| `tracezilla:login` | [Log in to tracezilla](../fundamentals/account-and-team.html#oauth-client-and-login-woocommerce) | Available |
+| `tracezilla:seed` | [Seed the Test Dataset](../fundamentals/seed.html) | Available |
+| Catalog, inventory, and order commands | | Planned, matching the Shopify commands |
+
+Commands that write take a run lock, so scheduled runs never overlap. A run
+that finds the lock taken is skipped with exit code `75` and changes nothing.
