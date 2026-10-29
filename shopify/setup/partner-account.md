@@ -3,6 +3,7 @@ layout: default
 nav_order: 10
 parent: Shopify Prerequisites
 title: Partner Account
+grand_parent: Shopify
 ---
 
 # Create a Shopify Partner account

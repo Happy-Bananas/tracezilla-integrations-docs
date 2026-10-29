@@ -3,6 +3,7 @@ layout: default
 nav_order: 30
 parent: Shopify Prerequisites
 title: Products & Locations
+grand_parent: Shopify
 ---
 
 # Products and locations
@@ -56,12 +57,15 @@ store.
 5. Enter a unique SKU for every variant.
 6. Save the product.
 
-Use recognizable SKUs such as:
+Use SKUs from the [standard test dataset](../../fundamentals/test-data.html),
+so they match the records the [seed](../../fundamentals/seed.html) creates in
+tracezilla. For example, a product **House Blend Coffee Beans** with two size
+variants and one simple product:
 
 ```text
-TEST-COFFEE-250G
-TEST-COFFEE-1KG
-TEST-TEA-GREEN
+TZ-COFFEE-001-01    House Blend Coffee Beans, 250 g
+TZ-COFFEE-001-02    House Blend Coffee Beans, 1 kg
+TZ-FRUIT-001        Fairtrade Bananas 1 kg
 ```
 
 Every variant selected for synchronization with tracezilla must have an SKU.

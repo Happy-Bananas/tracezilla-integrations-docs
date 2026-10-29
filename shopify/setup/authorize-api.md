@@ -3,6 +3,7 @@ layout: default
 nav_order: 50
 parent: Shopify Prerequisites
 title: Authorize API
+grand_parent: Shopify
 ---
 
 # Create and install a Shopify app

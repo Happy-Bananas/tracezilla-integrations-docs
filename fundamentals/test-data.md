@@ -11,37 +11,49 @@ The standard dataset gives developers a shared, non-production starting point.
 It is intentionally a little broader than any single feature so catalog,
 inventory, and order examples can use the same recognizable records.
 
-This first iteration defines the data contract only. Import spreadsheets will
-be added after they have been generated from and validated against current
-tracezilla templates.
+The dataset is described in a YAML seed file and applied through the tracezilla
+API. The first seed file ships with the WooCommerce PHP integration:
+[`seeds/tracezilla.yaml`](https://github.com/Happy-Bananas/tracezilla-woocommerce-php/blob/main/seeds/tracezilla.yaml).
+See [Seed the Test Dataset](./seed.html) for how to run it.
 
 ## Naming rule
 
-Every record owned by the dataset starts with `TZINT-`. Do not use customer
-names, addresses, product codes, or other production information.
+Every record owned by the dataset starts with `TZ-`, the same prefix used by
+the commerce-platform sandboxes, so that SKUs match across both systems. Do not
+use customer names, addresses, product codes, or other production information.
 
 ## Version 1 catalog
 
-| SKU | Intended state |
-|:--|:--|
-| `TZINT-MATCHED-001` | Exists in tracezilla and the commerce test store |
-| `TZINT-MATCHED-002` | A second normal matched product |
-| `TZINT-TRACEZILLA-ONLY-001` | Exists only in tracezilla |
-| `TZINT-STOCK-001` | Has a small positive inventory quantity |
-| `TZINT-ZERO-STOCK-001` | Has zero available inventory |
-| `TZINT-FRACTIONAL-001` | Uses a unit conversion that exposes unsafe rounding |
+SKUs follow the pattern `TZ-<CATEGORY>-<NNN>`, and variations add `-<NN>`.
+tracezilla allows at most 17 characters in an SKU code. The commerce sandboxes contain
+200 food products in ten categories: `FRUIT`, `VEG`, `DAIRY`, `BAKERY`, `MEAT`,
+`FISH`, `COFFEE`, `TEA`, `PANTRY`, and `SNACK`. tracezilla receives a
+subset:
 
-The commerce-platform dataset will later add its platform-only and invalid
-records. Those do not belong in tracezilla by definition.
+| SKU | Product | Intended state |
+|:--|:--|:--|
+| `TZ-FRUIT-001` | Fairtrade Bananas 1 kg | Matched, with stock |
+| `TZ-FRUIT-002` | Golden Pineapple | Matched, with stock, on sale in the shop |
+| `TZ-FRUIT-003` | Ripe Mango | Matched, zero inventory |
+| `TZ-COFFEE-001-01`, `TZ-COFFEE-001-02` | House Blend Coffee Beans 250 g and 1 kg | Matched variations, with stock |
+| `TZ-DAIRY-001` | Aged Gouda 500 g | Matched, with stock |
+| `TZ-DAIRY-002` | Organic Whole Milk 1 L | Matched, stored in crates of 12 (unit conversion) |
+| `TZ-RAW-001` | Raw Cocoa Beans 25 kg | Raw material that exists only in tracezilla |
+
+The rest of the commerce catalog, such as `TZ-FRUIT-004`, is deliberately
+missing from tracezilla so the create-SKUs workflow has records to create.
 
 ## Shared supporting data
 
-- One `TZINT` test warehouse/location.
-- One `TZINT Webshop` customer partner.
-- One `TZINT Supplier` partner.
-- A valid owner and required partner locations.
-- Small stock quantities for the inventory records.
-- Only the units and configuration required by these records.
+| Record | Purpose |
+|:--|:--|
+| `TZ-SUPPLIER` partner | Supplier of the stock purchase order |
+| `TZ-WEBSHOP` partner | Customer partner for imported webshop orders |
+| `TZ-WAREHOUSE-MAIN` location on your own company | Warehouse that holds the stock |
+| `TZ-STOCK-001` purchase order | Received order that puts stock in the warehouse |
+
+Stock quantities differ from the commerce sandbox on purpose, so inventory
+synchronization has updates to report.
 
 ## Feature coverage
 
@@ -49,16 +61,17 @@ records. Those do not belong in tracezilla by definition.
 |:--|:--|
 | Connection check | No business record is required |
 | Catalog comparison | Matched and tracezilla-only SKUs |
-| Create missing tracezilla SKUs | The later commerce-only SKU |
-| Inventory synchronization | Positive, zero, and fractional cases |
-| Order import | Webshop partner, warehouse, owner, and matched SKUs |
+| Create missing tracezilla SKUs | Commerce SKUs missing from tracezilla |
+| Inventory synchronization | Positive, zero, and unit-conversion cases |
+| Order import | Webshop partner, warehouse, and matched SKUs |
 
-## Before import files are published
+## Seed file format
 
-tracezilla import templates are downloaded from the application and can
-contain account-specific structure or identifiers. Version 1 files must be
-created from a current empty test team, contain no secrets or production data,
-and be tested for both first import and repeated import behavior.
+The seed file keeps tracezilla API field names, so any field from the
+[tracezilla API documentation](https://app.tracezilla.com/api/documentation)
+can be added to a record. Records are identified by `ref` (partners and
+locations), `sku_code` (SKUs), and `ext_ref` (purchase orders). The seed only
+creates records that are missing; it never updates or deletes existing ones.
 
 Official references:
 

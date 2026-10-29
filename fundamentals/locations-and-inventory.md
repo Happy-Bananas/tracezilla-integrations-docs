@@ -36,13 +36,15 @@ test may require a purchase or receiving flow so stock exists at the selected
 warehouse. The inventory workflow page will document the exact test procedure
 and consequences.
 
-Use a small known dataset:
+Use the [standard test dataset](./test-data.html). After
+[seeding](./seed.html), it gives these cases against the WooCommerce sandbox:
 
 | SKU | tracezilla quantity | External quantity | Expected result |
 |:--|--:|--:|:--|
-| `TEST-COFFEE-250G` | 10 | 3 | Would update |
-| `TEST-COFFEE-1KG` | 5 | 5 | Unchanged |
-| `TEST-TEA-GREEN` | 7 | Missing | Missing externally |
+| `TZ-FRUIT-001` | 80 | 100 | Would update |
+| `TZ-FRUIT-003` | 0 | 0 | Unchanged |
+| `TZ-DAIRY-002` | 2 crates of 12 (24 bottles) | 62 | Would update; converts crates to bottles |
+| `TZ-RAW-001` | 4 sacks of 25 kg | Missing | Missing externally |
 
 ## Mapping decisions
 

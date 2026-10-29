@@ -1,8 +1,9 @@
 ---
 title: Shopify Prerequisites
 layout: default
-nav_order: 30
+nav_order: 2
 has_children: true
+parent: Shopify
 ---
 
 # Shopify prerequisites
