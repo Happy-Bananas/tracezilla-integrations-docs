@@ -12,7 +12,7 @@ Writes with explicit confirmation
 
 Populate your development company with the
 [standard test dataset](./test-data.html): partners, a warehouse on your own
-company, SKUs that match the commerce sandboxes, and received stock.
+company, SKUs that match the external-service sandboxes, and received stock.
 
 The seed command and its YAML file currently ship with the WooCommerce PHP
 integration, `tracezilla-woocommerce-php`. The data itself is

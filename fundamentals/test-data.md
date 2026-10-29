@@ -19,13 +19,13 @@ See [Seed the Test Dataset](./seed.html) for how to run it.
 ## Naming rule
 
 Every record owned by the dataset starts with `TZ-`, the same prefix used by
-the commerce-platform sandboxes, so that SKUs match across both systems. Do not
+the external-service sandboxes, so that SKUs match across both systems. Do not
 use customer names, addresses, product codes, or other production information.
 
 ## Version 1 catalog
 
 SKUs follow the pattern `TZ-<CATEGORY>-<NNN>`, and variations add `-<NN>`.
-tracezilla allows at most 17 characters in an SKU code. The commerce sandboxes contain
+tracezilla allows at most 17 characters in an SKU code. The sandboxes contain
 200 food products in ten categories: `FRUIT`, `VEG`, `DAIRY`, `BAKERY`, `MEAT`,
 `FISH`, `COFFEE`, `TEA`, `PANTRY`, and `SNACK`. tracezilla receives a
 subset:
@@ -40,7 +40,7 @@ subset:
 | `TZ-DAIRY-002` | Organic Whole Milk 1 L | Matched, stored in crates of 12 (unit conversion) |
 | `TZ-RAW-001` | Raw Cocoa Beans 25 kg | Raw material that exists only in tracezilla |
 
-The rest of the commerce catalog, such as `TZ-FRUIT-004`, is deliberately
+The rest of the sandbox catalog, such as `TZ-FRUIT-004`, is deliberately
 missing from tracezilla so the create-SKUs workflow has records to create.
 
 ## Shared supporting data
@@ -52,7 +52,7 @@ missing from tracezilla so the create-SKUs workflow has records to create.
 | `TZ-WAREHOUSE-MAIN` location on your own company | Warehouse that holds the stock |
 | `TZ-STOCK-001` purchase order | Received order that puts stock in the warehouse |
 
-Stock quantities differ from the commerce sandbox on purpose, so inventory
+Stock quantities differ from the sandbox on purpose, so inventory
 synchronization has updates to report.
 
 ## Feature coverage
@@ -61,7 +61,7 @@ synchronization has updates to report.
 |:--|:--|
 | Connection check | No business record is required |
 | Catalog comparison | Matched and tracezilla-only SKUs |
-| Create missing tracezilla SKUs | Commerce SKUs missing from tracezilla |
+| Create missing tracezilla SKUs | Sandbox SKUs missing from tracezilla |
 | Inventory synchronization | Positive, zero, and unit-conversion cases |
 | Order import | Webshop partner, warehouse, and matched SKUs |
 
