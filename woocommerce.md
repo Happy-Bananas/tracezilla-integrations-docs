@@ -8,22 +8,29 @@ permalink: /woocommerce/
 
 # WooCommerce
 
-Guides and implementations for connecting WooCommerce with tracezilla.
+Connect WooCommerce with tracezilla using the standalone PHP integration
+`tracezilla-woocommerce-php`. It accesses WooCommerce through its REST API and
+does not need to be installed as a WordPress plugin.
 
 ## Start here
 
-Complete [WooCommerce Setup](./setup.html) before choosing a catalog, inventory,
-or order workflow. You can connect the examples to an existing WooCommerce
-store or use the disposable local WordPress and WooCommerce sandbox.
+1. Prepare [tracezilla](../tracezilla-fundamentals.html): a development company
+   and an OAuth client.
+2. Complete the [WooCommerce prerequisites](./setup.html): a development store
+   and REST API keys.
+3. Install the integration [with Docker](./install-with-docker.html) or
+   [without Docker](./install-without-docker.html).
+4. [Check both connections](./check-connections.html). Nothing else works until
+   this passes.
+5. [Seed the test dataset](../fundamentals/seed.html) into your development
+   company.
 
 ## Coverage
 
-| Platform | Current status |
+| Command | Status |
 |:--|:--|
-| PHP | Local sandbox, connection check, and tracezilla seed available |
-
-The PHP implementation is a standalone command-line application. It accesses
-WooCommerce through its REST API and does not need to be installed as a
-WordPress plugin.
+| [Check Connections](./check-connections.html) | Available |
+| [Seed the Test Dataset](../fundamentals/seed.html) | Available |
+| Catalog, inventory, and order commands | Planned, matching the Shopify commands |
 
 Additional languages will be considered when there is a demonstrated need.
