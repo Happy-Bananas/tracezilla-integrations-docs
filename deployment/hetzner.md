@@ -30,7 +30,7 @@ It assumes that the complete customer project—including the rules under
 - Composer 2
 - `rsync` on the developer's computer and server
 - Cron
-- [Shopify and tracezilla credentials](../getting-started.html#prerequisites)
+- Shopify and [tracezilla credentials](../fundamentals/account-and-team.html)
 
 ## 1. Connect with SSH
 
