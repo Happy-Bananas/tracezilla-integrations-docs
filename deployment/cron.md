@@ -18,7 +18,7 @@ responsibility.
 
 Cron is the primary production trigger. It starts a console command at a
 regular interval; BifrostConnect then communicates with the
-commerce service and tracezilla and applies the customer's PHP business rules.
+external service and tracezilla and applies the customer's PHP business rules.
 
 <pre class="mermaid">
 flowchart TB
@@ -26,7 +26,7 @@ flowchart TB
     Retry[Retry due failed tasks]
     Reconcile[Find new and recently changed records]
     Rules[Apply customer PHP rules]
-    APIs[Read from or write to commerce service and tracezilla]
+    APIs[Read from or write to external service and tracezilla]
     Result[Store results and failures]
 
     Cron --> Retry --> Reconcile --> Rules --> APIs --> Result

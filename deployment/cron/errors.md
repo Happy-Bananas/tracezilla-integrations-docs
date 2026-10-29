@@ -41,7 +41,7 @@ var/
     └── cron.log
 ```
 
-Each retry file contains metadata, not a copy of a sensitive commerce payload:
+Each retry file contains metadata, not a copy of a sensitive order payload:
 
 ```json
 {

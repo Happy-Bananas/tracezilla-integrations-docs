@@ -17,12 +17,12 @@ preparing several records.
 For integration testing, provide:
 
 - A few active SKUs with stable `TZINT-` codes.
-- At least one SKU that will also exist in the commerce platform.
+- At least one SKU that will also exist in the external service.
 - At least one tracezilla-only SKU for difference reporting.
 - Units and weight conversions that are easy to verify by hand.
 - No real customer product names, prices, or identifiers.
 
-An external commerce platform's product model does not automatically map to a
+An external service's product model does not automatically map to a
 tracezilla SKU. The integration must define identity, product structure,
 units, weights, and conversions explicitly.
 

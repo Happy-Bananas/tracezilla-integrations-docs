@@ -6,8 +6,8 @@ nav_order: 10
 
 # Getting started
 
-Each commerce platform has its own standalone PHP integration. The steps are
-the same for every platform; only the platform pages differ.
+Each external service has its own standalone PHP integration. The steps are
+the same for every service; only the service pages differ.
 
 ## 1. Prepare tracezilla
 
@@ -19,11 +19,11 @@ Shared by all integrations:
    and either a personal access token (Shopify) or an OAuth client
    (WooCommerce).
 
-## 2. Prepare the commerce platform
+## 2. Prepare the external service
 
-Choose the platform you are integrating with and complete its prerequisites:
+Choose the service you are integrating with and complete its prerequisites:
 
-| Platform | Prerequisites |
+| Service | Prerequisites |
 |:--|:--|
 | Shopify | [Shopify Prerequisites](./shopify/setup.html): development store and app |
 | WooCommerce | [WooCommerce Prerequisites](./woocommerce/setup.html): development store and REST API keys |
@@ -34,7 +34,7 @@ Install it **with Docker** (recommended; PHP and its packages run in a prepared
 development container) **or without Docker** (PHP and Composer installed on your
 computer). Both give the same project.
 
-| Platform | With Docker | Without Docker |
+| Service | With Docker | Without Docker |
 |:--|:--|:--|
 | Shopify | [Install with Docker](./run-with-docker.html) | [Install without Docker](./manual-installation.html) |
 | WooCommerce | [Install with Docker](./woocommerce/install-with-docker.html) | [Install without Docker](./woocommerce/install-without-docker.html) |
@@ -49,7 +49,7 @@ From the new project folder, run:
 
 Without Docker, run `php bin/bifrost-connect connection:check`.
 
-The command makes one small read-only request to the commerce platform and one
+The command makes one small read-only request to the external service and one
 to tracezilla, and reports both. **Nothing else works until both connections
 pass**, so fix any reported problem before continuing.
 
