@@ -136,14 +136,25 @@ WOOCOMMERCE_CONSUMER_SECRET=cs_...
 For an existing store, replace `WOOCOMMERCE_URL` with its public HTTPS URL.
 Never commit `.env` or API credentials to Git.
 
-Install the PHP dependencies and validate the connection:
+Install the PHP dependencies and check the connections:
 
 ```bash
 docker compose run --rm php composer install
-docker compose run --rm php php bin/test-connection
+docker compose run --rm php php bin/check-connection
 ```
 
-A successful check prints the connected store and WooCommerce version.
+The command checks WooCommerce and tracezilla with one read-only request each
+and reports both, even when one of them fails. Until you have logged in to
+tracezilla (below), the tracezilla line reports that no token is stored:
+
+```text
+Connection check failed.
+WooCommerce: connected to http://localhost:8080 (WooCommerce 11.2.1)
+tracezilla:  FAILED - No tracezilla token is stored. Run bin/tracezilla-login first.
+```
+
+Add `--json` for machine-readable output. The command exits with `0` only when
+both connections work.
 
 ## Seed tracezilla
 
@@ -189,6 +200,12 @@ The password is used once and never stored. The tokens are saved in
 command renews the access token automatically 30 days before it expires.
 Run the login again only if the command reports that the refresh token was
 rejected, for example after the client was deleted in tracezilla.
+
+Check both connections again. Both lines should now report `connected`:
+
+```bash
+docker compose run --rm php php bin/check-connection
+```
 
 In a customer installation, log in as a dedicated integration user instead of
 a personal account, so the integration keeps working when employees leave.

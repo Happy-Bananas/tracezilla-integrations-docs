@@ -20,7 +20,7 @@ store or use the disposable local WordPress and WooCommerce sandbox.
 
 | Platform | Current status |
 |:--|:--|
-| PHP | Local sandbox and connection test available |
+| PHP | Local sandbox, connection check, and tracezilla seed available |
 
 The PHP implementation is a standalone command-line application. It accesses
 WooCommerce through its REST API and does not need to be installed as a
