@@ -73,7 +73,7 @@ TRACEZILLA_CLIENT_SECRET=...
 After installing the integration, log in once from its project folder:
 
 ```bash
-docker compose run --rm php php bin/tracezilla-login
+docker compose run --rm php php bin/bifrost-connect tracezilla:login
 ```
 
 The command asks for your tracezilla username and password. The password is

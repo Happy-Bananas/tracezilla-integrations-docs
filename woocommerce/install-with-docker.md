@@ -78,7 +78,7 @@ first.
 ## 4. Log in to tracezilla
 
 ```bash
-docker compose run --rm php php bin/tracezilla-login
+docker compose run --rm php php bin/bifrost-connect tracezilla:login
 ```
 
 Enter your tracezilla username and password. The password is used once and

@@ -37,13 +37,13 @@ container and installs the PHP packages when needed, and then runs the check.
 The direct equivalent is:
 
 ```bash
-docker compose run --rm php php bin/check-connection
+docker compose run --rm php php bin/bifrost-connect connection:check
 ```
 
 ### Without Docker
 
 ```bash
-php bin/check-connection
+php bin/bifrost-connect connection:check
 ```
 
 A successful result looks like:
@@ -87,8 +87,8 @@ The failing line explains the problem. Common causes:
 | WooCommerce `401` with `Consumer key is invalid` or `Consumer secret is invalid` | The key in `.env` does not match the store. For the sandbox, use `ck_sandbox` / `cs_sandbox`. |
 | WooCommerce `401` with `Sorry, you cannot list resources.` | The key was not accepted at all, usually because the store does not use HTTPS. Real stores must; the sandbox handles this itself. |
 | WooCommerce `Connection refused` | Start the sandbox. With Docker, `WOOCOMMERCE_URL` must be `http://host.docker.internal:8080`. |
-| `No tracezilla token is stored. Run bin/tracezilla-login first.` | Run the [login](../fundamentals/account-and-team.html#oauth-client-and-login-woocommerce). |
-| `The refresh token was rejected; run bin/tracezilla-login again.` | The OAuth client was deleted or the session revoked. Log in again. |
+| `No tracezilla token is stored. Run bin/bifrost-connect tracezilla:login first.` | Run the [login](../fundamentals/account-and-team.html#oauth-client-and-login-woocommerce). |
+| `The refresh token was rejected; run bin/bifrost-connect tracezilla:login again.` | The OAuth client was deleted or the session revoked. Log in again. |
 | `Missing required environment variable: TRACEZILLA_CLIENT_ID` | Add the [OAuth client](../fundamentals/account-and-team.html#oauth-client-and-login-woocommerce) to `.env`. |
 
 ## Safety and exit status
@@ -96,13 +96,15 @@ The failing line explains the problem. Common causes:
 The command never changes products, orders, inventory, or settings, and never
 prints credentials or tokens. It returns exit code `0` only when both
 connections work, and `1` otherwise, so it can be used in scripts and before
-scheduled runs.
+scheduled runs. It does not take the run lock, so it can run while a scheduled
+command is working.
 
 ## Architecture
 
 <pre class="mermaid">
 flowchart TB
-    Command[bin/check-connection] --> Checker[ConnectionChecker]
+    Entry[bin/bifrost-connect connection:check] --> Command[bin/check-connection]
+    Command --> Checker[ConnectionChecker]
     Checker --> Woo[WooCommerce client<br>GET system_status]
     Checker --> TZ[tracezilla client<br>GET /skus]
     TZ --> Tokens[TokenProvider<br>renews the OAuth token]
@@ -116,6 +118,7 @@ flowchart TB
 | Responsibility | Source |
 |---|---|
 | Docker helper | `check-connection` |
+| Entry point | `bin/bifrost-connect` |
 | CLI options, composition, output, and exit status | `bin/check-connection` |
 | Both checks and the structured result | `src/Connection/ConnectionChecker.php` |
 | WooCommerce REST transport | `src/WooCommerce/Client.php` |
