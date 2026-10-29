@@ -6,22 +6,25 @@ nav_order: 1
 
 # BifrostConnect
 
-BifrostConnect bridges commerce platforms and tracezilla, carrying your custom
-business rules safely between them.
+BifrostConnect bridges external services and tracezilla, carrying your custom
+business rules safely between them. An external service can be any system with
+an API: a webshop, a marketplace, an accounting or ERP system, a shipping
+provider, and so on.
 
 <pre class="mermaid">
 flowchart TB
-    Commerce["Commerce service<br>Shopify, WooCommerce, ..."]
+    Service["External service<br>Shopify, WooCommerce, ..."]
     Bifrost["BifrostConnect<br>Custom business logic in PHP"]
     Tracezilla[tracezilla]
 
-    Commerce <--> Bifrost
+    Service <--> Bifrost
     Bifrost <--> Tracezilla
 </pre>
 
-Each commerce platform has a standalone headless PHP application:
+Each external service has a standalone headless PHP application. Available
+today:
 
-| Platform | Project | Status |
+| Service | Project | Status |
 |:--|:--|:--|
 | [Shopify](./shopify/) | `tracezilla-shopify-php` | Catalog, inventory, and order commands |
 | [WooCommerce](./woocommerce/) | `tracezilla-woocommerce-php` | Connection check and test-data seed; more commands planned |

@@ -32,5 +32,3 @@ does not need to be installed as a WordPress plugin.
 | [Check Connections](./check-connections.html) | Available |
 | [Seed the Test Dataset](../fundamentals/seed.html) | Available |
 | Catalog, inventory, and order commands | Planned, matching the Shopify commands |
-
-Additional languages will be considered when there is a demonstrated need.
