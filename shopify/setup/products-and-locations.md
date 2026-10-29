@@ -3,6 +3,7 @@ layout: default
 nav_order: 30
 parent: Shopify Prerequisites
 title: Products & Locations
+grand_parent: Shopify
 ---
 
 # Products and locations

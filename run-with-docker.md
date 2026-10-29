@@ -1,22 +1,25 @@
 ---
-title: Run with Docker
+title: Install with Docker
 layout: default
-parent: Getting Started
-nav_order: 10
+parent: Shopify
+nav_order: 3
 ---
 
-# Run with Docker
+# Install the Shopify integration with Docker
 
-This is the quickest way to create and run a BifrostConnect project. See
-[Manual Installation](./manual-installation.html) if you prefer to use PHP and
-Composer directly on your computer.
+This is the quickest way to create and run a BifrostConnect project for
+Shopify. See [Install without Docker](./manual-installation.html) if you prefer
+to use PHP and Composer directly on your computer.
 
 ## Requirements
 
 - Docker Desktop or Docker Engine with the Compose plugin
 - Git
 - `curl`
-- [tracezilla and Shopify test credentials](./getting-started.html#prerequisites)
+- [Shopify prerequisites](./shopify/setup.html): a development store and an
+  installed app
+- [tracezilla prerequisites](./tracezilla-fundamentals.html): a development
+  company and a personal access token
 
 You do not need a GitHub account to download or run the project.
 
@@ -47,10 +50,15 @@ be pushed to the public Happy Bananas repository.
 cd YOUR_PROJECT_NAME
 ```
 
-Open `.env` in your editor and complete the Shopify and tracezilla values.
+Open `.env` in your editor and complete the Shopify and tracezilla values. The
+tracezilla values are the team slug and the personal access token
+(`TRACEZILLA_API_KEY`); see [Credentials](./fundamentals/account-and-team.html).
 Never commit this file; Git ignores it automatically.
 
 ## 3. Check both connections
+
+Run the helper from the new project folder. It is part of the project, so it
+does not exist before step 1:
 
 ```bash
 ./check-connection
@@ -68,7 +76,9 @@ Shopify: Example Shop (example-shop.myshopify.com)
 tracezilla: connected
 ```
 
-No products, orders, inventory, or settings are changed.
+No products, orders, inventory, or settings are changed. Nothing else works
+until both connections pass; see [Validate Connection](./shopify/setup/connection-validation.html)
+if one of them fails.
 
 ## Next
 

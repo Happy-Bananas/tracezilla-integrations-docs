@@ -1,13 +1,13 @@
 ---
-title: Manual Installation
+title: Install without Docker
 layout: default
-nav_order: 11
-parent: Getting Started
+nav_order: 4
+parent: Shopify
 ---
 
-# Manual installation
+# Install the Shopify integration without Docker
 
-This is the native PHP alternative to [Run with Docker](./run-with-docker.html).
+This is the native PHP alternative to [Install with Docker](./run-with-docker.html).
 It covers obtaining the project
 files and preparing the development environment. It does not explain how to
 install system tools.
@@ -18,7 +18,10 @@ install system tools.
 - Composer 2
 - Git
 - A terminal and code editor
-- [tracezilla and Shopify test credentials](./getting-started.html#prerequisites)
+- [Shopify prerequisites](./shopify/setup.html): a development store and an
+  installed app
+- [tracezilla prerequisites](./tracezilla-fundamentals.html): a development
+  company and a personal access token
 
 A GitHub account is not required to download or run the public project.
 
@@ -64,7 +67,9 @@ Create `.env` from the included safe template:
 cp .env.example .env
 ```
 
-Open `.env` in your editor and add the Shopify and tracezilla credentials.
+Open `.env` in your editor and add the Shopify and tracezilla credentials. The
+tracezilla values are the team slug and the personal access token
+(`TRACEZILLA_API_KEY`); see [Credentials](./fundamentals/account-and-team.html).
 Git ignores this file automatically.
 
 ## 4. Check the credentials
@@ -82,7 +87,8 @@ Shopify: Example Shop (example-shop.myshopify.com)
 tracezilla: connected
 ```
 
-No products, orders, inventory, or settings are changed.
+No products, orders, inventory, or settings are changed. Nothing else works
+until both connections pass.
 
 ## Next
 

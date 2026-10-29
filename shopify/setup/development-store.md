@@ -3,6 +3,7 @@ layout: default
 nav_order: 20
 parent: Shopify Prerequisites
 title: Development Store
+grand_parent: Shopify
 ---
 
 # Create a Shopify development store
