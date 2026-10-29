@@ -23,12 +23,12 @@ _To be written._ The guide will explain how to:
 1. Create a new company for development from an existing tracezilla account.
 2. Name it so that it is clearly a test company.
 3. Find the new company's team slug.
-4. Create an API token in the new company.
+4. Create the credentials for the integration.
 
 Until then, use the official [tracezilla tutorials](https://www.tracezilla.com/en/tutorials)
 or [contact tracezilla](https://www.tracezilla.com/en/contact-us).
 
 ## Next step
 
-Continue with [Test Account and Credentials](./account-and-team.html) to add
-the team slug and API key to `.env`.
+Continue with [Credentials](./account-and-team.html) to add the team slug and
+authentication to `.env`.

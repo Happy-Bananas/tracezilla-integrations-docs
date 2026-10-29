@@ -1,41 +1,94 @@
 ---
-title: Test Account and Credentials
+title: Credentials
 layout: default
 parent: tracezilla Prerequisites
 nav_order: 10
 ---
 
-# Create a test account and acquire credentials
+# tracezilla credentials
 
-## 1. Create or select a test account
+Every integration needs the **team slug** of your development company and a
+way to authenticate. Complete [Development Company](./development-company.html)
+first.
 
-Use the official [tracezilla tutorials](https://www.tracezilla.com/en/tutorials)
-to create the account. Use a demo or otherwise isolated team that contains no
-customer production data.
+## Team slug
 
-If an integration project needs a demo extension or account assistance,
-[contact tracezilla](https://www.tracezilla.com/en/contact-us).
+In tracezilla, a company is a team. The team slug is the first part of the
+browser URL when the company is open, for example `dev-woocommerce-abc1` in:
 
-## 2. Acquire the credentials
+```text
+https://app.tracezilla.com/dev-woocommerce-abc1/dashboard/home
+```
 
-You need the team slug and an API key.
+The slug is not necessarily the same as the displayed company name. Add it to
+`.env`:
 
-### Team slug
+```dotenv
+TRACEZILLA_TEAM_SLUG=dev-woocommerce-abc1
+```
 
-Open a page inside the intended team and identify the team-specific slug in
-the browser URL. The slug identifies the team and is not necessarily the same
-as the displayed company name. Add it to `.env` as `TRACEZILLA_TEAM_SLUG`.
+The team slug is not secret.
 
-### API key
+## Authentication
 
-1. Open your account or personal settings in the intended test team.
-2. Open **API Tokens**.
-3. Create a token for the integration.
-4. Add it to `.env` as `TRACEZILLA_API_KEY`.
+The integrations authenticate in different ways today:
 
-The WooCommerce integration uses an OAuth client and a one-time login instead
-of an API key, so its token renews automatically. See
-[WooCommerce setup](../woocommerce/setup.html#create-an-oauth-client).
+| Integration | Authentication | Token lifetime |
+|:--|:--|:--|
+| Shopify | Personal access token | About 13 months, then it must be replaced by hand |
+| WooCommerce | OAuth client and a one-time login | Renews itself automatically |
 
-The team slug is not secret, but the API key is. Never commit or share the
-API key. If it is exposed, rotate it immediately.
+The Shopify integration will move to the OAuth client later.
+
+Only users with the Owner or Administrator role can create tokens and clients.
+In a customer installation, use a dedicated integration user rather than a
+personal account, so the integration keeps working when employees leave.
+
+### Personal access token (Shopify)
+
+1. In tracezilla, open **Settings → My account → API Tokens**.
+2. Create a **personal access token**.
+3. Copy the complete token. It is long and starts with `eyJ`.
+4. Add it to `.env`:
+
+```dotenv
+TRACEZILLA_API_KEY=eyJ...
+```
+
+### OAuth client and login (WooCommerce)
+
+The OAuth client uses the Resource Owner Password Credentials grant. Unlike a
+personal access token, it receives a refresh token, so the integration renews
+its own access token and never stops because a token expired.
+
+1. In tracezilla, open **Settings → My account → API Tokens**.
+2. Create an **OAuth client**.
+3. Add its Client ID and Client Secret to `.env`:
+
+```dotenv
+TRACEZILLA_CLIENT_ID=...
+TRACEZILLA_CLIENT_SECRET=...
+```
+
+After installing the integration, log in once from its project folder:
+
+```bash
+docker compose run --rm php php bin/tracezilla-login
+```
+
+The command asks for your tracezilla username and password. The password is
+used once and never stored. The tokens are saved in
+`var/tracezilla-token.json`, and every integration command renews the access
+token 30 days before it expires. Run the login again only if a command reports
+that the refresh token was rejected, for example after the client was deleted
+in tracezilla.
+
+## Keep credentials secret
+
+The token, Client Secret, and token file are secrets. Never commit or share
+`.env` or `var/`. If a secret is exposed, revoke it in tracezilla immediately
+and create a new one.
+
+## Official reference
+
+- [tracezilla API authentication](https://tech.tracezilla.com/docs/rest-api-v1/making-requests/authentication)

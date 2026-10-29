@@ -19,7 +19,7 @@ development.
 ## Prerequisites
 
 1. [Create a development company](./fundamentals/development-company.html).
-2. [Create a test account and acquire credentials](./fundamentals/account-and-team.html).
+2. [Acquire credentials](./fundamentals/account-and-team.html).
 3. Prepare the [standard test dataset](./fundamentals/test-data.html), or only
    the prerequisites needed by the feature:
    - [Catalog prerequisites](./fundamentals/entities.html)
