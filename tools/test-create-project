@@ -1,0 +1,82 @@
+#!/bin/sh
+# Tests for create-project. Uses local archives; nothing is downloaded.
+#
+#   sh tools/test-create-project
+
+set -eu
+
+script=$(cd "$(dirname "$0")/.." && pwd -P)/create-project
+work=$(mktemp -d)
+trap 'rm -rf "$work"' EXIT
+failures=0
+
+pass() { echo "ok   $1"; }
+fail() { echo "FAIL $1" >&2; failures=$((failures + 1)); }
+
+# A GitHub-style archive: one top-level folder with the template inside.
+mkdir -p "$work/source/tracezilla-woocommerce-php-main/bin" \
+    "$work/source/tracezilla-integrations-main/tracezilla-woocommerce-sandbox"
+printf 'WOOCOMMERCE_URL=http://host.docker.internal:8080\n' > "$work/source/tracezilla-woocommerce-php-main/.env.example"
+printf '#!/bin/sh\n' > "$work/source/tracezilla-woocommerce-php-main/check-connection"
+chmod +x "$work/source/tracezilla-woocommerce-php-main/check-connection"
+printf 'services: {}\n' > "$work/source/tracezilla-integrations-main/tracezilla-woocommerce-sandbox/compose.yaml"
+tar -czf "$work/integration.tar.gz" -C "$work/source" tracezilla-woocommerce-php-main
+tar -czf "$work/umbrella.tar.gz" -C "$work/source" tracezilla-integrations-main
+
+mkdir "$work/projects"
+cd "$work/projects"
+
+create() {
+    archive=$1
+    shift
+    TRACEZILLA_TEMPLATE_ARCHIVE="file://$work/$archive" sh "$script" "$@"
+}
+
+# Creates a plain project with its own .env.
+if create integration.tar.gz woocommerce GiantPotatoes >/dev/null 2>&1 \
+    && [ -x GiantPotatoes/check-connection ] \
+    && [ ! -e GiantPotatoes/.git ] \
+    && [ "$(cat GiantPotatoes/.env)" = "$(printf 'WOOCOMMERCE_URL=http://host.docker.internal:8080\n\nTRACEZILLA_DOCKER_UID=%s\nTRACEZILLA_DOCKER_GID=%s' "$(id -u)" "$(id -g)")" ]; then
+    pass "creates a WooCommerce project without Git and with .env"
+else
+    fail "creates a WooCommerce project without Git and with .env"
+fi
+
+# Takes only the sandbox folder out of the workspace archive.
+if create umbrella.tar.gz woocommerce-sandbox my-sandbox >/dev/null 2>&1 \
+    && [ -f my-sandbox/compose.yaml ] \
+    && [ ! -e my-sandbox/.env ]; then
+    pass "creates the WooCommerce sandbox"
+else
+    fail "creates the WooCommerce sandbox"
+fi
+
+refuses() {
+    description=$1
+    expected=$2
+    shift 2
+    if output=$(create integration.tar.gz "$@" 2>&1); then
+        fail "$description (it succeeded)"
+    elif printf '%s' "$output" | grep -q -- "$expected"; then
+        pass "$description"
+    else
+        fail "$description (got: $output)"
+    fi
+}
+
+refuses "refuses an existing folder" "already exists" woocommerce GiantPotatoes
+refuses "refuses an unknown platform" "Platforms:" magento Shop
+refuses "refuses a missing project name" "Usage:" woocommerce
+refuses "refuses a name starting with a dash" "must start with" woocommerce -x
+refuses "refuses a name with spaces" "use only" woocommerce "Giant Potatoes"
+refuses "refuses a missing parent folder" "does not exist" woocommerce missing/Project
+
+mkdir -p repository/.git repository/sub
+refuses "refuses a project inside a Git repository" "is a Git repository" woocommerce repository/sub/Project
+[ ! -e repository/sub/Project ] || fail "left a project inside the Git repository"
+
+if [ "$failures" -gt 0 ]; then
+    echo "$failures test(s) failed." >&2
+    exit 1
+fi
+echo "All tests passed."

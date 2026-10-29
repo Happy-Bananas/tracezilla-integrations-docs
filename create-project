@@ -1,0 +1,125 @@
+#!/bin/sh
+# Create a new BifrostConnect project on this computer.
+#
+#   curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- <platform> <project>
+#
+# Platforms: shopify, woocommerce, woocommerce-sandbox.
+#
+# The project is a plain folder without Git history or a link back to the
+# template. It is never created inside a Git repository. Only curl and tar are
+# needed.
+
+set -eu
+
+usage() {
+    echo "Usage: create-project <platform> <project>" >&2
+    echo "Platforms: shopify, woocommerce, woocommerce-sandbox" >&2
+    echo "Example:   create-project woocommerce GiantPotatoes" >&2
+}
+
+fail() {
+    echo "Cannot create project: $1" >&2
+    exit 2
+}
+
+if [ $# -ne 2 ]; then
+    usage
+    exit 2
+fi
+
+platform=$1
+project=$2
+github=https://github.com/Happy-Bananas
+
+# Each platform is a repository, or a folder inside one, plus what the project
+# needs after unpacking.
+case "$platform" in
+    shopify)
+        repository=tracezilla-shopify-php
+        folder=
+        label="Shopify integration"
+        ;;
+    woocommerce)
+        repository=tracezilla-woocommerce-php
+        folder=
+        label="WooCommerce integration"
+        ;;
+    woocommerce-sandbox)
+        repository=tracezilla-integrations
+        folder=tracezilla-woocommerce-sandbox
+        label="WooCommerce sandbox"
+        ;;
+    *)
+        usage
+        exit 2
+        ;;
+esac
+
+# Tests replace the download with a local archive.
+archive=${TRACEZILLA_TEMPLATE_ARCHIVE:-$github/$repository/archive/refs/heads/main.tar.gz}
+
+name=$(basename -- "$project")
+case "$name" in
+    [A-Za-z0-9]*) ;;
+    *) fail "the name must start with a letter or digit: $name" ;;
+esac
+case "$name" in
+    *[!A-Za-z0-9._-]*) fail "use only letters, digits, '.', '_' and '-' in the name: $name" ;;
+esac
+
+if [ -e "$project" ]; then
+    fail "$project already exists."
+fi
+
+parent=$(dirname -- "$project")
+if [ ! -d "$parent" ]; then
+    fail "the folder $parent does not exist."
+fi
+
+# A project belongs to the consultant or customer, never to another repository
+# such as the BifrostConnect workspace.
+directory=$(cd "$parent" && pwd -P)
+while :; do
+    if [ -e "$directory/.git" ]; then
+        fail "$directory is a Git repository. Create the project outside it."
+    fi
+    [ "$directory" = / ] && break
+    directory=$(dirname "$directory")
+done
+
+for tool in curl tar; do
+    command -v "$tool" >/dev/null 2>&1 || fail "$tool is required."
+done
+
+temporary=$(mktemp -d)
+trap 'rm -rf "$temporary"' EXIT
+
+echo "Creating $label in $project ..."
+curl -fsSL "$archive" | tar -xz -C "$temporary"
+
+# GitHub archives contain one top-level folder, e.g. tracezilla-shopify-php-main.
+source=$(find "$temporary" -mindepth 1 -maxdepth 1 -type d)
+if [ -n "$folder" ]; then
+    source=$source/$folder
+fi
+if [ ! -d "$source" ]; then
+    fail "the downloaded template does not contain $folder."
+fi
+mv "$source" "$project"
+
+if [ -f "$project/.env.example" ]; then
+    cp "$project/.env.example" "$project/.env"
+    printf '\nTRACEZILLA_DOCKER_UID=%s\nTRACEZILLA_DOCKER_GID=%s\n' "$(id -u)" "$(id -g)" >> "$project/.env"
+fi
+
+echo ""
+echo "Your $label is ready in $project."
+echo ""
+echo "Next:"
+echo "  cd $project"
+if [ "$platform" = woocommerce-sandbox ]; then
+    echo "  docker compose up -d"
+else
+    echo "  Edit .env"
+    echo "  ./check-connection"
+fi

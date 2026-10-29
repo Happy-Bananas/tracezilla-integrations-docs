@@ -14,8 +14,7 @@ to use PHP and Composer directly on your computer.
 ## Requirements
 
 - Docker Desktop or Docker Engine with the Compose plugin
-- Git
-- `curl`
+- `curl` and `tar`
 - [Shopify prerequisites](./shopify/setup.html): a development store and an
   installed app
 - [tracezilla prerequisites](./tracezilla-fundamentals.html): a development
@@ -25,29 +24,22 @@ You do not need a GitHub account to download or run the project.
 
 ## 1. Create the project
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/Happy-Bananas/tracezilla-shopify-php/main/create-shopify-project | sh -s -- YOUR_PROJECT_NAME
-```
-
-Replace `YOUR_PROJECT_NAME` with your project name, for example:
+Run the following from the folder where you keep your projects. Replace
+`GiantPotatoes` with the name of your project:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Happy-Bananas/tracezilla-shopify-php/main/create-shopify-project | sh -s -- happy-hanna-shopify
+curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- shopify GiantPotatoes
 ```
 
 The command downloads a fresh copy of BifrostConnect into that folder and
-creates the `.env` configuration file. It will not replace a folder that
-already exists.
-
-Everything runs from the new folder on your computer. If you later want backup,
-collaboration, or deployment through Git, push the project to a **private
-repository owned by you or the customer**. Customer business rules should not
-be pushed to the public Happy Bananas repository.
+creates the `.env` configuration file. The project is a plain folder without
+Git history; see [Create the project](./getting-started.html#3-create-the-project).
+It will not replace a folder that already exists.
 
 ## 2. Add credentials
 
 ```bash
-cd YOUR_PROJECT_NAME
+cd GiantPotatoes
 ```
 
 Open `.env` in your editor and complete the Shopify and tracezilla values. The

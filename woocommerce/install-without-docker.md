@@ -14,25 +14,24 @@ It does not explain how to install system tools.
 
 - PHP 8.3 or newer
 - Composer 2
-- Git
+- `curl` and `tar`
 - [WooCommerce prerequisites](./setup.html): a development store and REST API
   keys
 - [tracezilla prerequisites](../tracezilla-fundamentals.html): a development
   company and an OAuth client
 
-## 1. Get the project
+## 1. Create the project
 
-Run the following from the directory where you keep development projects.
-Replace `YOUR_PROJECT_NAME` with the folder name you want:
+Run the following from the folder where you keep your projects. Replace
+`GiantPotatoes` with the name of your project:
 
 ```bash
-git clone https://github.com/Happy-Bananas/tracezilla-woocommerce-php.git YOUR_PROJECT_NAME
-cd YOUR_PROJECT_NAME
-git remote rename origin template
+curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce GiantPotatoes
+cd GiantPotatoes
 ```
 
-The public source is named `template` in Git so it cannot be confused with a
-future private customer repository.
+The command creates a plain project folder with its own `.env` file, without
+Git history; see [Create the project](../getting-started.html#3-create-the-project).
 
 ## 2. Install the PHP packages
 
@@ -44,10 +43,6 @@ Composer reads `composer.lock` and installs the tested package versions into
 `vendor/`. Do not copy `vendor/` from another computer.
 
 ## 3. Add credentials
-
-```bash
-cp .env.example .env
-```
 
 Open `.env` in your editor. Set `WOOCOMMERCE_URL` as shown; the key is the
 sandbox's [preinstalled key](./setup/rest-api-keys.html). Add the tracezilla

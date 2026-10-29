@@ -16,7 +16,7 @@ install system tools.
 
 - PHP 8.3 or newer
 - Composer 2
-- Git
+- `curl` and `tar`
 - A terminal and code editor
 - [Shopify prerequisites](./shopify/setup.html): a development store and an
   installed app
@@ -29,26 +29,24 @@ A GitHub account is not required to download or run the public project.
 
 The development project consists of:
 
-- The integration source files from the public Git repository.
+- The integration source files, created with the create command.
 - A local `.env` configuration created from `.env.example`.
 - PHP packages installed by Composer into `vendor/`.
 
 Do not copy `vendor/` from another computer and do not commit `.env`.
 
-## 1. Get the source files
+## 1. Create the project
 
-Run the following from the directory where you keep development projects.
-Replace `YOUR_PROJECT_NAME` with the folder name you want:
+Run the following from the folder where you keep your projects. Replace
+`GiantPotatoes` with the name of your project:
 
 ```bash
-git clone https://github.com/Happy-Bananas/tracezilla-shopify-php.git YOUR_PROJECT_NAME
-cd YOUR_PROJECT_NAME
-git remote rename origin template
+curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- shopify GiantPotatoes
+cd GiantPotatoes
 ```
 
-This downloads the application into the new folder. The public source is named
-`template` in Git so it cannot be confused with a future private customer
-repository.
+The command creates a plain project folder with its own `.env` file, without
+Git history; see [Create the project](./getting-started.html#3-create-the-project).
 
 ## 2. Install the PHP packages
 
@@ -59,13 +57,7 @@ composer install
 Composer reads `composer.lock` and installs the tested package versions into
 `vendor/`.
 
-## 3. Create the local configuration
-
-Create `.env` from the included safe template:
-
-```bash
-cp .env.example .env
-```
+## 3. Complete the local configuration
 
 Open `.env` in your editor and add the Shopify and tracezilla credentials. The
 tracezilla values are the team slug and the personal access token

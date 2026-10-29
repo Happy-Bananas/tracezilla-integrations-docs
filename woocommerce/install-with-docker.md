@@ -14,7 +14,7 @@ and Composer directly on your computer.
 ## Requirements
 
 - Docker Desktop or Docker Engine with the Compose plugin
-- Git
+- `curl` and `tar`
 - [WooCommerce prerequisites](./setup.html): a development store and REST API
   keys
 - [tracezilla prerequisites](../tracezilla-fundamentals.html): a development
@@ -22,29 +22,20 @@ and Composer directly on your computer.
 
 You do not need a GitHub account to download or run the project.
 
-## 1. Get the project
+## 1. Create the project
 
-Run the following from the directory where you keep development projects.
-Replace `YOUR_PROJECT_NAME` with the folder name you want:
+Run the following from the folder where you keep your projects. Replace
+`GiantPotatoes` with the name of your project:
 
 ```bash
-git clone https://github.com/Happy-Bananas/tracezilla-woocommerce-php.git YOUR_PROJECT_NAME
-cd YOUR_PROJECT_NAME
-git remote rename origin template
+curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce GiantPotatoes
+cd GiantPotatoes
 ```
 
-The public source is named `template` in Git so it cannot be confused with a
-future private customer repository. If you later want backup, collaboration,
-or deployment through Git, push the project to a **private repository owned by
-you or the customer**.
+The command creates a plain project folder with its own `.env` file, without
+Git history; see [Create the project](../getting-started.html#3-create-the-project).
 
 ## 2. Add credentials
-
-Create `.env` from the included template:
-
-```bash
-cp .env.example .env
-```
 
 Open `.env` in your editor. The WooCommerce values already point to the local
 sandbox and its [preinstalled key](./setup/rest-api-keys.html); add the
@@ -71,9 +62,11 @@ docker compose run --rm php composer install
 ```
 
 The first run builds the development container, so it can take a little
-while. The container runs as your user, so the files it creates belong to you.
-If your user and group IDs are not 1000, set `UID` and `GID` in your shell
-first.
+while. The container runs as your user, so the files it creates belong to you:
+the create command stored your user and group IDs in `.env` as
+`TRACEZILLA_DOCKER_UID` and `TRACEZILLA_DOCKER_GID`. Docker Compose names the
+containers after the project folder, so several projects can exist side by
+side.
 
 ## 4. Log in to tracezilla
 
