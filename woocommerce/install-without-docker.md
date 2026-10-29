@@ -49,12 +49,14 @@ Composer reads `composer.lock` and installs the tested package versions into
 cp .env.example .env
 ```
 
-Open `.env` in your editor and add the WooCommerce and tracezilla values:
+Open `.env` in your editor. Set `WOOCOMMERCE_URL` as shown; the key is the
+sandbox's [preinstalled key](./setup/rest-api-keys.html). Add the tracezilla
+values:
 
 ```dotenv
 WOOCOMMERCE_URL=http://localhost:8080
-WOOCOMMERCE_CONSUMER_KEY=ck_...
-WOOCOMMERCE_CONSUMER_SECRET=cs_...
+WOOCOMMERCE_CONSUMER_KEY=ck_sandbox
+WOOCOMMERCE_CONSUMER_SECRET=cs_sandbox
 
 TRACEZILLA_TEAM_SLUG=your-development-company
 TRACEZILLA_CLIENT_ID=...
@@ -62,7 +64,8 @@ TRACEZILLA_CLIENT_SECRET=...
 ```
 
 Without Docker, the local sandbox is reached at `http://localhost:8080`. For an
-existing store, use its public HTTPS URL. Git ignores `.env`; never commit it.
+existing store, use its HTTPS URL and its own keys. Git ignores `.env`; never
+commit it.
 
 ## 4. Log in to tracezilla
 

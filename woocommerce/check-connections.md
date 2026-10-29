@@ -84,7 +84,8 @@ The failing line explains the problem. Common causes:
 | Message | Fix |
 |:--|:--|
 | `Missing required environment variable: WOOCOMMERCE_CONSUMER_KEY` | Add the [REST API keys](./setup/rest-api-keys.html) to `.env`. |
-| WooCommerce `401` or `Consumer key is invalid` | The key was deleted or the sandbox was reset. Create new keys. |
+| WooCommerce `401` with `Consumer key is invalid` or `Consumer secret is invalid` | The key in `.env` does not match the store. For the sandbox, use `ck_sandbox` / `cs_sandbox`. |
+| WooCommerce `401` with `Sorry, you cannot list resources.` | The key was not accepted at all, usually because the store does not use HTTPS. Real stores must; the sandbox handles this itself. |
 | WooCommerce `Connection refused` | Start the sandbox. With Docker, `WOOCOMMERCE_URL` must be `http://host.docker.internal:8080`. |
 | `No tracezilla token is stored. Run bin/tracezilla-login first.` | Run the [login](../fundamentals/account-and-team.html#oauth-client-and-login-woocommerce). |
 | `The refresh token was rejected; run bin/tracezilla-login again.` | The OAuth client was deleted or the session revoked. Log in again. |

@@ -51,10 +51,12 @@ sign in:
 | Field | Local sandbox value |
 |:--|:--|
 | Username | `admin` |
-| Password | `tracezilla` |
+| Password | `admin` |
 
-These credentials are only for the disposable local sandbox. Never use this
-password on a public WordPress installation.
+The sandbox also has a preinstalled [REST API key](./rest-api-keys.html). These
+well-known credentials are only for the disposable local sandbox. The sandbox is
+reachable from your local network, so do not run it on an untrusted network,
+and never use these values on a public WordPress installation.
 
 ## Inspect the test data
 

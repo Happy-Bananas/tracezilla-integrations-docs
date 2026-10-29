@@ -46,12 +46,14 @@ Create `.env` from the included template:
 cp .env.example .env
 ```
 
-Open `.env` in your editor and add the WooCommerce and tracezilla values:
+Open `.env` in your editor. The WooCommerce values already point to the local
+sandbox and its [preinstalled key](./setup/rest-api-keys.html); add the
+tracezilla values:
 
 ```dotenv
 WOOCOMMERCE_URL=http://host.docker.internal:8080
-WOOCOMMERCE_CONSUMER_KEY=ck_...
-WOOCOMMERCE_CONSUMER_SECRET=cs_...
+WOOCOMMERCE_CONSUMER_KEY=ck_sandbox
+WOOCOMMERCE_CONSUMER_SECRET=cs_sandbox
 
 TRACEZILLA_TEAM_SLUG=your-development-company
 TRACEZILLA_CLIENT_ID=...
@@ -59,8 +61,8 @@ TRACEZILLA_CLIENT_SECRET=...
 ```
 
 `host.docker.internal:8080` reaches the local sandbox from inside the
-container. For an existing store, use its public HTTPS URL. Git ignores `.env`;
-never commit it.
+container. For an existing store, use its HTTPS URL and its own keys. Git
+ignores `.env`; never commit it.
 
 ## 3. Install the PHP packages
 
