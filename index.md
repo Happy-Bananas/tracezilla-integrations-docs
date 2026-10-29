@@ -19,6 +19,12 @@ flowchart TB
     Bifrost <--> Tracezilla
 </pre>
 
-BifrostConnect is a standalone headless PHP application. Create a platform
-scenario, write the customer's rules in PHP, verify them with tests, and run
-the same command manually or from cron. Start with [Getting Started](./getting-started/).
+Each commerce platform has a standalone headless PHP application:
+
+| Platform | Project | Status |
+|:--|:--|:--|
+| [Shopify](./shopify/) | `tracezilla-shopify-php` | Catalog, inventory, and order commands |
+| [WooCommerce](./woocommerce/) | `tracezilla-woocommerce-php` | Connection check and test-data seed; more commands planned |
+
+Write the customer's rules in PHP, verify them with tests, and run the same
+command manually or from cron. Start with [Getting Started](./getting-started.html).
