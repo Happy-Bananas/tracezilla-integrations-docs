@@ -29,6 +29,12 @@ Install [Docker](https://docs.docker.com/get-started/get-docker/):
 Nothing else is needed. PHP, Composer, WordPress, and the database all run in
 containers.
 
+{: .important }
+With Docker, Docker must be running before you run any command: start Docker
+Desktop on Mac and Windows, or the Docker service on Linux. When the computer
+restarts, containers such as the WooCommerce sandbox stop and do not start by
+themselves; start them again with `docker compose up -d` in their folder.
+
 On Windows, Docker Desktop sets up WSL 2 itself to run the containers. You do
 not need to use WSL; run every command in PowerShell. Where Mac and Linux use a
 shell script, this manual shows the PowerShell command next to it.

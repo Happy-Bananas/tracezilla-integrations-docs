@@ -14,6 +14,14 @@ aux_links:
 
 aux_links_new_tab: true
 
+callouts:
+  important:
+    title: Important
+    color: blue
+  warning:
+    title: Warning
+    color: red
+
 footer_content: "Maintained by Happy Bananas. Distributed under the MIT License."
 
 exclude:

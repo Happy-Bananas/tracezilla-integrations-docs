@@ -95,12 +95,16 @@ Follow the install page for your service and your choice of
 
 ## 6. Check both connections
 
+{: .important }
+With Docker, start Docker first, and the WooCommerce sandbox if you use it.
+Neither starts by itself after the computer restarts.
+
 From the new project folder, run:
 
 | | Command |
 |:--|:--|
 | With Docker, Mac and Linux | `./check-connection` |
-| With Docker, Windows | See the install page of your service |
+| With Docker, Windows | See Check Connections for your service |
 | Without Docker | `php bin/bifrost-connect connection:check` |
 
 The command makes one small read-only request to the external service and one
