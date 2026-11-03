@@ -13,8 +13,7 @@ to use PHP and Composer directly on your computer.
 
 ## Requirements
 
-- Docker Desktop or Docker Engine with the Compose plugin
-- `curl` and `tar`
+- [Docker](./your-computer.html#with-docker); nothing else on your computer
 - [Shopify prerequisites](./shopify/setup.html): a development store and an
   installed app
 - [tracezilla prerequisites](./tracezilla-fundamentals.html): a development
@@ -27,13 +26,21 @@ You do not need a GitHub account to download or run the project.
 Run the following from the folder where you keep your projects. Replace
 `GiantPotatoes` with the name of your project:
 
+Mac and Linux:
+
 ```bash
 curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- shopify GiantPotatoes
 ```
 
+Windows (PowerShell):
+
+```powershell
+docker run --rm -v "${PWD}:/work" -w /work alpine:3 sh -c "wget -qO- https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- shopify GiantPotatoes"
+```
+
 The command downloads a fresh copy of BifrostConnect into that folder and
 creates the `.env` configuration file. The project is a plain folder without
-Git history; see [Create the project](./getting-started.html#3-create-the-project).
+Git history; see [Create the project](./getting-started.html#4-create-the-project).
 It will not replace a folder that already exists.
 
 ## 2. Add credentials
@@ -52,6 +59,8 @@ Never commit this file; Git ignores it automatically.
 Run the helper from the new project folder. It is part of the project, so it
 does not exist before step 1:
 
+Mac and Linux:
+
 ```bash
 ./check-connection
 ```
@@ -59,6 +68,18 @@ does not exist before step 1:
 The first run builds and starts the development container, so it can take a
 little while. The command prints progress, waits until BifrostConnect is ready,
 and then performs one small read-only request against each service.
+
+Windows (PowerShell): start the container, wait until
+`docker compose logs integration` shows `BIFROSTCONNECT IS READY`, and then run
+the check:
+
+```powershell
+docker compose up --build -d integration
+docker compose logs -f integration
+docker compose exec integration php bin/bifrost-connect connection:check
+```
+
+Press Ctrl+C to stop following the log once it reports that it is ready.
 
 A successful result looks like:
 

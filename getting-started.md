@@ -9,7 +9,12 @@ nav_order: 10
 Each external service has its own standalone PHP integration. The steps are
 the same for every service; only the service pages differ.
 
-## 1. Prepare tracezilla
+## 1. Prepare your computer
+
+Choose to work [with Docker or without Docker](./your-computer.html). With
+Docker, Docker is the only thing you install.
+
+## 2. Prepare tracezilla
 
 Shared by all integrations:
 
@@ -19,7 +24,7 @@ Shared by all integrations:
    and either a personal access token (Shopify) or an OAuth client
    (WooCommerce).
 
-## 2. Prepare the external service
+## 3. Prepare the external service
 
 Choose the service you are integrating with and complete its prerequisites:
 
@@ -28,25 +33,44 @@ Choose the service you are integrating with and complete its prerequisites:
 | Shopify | [Shopify Prerequisites](./shopify/setup.html): development store and app |
 | WooCommerce | [WooCommerce Prerequisites](./woocommerce/setup.html): development store and REST API keys |
 
-## 3. Create the project
+## 4. Create the project
 
-Open a terminal in the folder where you keep your projects and run the command
-for your service. Replace `GiantPotatoes` with the name of your project:
+Open a terminal in the folder where you keep your projects. In the commands
+below, replace `woocommerce` with `shopify` for a Shopify project, and
+`GiantPotatoes` with the name of your project.
 
-Shopify:
-
-```bash
-curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- shopify GiantPotatoes
-```
-
-WooCommerce:
+### Mac and Linux
 
 ```bash
 curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce GiantPotatoes
 ```
 
-The command needs only `curl` and `tar`. It downloads the latest integration
-into a new `GiantPotatoes` folder and creates its `.env` file. The project is
+### Windows with Docker
+
+In PowerShell, the same command runs in a small container:
+
+```powershell
+docker run --rm -v "${PWD}:/work" -w /work alpine:3 sh -c "wget -qO- https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce GiantPotatoes"
+```
+
+### Windows without Docker
+
+1. Download the integration as a ZIP file:
+   [WooCommerce](https://github.com/Happy-Bananas/tracezilla-woocommerce-php/archive/refs/heads/main.zip)
+   or [Shopify](https://github.com/Happy-Bananas/tracezilla-shopify-php/archive/refs/heads/main.zip).
+2. Extract it in the folder where you keep your projects and rename the
+   extracted folder to `GiantPotatoes`.
+3. In PowerShell, create `.env` in the project folder:
+
+   ```powershell
+   cd GiantPotatoes
+   Copy-Item .env.example .env
+   ```
+
+### What you get
+
+The command downloads the latest integration into a new `GiantPotatoes` folder
+and creates its `.env` file. The project is
 yours: a plain folder on your computer, with no Git history and no connection
 to the BifrostConnect repositories. The command refuses to replace an existing
 folder or to create the project inside a Git repository.
@@ -59,32 +83,31 @@ repositories.
 The WooCommerce test store is created the same way; see
 [Development store](./woocommerce/setup/store.html).
 
-## 4. Install the integration
+## 5. Install the integration
 
-Install it **with Docker** (recommended; PHP and its packages run in a prepared
-development container) **or without Docker** (PHP and Composer installed on your
-computer). Both give the same project.
+Follow the install page for your service and your choice of
+[Docker or no Docker](./your-computer.html):
 
 | Service | With Docker | Without Docker |
 |:--|:--|:--|
 | Shopify | [Install with Docker](./run-with-docker.html) | [Install without Docker](./manual-installation.html) |
 | WooCommerce | [Install with Docker](./woocommerce/install-with-docker.html) | [Install without Docker](./woocommerce/install-without-docker.html) |
 
-## 5. Check both connections
+## 6. Check both connections
 
 From the new project folder, run:
 
-```bash
-./check-connection
-```
-
-Without Docker, run `php bin/bifrost-connect connection:check`.
+| | Command |
+|:--|:--|
+| With Docker, Mac and Linux | `./check-connection` |
+| With Docker, Windows | See the install page of your service |
+| Without Docker | `php bin/bifrost-connect connection:check` |
 
 The command makes one small read-only request to the external service and one
 to tracezilla, and reports both. **Nothing else works until both connections
 pass**, so fix any reported problem before continuing.
 
-## 6. Next steps
+## 7. Next steps
 
 - [Seed the test dataset](./fundamentals/seed.html) into your development
   company.

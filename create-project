@@ -5,9 +5,13 @@
 #
 # Platforms: shopify, woocommerce, woocommerce-sandbox.
 #
+# Windows PowerShell has no sh, so there the script runs in a container:
+#
+#   docker run --rm -v "${PWD}:/work" -w /work alpine:3 sh -c "wget -qO- https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- <platform> <project>"
+#
 # The project is a plain folder without Git history or a link back to the
-# template. It is never created inside a Git repository. Only curl and tar are
-# needed.
+# template. It is never created inside a Git repository. Only curl or wget, and
+# tar are needed.
 
 set -eu
 
@@ -87,15 +91,20 @@ while :; do
     directory=$(dirname "$directory")
 done
 
-for tool in curl tar; do
-    command -v "$tool" >/dev/null 2>&1 || fail "$tool is required."
-done
+command -v tar >/dev/null 2>&1 || fail "tar is required."
+if command -v curl >/dev/null 2>&1; then
+    download() { curl -fsSL "$1"; }
+elif command -v wget >/dev/null 2>&1; then
+    download() { wget -qO- "$1"; }
+else
+    fail "curl or wget is required."
+fi
 
 temporary=$(mktemp -d)
 trap 'rm -rf "$temporary"' EXIT
 
 echo "Creating $label in $project ..."
-curl -fsSL "$archive" | tar -xz -C "$temporary"
+download "$archive" | tar -xz -C "$temporary"
 
 # GitHub archives contain one top-level folder, e.g. tracezilla-shopify-php-main.
 source=$(find "$temporary" -mindepth 1 -maxdepth 1 -type d)
@@ -109,7 +118,11 @@ mv "$source" "$project"
 
 if [ -f "$project/.env.example" ]; then
     cp "$project/.env.example" "$project/.env"
-    printf '\nTRACEZILLA_DOCKER_UID=%s\nTRACEZILLA_DOCKER_GID=%s\n' "$(id -u)" "$(id -g)" >> "$project/.env"
+    # Containers run as this user, so the files they create belong to you. In
+    # the Windows container the user is root; the default user is used then.
+    if [ "$(id -u)" != 0 ]; then
+        printf '\nTRACEZILLA_DOCKER_UID=%s\nTRACEZILLA_DOCKER_GID=%s\n' "$(id -u)" "$(id -g)" >> "$project/.env"
+    fi
 fi
 
 echo ""
@@ -121,5 +134,5 @@ if [ "$platform" = woocommerce-sandbox ]; then
     echo "  docker compose up -d"
 else
     echo "  Edit .env"
-    echo "  ./check-connection"
+    echo "  ./check-connection     (Windows: see the install guide)"
 fi

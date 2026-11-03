@@ -13,8 +13,7 @@ and Composer directly on your computer.
 
 ## Requirements
 
-- Docker Desktop or Docker Engine with the Compose plugin
-- `curl` and `tar`
+- [Docker](../your-computer.html#with-docker); nothing else on your computer
 - [WooCommerce prerequisites](./setup.html): a development store and REST API
   keys
 - [tracezilla prerequisites](../tracezilla-fundamentals.html): a development
@@ -27,13 +26,22 @@ You do not need a GitHub account to download or run the project.
 Run the following from the folder where you keep your projects. Replace
 `GiantPotatoes` with the name of your project:
 
+Mac and Linux:
+
 ```bash
 curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce GiantPotatoes
 cd GiantPotatoes
 ```
 
+Windows (PowerShell):
+
+```powershell
+docker run --rm -v "${PWD}:/work" -w /work alpine:3 sh -c "wget -qO- https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce GiantPotatoes"
+cd GiantPotatoes
+```
+
 The command creates a plain project folder with its own `.env` file, without
-Git history; see [Create the project](../getting-started.html#3-create-the-project).
+Git history; see [Create the project](../getting-started.html#4-create-the-project).
 
 ## 2. Add credentials
 
@@ -79,8 +87,16 @@ never stored; see [Credentials](../fundamentals/account-and-team.html#oauth-clie
 
 ## 5. Check both connections
 
+Mac and Linux:
+
 ```bash
 ./check-connection
+```
+
+Windows (PowerShell):
+
+```powershell
+docker compose run --rm php php bin/bifrost-connect connection:check
 ```
 
 The command performs one small read-only request against each service. A

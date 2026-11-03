@@ -14,9 +14,7 @@ install system tools.
 
 ## Requirements
 
-- PHP 8.3 or newer
-- Composer 2
-- `curl` and `tar`
+- [PHP 8.3 or newer and Composer 2](./your-computer.html#without-docker)
 - A terminal and code editor
 - [Shopify prerequisites](./shopify/setup.html): a development store and an
   installed app
@@ -45,8 +43,11 @@ curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-p
 cd GiantPotatoes
 ```
 
+On Windows, download and extract the project as described in
+[Windows without Docker](./getting-started.html#windows-without-docker).
+
 The command creates a plain project folder with its own `.env` file, without
-Git history; see [Create the project](./getting-started.html#3-create-the-project).
+Git history; see [Create the project](./getting-started.html#4-create-the-project).
 
 ## 2. Install the PHP packages
 

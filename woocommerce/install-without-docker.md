@@ -12,9 +12,7 @@ It does not explain how to install system tools.
 
 ## Requirements
 
-- PHP 8.3 or newer
-- Composer 2
-- `curl` and `tar`
+- [PHP 8.3 or newer and Composer 2](../your-computer.html#without-docker)
 - [WooCommerce prerequisites](./setup.html): a development store and REST API
   keys
 - [tracezilla prerequisites](../tracezilla-fundamentals.html): a development
@@ -30,8 +28,11 @@ curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-p
 cd GiantPotatoes
 ```
 
+On Windows, download and extract the project as described in
+[Windows without Docker](../getting-started.html#windows-without-docker).
+
 The command creates a plain project folder with its own `.env` file, without
-Git history; see [Create the project](../getting-started.html#3-create-the-project).
+Git history; see [Create the project](../getting-started.html#4-create-the-project).
 
 ## 2. Install the PHP packages
 

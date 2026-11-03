@@ -24,10 +24,21 @@ Use the local sandbox while learning or testing commands that can change data.
 
 ## Start the local sandbox
 
-Create the sandbox from the folder where you keep your projects:
+The sandbox runs in Docker. Without Docker, use your own WordPress with
+WooCommerce instead, as an existing store.
+
+Create the sandbox from the folder where you keep your projects. Mac and
+Linux:
 
 ```bash
 curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce-sandbox woocommerce-sandbox
+cd woocommerce-sandbox
+```
+
+Windows (PowerShell):
+
+```powershell
+docker run --rm -v "${PWD}:/work" -w /work alpine:3 sh -c "wget -qO- https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce-sandbox woocommerce-sandbox"
 cd woocommerce-sandbox
 ```
 
