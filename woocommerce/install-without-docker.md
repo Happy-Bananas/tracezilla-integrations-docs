@@ -79,21 +79,9 @@ never stored; see [Credentials](../fundamentals/account-and-team.html#oauth-clie
 
 ## 5. Check both connections
 
-```bash
-php bin/bifrost-connect connection:check
-```
-
-A successful result looks like:
-
-```text
-Connection check passed.
-WooCommerce: connected to http://localhost:8080 (WooCommerce 11.2.1)
-tracezilla:  connected to team your-development-company
-```
-
-No products, orders, inventory, or settings are changed. Nothing else works
-until both lines report `connected`; see [Check Connections](./check-connections.html)
-for what to do when one of them fails.
+Make sure your WordPress store is running, then follow
+[Check Connections](./check-connections.html). Nothing else works until both
+connections pass.
 
 ## Next
 

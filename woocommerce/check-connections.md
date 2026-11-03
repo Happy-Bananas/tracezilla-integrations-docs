@@ -24,9 +24,21 @@ Both systems are always checked, so a problem with one does not hide the state
 of the other. Run this check first: no other command works until both
 connections pass.
 
+## Before you run it
+
+With Docker, two things must be running:
+
+1. **Docker.** Start Docker Desktop on Mac and Windows, or the Docker service on
+   Linux.
+2. **The WooCommerce store.** For the local sandbox, run `docker compose up -d`
+   in the sandbox folder. It does not start by itself after the computer
+   restarts.
+
 ## Run the command
 
 ### With Docker
+
+Mac and Linux:
 
 ```bash
 ./check-connection
@@ -34,9 +46,10 @@ connections pass.
 
 The helper checks that Docker and `.env` are available, builds the development
 container and installs the PHP packages when needed, and then runs the check.
-The direct equivalent is:
 
-```bash
+Windows (PowerShell), or anywhere without the helper:
+
+```powershell
 docker compose run --rm php php bin/bifrost-connect connection:check
 ```
 
@@ -86,7 +99,8 @@ The failing line explains the problem. Common causes:
 | `Missing required environment variable: WOOCOMMERCE_CONSUMER_KEY` | Add the [REST API keys](./setup/rest-api-keys.html) to `.env`. |
 | WooCommerce `401` with `Consumer key is invalid` or `Consumer secret is invalid` | The key in `.env` does not match the store. For the sandbox, use `ck_sandbox` / `cs_sandbox`. |
 | WooCommerce `401` with `Sorry, you cannot list resources.` | The key was not accepted at all, usually because the store does not use HTTPS. Real stores must; the sandbox handles this itself. |
-| WooCommerce `Connection refused` | Start the sandbox. With Docker, `WOOCOMMERCE_URL` must be `http://host.docker.internal:8080`. |
+| `Cannot connect to the Docker daemon` or `error during connect` | Docker is not running. Start Docker Desktop, or the Docker service on Linux. |
+| WooCommerce `Connection refused` or `Could not connect to server` | The store is not running. Start the sandbox with `docker compose up -d` in its folder. With Docker, `WOOCOMMERCE_URL` must be `http://host.docker.internal:8080`. |
 | `No tracezilla token is stored. Run bin/bifrost-connect tracezilla:login first.` | Run the [login](../fundamentals/account-and-team.html#oauth-client-and-login-woocommerce). |
 | `The refresh token was rejected; run bin/bifrost-connect tracezilla:login again.` | The OAuth client was deleted or the session revoked. Log in again. |
 | `Missing required environment variable: TRACEZILLA_CLIENT_ID` | Add the [OAuth client](../fundamentals/account-and-team.html#oauth-client-and-login-woocommerce) to `.env`. |
