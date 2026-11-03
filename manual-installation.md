@@ -7,31 +7,23 @@ parent: Shopify
 
 # Install the Shopify integration without Docker
 
-This is the native PHP alternative to [Install with Docker](./run-with-docker.html).
-It covers obtaining the project
-files and preparing the development environment. It does not explain how to
-install system tools.
+This is the alternative to [Install with Docker](./run-with-docker.html).
 
 ## Requirements
 
-- [PHP 8.3 or newer and Composer 2](./your-computer.html#without-docker)
-- A terminal and code editor
+Your computer must already have these installed and working. Installing and
+configuring them is your responsibility and is not covered here; see
+[Without Docker](./your-computer.html#without-docker) for links to the
+official guides.
+
+- PHP 8.3 or newer
+- Composer 2
 - [Shopify prerequisites](./shopify/setup.html): a development store and an
   installed app
 - [tracezilla prerequisites](./tracezilla-fundamentals.html): a development
   company and a personal access token
 
 A GitHub account is not required to download or run the public project.
-
-## Required files
-
-The development project consists of:
-
-- The integration source files, created with the create command.
-- A local `.env` configuration created from `.env.example`.
-- PHP packages installed by Composer into `vendor/`.
-
-Do not copy `vendor/` from another computer and do not commit `.env`.
 
 ## 1. Create the project
 
@@ -49,14 +41,14 @@ On Windows, download and extract the project as described in
 The command creates a plain project folder with its own `.env` file, without
 Git history; see [Create the project](./getting-started.html#4-create-the-project).
 
-## 2. Install the PHP packages
+## 2. Download the libraries
 
 ```bash
 composer install
 ```
 
-Composer reads `composer.lock` and installs the tested package versions into
-`vendor/`.
+This downloads the libraries the project uses into its `vendor/` folder.
+
 
 ## 3. Complete the local configuration
 

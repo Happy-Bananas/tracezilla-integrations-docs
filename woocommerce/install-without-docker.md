@@ -7,12 +7,17 @@ nav_order: 4
 
 # Install the WooCommerce integration without Docker
 
-This is the native PHP alternative to [Install with Docker](./install-with-docker.html).
-It does not explain how to install system tools.
+This is the alternative to [Install with Docker](./install-with-docker.html).
 
 ## Requirements
 
-- [PHP 8.3 or newer and Composer 2](../your-computer.html#without-docker)
+Your computer must already have these installed and working. Installing and
+configuring them is your responsibility and is not covered here; see
+[Without Docker](../your-computer.html#without-docker) for links to the
+official guides.
+
+- PHP 8.3 or newer
+- Composer 2
 - [WooCommerce prerequisites](./setup.html): a development store and REST API
   keys
 - [tracezilla prerequisites](../tracezilla-fundamentals.html): a development
@@ -34,14 +39,14 @@ On Windows, download and extract the project as described in
 The command creates a plain project folder with its own `.env` file, without
 Git history; see [Create the project](../getting-started.html#4-create-the-project).
 
-## 2. Install the PHP packages
+## 2. Download the libraries
 
 ```bash
 composer install
 ```
 
-Composer reads `composer.lock` and installs the tested package versions into
-`vendor/`. Do not copy `vendor/` from another computer.
+This downloads the libraries the project uses into its `vendor/` folder.
+
 
 ## 3. Add credentials
 

@@ -43,7 +43,8 @@ Install:
   a local WordPress installation or an existing test store. See
   [Development Store](./woocommerce/setup/store.html).
 
-WSL is not needed on Windows.
+Setting up and maintaining these is your responsibility. The manual assumes
+they work. WSL is not needed on Windows.
 
 ## Components per platform
 
