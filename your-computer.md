@@ -71,4 +71,4 @@ and without Docker.
 |:--|:--|:--|
 | Integration (PHP 8.3, Composer packages) | Container, created with the [create command](./getting-started.html#4-create-the-project) | Your PHP and Composer |
 | Development store and app | Online, see [Shopify Prerequisites](./shopify/setup.html) | The same |
-| tracezilla development company and personal access token | Online, see [tracezilla Prerequisites](./tracezilla-fundamentals.html) | The same |
+| tracezilla development company and OAuth client | Online, see [tracezilla Prerequisites](./tracezilla-fundamentals.html) | The same |

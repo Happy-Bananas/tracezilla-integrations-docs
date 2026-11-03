@@ -34,7 +34,7 @@ Every command runs through one entry point, `bin/bifrost-connect`. Run
 | Command | Purpose | Status |
 |:--|:--|:--|
 | `connection:check` | [Check Connections](./check-connections.html) | Available |
-| `tracezilla:login` | [Log in to tracezilla](../fundamentals/account-and-team.html#oauth-client-and-login-woocommerce) | Available |
+| `tracezilla:login` | [Log in to tracezilla](../fundamentals/account-and-team.html#oauth-client-and-login) | Available |
 | `tracezilla:seed` | [Seed the Test Dataset](../fundamentals/seed.html) | Available |
 | `scenario:create`, `scenario:run` | [Scenarios](./scenarios.html) | Available |
 | Catalog, inventory, and order commands | | Planned, matching the Shopify commands |

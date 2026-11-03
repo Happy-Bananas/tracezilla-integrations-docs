@@ -84,7 +84,7 @@ docker compose exec integration php bin/bifrost-connect connection:check
 ```
 
 Add `--json` to either form for structured output. The command never displays
-the Shopify access token, client secret, or tracezilla API key.
+the Shopify access token, client secret, or tracezilla tokens.
 
 Additional platform instructions will be added as their focused repositories
 become available.

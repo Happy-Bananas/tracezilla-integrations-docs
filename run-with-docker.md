@@ -17,7 +17,7 @@ to use PHP and Composer directly on your computer.
 - [Shopify prerequisites](./shopify/setup.html): a development store and an
   installed app
 - [tracezilla prerequisites](./tracezilla-fundamentals.html): a development
-  company and a personal access token
+  company and an OAuth client
 
 You do not need a GitHub account to download or run the project.
 
@@ -50,11 +50,25 @@ cd GiantPotatoes
 ```
 
 Open `.env` in your editor and complete the Shopify and tracezilla values. The
-tracezilla values are the team slug and the personal access token
-(`TRACEZILLA_API_KEY`); see [Credentials](./fundamentals/account-and-team.html).
+tracezilla values are the team slug and the OAuth client
+(`TRACEZILLA_CLIENT_ID` and `TRACEZILLA_CLIENT_SECRET`); see
+[Credentials](./fundamentals/account-and-team.html).
 Never commit this file; Git ignores it automatically.
 
-## 3. Check both connections
+## 3. Log in to tracezilla
+
+Install the PHP packages in the development container, then log in once:
+
+```bash
+docker compose run --rm integration composer install
+docker compose run --rm integration php bin/bifrost-connect tracezilla:login
+```
+
+The first command builds the development container, so it can take a little
+while. Enter your tracezilla username and password. The password is used once and
+never stored; see [Credentials](./fundamentals/account-and-team.html#oauth-client-and-login).
+
+## 4. Check both connections
 
 Run the helper from the new project folder. It is part of the project, so it
 does not exist before step 1:

@@ -75,7 +75,7 @@ php bin/bifrost-connect tracezilla:login
 ```
 
 Enter your tracezilla username and password. The password is used once and
-never stored; see [Credentials](../fundamentals/account-and-team.html#oauth-client-and-login-woocommerce).
+never stored; see [Credentials](../fundamentals/account-and-team.html#oauth-client-and-login).
 
 ## 5. Check both connections
 
