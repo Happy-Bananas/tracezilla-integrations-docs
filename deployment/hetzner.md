@@ -42,7 +42,7 @@ ssh -p YOUR_SSH_PORT YOUR_SSH_USER@YOUR_SERVER
 
 ```bash
 mkdir -p ~/apps
-mkdir -p ~/apps/YOUR_PROJECT_NAME
+mkdir -p ~/apps/YOUR_INTEGRATION_NAME
 ```
 
 ## 3. Upload the tested project
@@ -57,7 +57,7 @@ rsync -az --delete \
   --exclude='vendor/' \
   --exclude='var/' \
   -e 'ssh -p YOUR_SSH_PORT' \
-  ./ YOUR_SSH_USER@YOUR_SERVER:~/apps/YOUR_PROJECT_NAME/
+  ./ YOUR_SSH_USER@YOUR_SERVER:~/apps/YOUR_INTEGRATION_NAME/
 ```
 
 This makes the deployed source match the tested local source. The exclusions
@@ -69,7 +69,7 @@ version-control metadata.
 Return to the SSH session:
 
 ```bash
-cd ~/apps/YOUR_PROJECT_NAME
+cd ~/apps/YOUR_INTEGRATION_NAME
 composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 ```
 
@@ -121,7 +121,7 @@ Test the change locally, run the same `rsync` command again, and then run on
 the server:
 
 ```bash
-cd ~/apps/YOUR_PROJECT_NAME
+cd ~/apps/YOUR_INTEGRATION_NAME
 composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 php bin/bifrost-connect deployment:check
 php bin/bifrost-connect connection:check

@@ -28,11 +28,11 @@ A GitHub account is not required to download or run the public project.
 ## 1. Create the project
 
 Run the following from the folder where you keep your projects. Replace
-`GiantPotatoes` with the name of your project:
+`YOUR_INTEGRATION_NAME` with the name of your integration:
 
 ```bash
-curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- shopify GiantPotatoes
-cd GiantPotatoes
+curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- shopify YOUR_INTEGRATION_NAME
+cd YOUR_INTEGRATION_NAME
 ```
 
 On Windows, download and extract the project as described in

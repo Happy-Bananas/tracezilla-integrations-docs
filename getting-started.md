@@ -36,12 +36,12 @@ Choose the service you are integrating with and complete its prerequisites:
 
 Open a terminal in the folder where you keep your projects. In the commands
 below, replace `woocommerce` with `shopify` for a Shopify project, and
-`GiantPotatoes` with the name of your project.
+`YOUR_INTEGRATION_NAME` with the name of your integration.
 
 ### Mac and Linux
 
 ```bash
-curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce GiantPotatoes
+curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce YOUR_INTEGRATION_NAME
 ```
 
 ### Windows with Docker
@@ -49,7 +49,7 @@ curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-p
 In PowerShell, the same command runs in a small container:
 
 ```powershell
-docker run --rm -v "${PWD}:/work" -w /work alpine:3 sh -c "wget -qO- https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce GiantPotatoes"
+docker run --rm -v "${PWD}:/work" -w /work alpine:3 sh -c "wget -qO- https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce YOUR_INTEGRATION_NAME"
 ```
 
 ### Windows without Docker
@@ -58,17 +58,17 @@ docker run --rm -v "${PWD}:/work" -w /work alpine:3 sh -c "wget -qO- https://hap
    [WooCommerce](https://github.com/Happy-Bananas/tracezilla-woocommerce-php/archive/refs/heads/main.zip)
    or [Shopify](https://github.com/Happy-Bananas/tracezilla-shopify-php/archive/refs/heads/main.zip).
 2. Extract it in the folder where you keep your projects and rename the
-   extracted folder to `GiantPotatoes`.
+   extracted folder to `YOUR_INTEGRATION_NAME`.
 3. In PowerShell, create `.env` in the project folder:
 
    ```powershell
-   cd GiantPotatoes
+   cd YOUR_INTEGRATION_NAME
    Copy-Item .env.example .env
    ```
 
 ### What you get
 
-The command downloads the latest integration into a new `GiantPotatoes` folder
+The command downloads the latest integration into a new `YOUR_INTEGRATION_NAME` folder
 and creates its `.env` file. The project is
 yours: a plain folder on your computer, with no Git history and no connection
 to the BifrostConnect repositories. The command refuses to replace an existing

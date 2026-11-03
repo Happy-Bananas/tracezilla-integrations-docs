@@ -62,7 +62,7 @@ The other non-secret defaults normally require no changes.
 For example, the destination may be:
 
 ```yaml
-bifrostconnect_path: /usr/home/YOUR_SSH_USER/apps/YOUR_PROJECT_NAME
+bifrostconnect_path: /usr/home/YOUR_SSH_USER/apps/YOUR_INTEGRATION_NAME
 ```
 
 ## 3. Create the encrypted secrets

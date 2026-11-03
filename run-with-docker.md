@@ -24,18 +24,18 @@ You do not need a GitHub account to download or run the project.
 ## 1. Create the project
 
 Run the following from the folder where you keep your projects. Replace
-`GiantPotatoes` with the name of your project:
+`YOUR_INTEGRATION_NAME` with the name of your integration:
 
 Mac and Linux:
 
 ```bash
-curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- shopify GiantPotatoes
+curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- shopify YOUR_INTEGRATION_NAME
 ```
 
 Windows (PowerShell):
 
 ```powershell
-docker run --rm -v "${PWD}:/work" -w /work alpine:3 sh -c "wget -qO- https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- shopify GiantPotatoes"
+docker run --rm -v "${PWD}:/work" -w /work alpine:3 sh -c "wget -qO- https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- shopify YOUR_INTEGRATION_NAME"
 ```
 
 The command downloads a fresh copy of BifrostConnect into that folder and
@@ -46,7 +46,7 @@ It will not replace a folder that already exists.
 ## 2. Add credentials
 
 ```bash
-cd GiantPotatoes
+cd YOUR_INTEGRATION_NAME
 ```
 
 Open `.env` in your editor and complete the Shopify and tracezilla values. The
