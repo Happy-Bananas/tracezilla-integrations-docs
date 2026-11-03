@@ -24,20 +24,20 @@ You do not need a GitHub account to download or run the project.
 ## 1. Create the project
 
 Run the following from the folder where you keep your projects. Replace
-`GiantPotatoes` with the name of your project:
+`YOUR_INTEGRATION_NAME` with the name of your integration:
 
 Mac and Linux:
 
 ```bash
-curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce GiantPotatoes
-cd GiantPotatoes
+curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce YOUR_INTEGRATION_NAME
+cd YOUR_INTEGRATION_NAME
 ```
 
 Windows (PowerShell):
 
 ```powershell
-docker run --rm -v "${PWD}:/work" -w /work alpine:3 sh -c "wget -qO- https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce GiantPotatoes"
-cd GiantPotatoes
+docker run --rm -v "${PWD}:/work" -w /work alpine:3 sh -c "wget -qO- https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce YOUR_INTEGRATION_NAME"
+cd YOUR_INTEGRATION_NAME
 ```
 
 The command creates a plain project folder with its own `.env` file, without

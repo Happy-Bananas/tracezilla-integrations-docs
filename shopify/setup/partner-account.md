@@ -8,7 +8,7 @@ grand_parent: Shopify
 
 # Create a Shopify Partner account
 
-A Shopify Partner account gives an integration consultant access to Shopify's
+A Shopify Partner account gives you access to Shopify's
 developer tools, including Partner organizations, development stores, and
 applications. You do not need a customer's production store to complete this
 guide.

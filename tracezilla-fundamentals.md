@@ -7,14 +7,10 @@ has_children: true
 
 # tracezilla prerequisites
 
-This section is an index of the tracezilla prerequisites needed before
-developing an integration.
-
-Each subpage explains what must be ready and links to the official
-[tracezilla tutorials](https://www.tracezilla.com/en/tutorials) whenever
-possible. A subpage may also provide importable test data, or a short missing
-instruction when the official documentation is not sufficient for integration
-development.
+Before you build an integration, set up the following in tracezilla. Each page
+says what must be ready and links to the official
+[tracezilla tutorials](https://www.tracezilla.com/en/tutorials) for how to do
+it in tracezilla.
 
 ## Prerequisites
 
@@ -27,9 +23,7 @@ development.
    - [Inventory prerequisites](./fundamentals/locations-and-inventory.html)
    - [Order prerequisites](./fundamentals/sales-orders.html)
 
-## What this section is not
+## API reference
 
-This section does not explain how to implement an integration and does not
-document the tracezilla API. Implementation guidance belongs with the headless
-application. Endpoint and request details belong in the official
+For endpoints, fields, and requests, see the official
 [tracezilla API documentation](https://app.tracezilla.com/api/documentation).

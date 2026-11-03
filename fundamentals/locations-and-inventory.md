@@ -8,16 +8,16 @@ nav_order: 50
 # Inventory prerequisites
 
 Inventory tests require more than SKUs. Prepare one known warehouse location
-and a small quantity of stock for selected `TZINT-` records. Use tracezilla's
+and a small quantity of stock for selected `TZ-` records. Use tracezilla's
 official [inventory tutorials](https://www.tracezilla.com/en/tutorials/topic/inventory-management)
-for product operation and the official
+to learn how to do this in tracezilla, and the official
 [lot import guide](https://www.tracezilla.com/en/tutorials/import-lots) when
 loading test inventory.
 
 Inventory synchronization needs an explicit relationship between the
 tracezilla warehouse and the external service's location. Display names,
-database IDs, location numbers, and external GraphQL IDs are different
-identifier namespaces.
+database IDs, location numbers, and external GraphQL IDs are different kinds of
+ID; do not mix them.
 
 ## Required state
 
@@ -33,8 +33,8 @@ source. Confirm where received lots actually appear.
 
 Creating an SKU does not necessarily create available inventory. A realistic
 test may require a purchase or receiving flow so stock exists at the selected
-warehouse. The inventory workflow page will document the exact test procedure
-and consequences.
+warehouse. The seed below does this with a received purchase order. For the
+Shopify test procedure, see [Synchronize Inventory](../shopify/synchronize-inventory.html).
 
 Use the [standard test dataset](./test-data.html). After
 [seeding](./seed.html), it gives these cases against the WooCommerce sandbox:
@@ -63,4 +63,5 @@ fractional mappings rather than rounding silently.
 
 Read and compare both locations before writing. Preview old and new quantities,
 require explicit execution, limit the first write, and update only the selected
-location. A failure for one SKU must not hide results for the others.
+location. Check that your command still reports every other SKU when one
+fails.

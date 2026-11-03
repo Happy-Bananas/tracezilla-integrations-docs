@@ -7,9 +7,9 @@ nav_order: 5
 
 # Implement custom business logic
 
-This guide gives the consultant the helicopter view: how a customer request
-becomes a reliable scheduled integration feature without putting business
-rules in cron, an API client, or a future webhook handler.
+This page shows how to turn a customer's request into a feature that runs
+reliably on a schedule. Keep the business rules in your own PHP classes, not in
+cron, an API client, or a webhook handler.
 
 ## Generate the starting point
 
@@ -27,17 +27,17 @@ docker compose exec integration php bin/bifrost-connect scenario:create confirm-
 php bin/bifrost-connect scenario:create confirm-credentials --platform=shopify
 ```
 
-The command creates four consultant-owned files under
-`custom/Scenarios/Shopify/ConfirmCredentials/`:
+The command creates four files under
+`custom/Scenarios/Shopify/ConfirmCredentials/`. They are yours to change:
 
-| File | Consultant responsibility |
+| File | What you do in it |
 |---|---|
 | `ShopifyQuery.graphql` | Request only the Shopify fields required by the feature |
 | `TracezillaRequest.php` | Declare the read-only tracezilla endpoint and query parameters |
 | `BusinessRules.php` | Validate inputs and express the customer's decisions in PHP |
 | `BusinessRulesTest.php` | Turn the customer story into examples that run without live APIs |
 
-The generated “hello world” is deliberately read-only. It requests the Shopify
+The generated “hello world” is read-only. It requests the Shopify
 shop name, reads a one-record page from tracezilla, and reports that both sets
 of credentials work. It never prints credentials or access tokens.
 
@@ -57,9 +57,8 @@ composer test
 php bin/bifrost-connect scenario:run confirm-credentials --platform=shopify
 ```
 
-The initial runner supports read-only scenarios. Write scenarios will be added
-behind explicit preview, `--execute`, and `--confirm` safeguards; do not place
-write calls inside `BusinessRules.php`.
+Scenarios are read-only. Do not put calls that change Shopify or tracezilla in
+`BusinessRules.php`; build writes as a workflow command, as described below.
 
 ## Start with the business outcome
 
@@ -198,11 +197,10 @@ Use absolute paths because cron has a minimal environment. Ensure failures are
 monitored rather than only written to an unread log.
 
 {: .warning }
-The cron entries illustrate the target operating model; do not copy them into
-production unchanged. Before scheduling a workflow, verify that its pagination,
+The cron entries are examples; do not copy them into production unchanged. Before scheduling a workflow, verify that its pagination,
 selection limit, lookback window, and idempotency rule cannot leave older
-eligible records permanently behind. The current example order command is a
-starting point for that customer-specific hardening.
+eligible records permanently behind. Treat the example order command as a
+starting point that you harden for each customer.
 
 ## Design for reconciliation
 
@@ -213,13 +211,14 @@ reprocessing safe.
 
 For orders, an immutable commerce order ID stored as the tracezilla external
 reference provides the idempotency boundary. For inventory, compare current
-source and destination quantities before writing. Other workflows must define
-their own equivalent identity and retry rule.
+source and destination quantities before writing. For a new workflow, choose a
+stable ID that stops duplicates, and decide how a failed item is retried.
 
-## Add webhooks later
+## If you add a webhook
 
-A webhook can trigger the same workflow shortly after an event. It should not
-introduce a second implementation of the rules.
+The integration has no webhook support. If you add a webhook so a change is
+handled sooner, let it call the same workflow as cron, so the rules exist only
+once.
 
 ```text
 Webhook ─┐
@@ -227,7 +226,6 @@ Webhook ─┐
 Cron ────┘
 ```
 
-Cron remains the recovery mechanism. It finds events whose webhook was missed,
-whose first execution failed, or whose processing completed only partially.
-Both triggers must therefore share the same idempotency checks and structured
-result behavior.
+Keep cron running as well. It picks up events whose webhook was missed, failed,
+or was only partly processed. Because both call the same workflow, they share
+the same duplicate checks and results.

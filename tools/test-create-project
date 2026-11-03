@@ -33,10 +33,10 @@ create() {
 }
 
 # Creates a plain project with its own .env.
-if create integration.tar.gz woocommerce GiantPotatoes >/dev/null 2>&1 \
-    && [ -x GiantPotatoes/check-connection ] \
-    && [ ! -e GiantPotatoes/.git ] \
-    && [ "$(cat GiantPotatoes/.env)" = "$(printf 'WOOCOMMERCE_URL=http://host.docker.internal:8080\n\nTRACEZILLA_DOCKER_UID=%s\nTRACEZILLA_DOCKER_GID=%s' "$(id -u)" "$(id -g)")" ]; then
+if create integration.tar.gz woocommerce YOUR_INTEGRATION_NAME >/dev/null 2>&1 \
+    && [ -x YOUR_INTEGRATION_NAME/check-connection ] \
+    && [ ! -e YOUR_INTEGRATION_NAME/.git ] \
+    && [ "$(cat YOUR_INTEGRATION_NAME/.env)" = "$(printf 'WOOCOMMERCE_URL=http://host.docker.internal:8080\n\nTRACEZILLA_DOCKER_UID=%s\nTRACEZILLA_DOCKER_GID=%s' "$(id -u)" "$(id -g)")" ]; then
     pass "creates a WooCommerce project without Git and with .env"
 else
     fail "creates a WooCommerce project without Git and with .env"
@@ -64,11 +64,11 @@ refuses() {
     fi
 }
 
-refuses "refuses an existing folder" "already exists" woocommerce GiantPotatoes
+refuses "refuses an existing folder" "already exists" woocommerce YOUR_INTEGRATION_NAME
 refuses "refuses an unknown platform" "Platforms:" magento Shop
 refuses "refuses a missing project name" "Usage:" woocommerce
 refuses "refuses a name starting with a dash" "must start with" woocommerce -x
-refuses "refuses a name with spaces" "use only" woocommerce "Giant Potatoes"
+refuses "refuses a name with spaces" "use only" woocommerce "My Integration"
 refuses "refuses a missing parent folder" "does not exist" woocommerce missing/Project
 
 mkdir -p repository/.git repository/sub

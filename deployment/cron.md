@@ -13,7 +13,7 @@ Unsupported
 
 {: .warning }
 This deployment guidance is an optional example. Hosting, security, backups,
-monitoring, and scheduled operation remain the developer's or customer's
+monitoring, and scheduled operation remain your or your customer's
 responsibility.
 
 Cron is the primary production trigger. It starts a console command at a
@@ -37,10 +37,10 @@ schedule, working directory, and log destination.
 
 ## What to do next
 
-Consultants normally need only these two pages:
+You normally need only these two pages:
 
 - [Set up a cron task](./cron/setup.html) — copy, test, and schedule the
-  headless command on a PHP host.
+  console command on a PHP host.
 - [Troubleshoot scheduled runs](./cron/troubleshooting.html) — read the history
   first, inspect quarantined files, and identify tasks that need attention.
 
@@ -49,5 +49,5 @@ individual-order writes are stored and considered again by later cron
 reconciliations according to their retry time. Business problems stop in the
 attention list instead of retrying forever.
 
-Framework maintainers can read [Cron error and retry internals](./cron/errors.html)
-for the retry implementation details.
+To understand how failed work is stored and retried, read
+[Retries](./cron/errors.html).

@@ -59,8 +59,7 @@ Locate the app's **Client ID** and **Client secret**. Store them in a password
 manager or secret store. Do not place credentials in documentation,
 screenshots, committed files, or terminal output.
 
-Each implementation repository will document its own configuration names. The
-values normally include:
+Add them to the project's `.env`:
 
 ```dotenv
 SHOPIFY_SHOP_URL=example-integration-test.myshopify.com
@@ -75,10 +74,9 @@ scope setting cannot grant access that the installed app has not approved.
 
 ## Access-token behavior
 
-The current examples use Shopify's client credentials grant for an app owned
-by the same organization as the store. Access tokens expire after 24 hours;
-implementations must request a replacement when needed and must never print
-the token.
+The integration uses Shopify's client credentials grant, which works for an
+app owned by the same organization as the store. Access tokens expire after 24
+hours; the integration requests a new one on every run and never prints it.
 
 ## Verify the result
 

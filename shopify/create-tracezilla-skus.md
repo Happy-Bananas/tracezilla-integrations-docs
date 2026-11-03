@@ -18,7 +18,7 @@ code that does not already exist.
 
 ### Mapping
 
-The mapping is deliberately visible in
+Change the mapping to the customer's rules in
 `src/Tracezilla/Mappers/ShopifyVariantToTracezillaSkuMapper.php`:
 
 | Shopify source | tracezilla field | Example value |
@@ -123,9 +123,9 @@ flowchart TB
 | Structured summary and items | `src/Workflows/CreateTracezillaSkusResult.php` |
 | Terminal output | `src/Output/SkuCreationRenderer.php` |
 
-The mapper is the intended customization point. There is no generic mapping
-configuration or rules engine: the example keeps business assumptions explicit
-and close to the code that creates the API payload.
+Put your customer's rules directly in this mapper class. There is no separate
+mapping configuration, so the rules stay next to the code that builds the
+tracezilla request.
 
 ## Tests
 

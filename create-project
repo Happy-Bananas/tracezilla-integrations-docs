@@ -18,7 +18,7 @@ set -eu
 usage() {
     echo "Usage: create-project <platform> <project>" >&2
     echo "Platforms: shopify, woocommerce, woocommerce-sandbox" >&2
-    echo "Example:   create-project woocommerce GiantPotatoes" >&2
+    echo "Example:   create-project woocommerce YOUR_INTEGRATION_NAME" >&2
 }
 
 fail() {

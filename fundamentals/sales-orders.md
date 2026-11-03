@@ -10,22 +10,21 @@ nav_order: 60
 Use tracezilla's official [partner tutorial](https://www.tracezilla.com/en/tutorials/partners),
 [partner import guide](https://www.tracezilla.com/en/tutorials/import-template-for-partners),
 and [sales-order tutorial](https://www.tracezilla.com/en/tutorials/sales-order)
-for product operation.
+to learn how to do this in tracezilla.
 
 For an integration test, prepare one clearly named webshop/customer partner,
-its required location and owner, one warehouse source, and matching `TZINT-`
+its required location and owner, one warehouse source, and matching `TZ-`
 SKUs. Do not use real customer identities or addresses.
 
-Importing an external order requires more context than its lines. The
-integration must resolve customer, pickup, delivery, ownership, warehouse, SKU,
-price, currency, and identity rules before creating a tracezilla sales order.
+Importing an external order requires more context than its lines. Before you
+create a tracezilla sales order, your rules must decide the customer, pickup,
+delivery, owner, warehouse, SKU, price, currency, and identity.
 
 ## Webshop partner pattern
 
-An integration can represent the webshop as a tracezilla customer partner. A
-workflow may use that partner's primary location and owner when creating sales
-orders. This is one useful example pattern—not a requirement for every
-customer.
+The examples import orders onto one tracezilla customer partner for the
+webshop, using that partner's primary location and owner. Change this if your
+customer needs something else.
 
 Customer-specific decisions include:
 

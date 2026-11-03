@@ -12,11 +12,11 @@ Unsupported
 
 {: .warning }
 This is optional deployment automation. Server access, security, backups,
-monitoring, Ansible, and the vault password remain the developer's or
-customer's responsibility.
+monitoring, Ansible, and the vault password remain your or your customer's
+responsibility.
 
 The BifrostConnect project includes a playbook under `deployment/ansible/`.
-It uploads the project currently on the developer's computer, generates the
+It uploads the project currently on your computer, generates the
 server `.env` from encrypted secrets, installs production PHP packages, and
 checks the deployment and both service connections.
 
@@ -24,7 +24,7 @@ The playbook does not use Git on the server and does not configure cron.
 
 ## Requirements
 
-On the developer's computer:
+On your computer:
 
 - Ansible
 - SSH access to the server using a key
@@ -62,7 +62,7 @@ The other non-secret defaults normally require no changes.
 For example, the destination may be:
 
 ```yaml
-bifrostconnect_path: /usr/home/YOUR_SSH_USER/apps/YOUR_PROJECT_NAME
+bifrostconnect_path: /usr/home/YOUR_SSH_USER/apps/YOUR_INTEGRATION_NAME
 ```
 
 ## 3. Create the encrypted secrets

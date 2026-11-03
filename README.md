@@ -1,6 +1,6 @@
 # BifrostConnect Documentation
 
-Service-first documentation for consultants integrating Shopify,
+Service-first documentation for developers integrating Shopify,
 WooCommerce, and other external services with the tracezilla API.
 
 ## Run locally

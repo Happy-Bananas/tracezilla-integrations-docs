@@ -13,7 +13,7 @@ Unsupported
 
 {: .warning }
 This deployment guidance is an optional example. Hosting, security, backups,
-monitoring, and scheduled operation remain the developer's or customer's
+monitoring, and scheduled operation remain your or your customer's
 responsibility.
 
 Start with the files written by the integration. Do not begin by changing cron
@@ -38,8 +38,8 @@ Look for events such as:
 - `resolved` — the work completed or was already present safely.
 - `attention_required` — automatic retries stopped and a person must correct
   a business or persistent technical problem.
-- `retried_manually` — an operator requested another attempt.
-- `dismissed` — an operator deliberately removed the task.
+- `retried_manually` — someone retried it with `failures:retry`.
+- `dismissed` — someone removed it with `failures:dismiss`.
 - `corrupt_task_quarantined` — a task file could not be read safely.
 
 ## 2. Look in the corrupt folder
@@ -50,9 +50,9 @@ Unreadable task files are moved out of normal processing:
 find var/retry/corrupt -maxdepth 1 -type f -name '*.json' -print
 ```
 
-Do not move a file back into `pending` or edit it in place. Preserve it for a
-developer to inspect alongside the corresponding history event. Other valid
-tasks continue running.
+Do not move a file back into `pending` or edit it in place. Keep it, and
+compare it with the matching event in the history file. Other valid tasks
+continue running.
 
 ## 3. List current failures
 
@@ -104,9 +104,9 @@ php bin/bifrost-connect failures:dismiss \
 
 Dismissal is written to history before the retry file is removed.
 
-## When to involve a developer
+## When to look at the code
 
-Escalate when a corrupt task appears, an unexpected error repeatedly moves to
-attention, valid records remain outside the selected window, or the deployment
-check fails. The implementation details are documented in
-[Cron error and retry internals](./errors.html).
+Investigate the workflow when a corrupt task appears, an unexpected error
+repeatedly moves to attention, valid records remain outside the selected
+window, or the deployment check fails. See [Retries](./errors.html) for how
+failed work is stored and retried.

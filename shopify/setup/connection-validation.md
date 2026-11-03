@@ -8,86 +8,72 @@ grand_parent: Shopify
 
 # Validate the Shopify connection
 
-Validate a narrow authenticated read before running catalog, inventory, or
-order workflows. Connection validation is read-only and should not print or
-store the acquired access token.
+Check the connection before you run catalog, inventory, or order commands. The
+check is read-only and never prints the Shopify access token, the client
+secret, or the tracezilla tokens.
 
-## Validation contract
+## Run the check
 
-A platform implementation should:
-
-1. Validate that the shop hostname, client ID, client secret, requested API
-   version, and timeouts are configured.
-2. Request an access token using the client credentials grant.
-3. Send a small GraphQL Admin API query such as `shop { name }`.
-4. Confirm that the request authenticated successfully.
-5. Read Shopify's `X-Shopify-API-Version` response header.
-6. Report whether Shopify used the version requested by the implementation.
-7. Return only safe identifiers and status information.
-
-An implementation must treat the access token as a secret. Shopify currently
-sets client-credentials access tokens to expire after 24 hours.
-
-## Validate workflow-specific access
-
-A successful shop query proves authentication, not every scope. Validate each
-additional permission with the smallest relevant read:
-
-| Workflow prerequisite | Read-only check |
-|:--|:--|
-| Catalog | Read a small product/variant page |
-| Locations | List locations and identify the intended test location |
-| Inventory | Read tracked inventory at that location |
-| Orders | Read a small permitted order page |
-
-Do not grant write scopes just to make a connection check succeed.
-
-## Safe success result
-
-A useful result contains:
-
-- The intended shop name or permanent hostname.
-- Requested API version.
-- API version Shopify actually used.
-- Whether those versions match.
-- Confirmation that the selected read succeeded.
-
-It must not contain the client secret, access token, complete request headers,
-or unrelated API payload data.
-
-## Ready to continue
-
-Continue only when:
-
-- The app is installed on the intended dev store.
-- Authentication succeeds.
-- Shopify uses the intended supported API version.
-- The smallest read required by the selected workflow succeeds.
-- Returned products or locations belong to the intended test store.
-
-## Implementations
-
-### PHP
-
-From the generated project directory, run:
+From the project folder, run:
 
 ```bash
 ./check-connection
 ```
 
-This starts the Docker development service when needed, waits for dependencies
-to be ready, and runs the read-only `connection:check` console command. For an
-already-running container, the equivalent command is:
+This starts the Docker development service when needed, waits until it is
+ready, and runs `connection:check`. If the container is already running, the
+equivalent command is:
 
 ```bash
 docker compose exec integration php bin/bifrost-connect connection:check
 ```
 
-Add `--json` to either form for structured output. The command never displays
-the Shopify access token, client secret, or tracezilla tokens.
+Without Docker, run `php bin/bifrost-connect connection:check`. Add `--json` to
+any of these for structured output.
 
-Additional platform instructions will be added as their focused repositories
-become available.
+A successful result looks like:
+
+```text
+Connection check passed.
+Shopify: Example Shop (example-shop.myshopify.com)
+tracezilla: connected
+```
+
+## What the check does
+
+1. Checks that the Shopify and tracezilla settings in `.env` are present.
+2. Requests a Shopify access token using the client credentials grant. The
+   token expires after 24 hours, so the integration requests a new one on
+   every run.
+3. Reads the shop name and permanent domain with a small GraphQL Admin API
+   query.
+4. Reads one SKU from tracezilla, renewing the tracezilla token if needed.
+
+The check stops at the first failure and prints its reason. Make sure the shop
+name and domain belong to your development store.
+
+## Check access for each command
+
+A successful check proves that authentication works, not that the app has
+every scope a command needs. Before you rely on a command, run its read-only
+form once against the development store:
+
+| Command needs | Read-only way to check it |
+|:--|:--|
+| Catalog | [Compare Catalogs](../compare-catalogs.html) |
+| Locations | [List Shopify Locations](../list-shopify-locations.html) |
+| Inventory | A dry run of [Synchronize Inventory](../synchronize-inventory.html) |
+| Orders | [Report Collected Orders](../report-collected-orders.html) |
+
+Do not grant write scopes just to make a check succeed.
+
+## Ready to continue
+
+Continue when:
+
+- The app is installed on your development store.
+- The connection check passes and names your development store.
+- The read-only check for the command you need succeeds.
 
 ## Official Shopify references
 

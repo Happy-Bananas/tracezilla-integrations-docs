@@ -18,8 +18,8 @@ same trimmed SKU code. It never creates or changes a product, variant, or SKU.
 
 This report is narrower than [Compare Catalogs](compare-catalogs.html). Compare
 Catalogs diagnoses differences in both directions; this command turns only the
-tracezilla-only category into a bounded consultant decision list containing the
-SKU, tracezilla ID, and available name.
+tracezilla-only category into a bounded list of products to decide on with the
+customer, with the SKU, tracezilla ID, and available name.
 
 ## Run the command
 
@@ -85,7 +85,8 @@ JSON remains valid and includes the execution context around the result:
 ## Product-creation boundary
 
 The available catalogs cannot safely determine how a tracezilla SKU should be
-represented in Shopify. A future write workflow must explicitly define:
+represented in Shopify. If you build a workflow that creates them in Shopify,
+decide with the customer:
 
 - whether the SKU belongs to a new product or an existing product's variant;
 - product title, handle, vendor, product type, options, and variant values;
@@ -93,8 +94,8 @@ represented in Shopify. A future write workflow must explicitly define:
 - price, tax, shipping, and inventory-tracking behavior; and
 - images, descriptions, and other storefront content.
 
-The report deliberately stops at the decision boundary instead of inventing
-these customer-specific rules.
+The report stops here because these rules differ for every customer; decide
+them with the customer.
 
 ## Safety and exit status
 
