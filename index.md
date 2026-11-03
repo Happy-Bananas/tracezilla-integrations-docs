@@ -6,10 +6,15 @@ nav_order: 1
 
 # BifrostConnect
 
-BifrostConnect is an open-source starting point for **building your own
-connection** between tracezilla and an external service, and **hosting it
-yourself**. An external service can be any system with an API: a webshop, a
-marketplace, an accounting or ERP system, a shipping provider, and so on.
+BifrostConnect is for **developers who build integrations between tracezilla
+and external services for tracezilla customers**. An external service can be
+any system with an API: a webshop, a marketplace, an accounting or ERP system,
+a shipping provider, and so on.
+
+It is an open-source starting point: you **build the connection** for your
+customer in PHP, and you or the customer **host it yourselves**. You need to be
+comfortable with PHP and the command line; this manual covers the rest, from
+setting up your computer to running the integration on a server.
 
 {: .important }
 BifrostConnect is not a hosted service. Nobody runs it for you: you or your
