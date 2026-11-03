@@ -37,11 +37,18 @@ every tracezilla SKU.
 {
     "status": "ok",
     "summary": {
-        "decide_with_customer": 0,
+        "decide_with_customer": 1,
         "not_for_the_shop": 1,
         "inactive_tracezilla_skus_skipped": 2
     },
-    "decide_with_customer": [],
+    "decide_with_customer": [
+        {
+            "sku": "TZ-GIFT-001",
+            "tracezilla_id": "dc0eea55-77b2-4225-84f6-d3f6f1e654b9",
+            "name": "Gourmet Gift Box",
+            "category": "finished_good"
+        }
+    ],
     "not_for_the_shop": [
         {
             "sku": "TZ-RAW-001",
@@ -55,8 +62,8 @@ every tracezilla SKU.
 ```
 
 This is the result against the sandbox and a development company filled with
-the [test dataset](../../fundamentals/seed.html). Every sellable product in the
-test dataset is already in the shop, so the decision list is empty there.
+the [test dataset](../../fundamentals/seed.html): the gift box could be sold,
+and the cocoa beans are a raw material.
 
 | Section | Meaning | What to do with the customer |
 |:--|:--|:--|

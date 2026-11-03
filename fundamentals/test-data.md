@@ -38,6 +38,7 @@ subset:
 | `TZ-DAIRY-001` | Aged Gouda 500 g | Matched, with stock |
 | `TZ-DAIRY-002` | Organic Whole Milk 1 L | Matched, stored in crates of 12 (unit conversion) |
 | `TZ-RAW-001` | Raw Cocoa Beans 25 kg | Raw material that exists only in tracezilla |
+| `TZ-GIFT-001` | Gourmet Gift Box | Sellable, but exists only in tracezilla: a product to decide on with the customer |
 
 The rest of the sandbox catalog, such as `TZ-FRUIT-004`, is deliberately
 missing from tracezilla so the create-SKUs workflow has records to create.
