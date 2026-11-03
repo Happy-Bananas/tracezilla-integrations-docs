@@ -117,5 +117,6 @@ pass**, so fix any reported problem before continuing.
   company.
 - Shopify: [Implement Custom Business Logic](./shopify/custom-business-logic.html)
   and the Shopify commands.
-- WooCommerce: the [WooCommerce commands](./woocommerce/).
+- WooCommerce: your first [scenario](./woocommerce/scenarios.html), then the
+  [WooCommerce commands](./woocommerce/).
 - When it works locally, see [Deployment](./deployment.html).
