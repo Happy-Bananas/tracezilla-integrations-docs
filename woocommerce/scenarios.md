@@ -112,7 +112,7 @@ becomes the input of `BusinessRules::apply()`:
 WooCommerce paths are relative to `/wp-json/wc/v3/`; see the
 [WooCommerce REST API](https://woocommerce.github.io/woocommerce-rest-api-docs/).
 tracezilla paths are relative to `/api/v1/{team-slug}/`; see the
-[tracezilla API](https://tech.tracezilla.com/docs/rest-api-v1/).
+[tracezilla API](https://tech.tracezilla.com/docs/rest-api).
 
 ## Implementation
 
