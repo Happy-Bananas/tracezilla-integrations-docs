@@ -95,7 +95,7 @@ customer, change them, and change the matching examples in
 |:--|:--|:--|
 | What can never be sold in the shop | SKUs with sales not allowed in tracezilla, and everything that is not a `finished_good` | Also leave out SKUs whose code starts with `TZ-B2B-` |
 | Inactive tracezilla SKUs | Ignored | Report them separately |
-| How SKUs are compared | Surrounding spaces are ignored; upper and lower case differ | Ignore case: return `strtoupper(trim($sku))` in `key()` |
+| How SKUs are compared | Surrounding spaces are ignored; upper and lower case differ | Ignore case: return `strtoupper(trim($sku))` in `comparable()` |
 
 ## Safety
 

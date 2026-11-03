@@ -119,8 +119,8 @@ command is working.
 flowchart TB
     Entry[bin/bifrost-connect connection:check] --> Command[bin/check-connection]
     Command --> Checker[ConnectionChecker]
-    Checker --> Woo[WooCommerce client<br>GET system_status]
-    Checker --> TZ[tracezilla client<br>GET /skus]
+    Checker --> Woo[LiveWooCommerceConnection<br>GET system_status]
+    Checker --> TZ[LiveTracezillaConnection<br>GET /skus]
     TZ --> Tokens[TokenProvider<br>renews the OAuth token]
     Checker --> Result[Structured result]
     Result --> Text[Text output]
@@ -135,6 +135,8 @@ flowchart TB
 | Entry point | `bin/bifrost-connect` |
 | CLI options, composition, output, and exit status | `bin/check-connection` |
 | Both checks and the structured result | `src/Connection/ConnectionChecker.php` |
+| What the check needs from each service | `src/Connection/WooCommerceConnection.php`, `src/Connection/TracezillaConnection.php` |
+| The real requests | `src/Connection/LiveWooCommerceConnection.php`, `src/Connection/LiveTracezillaConnection.php` |
 | WooCommerce REST transport | `src/WooCommerce/Client.php` |
 | tracezilla transport and token renewal | `src/Tracezilla/Client.php`, `src/Tracezilla/TokenProvider.php` |
 
@@ -145,5 +147,8 @@ docker compose run --rm php composer test
 ```
 
 The tests verify the combined result, that a failure in one system does not
-hide the other, and that unexpected responses count as failures, without
-contacting either service.
+hide the other, and that unexpected responses count as failures. They never
+contact either service: instead of the live connections they use fake ones,
+`tests/Unit/Connection/FakeWooCommerceConnection.php` and
+`FakeTracezillaConnection.php`, which return a prepared answer or fail with a
+prepared message.
