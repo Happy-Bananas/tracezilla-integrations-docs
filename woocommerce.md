@@ -37,6 +37,7 @@ Every command runs through one entry point, `bin/bifrost-connect`. Run
 | `tracezilla:login` | [Log in to tracezilla](../fundamentals/account-and-team.html#oauth-client-and-login) | Available |
 | `tracezilla:seed` | [Seed the Test Dataset](../fundamentals/seed.html) | Available |
 | `scenario:create`, `scenario:run` | [Scenarios](./scenarios.html) | Available |
+| Template `compare-catalogs` | [Compare Catalogs](./scenarios/compare-catalogs.html) | Available |
 | Your own catalog, inventory, and order rules | [Scenarios](./scenarios.html) | Write them as scenarios |
 
 Commands that write take a run lock, so scheduled runs never overlap. A run
