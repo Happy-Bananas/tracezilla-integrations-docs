@@ -49,9 +49,8 @@ Command: php bin/compare-catalogs
 Mode: READ ONLY
 ```
 
-This makes saved terminal and future cron logs self-describing. The displayed
-command is the PHP entry point; when Docker is used, the surrounding
-`docker compose run` invocation remains the responsibility of the shell.
+Keep this header in saved output and cron logs, so you can see which command
+produced them. It shows the PHP command, also when you run it through Docker.
 
 ## Options
 
@@ -89,8 +88,6 @@ The command requires Shopify `read_products` access and read access to the
 configured tracezilla team. It does not create or update data.
 
 Because the command cannot write, it has no `--execute` or `--confirm` flags.
-Commands that can change external data will instead default to `dry_run` and
-require both flags before reporting `execute` mode.
 
 Catalog differences are a successful result and return exit code `0`.
 Configuration, authentication, transport, or malformed-response errors return
@@ -127,9 +124,9 @@ flowchart TB
 | Structured result | `src/Shared/CatalogComparisonResult.php` |
 | Terminal and JSON rendering | `src/Output/` |
 
-This division is intentional: the entry point assembles the command, clients
-handle APIs, services retrieve use-case data, mappers normalize records, and
-the workflow contains the comparison rule.
+Follow the same division when you add a command: the entry point assembles the
+command, clients handle APIs, services retrieve use-case data, mappers
+normalize records, and the workflow contains the rule.
 
 ## Tests
 

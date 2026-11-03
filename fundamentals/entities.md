@@ -16,20 +16,20 @@ preparing several records.
 
 For integration testing, provide:
 
-- A few active SKUs with stable `TZINT-` codes.
+- A few active SKUs with stable `TZ-` codes.
 - At least one SKU that will also exist in the external service.
 - At least one tracezilla-only SKU for difference reporting.
 - Units and weight conversions that are easy to verify by hand.
 - No real customer product names, prices, or identifiers.
 
 An external service's product model does not automatically map to a
-tracezilla SKU. The integration must define identity, product structure,
-units, weights, and conversions explicitly.
+tracezilla SKU. You must define identity, product structure, units, weights,
+and conversions explicitly.
 
 ## Identity
 
-The initial examples match an external variant SKU to tracezilla's `sku_code`.
-That is a workflow policy, not a universal rule.
+The examples match an external variant SKU to tracezilla's `sku_code`. Change
+this if your customer identifies products differently.
 
 Decide and test:
 
@@ -60,14 +60,15 @@ rules.
 
 ## Read versus write behavior
 
-A catalog comparison should remain read-only. A create workflow should:
+Keep a catalog comparison read-only. When you write a command that creates
+SKUs, make it:
 
-1. Read the complete source and existing tracezilla identities.
+1. Read the complete source and the existing tracezilla SKUs.
 2. Classify missing, existing, blank, and duplicate records.
-3. Validate the mapped payload.
+3. Validate the mapped data.
 4. Preview the decision without writing.
-5. Require explicit execution and a conservative initial limit.
-6. Return one result per selected source record.
+5. Write only with `--execute --confirm`, and start with a small limit.
+6. Report one result per selected source record.
 
 Consult the current [tracezilla API documentation](https://app.tracezilla.com/api/documentation)
 for supported SKU fields and endpoint schemas.

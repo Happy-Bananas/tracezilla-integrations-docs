@@ -39,8 +39,8 @@ settings. Record only the hostname, for example:
 example-integration-test.myshopify.com
 ```
 
-Do not substitute a custom storefront domain. Implementations use the
-permanent Shopify domain to construct Admin API URLs.
+Do not use a custom storefront domain. The integration uses the permanent
+Shopify domain to reach the Admin API.
 
 ## Verify the result
 

@@ -11,9 +11,9 @@ parent: Shopify
 Create a safe Shopify development environment, prepare predictable test data,
 and authorize the minimum Admin API access needed by the integration.
 
-No prior Shopify development experience is required. The guides are written as
-text-first procedures because Shopify may change dashboard layouts and labels
-without changing the underlying setup outcome.
+No prior Shopify development experience is required. If a label in Shopify
+differs from these steps, look for the closest match; Shopify changes its
+dashboard from time to time.
 
 ## Setup path
 

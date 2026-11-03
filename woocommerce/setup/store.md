@@ -15,8 +15,7 @@ WordPress development experience is required.
 
 You can use either:
 
-- The disposable `tracezilla-woocommerce-sandbox` included in the integrations
-  workspace.
+- The disposable local sandbox, which you create with the command below.
 - An existing WooCommerce store where you are authorized to create REST API
   credentials.
 
@@ -97,7 +96,7 @@ docker compose run --rm \
   eval-file /seed-products.php --path=/var/www/html
 ```
 
-Run this command from the `tracezilla-woocommerce-sandbox` directory whenever
+Run this command from the sandbox folder whenever
 you want to restore the standard products, customers, and orders. The operation
 is idempotent and does not reset the rest of the WordPress database. Fixture
 creation does not send customer or order emails.

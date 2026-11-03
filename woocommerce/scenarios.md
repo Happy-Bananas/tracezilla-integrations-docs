@@ -88,8 +88,7 @@ and the sandbox must be running. The result is JSON:
 4. Run the scenario against the sandbox.
 
 Scenarios are read only. Do not put calls that change WooCommerce or tracezilla
-in `BusinessRules.php`; writing will be added later behind a dry run and
-`--execute --confirm`.
+in `BusinessRules.php`.
 
 ## Implementation
 

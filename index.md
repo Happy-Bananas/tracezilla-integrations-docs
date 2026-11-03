@@ -37,7 +37,8 @@ flowchart LR
    service, write the customer's business rules in PHP, and verify them with
    tests on your own computer. A scaffold command, `scenario:create`, generates
    the files for a new feature with a working example and its test
-   ([Shopify](./shopify/custom-business-logic.html); planned for WooCommerce).
+   ([Shopify](./shopify/custom-business-logic.html),
+   [WooCommerce](./woocommerce/scenarios.html)).
 2. **Host it yourself.** Copy the finished project to a server you or the
    customer control. It is a plain console application: PHP and a `.env` file
    with the credentials; no web server, database, or open port is required.
@@ -63,11 +64,11 @@ examples, not a supported hosting service.
 
 ## Available integrations
 
-Each external service has a standalone headless PHP application:
+Each external service has a standalone PHP console application (no web server needed):
 
 | Service | Project | Status |
 |:--|:--|:--|
 | [Shopify](./shopify/) | `tracezilla-shopify-php` | Catalog, inventory, and order commands |
-| [WooCommerce](./woocommerce/) | `tracezilla-woocommerce-php` | Connection check and test-data seed; more commands planned |
+| [WooCommerce](./woocommerce/) | `tracezilla-woocommerce-php` | Connection check, test-data seed, and scenarios |
 
 Start with [Getting Started](./getting-started.html).

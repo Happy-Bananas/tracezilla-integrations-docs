@@ -100,8 +100,8 @@ The inventory workflow uses:
 | `read_inventory` | Read inventory items and quantities |
 | `write_inventory` | Update quantities after explicit execution |
 
-Having `write_inventory` permission does not cause a write by itself. A safe
-implementation remains a preview until execution is explicitly enabled.
+Having `write_inventory` permission does not cause a write by itself.
+`inventory:sync` writes only when you add `--execute --confirm`.
 
 ## Readiness checklist
 

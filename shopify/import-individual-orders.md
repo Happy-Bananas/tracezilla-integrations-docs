@@ -38,7 +38,7 @@ roles, order status, and post-save behavior to the customer.
 The command rejects an entire order when a line lacks a usable SKU, positive
 quantity, numeric price, or matching currency. It does not silently create a
 partial sales order. Cancelled orders and orders with more than 250 lines are
-skipped; line-item pagination must be implemented before importing the latter.
+skipped; to import those, add line-item pagination first.
 
 ## Run a dry run
 

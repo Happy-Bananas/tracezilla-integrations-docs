@@ -7,9 +7,8 @@ nav_order: 35
 
 # Standard test dataset
 
-The standard dataset gives developers a shared, non-production starting point.
-It is intentionally a little broader than any single feature so catalog,
-inventory, and order examples can use the same recognizable records.
+Use this dataset in your development company so the catalog, inventory, and
+order examples all work against the same recognizable records.
 
 The dataset is described in a YAML seed file and applied through the tracezilla
 API. The first seed file ships with the WooCommerce PHP integration:
@@ -22,7 +21,7 @@ Every record owned by the dataset starts with `TZ-`, the same prefix used by
 the external-service sandboxes, so that SKUs match across both systems. Do not
 use customer names, addresses, product codes, or other production information.
 
-## Version 1 catalog
+## Catalog
 
 SKUs follow the pattern `TZ-<CATEGORY>-<NNN>`, and variations add `-<NN>`.
 tracezilla allows at most 17 characters in an SKU code. The sandboxes contain

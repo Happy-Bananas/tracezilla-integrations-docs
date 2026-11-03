@@ -29,6 +29,10 @@ The example calculates Shopify's available whole-unit quantity as:
 + (non-traceable available × non-traceable UOM conversion)
 ```
 
+tracezilla reports stock held in lots (traceable) and stock without lots
+(non-traceable) separately. A UOM (unit of measure) conversion turns each into
+sellable units, for example a crate of 12 into 12 bottles.
+
 Negative, fractional, or non-finite results fail safely. This formula is an
 example business assumption; review the customer's units, traceability, and
 sellable-quantity rules before writing.
