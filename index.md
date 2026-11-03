@@ -6,6 +6,12 @@ nav_order: 1
 
 # BifrostConnect
 
+{: .warning }
+Do not start a customer project with `git clone` of a BifrostConnect
+repository. A clone stays connected to the public repository, so the customer's
+business rules could end up there. Use the
+[create command](#start-a-new-project) instead.
+
 BifrostConnect is for **developers who build integrations between tracezilla
 and external services for tracezilla customers**. An external service can be
 any system with an API: a webshop, a marketplace, an accounting or ERP system,
@@ -70,11 +76,6 @@ On Windows, use the command in [Getting Started](./getting-started.html#4-create
 The command gives you a plain folder that belongs to you and your customer,
 with no Git history and no connection to the BifrostConnect repositories. If
 you want version control, put it in your own private Git repository.
-
-{: .warning }
-Do not start a customer project with `git clone` of a BifrostConnect
-repository. A clone stays connected to the public repository, so the customer's
-business rules could end up there.
 
 ## Your responsibilities
 
