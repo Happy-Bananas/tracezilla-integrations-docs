@@ -44,7 +44,7 @@ It reads all pages, so a run on a large shop takes a while: one request per
     "summary": {
         "matched": 7,
         "only_in_woocommerce": 194,
-        "only_in_tracezilla": 1,
+        "only_in_tracezilla": 2,
         "woocommerce_without_sku": 0,
         "duplicate_skus": 0,
         "inactive_tracezilla_skus_skipped": 2
@@ -56,6 +56,7 @@ It reads all pages, so a run on a large shop takes a while: one request per
         { "sku": "TZ-BAKERY-001", "name": "Sourdough Rye Bread 750 g" }
     ],
     "only_in_tracezilla": [
+        { "sku": "TZ-GIFT-001", "name": "Gourmet Gift Box" },
         { "sku": "TZ-RAW-001", "name": "Raw Cocoa Beans 25 kg" }
     ],
     "woocommerce_without_sku": [],

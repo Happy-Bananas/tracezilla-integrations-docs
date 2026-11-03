@@ -22,6 +22,7 @@ the customer, test it, and run it, by hand or from cron.
 |:--|:--|
 | `confirm-credentials` | A hello world: reads the store status and one tracezilla SKU. The default. |
 | [`compare-catalogs`](./scenarios/compare-catalogs.html) | Compares the WooCommerce catalog with the tracezilla SKUs |
+| [`missing-in-woocommerce`](./scenarios/missing-in-woocommerce.html) | Lists tracezilla SKUs the shop does not sell, to decide on with the customer |
 
 ## Create a scenario
 
@@ -107,7 +108,7 @@ becomes the input of `BusinessRules::apply()`:
 | `$wooCommerce->catalog()` | Everything a customer can buy: simple products, and variations instead of their variable product, each with `sku`, `name`, `product_id`, `variation_id`, `status`, `manage_stock`, and `stock_quantity` |
 | `$tracezilla->get($path, $query)` | One tracezilla response, for example `get('/skus', ['perPage' => 1])` |
 | `$tracezilla->getAll($path, $query)` | Every page of a tracezilla list |
-| `$tracezilla->skus()` | All SKUs, each with `id`, `sku_code`, `name`, and `active` |
+| `$tracezilla->skus()` | All SKUs, each with `id`, `sku_code`, `name`, `active`, `category` (for example `finished_good` or `raw_material`), and `allow_sales` |
 
 WooCommerce paths are relative to `/wp-json/wc/v3/`; see the
 [WooCommerce REST API](https://woocommerce.github.io/woocommerce-rest-api-docs/).
