@@ -85,7 +85,7 @@ customer, change them, and change the matching examples in
 
 | Rule | Template default | Example change |
 |:--|:--|:--|
-| How SKUs are compared | Surrounding spaces are ignored; upper and lower case differ | Ignore case: return `strtoupper(trim($sku))` in `key()` |
+| How SKUs are compared | Surrounding spaces are ignored; upper and lower case differ | Ignore case: return `strtoupper(trim($sku))` in `comparable()` |
 | Inactive tracezilla SKUs | Left out | Compare them too, or report them separately |
 
 To change what is read, for example only published products, filter in
