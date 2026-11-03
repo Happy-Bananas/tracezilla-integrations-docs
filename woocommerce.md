@@ -24,6 +24,7 @@ does not need to be installed as a WordPress plugin.
    this passes.
 5. [Seed the test dataset](../fundamentals/seed.html) into your development
    company.
+6. Create and run your first [scenario](./scenarios.html).
 
 ## Coverage
 
@@ -35,6 +36,7 @@ Every command runs through one entry point, `bin/bifrost-connect`. Run
 | `connection:check` | [Check Connections](./check-connections.html) | Available |
 | `tracezilla:login` | [Log in to tracezilla](../fundamentals/account-and-team.html#oauth-client-and-login-woocommerce) | Available |
 | `tracezilla:seed` | [Seed the Test Dataset](../fundamentals/seed.html) | Available |
+| `scenario:create`, `scenario:run` | [Scenarios](./scenarios.html) | Available |
 | Catalog, inventory, and order commands | | Planned, matching the Shopify commands |
 
 Commands that write take a run lock, so scheduled runs never overlap. A run
