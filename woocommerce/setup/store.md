@@ -24,13 +24,27 @@ Use the local sandbox while learning or testing commands that can change data.
 
 ## Start the local sandbox
 
-Clone the integrations workspace and enter the sandbox directory:
+The sandbox runs in Docker. Without Docker, use your own WordPress with
+WooCommerce instead, as an existing store.
+
+Create the sandbox from the folder where you keep your projects. Mac and
+Linux:
 
 ```bash
-git clone --recurse-submodules \
-  https://github.com/Happy-Bananas/tracezilla-integrations.git
-cd tracezilla-integrations/tracezilla-woocommerce-sandbox
+curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce-sandbox woocommerce-sandbox
+cd woocommerce-sandbox
 ```
+
+Windows (PowerShell):
+
+```powershell
+docker run --rm -v "${PWD}:/work" -w /work alpine:3 sh -c "wget -qO- https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce-sandbox woocommerce-sandbox"
+cd woocommerce-sandbox
+```
+
+Only one sandbox can run at a time, because it uses port 8080. It keeps its
+containers and database under the Docker Compose name
+`tracezilla-woocommerce-sandbox`, whatever its folder is called.
 
 Start WordPress, WooCommerce, and MariaDB:
 

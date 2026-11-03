@@ -59,6 +59,17 @@ A broken internal destination blocks the GitHub Pages deployment. External
 links are excluded because rate limits and temporary third-party outages should
 not block publication.
 
+## The create-project script
+
+`create-project` is published unchanged at
+`https://happy-bananas.github.io/tracezilla-integrations-docs/create-project`.
+Getting Started uses it to create a new project for each platform. Its tests
+use local archives and run before every deployment:
+
+```bash
+sh tools/test-create-project
+```
+
 ## Publishing
 
 Pushes to `main` run the GitHub Pages workflow. In the GitHub repository,

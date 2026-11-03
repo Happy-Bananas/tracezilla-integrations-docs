@@ -21,6 +21,9 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Test the create-project script
+        run: sh tools/test-create-project
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:

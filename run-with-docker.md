@@ -13,9 +13,7 @@ to use PHP and Composer directly on your computer.
 
 ## Requirements
 
-- Docker Desktop or Docker Engine with the Compose plugin
-- Git
-- `curl`
+- [Docker](./your-computer.html#with-docker); nothing else on your computer
 - [Shopify prerequisites](./shopify/setup.html): a development store and an
   installed app
 - [tracezilla prerequisites](./tracezilla-fundamentals.html): a development
@@ -25,29 +23,30 @@ You do not need a GitHub account to download or run the project.
 
 ## 1. Create the project
 
+Run the following from the folder where you keep your projects. Replace
+`GiantPotatoes` with the name of your project:
+
+Mac and Linux:
+
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Happy-Bananas/tracezilla-shopify-php/main/create-shopify-project | sh -s -- YOUR_PROJECT_NAME
+curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- shopify GiantPotatoes
 ```
 
-Replace `YOUR_PROJECT_NAME` with your project name, for example:
+Windows (PowerShell):
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/Happy-Bananas/tracezilla-shopify-php/main/create-shopify-project | sh -s -- happy-hanna-shopify
+```powershell
+docker run --rm -v "${PWD}:/work" -w /work alpine:3 sh -c "wget -qO- https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- shopify GiantPotatoes"
 ```
 
 The command downloads a fresh copy of BifrostConnect into that folder and
-creates the `.env` configuration file. It will not replace a folder that
-already exists.
-
-Everything runs from the new folder on your computer. If you later want backup,
-collaboration, or deployment through Git, push the project to a **private
-repository owned by you or the customer**. Customer business rules should not
-be pushed to the public Happy Bananas repository.
+creates the `.env` configuration file. The project is a plain folder without
+Git history; see [Create the project](./getting-started.html#4-create-the-project).
+It will not replace a folder that already exists.
 
 ## 2. Add credentials
 
 ```bash
-cd YOUR_PROJECT_NAME
+cd GiantPotatoes
 ```
 
 Open `.env` in your editor and complete the Shopify and tracezilla values. The
@@ -60,6 +59,8 @@ Never commit this file; Git ignores it automatically.
 Run the helper from the new project folder. It is part of the project, so it
 does not exist before step 1:
 
+Mac and Linux:
+
 ```bash
 ./check-connection
 ```
@@ -67,6 +68,18 @@ does not exist before step 1:
 The first run builds and starts the development container, so it can take a
 little while. The command prints progress, waits until BifrostConnect is ready,
 and then performs one small read-only request against each service.
+
+Windows (PowerShell): start the container, wait until
+`docker compose logs integration` shows `BIFROSTCONNECT IS READY`, and then run
+the check:
+
+```powershell
+docker compose up --build -d integration
+docker compose logs -f integration
+docker compose exec integration php bin/bifrost-connect connection:check
+```
+
+Press Ctrl+C to stop following the log once it reports that it is ready.
 
 A successful result looks like:
 
