@@ -40,16 +40,14 @@ The integrations authenticate in different ways today:
 
 The Shopify integration will move to the OAuth client later.
 
-Only users with the Owner or Administrator role can create tokens and clients.
 In a customer installation, use a dedicated integration user rather than a
 personal account, so the integration keeps working when employees leave.
 
 ### Personal access token (Shopify)
 
-1. In tracezilla, open **Settings → My account → API Tokens**.
-2. Create a **personal access token**.
-3. Copy the complete token. It is long and starts with `eyJ`.
-4. Add it to `.env`:
+Create a personal access token as described in the
+[tracezilla API documentation](https://tech.tracezilla.com/docs/rest-api-v1/making-requests/authentication.html#bearer-token-and-resource-owner-password-credentials),
+and add the complete token to `.env`:
 
 ```dotenv
 TRACEZILLA_API_KEY=eyJ...
@@ -61,9 +59,9 @@ The OAuth client uses the Resource Owner Password Credentials grant. Unlike a
 personal access token, it receives a refresh token, so the integration renews
 its own access token and never stops because a token expired.
 
-1. In tracezilla, open **Settings → My account → API Tokens**.
-2. Create an **OAuth client**.
-3. Add its Client ID and Client Secret to `.env`:
+Create an OAuth client as described in the
+[tracezilla API documentation](https://tech.tracezilla.com/docs/rest-api-v1/making-requests/authentication.html#bearer-token-and-resource-owner-password-credentials),
+and add its Client ID and Client Secret to `.env`:
 
 ```dotenv
 TRACEZILLA_CLIENT_ID=...
@@ -91,4 +89,4 @@ and create a new one.
 
 ## Official reference
 
-- [tracezilla API authentication](https://tech.tracezilla.com/docs/rest-api-v1/making-requests/authentication)
+- [tracezilla API authentication](https://tech.tracezilla.com/docs/rest-api-v1/making-requests/authentication.html#bearer-token-and-resource-owner-password-credentials)
