@@ -14,7 +14,7 @@ tracezilla.
 ## Start here
 
 1. Prepare [tracezilla](../tracezilla-fundamentals.html): a development company
-   and a personal access token.
+   and an OAuth client.
 2. Complete the [Shopify prerequisites](./setup.html): a development store and
    an installed app.
 3. Install the integration [with Docker](../run-with-docker.html) or

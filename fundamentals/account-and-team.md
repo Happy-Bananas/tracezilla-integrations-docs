@@ -29,35 +29,14 @@ TRACEZILLA_TEAM_SLUG=dev-woocommerce-abc1
 
 The team slug is not secret.
 
-## Authentication
+## OAuth client and login
 
-The integrations authenticate in different ways today:
-
-| Integration | Authentication | Token lifetime |
-|:--|:--|:--|
-| Shopify | Personal access token | About 13 months, then it must be replaced by hand |
-| WooCommerce | OAuth client and a one-time login | Renews itself automatically |
-
-The Shopify integration will move to the OAuth client later.
+Every integration authenticates with an OAuth client and a one-time login. The
+integration then renews its own access token, so it never stops because a
+token expired.
 
 In a customer installation, use a dedicated integration user rather than a
 personal account, so the integration keeps working when employees leave.
-
-### Personal access token (Shopify)
-
-Create a personal access token as described in the
-[tracezilla API documentation](https://tech.tracezilla.com/docs/rest-api-v1/making-requests/authentication.html#bearer-token-and-resource-owner-password-credentials),
-and add the complete token to `.env`:
-
-```dotenv
-TRACEZILLA_API_KEY=eyJ...
-```
-
-### OAuth client and login (WooCommerce)
-
-The OAuth client uses the Resource Owner Password Credentials grant. Unlike a
-personal access token, it receives a refresh token, so the integration renews
-its own access token and never stops because a token expired.
 
 Create an OAuth client as described in the
 [tracezilla API documentation](https://tech.tracezilla.com/docs/rest-api-v1/making-requests/authentication.html#bearer-token-and-resource-owner-password-credentials),
@@ -70,9 +49,11 @@ TRACEZILLA_CLIENT_SECRET=...
 
 After installing the integration, log in once from its project folder:
 
-```bash
-docker compose run --rm php php bin/bifrost-connect tracezilla:login
-```
+| | Command |
+|:--|:--|
+| WooCommerce with Docker | `docker compose run --rm php php bin/bifrost-connect tracezilla:login` |
+| Shopify with Docker | `docker compose run --rm integration php bin/bifrost-connect tracezilla:login` |
+| Without Docker | `php bin/bifrost-connect tracezilla:login` |
 
 The command asks for your tracezilla username and password. The password is
 used once and never stored. The tokens are saved in
@@ -83,7 +64,7 @@ in tracezilla.
 
 ## Keep credentials secret
 
-The token, Client Secret, and token file are secrets. Never commit or share
+The Client Secret and the token file are secrets. Never commit or share
 `.env` or `var/`. If a secret is exposed, revoke it in tracezilla immediately
 and create a new one.
 

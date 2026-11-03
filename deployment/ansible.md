@@ -81,7 +81,8 @@ Ansible:
 ---
 vault_shopify_client_id: YOUR_SHOPIFY_CLIENT_ID
 vault_shopify_client_secret: YOUR_SHOPIFY_CLIENT_SECRET
-vault_tracezilla_api_key: YOUR_TRACEZILLA_API_KEY
+vault_tracezilla_client_id: YOUR_TRACEZILLA_CLIENT_ID
+vault_tracezilla_client_secret: YOUR_TRACEZILLA_CLIENT_SECRET
 ```
 
 Ansible encrypts `vault.yml` before writing it to disk. The encrypted file can
@@ -107,8 +108,7 @@ The playbook:
 
 1. Creates the destination and private runtime directory.
 2. Uploads the current source and customer business rules through Ansible's
-   normal SSH connection. No `rsync`, Git, or interactive server login is
-   required.
+   normal SSH connection. No `rsync` or Git is required on the server.
 3. Preserves the server's runtime files and installed packages. The local
    `.env`, `vendor/`, and Git data are never uploaded.
 4. Generates the production `.env` from the encrypted vault.
@@ -117,6 +117,22 @@ The playbook:
 
 The deployment succeeds only when BifrostConnect is ready and can connect to
 both Shopify and tracezilla.
+
+### Log in to tracezilla once
+
+The first deployment stops at the connection check with `No tracezilla token
+is stored`, because the server has not logged in to tracezilla yet. Log in once
+on the server as the hosting user, then run the playbook again:
+
+```bash
+ssh YOUR_SSH_USER@YOUR_SERVER
+cd YOUR_BIFROSTCONNECT_PATH
+php bin/bifrost-connect tracezilla:login
+```
+
+Use the dedicated integration user's tracezilla login. The password is not
+stored. The tokens are saved in the server's `var/` folder, which later
+deployments keep, and renew themselves.
 
 ## Deploy an update
 

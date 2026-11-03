@@ -21,8 +21,7 @@ Shared by all integrations:
 1. [Create a development company](./fundamentals/development-company.html).
    Never develop against a production team.
 2. [Acquire credentials](./fundamentals/account-and-team.html): the team slug
-   and either a personal access token (Shopify) or an OAuth client
-   (WooCommerce).
+   and an OAuth client.
 
 ## 3. Prepare the external service
 
