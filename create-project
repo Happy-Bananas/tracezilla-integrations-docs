@@ -1,11 +1,12 @@
 #!/bin/sh
 # Create a new BifrostConnect project on this computer.
 #
-#   curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- <platform> <project> [--with-seed]
+#   curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- <platform> <project> [--without-seed]
 #
 # Platforms: shopify, woocommerce, woocommerce-sandbox.
-# --with-seed keeps the tracezilla seed command and its test data in the
-# project; without it they are left out.
+# The project includes the tracezilla seed command and its test data.
+# --without-seed leaves them out, for a project that never uses a development
+# company.
 #
 # Windows PowerShell has no sh, so there the script runs in a container:
 #
@@ -18,10 +19,10 @@
 set -eu
 
 usage() {
-    echo "Usage: create-project <platform> <project> [--with-seed]" >&2
+    echo "Usage: create-project <platform> <project> [--without-seed]" >&2
     echo "Platforms: shopify, woocommerce, woocommerce-sandbox" >&2
-    echo "--with-seed: include the tracezilla seed (test data for a development company)" >&2
-    echo "Example:   create-project woocommerce YOUR_INTEGRATION_NAME --with-seed" >&2
+    echo "--without-seed: leave out the tracezilla seed (test data for a development company)" >&2
+    echo "Example:   create-project woocommerce YOUR_INTEGRATION_NAME" >&2
 }
 
 fail() {
@@ -31,10 +32,10 @@ fail() {
 
 platform=
 project=
-with_seed=no
+with_seed=yes
 for argument in "$@"; do
     case "$argument" in
-        --with-seed) with_seed=yes ;;
+        --without-seed) with_seed=no ;;
         --*) usage; exit 2 ;;
         *)
             if [ -z "$platform" ]; then
@@ -135,13 +136,9 @@ if [ ! -d "$source" ]; then
 fi
 mv "$source" "$project"
 
-# The seed only fills a development company with test data, so a project gets
-# it only when asked for. The sandbox has no seed.
-if [ "$platform" = woocommerce-sandbox ]; then
-    if [ "$with_seed" = yes ]; then
-        echo "Note: --with-seed has no effect on the sandbox." >&2
-    fi
-elif [ "$with_seed" = no ]; then
+# The seed only fills a development company with test data. A project that
+# works directly on production data leaves it out. The sandbox has no seed.
+if [ "$platform" != woocommerce-sandbox ] && [ "$with_seed" = no ]; then
     rm -rf "$project/bin/seed-tracezilla" "$project/src/Seed" "$project/seeds" "$project/tests/Unit/Seed"
     # TRACEZILLA_OWN_COMPANY and its comment are only used by the seed.
     if [ -f "$project/.env.example" ]; then
