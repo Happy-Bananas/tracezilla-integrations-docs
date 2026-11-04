@@ -42,18 +42,18 @@ trimmed SKU code, not product names or internal IDs.
 
 ## Run the command
 
-Dry run is the default and processes at most ten Shopify variants:
+Preview with `--dry-run`. It processes at most ten Shopify variants:
 
 With Docker:
 
 ```bash
-docker compose exec integration php bin/bifrost-connect catalog:create-tracezilla-skus
+docker compose exec integration php bin/bifrost-connect catalog:create-tracezilla-skus --dry-run
 ```
 
 Without Docker:
 
 ```bash
-php bin/bifrost-connect catalog:create-tracezilla-skus
+php bin/bifrost-connect catalog:create-tracezilla-skus --dry-run
 ```
 
 ## Options
@@ -63,15 +63,15 @@ Choose another processing limit or request complete JSON:
 With Docker:
 
 ```bash
-docker compose exec integration php bin/bifrost-connect catalog:create-tracezilla-skus --limit=25
-docker compose exec integration php bin/bifrost-connect catalog:create-tracezilla-skus --limit=25 --json
+docker compose exec integration php bin/bifrost-connect catalog:create-tracezilla-skus --limit=25 --dry-run
+docker compose exec integration php bin/bifrost-connect catalog:create-tracezilla-skus --limit=25 --json --dry-run
 ```
 
 Without Docker:
 
 ```bash
-php bin/bifrost-connect catalog:create-tracezilla-skus --limit=25
-php bin/bifrost-connect catalog:create-tracezilla-skus --limit=25 --json
+php bin/bifrost-connect catalog:create-tracezilla-skus --limit=25 --dry-run
+php bin/bifrost-connect catalog:create-tracezilla-skus --limit=25 --json --dry-run
 ```
 
 Unlike the display limit in Compare Catalogs, this limit controls how many

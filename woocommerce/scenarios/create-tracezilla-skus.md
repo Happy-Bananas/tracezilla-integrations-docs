@@ -25,7 +25,7 @@ With Docker:
 ```bash
 docker compose run --rm php php bin/bifrost-connect scenario:create sku-sync --template=create-tracezilla-skus
 docker compose run --rm php composer test
-docker compose run --rm php php bin/bifrost-connect scenario:run sku-sync
+docker compose run --rm php php bin/bifrost-connect scenario:run sku-sync --dry-run
 ```
 
 Without Docker:
@@ -33,7 +33,7 @@ Without Docker:
 ```bash
 php bin/bifrost-connect scenario:create sku-sync --template=create-tracezilla-skus
 composer test
-php bin/bifrost-connect scenario:run sku-sync
+php bin/bifrost-connect scenario:run sku-sync --dry-run
 ```
 
 `sku-sync` is your scenario's name; choose any name.

@@ -144,9 +144,10 @@ before it happens:
    planned changes under `changes`. It does not write anything itself.
 3. `scenario:run` writes the planned changes, but only when you ask for it.
 
-Without options, `scenario:run` is a dry run: every change is reported as
-`planned` and nothing is written. Review the plan, then write one change
-first:
+A scenario that plans changes needs a mode. With `--dry-run`, every change is
+reported as `planned` and nothing is written. Without a mode, the run stops
+before writing and asks you to choose one. Review the plan, then write one
+change first:
 
 With Docker:
 
