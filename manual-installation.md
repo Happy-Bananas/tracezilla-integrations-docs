@@ -87,4 +87,5 @@ until both connections pass.
 
 ## Next
 
-[Implement Custom Business Logic](./shopify/custom-business-logic.html).
+Fill your development company with the [standard test dataset](./fundamentals/seed.html),
+then continue with [Implement Custom Business Logic](./shopify/custom-business-logic.html).

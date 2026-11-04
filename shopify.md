@@ -21,5 +21,7 @@ rules between Shopify and tracezilla.
    [without Docker](../manual-installation.html).
 4. Check both connections with `./check-connection`. Nothing else works until
    this passes.
-5. Continue with [Implement Custom Business Logic](./custom-business-logic.html),
+5. [Seed the test dataset](../fundamentals/seed.html) into your development
+   company.
+6. Continue with [Implement Custom Business Logic](./custom-business-logic.html),
    or select one of the Shopify commands in the navigation.

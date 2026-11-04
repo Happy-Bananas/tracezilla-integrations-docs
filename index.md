@@ -95,7 +95,7 @@ Each external service has a standalone PHP console application (no web server ne
 
 | Service | Project | Status |
 |:--|:--|:--|
-| [Shopify](./shopify/) | `tracezilla-shopify-php` | Catalog, inventory, and order commands |
+| [Shopify](./shopify/) | `tracezilla-shopify-php` | Connection check, test-data seed, and catalog, inventory, and order commands |
 | [WooCommerce](./woocommerce/) | `tracezilla-woocommerce-php` | Connection check, test-data seed, and scenarios |
 
 Start with [Getting Started](./getting-started.html).

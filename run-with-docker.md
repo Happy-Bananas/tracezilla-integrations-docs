@@ -110,5 +110,6 @@ if one of them fails.
 
 ## Next
 
-The connections work and the development environment is ready. Continue with
-[Implement Custom Business Logic](./shopify/custom-business-logic.html).
+The connections work and the development environment is ready. Fill your
+development company with the [standard test dataset](./fundamentals/seed.html),
+then continue with [Implement Custom Business Logic](./shopify/custom-business-logic.html).

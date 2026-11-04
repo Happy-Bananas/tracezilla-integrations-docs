@@ -14,9 +14,9 @@ Populate your development company with the
 [standard test dataset](./test-data.html): partners, a warehouse on your own
 company, SKUs that match the external-service sandboxes, and received stock.
 
-The seed command and its YAML file currently ship with the WooCommerce PHP
-integration, `tracezilla-woocommerce-php`. The data itself is
-platform-neutral and can be used with any integration.
+The seed only talks to tracezilla, so it works the same in every integration.
+Every integration project ships the `tracezilla:seed` command and the dataset,
+`seeds/tracezilla.yaml`.
 
 ## Before you start
 
@@ -24,9 +24,8 @@ platform-neutral and can be used with any integration.
   production team.
 - [Credentials](./account-and-team.html) with the OAuth client, and a completed
   `tracezilla:login`.
-- The WooCommerce PHP integration installed with
-  [Docker](../woocommerce/install-with-docker.html) or
-  [without Docker](../woocommerce/install-without-docker.html).
+- Your integration installed, as described in
+  [Getting Started](../getting-started.html).
 
 Add the exact partner name of your own company in tracezilla to the `.env` file
 in your integration project folder. The seed adds its warehouse location to
@@ -39,19 +38,25 @@ TRACEZILLA_OWN_COMPANY=Your development company
 ## Run the seed
 
 Run these commands in your integration project folder: the folder you created
-with `create-project woocommerce`, under the name you chose. For example:
+with `create-project`, under the name you chose. For example:
 
 ```bash
 cd YOUR_INTEGRATION_NAME
 ```
 
 The command needs a mode. Start with a dry run, `--dry-run`, which shows what
-would be created and writes nothing:
+would be created and writes nothing.
 
-With Docker:
+With Docker, in a WooCommerce integration:
 
 ```bash
 docker compose run --rm php php bin/bifrost-connect tracezilla:seed --dry-run
+```
+
+With Docker, in a Shopify integration:
+
+```bash
+docker compose exec integration php bin/bifrost-connect tracezilla:seed --dry-run
 ```
 
 Without Docker:
@@ -63,10 +68,16 @@ php bin/bifrost-connect tracezilla:seed --dry-run
 Check that the first line names your development company, then write the
 data.
 
-With Docker:
+With Docker, in a WooCommerce integration:
 
 ```bash
 docker compose run --rm php php bin/bifrost-connect tracezilla:seed --execute --confirm
+```
+
+With Docker, in a Shopify integration:
+
+```bash
+docker compose exec integration php bin/bifrost-connect tracezilla:seed --execute --confirm
 ```
 
 Without Docker:
@@ -76,14 +87,17 @@ php bin/bifrost-connect tracezilla:seed --execute --confirm
 ```
 
 Both `--execute` and `--confirm` are required. Without a mode, or with
-`--dry-run` and `--execute` together, the command refuses to run. Running it again
-reports every record as `exists`. To use another dataset, pass the path of its
-YAML file as the first argument.
+`--dry-run` and `--execute` together, the command refuses to run. Running it
+again reports every record as `exists`. To use another dataset, pass the path
+of its YAML file as the first argument.
+
+The Shopify Docker commands use `exec`, because the Shopify development
+container keeps running after `./check-connection` has started it.
 
 ## What the seed does
 
-The seed reads [`seeds/tracezilla.yaml`](https://github.com/Happy-Bananas/tracezilla-woocommerce-php/blob/main/seeds/tracezilla.yaml)
-and creates the records that are missing:
+The seed reads `seeds/tracezilla.yaml` in your integration project and creates
+the records that are missing:
 
 1. Locations on your own company (the warehouse).
 2. Partners and their locations.
