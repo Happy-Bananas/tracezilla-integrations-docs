@@ -68,7 +68,7 @@ For a run every five minutes:
 Use a command like this, replacing every example value and path:
 
 ```bash
-cd /absolute/path/customer-integration && /absolute/path/php bin/bifrost-connect orders:import-individual --customer='Webshop customer' --warehouse=2 --days=3 --limit=100 --execute --confirm >> var/log/cron.log 2>&1
+cd /absolute/path/customer-integration && /absolute/path/php bin/bifrost-connect orders:import-individual --customer='Webshop customer' --warehouse=2 --days=3 --limit=100 --execute >> var/log/cron.log 2>&1
 ```
 
 The application prevents overlapping runs automatically. If a previous

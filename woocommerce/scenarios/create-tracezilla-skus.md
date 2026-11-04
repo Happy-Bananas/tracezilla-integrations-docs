@@ -9,7 +9,7 @@ nav_order: 30
 # Create tracezilla SKUs
 
 {: .label .label-yellow }
-Writes with explicit confirmation
+Writes with `--execute`
 
 This template creates a tracezilla SKU for every product the shop sells that
 tracezilla does not know yet. Inventory synchronization and order import need
@@ -89,13 +89,13 @@ Check the plan, then create one SKU and look at it in tracezilla:
 With Docker:
 
 ```bash
-docker compose run --rm php php bin/bifrost-connect scenario:run sku-sync --execute --confirm --limit=1
+docker compose run --rm php php bin/bifrost-connect scenario:run sku-sync --execute --limit=1
 ```
 
 Without Docker:
 
 ```bash
-php bin/bifrost-connect scenario:run sku-sync --execute --confirm --limit=1
+php bin/bifrost-connect scenario:run sku-sync --execute --limit=1
 ```
 
 When it is right, run it without `--limit` to create the rest. Running it
@@ -121,7 +121,7 @@ than 17 characters is skipped, because tracezilla rejects it.
 
 ## Safety
 
-Nothing is written without `--execute --confirm`. One failed SKU does not stop
+Nothing is written without `--execute`. One failed SKU does not stop
 the others; it is reported with tracezilla's reason, and the command then exits
 with `1`. The scenario takes the integration's run lock, so it never runs at
 the same time as another scheduled command.

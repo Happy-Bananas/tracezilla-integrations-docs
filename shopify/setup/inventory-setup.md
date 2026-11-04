@@ -101,7 +101,7 @@ The inventory workflow uses:
 | `write_inventory` | Update quantities after explicit execution |
 
 Having `write_inventory` permission does not cause a write by itself.
-`inventory:sync` writes only when you add `--execute --confirm`.
+`inventory:sync` writes only when you add `--execute`.
 
 ## Readiness checklist
 

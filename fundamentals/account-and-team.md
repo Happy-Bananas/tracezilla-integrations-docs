@@ -51,8 +51,7 @@ After installing the integration, log in once from its project folder:
 
 | | Command |
 |:--|:--|
-| WooCommerce with Docker | `docker compose run --rm php php bin/bifrost-connect tracezilla:login` |
-| Shopify with Docker | `docker compose run --rm integration php bin/bifrost-connect tracezilla:login` |
+| With Docker | `docker compose run --rm php php bin/bifrost-connect tracezilla:login` |
 | Without Docker | `php bin/bifrost-connect tracezilla:login` |
 
 The command asks for your tracezilla username and password. The password is

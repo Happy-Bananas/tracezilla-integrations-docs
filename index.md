@@ -6,12 +6,6 @@ nav_order: 1
 
 # BifrostConnect
 
-{: .warning }
-Do not start a customer project with `git clone` of a BifrostConnect
-repository. A clone stays connected to the public repository, so the customer's
-business rules could end up there. Use the
-[create command](#start-a-new-project) instead.
-
 BifrostConnect is for **developers who build integrations between tracezilla
 and external services for tracezilla customers**. An external service can be
 any system with an API: a webshop, a marketplace, an accounting or ERP system,
@@ -63,6 +57,11 @@ production.
 
 ## Start a new project
 
+{: .warning }
+Do not start a customer project with `git clone` of a BifrostConnect
+repository. A clone stays connected to the public repository, so the customer's
+business rules could end up there. Use the create command below instead.
+
 Create every customer project with this command. Replace `woocommerce` with
 `shopify` for a Shopify project, and `YOUR_INTEGRATION_NAME` with the name of
 your integration:
@@ -72,6 +71,11 @@ curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-p
 ```
 
 On Windows, use the command in [Getting Started](./getting-started.html#4-create-the-project).
+
+The project includes the tracezilla seed, which fills a development company
+with test data; see [Seed the Test Dataset](./fundamentals/seed.html). If you
+will work directly on the customer's production data, add `--without-seed`
+after the project name to leave it out.
 
 The command gives you a plain folder that belongs to you and your customer,
 with no Git history and no connection to the BifrostConnect repositories. If
@@ -95,7 +99,7 @@ Each external service has a standalone PHP console application (no web server ne
 
 | Service | Project | Status |
 |:--|:--|:--|
-| [Shopify](./shopify/) | `tracezilla-shopify-php` | Catalog, inventory, and order commands |
+| [Shopify](./shopify/) | `tracezilla-shopify-php` | Connection check, test-data seed, and catalog, inventory, and order commands |
 | [WooCommerce](./woocommerce/) | `tracezilla-woocommerce-php` | Connection check, test-data seed, and scenarios |
 
 Start with [Getting Started](./getting-started.html).

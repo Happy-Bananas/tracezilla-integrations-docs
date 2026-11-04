@@ -39,6 +39,11 @@ On Windows, download and extract the project as described in
 The command creates a plain project folder with its own `.env` file, without
 Git history; see [Create the project](../getting-started.html#4-create-the-project).
 
+The project includes the tracezilla seed, which fills a development company
+with test data; see [Seed the Test Dataset](../fundamentals/seed.html). If you
+will work directly on the customer's production data, add `--without-seed`
+after the project name to leave it out.
+
 ## 2. Download the libraries
 
 ```bash

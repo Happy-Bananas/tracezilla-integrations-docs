@@ -31,7 +31,7 @@ From your project directory, run:
 With Docker:
 
 ```bash
-docker compose exec integration php bin/bifrost-connect shopify:locations
+docker compose run --rm php php bin/bifrost-connect shopify:locations
 ```
 
 Without Docker:
@@ -50,7 +50,7 @@ Return the complete structured result as JSON:
 With Docker:
 
 ```bash
-docker compose exec integration php bin/bifrost-connect shopify:locations --json
+docker compose run --rm php php bin/bifrost-connect shopify:locations --json
 ```
 
 Without Docker:
@@ -109,7 +109,7 @@ those pieces and selects table or JSON output.
 With Docker:
 
 ```bash
-docker compose exec integration composer test
+docker compose run --rm php composer test
 ```
 
 Without Docker:

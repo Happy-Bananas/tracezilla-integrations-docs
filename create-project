@@ -1,9 +1,12 @@
 #!/bin/sh
 # Create a new BifrostConnect project on this computer.
 #
-#   curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- <platform> <project>
+#   curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- <platform> <project> [--without-seed]
 #
 # Platforms: shopify, woocommerce, woocommerce-sandbox.
+# The project includes the tracezilla seed command and its test data.
+# --without-seed leaves them out, for a project that never uses a development
+# company.
 #
 # Windows PowerShell has no sh, so there the script runs in a container:
 #
@@ -16,8 +19,9 @@
 set -eu
 
 usage() {
-    echo "Usage: create-project <platform> <project>" >&2
+    echo "Usage: create-project <platform> <project> [--without-seed]" >&2
     echo "Platforms: shopify, woocommerce, woocommerce-sandbox" >&2
+    echo "--without-seed: leave out the tracezilla seed (test data for a development company)" >&2
     echo "Example:   create-project woocommerce YOUR_INTEGRATION_NAME" >&2
 }
 
@@ -26,13 +30,29 @@ fail() {
     exit 2
 }
 
-if [ $# -ne 2 ]; then
+platform=
+project=
+with_seed=yes
+for argument in "$@"; do
+    case "$argument" in
+        --without-seed) with_seed=no ;;
+        --*) usage; exit 2 ;;
+        *)
+            if [ -z "$platform" ]; then
+                platform=$argument
+            elif [ -z "$project" ]; then
+                project=$argument
+            else
+                usage
+                exit 2
+            fi
+            ;;
+    esac
+done
+if [ -z "$platform" ] || [ -z "$project" ]; then
     usage
     exit 2
 fi
-
-platform=$1
-project=$2
 github=https://github.com/Happy-Bananas
 
 # Each platform is a repository, or a folder inside one, plus what the project
@@ -115,6 +135,18 @@ if [ ! -d "$source" ]; then
     fail "the downloaded template does not contain $folder."
 fi
 mv "$source" "$project"
+
+# The seed only fills a development company with test data. A project that
+# works directly on production data leaves it out. The sandbox has no seed.
+if [ "$platform" != woocommerce-sandbox ] && [ "$with_seed" = no ]; then
+    rm -rf "$project/bin/seed-tracezilla" "$project/src/Seed" "$project/seeds" "$project/tests/Unit/Seed"
+    # TRACEZILLA_OWN_COMPANY and its comment are only used by the seed.
+    if [ -f "$project/.env.example" ]; then
+        grep -v -e '^TRACEZILLA_OWN_COMPANY=' -e 'own partner in tracezilla' -e 'adds its warehouse location' \
+            "$project/.env.example" > "$project/.env.example.new" || true
+        mv "$project/.env.example.new" "$project/.env.example"
+    fi
+fi
 
 if [ -f "$project/.env.example" ]; then
     cp "$project/.env.example" "$project/.env"
