@@ -39,7 +39,7 @@ php bin/bifrost-connect orders:import-individual \
   --customer='Webshop customer' \
   --warehouse=2 \
   --days=3 \
-  --limit=100
+  --limit=100 --dry-run
 ```
 
 Review the result, configuration, customer mapping, and selected records.

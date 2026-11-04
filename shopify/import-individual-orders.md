@@ -13,7 +13,8 @@ Writes with explicit confirmation
 ## Behavior
 
 The command reads recently created Shopify orders and maps each selected order
-to one tracezilla sales order. It is a dry run by default. Existing tracezilla
+to one tracezilla sales order. Preview it with `--dry-run`; it writes only with
+`--execute --confirm`. Existing tracezilla
 orders are detected by the external reference `SHP<Shopify legacy order ID>`.
 
 ## Mapping assumptions
@@ -52,7 +53,7 @@ docker compose exec integration php bin/bifrost-connect orders:import-individual
   --customer='Banana primary webshop' \
   --warehouse=2 \
   --days=3 \
-  --limit=10
+  --limit=10 --dry-run
 ```
 
 Without Docker:
@@ -62,13 +63,13 @@ php bin/bifrost-connect orders:import-individual \
   --customer='Banana primary webshop' \
   --warehouse=2 \
   --days=3 \
-  --limit=10
+  --limit=10 --dry-run
 ```
 
 The output begins with the reproducible PHP command and mode:
 
 ```text
-Command: php bin/import-individual-orders --customer='Banana primary webshop' --warehouse=2 --days=3 --limit=10
+Command: php bin/import-individual-orders --customer='Banana primary webshop' --warehouse=2 --days=3 --limit=10 --dry-run
 Mode: DRY RUN
 ```
 

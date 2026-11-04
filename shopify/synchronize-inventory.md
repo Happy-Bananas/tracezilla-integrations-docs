@@ -48,7 +48,7 @@ With Docker:
 docker compose exec integration php bin/bifrost-connect inventory:sync \
   --shopify-location=gid://shopify/Location/123 \
   --tracezilla-warehouse=2 \
-  --limit=10
+  --limit=10 --dry-run
 ```
 
 Without Docker:
@@ -57,10 +57,10 @@ Without Docker:
 php bin/bifrost-connect inventory:sync \
   --shopify-location=gid://shopify/Location/123 \
   --tracezilla-warehouse=2 \
-  --limit=10
+  --limit=10 --dry-run
 ```
 
-Dry run is the default. No inventory is changed.
+`--dry-run` only reports what would change. No inventory is changed.
 
 ## Options
 
@@ -68,7 +68,8 @@ Dry run is the default. No inventory is changed.
 - `--tracezilla-warehouse=N` selects the source warehouse by location number.
 - `--limit=N` bounds processed tracezilla records and defaults to `10`.
 - `--json` returns the complete structured result.
-- `--execute --confirm` explicitly enables writes.
+- `--dry-run` or `--execute --confirm` is required: preview, or write the
+  changed quantities.
 
 Both location arguments are mandatory to prevent an implicit destination.
 

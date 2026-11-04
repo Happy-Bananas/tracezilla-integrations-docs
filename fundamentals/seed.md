@@ -45,18 +45,19 @@ with `create-project woocommerce`, under the name you chose. For example:
 cd YOUR_INTEGRATION_NAME
 ```
 
-Preview what would be created. Nothing is written:
+The command needs a mode. Start with a dry run, `--dry-run`, which shows what
+would be created and writes nothing:
 
 With Docker:
 
 ```bash
-docker compose run --rm php php bin/bifrost-connect tracezilla:seed
+docker compose run --rm php php bin/bifrost-connect tracezilla:seed --dry-run
 ```
 
 Without Docker:
 
 ```bash
-php bin/bifrost-connect tracezilla:seed
+php bin/bifrost-connect tracezilla:seed --dry-run
 ```
 
 Check that the first line names your development company, then write the
@@ -74,7 +75,8 @@ Without Docker:
 php bin/bifrost-connect tracezilla:seed --execute --confirm
 ```
 
-Both `--execute` and `--confirm` are required. Running the command again
+Both `--execute` and `--confirm` are required. Without a mode, or with
+`--dry-run` and `--execute` together, the command refuses to run. Running it again
 reports every record as `exists`. To use another dataset, pass the path of its
 YAML file as the first argument.
 

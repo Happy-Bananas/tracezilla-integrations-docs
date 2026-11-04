@@ -139,8 +139,8 @@ Use this order of work:
    class.
 5. Make the workflow coordinate reads, rules, duplicate checks, writes, and
    structured results.
-6. Default writes to dry run. Require explicit execution flags and a bounded
-   limit.
+6. Require an explicit mode, `--dry-run` or `--execute --confirm`, and a
+   bounded limit.
 7. Add the thin entry-point script and register its public name in
    `bin/bifrost-connect`.
 8. Unit-test business decisions and retry behavior with fake readers and
