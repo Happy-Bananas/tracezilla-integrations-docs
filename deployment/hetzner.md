@@ -30,7 +30,7 @@ It assumes that the complete customer project—including the rules under
 - Composer 2
 - `rsync` on your computer and the server
 - Cron
-- Shopify and [tracezilla credentials](../fundamentals/account-and-team.html)
+- Credentials for the external service and [tracezilla](../fundamentals/account-and-team.html)
 
 ## 1. Connect with SSH
 
@@ -80,9 +80,9 @@ test -f .env || cp .env.example .env
 chmod 600 .env
 ```
 
-Open `.env` with the editor available on the server and enter the Shopify and
-tracezilla values. Never display the completed file in terminal output or
-upload or share it.
+Open `.env` with the editor available on the server and enter the values for
+the external service and tracezilla. Never display the completed file in
+terminal output or upload or share it.
 
 ## 6. Prepare persistent runtime files
 
@@ -107,13 +107,18 @@ renew themselves.
 ## 8. Verify the deployment
 
 ```bash
-php bin/bifrost-connect deployment:check
 php bin/bifrost-connect connection:check
 ```
 
-Continue only when the deployment reports `"ready": true` and both Shopify
-and tracezilla report a successful connection. The connection check is
-read-only.
+Continue only when both the external service and tracezilla report a
+successful connection. The connection check is read-only.
+
+The Shopify integration also has a deployment check. Run it and continue only
+when it reports `"ready": true`:
+
+```bash
+php bin/bifrost-connect deployment:check
+```
 
 ## 9. Deploy an update
 
@@ -123,9 +128,10 @@ the server:
 ```bash
 cd ~/apps/YOUR_INTEGRATION_NAME
 composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
-php bin/bifrost-connect deployment:check
 php bin/bifrost-connect connection:check
 ```
+
+For Shopify, also run `php bin/bifrost-connect deployment:check`.
 
 The server receives only the version currently in your project directory.
 Nothing changes on an existing customer installation until you upload another

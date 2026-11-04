@@ -16,6 +16,10 @@ This deployment guidance is an optional example. Hosting, security, backups,
 monitoring, and scheduled operation remain your or your customer's
 responsibility.
 
+{: .important }
+Steps 1, 2, 3 and 5 use files and commands that only the Shopify integration
+has. For WooCommerce, start with [4. Read the cron output](#4-read-the-cron-output).
+
 Start with the files written by the integration. Do not begin by changing cron
 or deleting retry files.
 
