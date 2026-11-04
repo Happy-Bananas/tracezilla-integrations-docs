@@ -1,10 +1,14 @@
 ---
-title: Your Computer
+title: Development Environment
 layout: default
 nav_order: 15
 ---
 
-# Your computer
+# Development environment
+
+The tech stack on your computer: Docker, or PHP and Composer, and the test
+store for your platform.
+{: .fs-6 .fw-300 }
 
 BifrostConnect can run in two ways on Mac, Linux, and Windows. Both give the
 same project, and you can switch later.
@@ -30,10 +34,21 @@ Nothing else is needed. PHP, Composer, WordPress, and the database all run in
 containers.
 
 {: .important }
-With Docker, Docker must be running before you run any command: start Docker
-Desktop on Mac and Windows, or the Docker service on Linux. When the computer
-restarts, containers such as the WooCommerce sandbox stop and do not start by
-themselves; start them again with `docker compose up -d` in their folder.
+> With Docker, Docker must be running before you run any command: start Docker
+> Desktop on Mac and Windows, or the Docker service on Linux.
+>
+> When the computer restarts, containers such as the WooCommerce sandbox stop
+> and do not start by themselves. Start the sandbox again from its folder,
+> `woocommerce-sandbox` if you created it as described in
+> [Development Store](./woocommerce/setup/store.html):
+>
+> ```bash
+> cd woocommerce-sandbox
+> docker compose up -d
+> ```
+>
+> WordPress is then available at <http://localhost:8080> (administration:
+> <http://localhost:8080/wp-admin/>, login `admin` / `admin`).
 
 On Windows, Docker Desktop sets up WSL 2 itself to run the containers. You do
 not need to use WSL; run every command in PowerShell. Where Mac and Linux use a

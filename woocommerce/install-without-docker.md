@@ -13,7 +13,7 @@ This is the alternative to [Install with Docker](./install-with-docker.html).
 
 Your computer must already have these installed and working. Installing and
 configuring them is your responsibility and is not covered here; see
-[Without Docker](../your-computer.html#without-docker) for links to the
+[Without Docker](../development-environment.html#without-docker) for links to the
 official guides.
 
 - PHP 8.3 or newer

@@ -9,10 +9,10 @@ nav_order: 10
 Each external service has its own standalone PHP integration. The steps are
 the same for every service; only the service pages differ.
 
-## 1. Prepare your computer
+## 1. Set up your development environment
 
-Choose to work [with Docker or without Docker](./your-computer.html). With
-Docker, Docker is the only thing you install.
+Choose to work [with Docker or without Docker](./development-environment.html).
+With Docker, Docker is the only thing you install.
 
 ## 2. Prepare tracezilla
 
@@ -85,7 +85,7 @@ The WooCommerce test store is created the same way; see
 ## 5. Install the integration
 
 Follow the install page for your service and your choice of
-[Docker or no Docker](./your-computer.html):
+[Docker or no Docker](./development-environment.html):
 
 | Service | With Docker | Without Docker |
 |:--|:--|:--|
