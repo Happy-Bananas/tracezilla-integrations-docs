@@ -103,16 +103,33 @@ Follow the install page for your service and your choice of
 With Docker, start Docker first, and the WooCommerce sandbox if you use it.
 Neither starts by itself after the computer restarts.
 
-From the new project folder, run:
+The check needs the PHP packages and a tracezilla login. The install page in
+step 5 does both; if you skipped them, run these once from the new project
+folder. With Docker:
+
+```bash
+docker compose run --rm php composer install
+docker compose run --rm php php bin/bifrost-connect tracezilla:login
+```
+
+Without Docker:
+
+```bash
+composer install
+php bin/bifrost-connect tracezilla:login
+```
+
+Then run the check from the same folder:
 
 | | Command |
 |:--|:--|
 | With Docker, Mac and Linux | `./check-connection` |
-| With Docker, Windows | See Check Connections for your service |
+| With Docker, Windows | `docker compose run --rm php php bin/bifrost-connect connection:check` |
 | Without Docker | `php bin/bifrost-connect connection:check` |
 
 The command makes one small read-only request to the external service and one
-to tracezilla, and reports both. **Nothing else works until both connections
+to tracezilla. The WooCommerce check always reports both; the Shopify check
+stops at the first failure. **Nothing else works until both connections
 pass**, so fix any reported problem before continuing; see
 [Troubleshooting](./troubleshooting.html).
 
