@@ -6,7 +6,7 @@ nav_order: 10
 has_children: true
 ---
 
-# Schedule BifrostConnect with cron
+# Schedule your integration with cron
 
 {: .label .label-red }
 Unsupported
@@ -17,7 +17,7 @@ monitoring, and scheduled operation remain your or your customer's
 responsibility.
 
 Cron is the primary production trigger. It starts a console command at a
-regular interval; BifrostConnect then communicates with the
+regular interval; your integration then communicates with the
 external service and tracezilla and applies the customer's PHP business rules.
 
 <pre class="mermaid">

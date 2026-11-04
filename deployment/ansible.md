@@ -15,7 +15,7 @@ This is optional deployment automation. Server access, security, backups,
 monitoring, Ansible, and the vault password remain your or your customer's
 responsibility.
 
-The BifrostConnect project includes a playbook under `deployment/ansible/`.
+Your integration project includes a playbook under `deployment/ansible/`.
 It uploads the project currently on your computer, generates the
 server `.env` from encrypted secrets, installs production PHP packages, and
 checks the deployment and both service connections.
@@ -39,7 +39,7 @@ The hosting account does not need root access.
 
 ## 1. Create the inventory
 
-From the BifrostConnect project root, run:
+From your integration project folder, run:
 
 ```bash
 cp deployment/ansible/inventory.example.yml deployment/ansible/inventory.yml
@@ -89,7 +89,7 @@ Ansible encrypts `vault.yml` before writing it to disk. The encrypted file can
 be stored in a private customer repository. Do not commit an unencrypted copy
 of these values, the vault password, or `.env`.
 
-The vault protects secrets stored with the project. BifrostConnect still needs
+The vault protects secrets stored with the project. Your integration still needs
 a decrypted `.env` on the server; the playbook creates it with permission
 `0600` and suppresses its contents from Ansible output.
 
@@ -115,7 +115,7 @@ The playbook:
 5. Installs the locked production Composer packages.
 6. Runs the deployment and read-only connection checks.
 
-The deployment succeeds only when BifrostConnect is ready and can connect to
+The deployment succeeds only when your integration is ready and can connect to
 both Shopify and tracezilla.
 
 ### Log in to tracezilla once
@@ -126,7 +126,7 @@ on the server as the hosting user, then run the playbook again:
 
 ```bash
 ssh YOUR_SSH_USER@YOUR_SERVER
-cd YOUR_BIFROSTCONNECT_PATH
+cd /usr/home/YOUR_SSH_USER/apps/YOUR_INTEGRATION_NAME
 php bin/bifrost-connect tracezilla:login
 ```
 

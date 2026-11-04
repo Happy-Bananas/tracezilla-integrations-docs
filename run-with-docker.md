@@ -7,8 +7,8 @@ nav_order: 3
 
 # Install the Shopify integration with Docker
 
-This is the quickest way to create and run a BifrostConnect project for
-Shopify. See [Install without Docker](./manual-installation.html) if you prefer
+This is the quickest way to create and run a Shopify integration with
+BifrostConnect. See [Install without Docker](./manual-installation.html) if you prefer
 to use PHP and Composer directly on your computer.
 
 ## Requirements
@@ -38,7 +38,8 @@ Windows (PowerShell):
 docker run --rm -v "${PWD}:/work" -w /work alpine:3 sh -c "wget -qO- https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- shopify YOUR_INTEGRATION_NAME"
 ```
 
-The command downloads a fresh copy of BifrostConnect into that folder and
+The command downloads a fresh copy of the BifrostConnect Shopify template into
+that folder and
 creates the `.env` configuration file. The project is a plain folder without
 Git history; see [Create the project](./getting-started.html#4-create-the-project).
 It will not replace a folder that already exists.
@@ -80,11 +81,11 @@ Mac and Linux:
 ```
 
 The first run builds and starts the development container, so it can take a
-little while. The command prints progress, waits until BifrostConnect is ready,
+little while. The command prints progress, waits until the integration is ready,
 and then performs one small read-only request against each service.
 
 Windows (PowerShell): start the container, wait until
-`docker compose logs integration` shows `BIFROSTCONNECT IS READY`, and then run
+`docker compose logs integration` shows `THE INTEGRATION IS READY`, and then run
 the check:
 
 ```powershell

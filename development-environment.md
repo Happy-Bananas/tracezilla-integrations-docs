@@ -10,8 +10,8 @@ The tech stack on your computer: Docker, or PHP and Composer, and the test
 store for your platform.
 {: .fs-6 .fw-300 }
 
-BifrostConnect can run in two ways on Mac, Linux, and Windows. Both give the
-same project, and you can switch later.
+You can develop your integration in two ways on Mac, Linux, and Windows. Both
+give the same project, and you can switch later.
 
 | | With Docker (recommended) | Without Docker |
 |:--|:--|:--|

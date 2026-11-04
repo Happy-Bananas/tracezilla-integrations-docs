@@ -23,8 +23,8 @@ comfortable with PHP and the command line; this manual covers the rest, from
 setting up your computer to running the integration on a server.
 
 {: .important }
-BifrostConnect is not a hosted service. Nobody runs it for you: you or your
-customer install it on a server you control, and **cron starts it** on a
+BifrostConnect is not a hosted service. Nobody runs your integration for you:
+you or your customer install it on a server you control, and **cron starts it** on a
 schedule. Nothing is exchanged between the systems unless your server runs a
 command.
 
@@ -32,7 +32,7 @@ command.
 flowchart LR
     subgraph Server["Your server"]
         Cron["Cron<br>every few minutes"]
-        Bifrost["BifrostConnect<br>your business rules in PHP"]
+        Bifrost["Your integration<br>built with BifrostConnect,<br>your business rules in PHP"]
         Cron --> Bifrost
     end
     Service["External service<br>Shopify, WooCommerce, ..."]
@@ -53,7 +53,7 @@ flowchart LR
 2. **Host it yourself.** Copy the finished project to a server you or the
    customer control. It is a plain console application: PHP and a `.env` file
    with the credentials; no web server, database, or open port is required.
-3. **Trigger it with cron.** BifrostConnect does not run in the background and
+3. **Trigger it with cron.** Your integration does not run in the background and
    does not receive anything by itself. A cron task on the server starts a
    command at a regular interval, for example every five minutes. Each run reads
    what has changed, applies the rules, writes the results, and stops.
