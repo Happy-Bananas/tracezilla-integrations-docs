@@ -113,7 +113,8 @@ From the new project folder, run:
 
 The command makes one small read-only request to the external service and one
 to tracezilla, and reports both. **Nothing else works until both connections
-pass**, so fix any reported problem before continuing.
+pass**, so fix any reported problem before continuing; see
+[Troubleshooting](./troubleshooting.html).
 
 ## 7. Next steps
 
