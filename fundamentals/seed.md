@@ -42,19 +42,13 @@ with `create-project`, under the name you chose. For example:
 cd YOUR_INTEGRATION_NAME
 ```
 
-The command needs a mode. Start with a dry run, `--dry-run`, which shows what
-would be created and writes nothing.
+The command is the same in every integration. It needs a mode: start with a
+dry run, `--dry-run`, which shows what would be created and writes nothing.
 
-With Docker, in a WooCommerce integration:
+With Docker:
 
 ```bash
 docker compose run --rm php php bin/bifrost-connect tracezilla:seed --dry-run
-```
-
-With Docker, in a Shopify integration:
-
-```bash
-docker compose exec integration php bin/bifrost-connect tracezilla:seed --dry-run
 ```
 
 Without Docker:
@@ -66,16 +60,10 @@ php bin/bifrost-connect tracezilla:seed --dry-run
 Check that the first line names your development company, then write the
 data.
 
-With Docker, in a WooCommerce integration:
+With Docker:
 
 ```bash
 docker compose run --rm php php bin/bifrost-connect tracezilla:seed --execute --confirm
-```
-
-With Docker, in a Shopify integration:
-
-```bash
-docker compose exec integration php bin/bifrost-connect tracezilla:seed --execute --confirm
 ```
 
 Without Docker:
@@ -84,13 +72,13 @@ Without Docker:
 php bin/bifrost-connect tracezilla:seed --execute --confirm
 ```
 
+In a Shopify integration, the Docker commands start with
+`docker compose exec integration` instead of `docker compose run --rm php`.
+
 Both `--execute` and `--confirm` are required. Without a mode, or with
 `--dry-run` and `--execute` together, the command refuses to run. Running it
 again reports every record as `exists`. To use another dataset, pass the path
 of its YAML file as the first argument.
-
-The Shopify Docker commands use `exec`, because the Shopify development
-container keeps running after `./check-connection` has started it.
 
 ## What the seed does
 
