@@ -64,7 +64,7 @@ business rules could end up there. Use the create command instead.
 
 Create every customer project with the create command in
 [Getting Started](./getting-started.html#4-create-the-project), or follow the
-install page for your platform, which starts with the same command.
+setup page for your platform, which starts with the same command.
 
 It gives you a plain folder that belongs to you and your customer, with no Git
 history and no connection to the BifrostConnect repositories. If you want

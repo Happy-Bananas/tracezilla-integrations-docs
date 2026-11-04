@@ -90,15 +90,15 @@ repositories.
 The WooCommerce test store is created the same way; see
 [Development store](./woocommerce/setup/store.html).
 
-## 5. Install the integration
+## 5. Set up your integration
 
-Follow the install page for your service and your choice of
+Follow the setup page for your service and your choice of
 [Docker or no Docker](./development-environment.html):
 
 | Service | With Docker | Without Docker |
 |:--|:--|:--|
-| Shopify | [Install with Docker](./run-with-docker.html) | [Install without Docker](./manual-installation.html) |
-| WooCommerce | [Install with Docker](./woocommerce/install-with-docker.html) | [Install without Docker](./woocommerce/install-without-docker.html) |
+| Shopify | [Set up with Docker](./run-with-docker.html) | [Set up without Docker](./manual-installation.html) |
+| WooCommerce | [Set up with Docker](./woocommerce/install-with-docker.html) | [Set up without Docker](./woocommerce/install-without-docker.html) |
 
 ## 6. Check both connections
 
@@ -106,7 +106,7 @@ Follow the install page for your service and your choice of
 With Docker, start Docker first, and the WooCommerce sandbox if you use it.
 Neither starts by itself after the computer restarts.
 
-The check needs the PHP packages and a tracezilla login. The install page in
+The check needs the PHP packages and a tracezilla login. The setup page in
 step 5 does both; if you skipped them, run these once from the new project
 folder. With Docker:
 

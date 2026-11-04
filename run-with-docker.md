@@ -1,14 +1,14 @@
 ---
-title: Install with Docker
+title: Set Up with Docker
 layout: default
 parent: Shopify
 nav_order: 3
 ---
 
-# Install the Shopify integration with Docker
+# Set up your Shopify integration with Docker
 
 This is the quickest way to create and run a Shopify integration with
-BifrostConnect. See [Install without Docker](./manual-installation.html) if you prefer
+BifrostConnect. See [Set up without Docker](./manual-installation.html) if you prefer
 to use PHP and Composer directly on your computer.
 
 ## Requirements

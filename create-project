@@ -173,5 +173,5 @@ if [ "$platform" = woocommerce-sandbox ]; then
     echo "  docker compose up -d"
 else
     echo "  Edit .env"
-    echo "  ./check-connection     (Windows: see the install guide)"
+    echo "  ./check-connection     (Windows: see the setup page)"
 fi

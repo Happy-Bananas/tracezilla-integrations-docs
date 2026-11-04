@@ -37,5 +37,5 @@ over HTTPS.
 ## Next step
 
 Prepare [tracezilla](../../tracezilla-fundamentals.html) if you have not done
-so, then install the integration [with Docker](../install-with-docker.html) or
+so, then set up your integration [with Docker](../install-with-docker.html) or
 [without Docker](../install-without-docker.html).

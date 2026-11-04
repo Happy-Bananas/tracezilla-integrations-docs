@@ -31,5 +31,5 @@ At the end of setup, you should have:
 Use development data throughout this section. Do not test write commands in a
 customer's production store.
 
-Then install the integration [with Docker](./install-with-docker.html) or
+Then set up your integration [with Docker](./install-with-docker.html) or
 [without Docker](./install-without-docker.html).
