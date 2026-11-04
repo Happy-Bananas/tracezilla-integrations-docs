@@ -27,7 +27,7 @@ The following example reports at most ten orders created during the previous
 three days. `Europe/Copenhagen` defines when one reporting day ends and the
 next begins.
 
-### With Docker
+With Docker:
 
 ```bash
 docker compose exec integration php bin/bifrost-connect orders:report-collected \
@@ -36,10 +36,10 @@ docker compose exec integration php bin/bifrost-connect orders:report-collected 
   --limit=10
 ```
 
-### Without Docker
+Without Docker:
 
 ```bash
-php bin/report-collected-orders \
+php bin/bifrost-connect orders:report-collected \
   --days=3 \
   --timezone=Europe/Copenhagen \
   --limit=10
@@ -64,8 +64,17 @@ limit, skipped orders, and skipped lines.
 
 For machine-readable output:
 
+With Docker:
+
 ```bash
 docker compose exec integration php bin/bifrost-connect orders:report-collected \
+  --days=3 --timezone=Europe/Copenhagen --limit=10 --json
+```
+
+Without Docker:
+
+```bash
+php bin/bifrost-connect orders:report-collected \
   --days=3 --timezone=Europe/Copenhagen --limit=10 --json
 ```
 
@@ -107,8 +116,16 @@ API credentials.
 
 ## Tests
 
+With Docker:
+
 ```bash
 docker compose exec integration composer test
+```
+
+Without Docker:
+
+```bash
+composer test
 ```
 
 Tests verify timezone grouping, revenue totals, limits, skip rules, option

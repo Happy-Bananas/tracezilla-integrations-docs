@@ -44,25 +44,34 @@ trimmed SKU code, not product names or internal IDs.
 
 Dry run is the default and processes at most ten Shopify variants:
 
-### With Docker
+With Docker:
 
 ```bash
 docker compose exec integration php bin/bifrost-connect catalog:create-tracezilla-skus
 ```
 
-### Without Docker
+Without Docker:
 
 ```bash
-php bin/create-tracezilla-skus
+php bin/bifrost-connect catalog:create-tracezilla-skus
 ```
 
 ## Options
 
 Choose another processing limit or request complete JSON:
 
+With Docker:
+
 ```bash
 docker compose exec integration php bin/bifrost-connect catalog:create-tracezilla-skus --limit=25
 docker compose exec integration php bin/bifrost-connect catalog:create-tracezilla-skus --limit=25 --json
+```
+
+Without Docker:
+
+```bash
+php bin/bifrost-connect catalog:create-tracezilla-skus --limit=25
+php bin/bifrost-connect catalog:create-tracezilla-skus --limit=25 --json
 ```
 
 Unlike the display limit in Compare Catalogs, this limit controls how many
@@ -73,8 +82,16 @@ and tracezilla catalogs so it can report source counts and avoid duplicates.
 
 First inspect a dry run. For the first sandbox write, use a limit of one:
 
+With Docker:
+
 ```bash
 docker compose exec integration php bin/bifrost-connect catalog:create-tracezilla-skus --execute --confirm --limit=1
+```
+
+Without Docker:
+
+```bash
+php bin/bifrost-connect catalog:create-tracezilla-skus --execute --confirm --limit=1
 ```
 
 Both `--execute` and `--confirm` are required. Supplying `--execute` alone exits
@@ -129,8 +146,16 @@ tracezilla request.
 
 ## Tests
 
+With Docker:
+
 ```bash
 docker compose exec integration composer test
+```
+
+Without Docker:
+
+```bash
+composer test
 ```
 
 The tests use in-memory variants and a fake tracezilla gateway. They verify dry

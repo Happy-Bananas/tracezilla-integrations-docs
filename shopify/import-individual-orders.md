@@ -45,7 +45,7 @@ skipped; to import those, add line-item pagination first.
 The customer name must exactly identify a tracezilla customer partner. The
 warehouse is selected by its tracezilla location number.
 
-### With Docker
+With Docker:
 
 ```bash
 docker compose exec integration php bin/bifrost-connect orders:import-individual \
@@ -55,10 +55,10 @@ docker compose exec integration php bin/bifrost-connect orders:import-individual
   --limit=10
 ```
 
-### Without Docker
+Without Docker:
 
 ```bash
-php bin/import-individual-orders \
+php bin/bifrost-connect orders:import-individual \
   --customer='Banana primary webshop' \
   --warehouse=2 \
   --days=3 \
@@ -91,8 +91,21 @@ First ensure the dry run contains exactly the intended customer, warehouse,
 address, SKUs, quantities, prices, currency, and external reference. Then test
 one order in sandbox accounts:
 
+With Docker:
+
 ```bash
 docker compose exec integration php bin/bifrost-connect orders:import-individual \
+  --customer='Banana primary webshop' \
+  --warehouse=2 \
+  --days=3 \
+  --limit=1 \
+  --execute --confirm
+```
+
+Without Docker:
+
+```bash
+php bin/bifrost-connect orders:import-individual \
   --customer='Banana primary webshop' \
   --warehouse=2 \
   --days=3 \
@@ -155,8 +168,16 @@ transport behavior.
 
 ## Tests
 
+With Docker:
+
 ```bash
 docker compose exec integration composer test
+```
+
+Without Docker:
+
+```bash
+composer test
 ```
 
 Tests verify mapping, line aggregation, partial-order rejection, duplicate

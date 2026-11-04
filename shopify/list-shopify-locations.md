@@ -28,16 +28,16 @@ inventory commands.
 
 From your project directory, run:
 
-### With Docker
+With Docker:
 
 ```bash
 docker compose exec integration php bin/bifrost-connect shopify:locations
 ```
 
-### Without Docker
+Without Docker:
 
 ```bash
-php bin/list-shopify-locations
+php bin/bifrost-connect shopify:locations
 ```
 
 The terminal table lists every returned location. If the app cannot see any
@@ -47,8 +47,16 @@ locations, the command reports that explicitly and still exits successfully.
 
 Return the complete structured result as JSON:
 
+With Docker:
+
 ```bash
 docker compose exec integration php bin/bifrost-connect shopify:locations --json
+```
+
+Without Docker:
+
+```bash
+php bin/bifrost-connect shopify:locations --json
 ```
 
 There is no processing limit. The command follows Shopify pagination until all
@@ -98,8 +106,16 @@ those pieces and selects table or JSON output.
 
 ## Tests
 
+With Docker:
+
 ```bash
 docker compose exec integration composer test
+```
+
+Without Docker:
+
+```bash
+composer test
 ```
 
 The location tests verify mapping, addresses, activity flags, serialization,

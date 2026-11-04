@@ -49,7 +49,19 @@ fails with `no configuration file provided`.
 ## Coverage
 
 Every command runs through one entry point, `bin/bifrost-connect`, in your
-integration project folder. Run `php bin/bifrost-connect help` to list them.
+integration project folder. To list the commands:
+
+With Docker:
+
+```bash
+docker compose run --rm php php bin/bifrost-connect help
+```
+
+Without Docker:
+
+```bash
+php bin/bifrost-connect help
+```
 
 | Command | Purpose | Status |
 |:--|:--|:--|

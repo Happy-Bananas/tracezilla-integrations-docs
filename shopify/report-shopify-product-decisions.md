@@ -25,16 +25,16 @@ customer, with the SKU, tracezilla ID, and available name.
 
 From your project directory, run:
 
-### With Docker
+With Docker:
 
 ```bash
 docker compose exec integration php bin/bifrost-connect catalog:report-shopify-decisions
 ```
 
-### Without Docker
+Without Docker:
 
 ```bash
-php bin/report-tracezilla-skus-needing-shopify-decision
+php bin/bifrost-connect catalog:report-shopify-decisions
 ```
 
 The output begins with the validated PHP command and execution mode:
@@ -55,16 +55,32 @@ For every reported SKU, decide whether to:
 
 Display at most 25 candidates while retaining the complete candidate count:
 
+With Docker:
+
 ```bash
 docker compose exec integration php bin/bifrost-connect catalog:report-shopify-decisions --limit=25
+```
+
+Without Docker:
+
+```bash
+php bin/bifrost-connect catalog:report-shopify-decisions --limit=25
 ```
 
 The default display limit is `10`. Unlike Compare Catalogs JSON, this command's
 JSON candidate list is also bounded by `--limit` so unattended output remains
 manageable:
 
+With Docker:
+
 ```bash
 docker compose exec integration php bin/bifrost-connect catalog:report-shopify-decisions --limit=25 --json
+```
+
+Without Docker:
+
+```bash
+php bin/bifrost-connect catalog:report-shopify-decisions --limit=25 --json
 ```
 
 JSON remains valid and includes the execution context around the result:
@@ -142,8 +158,16 @@ API clients and pagination remain outside the decision rule.
 
 ## Tests
 
+With Docker:
+
 ```bash
 docker compose exec integration composer test
+```
+
+Without Docker:
+
+```bash
+composer test
 ```
 
 Tests verify filtering, deterministic SKU ordering, the display limit, source

@@ -16,6 +16,8 @@ secret, or the tracezilla tokens.
 
 From the project folder, run:
 
+With Docker:
+
 ```bash
 ./check-connection
 ```
@@ -28,8 +30,13 @@ equivalent command is:
 docker compose exec integration php bin/bifrost-connect connection:check
 ```
 
-Without Docker, run `php bin/bifrost-connect connection:check`. Add `--json` to
-any of these for structured output.
+Without Docker:
+
+```bash
+php bin/bifrost-connect connection:check
+```
+
+Add `--json` to any of these for structured output.
 
 A successful result looks like:
 

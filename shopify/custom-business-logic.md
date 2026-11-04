@@ -15,13 +15,13 @@ cron, an API client, or a webhook handler.
 
 Generate a scenario instead of copying framework classes by hand:
 
-### With Docker
+With Docker:
 
 ```bash
 docker compose exec integration php bin/bifrost-connect scenario:create confirm-credentials --platform=shopify
 ```
 
-### Without Docker
+Without Docker:
 
 ```bash
 php bin/bifrost-connect scenario:create confirm-credentials --platform=shopify
@@ -43,14 +43,14 @@ of credentials work. It never prints credentials or access tokens.
 
 Run the generated test and scenario:
 
-### With Docker
+With Docker:
 
 ```bash
 docker compose exec integration composer test
 docker compose exec integration php bin/bifrost-connect scenario:run confirm-credentials --platform=shopify
 ```
 
-### Without Docker
+Without Docker:
 
 ```bash
 composer test
@@ -173,8 +173,16 @@ Each business sentence should have a focused unit test. At minimum, cover:
 
 Run the complete suite in the development container:
 
+With Docker:
+
 ```bash
 docker compose exec integration composer test
+```
+
+Without Docker:
+
+```bash
+composer test
 ```
 
 ## Schedule the command

@@ -17,14 +17,23 @@ shop. It is the tracezilla side of [Compare Catalogs](./compare-catalogs.html).
 
 ## Create and run it
 
+With Docker:
+
 ```bash
 docker compose run --rm php php bin/bifrost-connect scenario:create shop-decisions --template=missing-in-woocommerce
 docker compose run --rm php composer test
 docker compose run --rm php php bin/bifrost-connect scenario:run shop-decisions
 ```
 
-Without Docker, leave out `docker compose run --rm php`. `shop-decisions` is
-your scenario's name; choose any name.
+Without Docker:
+
+```bash
+php bin/bifrost-connect scenario:create shop-decisions --template=missing-in-woocommerce
+composer test
+php bin/bifrost-connect scenario:run shop-decisions
+```
+
+`shop-decisions` is your scenario's name; choose any name.
 
 ## What it reads
 

@@ -47,20 +47,22 @@ cd YOUR_INTEGRATION_NAME
 
 Preview what would be created. Nothing is written:
 
-### With Docker
+With Docker:
 
 ```bash
 docker compose run --rm php php bin/bifrost-connect tracezilla:seed
 ```
 
-### Without Docker
+Without Docker:
 
 ```bash
 php bin/bifrost-connect tracezilla:seed
 ```
 
 Check that the first line names your development company, then write the
-data. With Docker:
+data.
+
+With Docker:
 
 ```bash
 docker compose run --rm php php bin/bifrost-connect tracezilla:seed --execute --confirm
