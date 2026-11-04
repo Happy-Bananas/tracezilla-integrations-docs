@@ -64,11 +64,18 @@ not block publication.
 `create-project` is published unchanged at
 `https://happy-bananas.github.io/tracezilla-integrations-docs/create-project`.
 Getting Started uses it to create a new project for each platform. Its tests
-use local archives and run before every deployment:
+use local archives and the real templates, and run before every deployment:
 
 ```bash
 sh tools/test-create-project
 ```
+
+To add a platform:
+
+1. Add it to the `case "$platform"` list and the usage text in `create-project`.
+2. Add a row to the platform table in `getting-started.md` (step 4).
+3. Add the template to the real-template tests in `tools/test-create-project`
+   and to the clone step in `.github/workflows/pages.yml`.
 
 ## Publishing
 

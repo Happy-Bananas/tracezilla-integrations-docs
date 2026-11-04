@@ -18,7 +18,7 @@ does not need to be installed as a WordPress plugin.
    and an OAuth client.
 2. Complete the [WooCommerce prerequisites](./setup.html): a development store
    and REST API keys.
-3. Install the integration [with Docker](./install-with-docker.html) or
+3. Set up your integration [with Docker](./install-with-docker.html) or
    [without Docker](./install-without-docker.html).
 4. [Check both connections](./check-connections.html). Nothing else works until
    this passes.

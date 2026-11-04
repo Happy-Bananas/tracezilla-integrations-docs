@@ -15,6 +15,11 @@ Unsupported
 This page explains what the integration does with failures. To fix a failed
 run, start with [Troubleshoot scheduled runs](./troubleshooting.html).
 
+{: .important }
+Shopify integration only. The WooCommerce integration has no retry queue
+yet: a failed change is reported in the run's output, and the next run plans
+it again if the scenario's rules still call for it.
+
 Cron only starts the integration again; it cannot retry one failed order, SKU,
 or inventory update. The integration therefore remembers failed items itself
 and retries them on later runs. You do not need to do anything for this to

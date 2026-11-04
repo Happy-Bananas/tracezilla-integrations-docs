@@ -1,14 +1,14 @@
 ---
-title: Install with Docker
+title: Set Up with Docker
 layout: default
 parent: WooCommerce
 nav_order: 3
 ---
 
-# Install the WooCommerce integration with Docker
+# Set up your WooCommerce integration with Docker
 
 This is the quickest way to install and run the WooCommerce integration. See
-[Install without Docker](./install-without-docker.html) if you prefer to use PHP
+[Set up without Docker](./install-without-docker.html) if you prefer to use PHP
 and Composer directly on your computer.
 
 ## Requirements

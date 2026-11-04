@@ -17,7 +17,7 @@ rules between Shopify and tracezilla.
    and an OAuth client.
 2. Complete the [Shopify prerequisites](./setup.html): a development store and
    an installed app.
-3. Install the integration [with Docker](../run-with-docker.html) or
+3. Set up your integration [with Docker](../run-with-docker.html) or
    [without Docker](../manual-installation.html).
 4. Check both connections with `./check-connection`. Nothing else works until
    this passes.

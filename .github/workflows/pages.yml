@@ -21,7 +21,16 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      # The tests also create projects from the real templates, the same main
+      # branches that create-project downloads.
+      - name: Download the integration templates
+        run: |
+          git clone --depth 1 https://github.com/Happy-Bananas/tracezilla-woocommerce-php.git "$RUNNER_TEMP/tracezilla-woocommerce-php"
+          git clone --depth 1 https://github.com/Happy-Bananas/tracezilla-shopify-php.git "$RUNNER_TEMP/tracezilla-shopify-php"
+
       - name: Test the create-project script
+        env:
+          TRACEZILLA_TEMPLATES_DIR: ${{ runner.temp }}
         run: sh tools/test-create-project
 
       - name: Set up Ruby

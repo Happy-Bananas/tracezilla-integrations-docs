@@ -15,6 +15,10 @@ This is optional deployment automation. Server access, security, backups,
 monitoring, Ansible, and the vault password remain your or your customer's
 responsibility.
 
+{: .important }
+Shopify integration only. The WooCommerce integration has no playbook yet;
+deploy it as in [Deploy on Hetzner](./hetzner.html).
+
 Your integration project includes a playbook under `deployment/ansible/`.
 It uploads the project currently on your computer, generates the
 server `.env` from encrypted secrets, installs production PHP packages, and

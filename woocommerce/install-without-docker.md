@@ -1,13 +1,13 @@
 ---
-title: Install without Docker
+title: Set Up without Docker
 layout: default
 parent: WooCommerce
 nav_order: 4
 ---
 
-# Install the WooCommerce integration without Docker
+# Set up your WooCommerce integration without Docker
 
-This is the alternative to [Install with Docker](./install-with-docker.html).
+This is the alternative to [Set up with Docker](./install-with-docker.html).
 
 ## Requirements
 

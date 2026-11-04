@@ -11,6 +11,9 @@ Every integration needs the **team slug** of your development company and a
 way to authenticate. Complete [Development Company](./development-company.html)
 first.
 
+Write the values down for now. The project's `.env` file only exists after you
+create the project in Getting Started step 4; you enter them there.
+
 ## Team slug
 
 In tracezilla, a company is a team. The team slug is the first part of the
@@ -20,8 +23,8 @@ browser URL when the company is open, for example `dev-woocommerce-abc1` in:
 https://app.tracezilla.com/dev-woocommerce-abc1/dashboard/home
 ```
 
-The slug is not necessarily the same as the displayed company name. Add it to
-`.env`:
+The slug is not necessarily the same as the displayed company name. In
+`.env`, it goes here:
 
 ```dotenv
 TRACEZILLA_TEAM_SLUG=dev-woocommerce-abc1
@@ -40,7 +43,7 @@ personal account, so the integration keeps working when employees leave.
 
 Create an OAuth client as described in the
 [tracezilla API documentation](https://tech.tracezilla.com/docs/rest-api-v1/making-requests/authentication.html#bearer-token-and-resource-owner-password-credentials),
-and add its Client ID and Client Secret to `.env`:
+and note its Client ID and Client Secret. In `.env`, they go here:
 
 ```dotenv
 TRACEZILLA_CLIENT_ID=...

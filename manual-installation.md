@@ -1,13 +1,13 @@
 ---
-title: Install without Docker
+title: Set Up without Docker
 layout: default
 nav_order: 4
 parent: Shopify
 ---
 
-# Install the Shopify integration without Docker
+# Set up your Shopify integration without Docker
 
-This is the alternative to [Install with Docker](./run-with-docker.html).
+This is the alternative to [Set up with Docker](./run-with-docker.html).
 
 ## Requirements
 

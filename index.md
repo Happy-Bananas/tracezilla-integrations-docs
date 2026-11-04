@@ -60,26 +60,15 @@ production.
 {: .warning }
 Do not start a customer project with `git clone` of a BifrostConnect
 repository. A clone stays connected to the public repository, so the customer's
-business rules could end up there. Use the create command below instead.
+business rules could end up there. Use the create command instead.
 
-Create every customer project with this command. Replace `woocommerce` with
-`shopify` for a Shopify project, and `YOUR_INTEGRATION_NAME` with the name of
-your integration:
+Create every customer project with the create command in
+[Getting Started](./getting-started.html#4-create-the-project), or follow the
+setup page for your platform, which starts with the same command.
 
-```bash
-curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce YOUR_INTEGRATION_NAME
-```
-
-On Windows, use the command in [Getting Started](./getting-started.html#4-create-the-project).
-
-The project includes the tracezilla seed, which fills a development company
-with test data; see [Seed the Test Dataset](./fundamentals/seed.html). If you
-will work directly on the customer's production data, add `--without-seed`
-after the project name to leave it out.
-
-The command gives you a plain folder that belongs to you and your customer,
-with no Git history and no connection to the BifrostConnect repositories. If
-you want version control, put it in your own private Git repository.
+It gives you a plain folder that belongs to you and your customer, with no Git
+history and no connection to the BifrostConnect repositories. If you want
+version control, put it in your own private Git repository.
 
 ## Your responsibilities
 

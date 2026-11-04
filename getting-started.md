@@ -35,13 +35,18 @@ Choose the service you are integrating with and complete its prerequisites:
 ## 4. Create the project
 
 Open a terminal in the folder where you keep your projects. In the commands
-below, replace `woocommerce` with `shopify` for a Shopify project, and
+below, replace `PLATFORM` with the platform you integrate with, and
 `YOUR_INTEGRATION_NAME` with the name of your integration.
+
+| Platform | `PLATFORM` | ZIP download (Windows without Docker) |
+|:--|:--|:--|
+| Shopify | `shopify` | [tracezilla-shopify-php](https://github.com/Happy-Bananas/tracezilla-shopify-php/archive/refs/heads/main.zip) |
+| WooCommerce | `woocommerce` | [tracezilla-woocommerce-php](https://github.com/Happy-Bananas/tracezilla-woocommerce-php/archive/refs/heads/main.zip) |
 
 ### Mac and Linux
 
 ```bash
-curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce YOUR_INTEGRATION_NAME
+curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- PLATFORM YOUR_INTEGRATION_NAME
 ```
 
 ### Windows with Docker
@@ -49,14 +54,12 @@ curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-p
 In PowerShell, the same command runs in a small container:
 
 ```powershell
-docker run --rm -v "${PWD}:/work" -w /work alpine:3 sh -c "wget -qO- https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce YOUR_INTEGRATION_NAME"
+docker run --rm -v "${PWD}:/work" -w /work alpine:3 sh -c "wget -qO- https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- PLATFORM YOUR_INTEGRATION_NAME"
 ```
 
 ### Windows without Docker
 
-1. Download the integration as a ZIP file:
-   [WooCommerce](https://github.com/Happy-Bananas/tracezilla-woocommerce-php/archive/refs/heads/main.zip)
-   or [Shopify](https://github.com/Happy-Bananas/tracezilla-shopify-php/archive/refs/heads/main.zip).
+1. Download the ZIP file for your platform from the table above.
 2. Extract it in the folder where you keep your projects and rename the
    extracted folder to `YOUR_INTEGRATION_NAME`.
 3. In PowerShell, create `.env` in the project folder:
@@ -87,15 +90,15 @@ repositories.
 The WooCommerce test store is created the same way; see
 [Development store](./woocommerce/setup/store.html).
 
-## 5. Install the integration
+## 5. Set up your integration
 
-Follow the install page for your service and your choice of
+Follow the setup page for your service and your choice of
 [Docker or no Docker](./development-environment.html):
 
 | Service | With Docker | Without Docker |
 |:--|:--|:--|
-| Shopify | [Install with Docker](./run-with-docker.html) | [Install without Docker](./manual-installation.html) |
-| WooCommerce | [Install with Docker](./woocommerce/install-with-docker.html) | [Install without Docker](./woocommerce/install-without-docker.html) |
+| Shopify | [Set up with Docker](./run-with-docker.html) | [Set up without Docker](./manual-installation.html) |
+| WooCommerce | [Set up with Docker](./woocommerce/install-with-docker.html) | [Set up without Docker](./woocommerce/install-without-docker.html) |
 
 ## 6. Check both connections
 
@@ -103,16 +106,33 @@ Follow the install page for your service and your choice of
 With Docker, start Docker first, and the WooCommerce sandbox if you use it.
 Neither starts by itself after the computer restarts.
 
-From the new project folder, run:
+The check needs the PHP packages and a tracezilla login. The setup page in
+step 5 does both; if you skipped them, run these once from the new project
+folder. With Docker:
+
+```bash
+docker compose run --rm php composer install
+docker compose run --rm php php bin/bifrost-connect tracezilla:login
+```
+
+Without Docker:
+
+```bash
+composer install
+php bin/bifrost-connect tracezilla:login
+```
+
+Then run the check from the same folder:
 
 | | Command |
 |:--|:--|
 | With Docker, Mac and Linux | `./check-connection` |
-| With Docker, Windows | See Check Connections for your service |
+| With Docker, Windows | `docker compose run --rm php php bin/bifrost-connect connection:check` |
 | Without Docker | `php bin/bifrost-connect connection:check` |
 
 The command makes one small read-only request to the external service and one
-to tracezilla, and reports both. **Nothing else works until both connections
+to tracezilla. The WooCommerce check always reports both; the Shopify check
+stops at the first failure. **Nothing else works until both connections
 pass**, so fix any reported problem before continuing; see
 [Troubleshooting](./troubleshooting.html).
 
