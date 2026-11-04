@@ -47,7 +47,7 @@ Preview with `--dry-run`. It processes at most ten Shopify variants:
 With Docker:
 
 ```bash
-docker compose exec integration php bin/bifrost-connect catalog:create-tracezilla-skus --dry-run
+docker compose run --rm php php bin/bifrost-connect catalog:create-tracezilla-skus --dry-run
 ```
 
 Without Docker:
@@ -63,8 +63,8 @@ Choose another processing limit or request complete JSON:
 With Docker:
 
 ```bash
-docker compose exec integration php bin/bifrost-connect catalog:create-tracezilla-skus --limit=25 --dry-run
-docker compose exec integration php bin/bifrost-connect catalog:create-tracezilla-skus --limit=25 --json --dry-run
+docker compose run --rm php php bin/bifrost-connect catalog:create-tracezilla-skus --limit=25 --dry-run
+docker compose run --rm php php bin/bifrost-connect catalog:create-tracezilla-skus --limit=25 --json --dry-run
 ```
 
 Without Docker:
@@ -85,7 +85,7 @@ First inspect a dry run. For the first sandbox write, use a limit of one:
 With Docker:
 
 ```bash
-docker compose exec integration php bin/bifrost-connect catalog:create-tracezilla-skus --execute --limit=1
+docker compose run --rm php php bin/bifrost-connect catalog:create-tracezilla-skus --execute --limit=1
 ```
 
 Without Docker:
@@ -148,7 +148,7 @@ tracezilla request.
 With Docker:
 
 ```bash
-docker compose exec integration composer test
+docker compose run --rm php composer test
 ```
 
 Without Docker:

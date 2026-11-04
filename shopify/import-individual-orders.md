@@ -49,7 +49,7 @@ warehouse is selected by its tracezilla location number.
 With Docker:
 
 ```bash
-docker compose exec integration php bin/bifrost-connect orders:import-individual \
+docker compose run --rm php php bin/bifrost-connect orders:import-individual \
   --customer='Banana primary webshop' \
   --warehouse=2 \
   --days=3 \
@@ -95,7 +95,7 @@ one order in sandbox accounts:
 With Docker:
 
 ```bash
-docker compose exec integration php bin/bifrost-connect orders:import-individual \
+docker compose run --rm php php bin/bifrost-connect orders:import-individual \
   --customer='Banana primary webshop' \
   --warehouse=2 \
   --days=3 \
@@ -172,7 +172,7 @@ transport behavior.
 With Docker:
 
 ```bash
-docker compose exec integration composer test
+docker compose run --rm php composer test
 ```
 
 Without Docker:

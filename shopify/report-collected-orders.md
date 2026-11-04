@@ -30,7 +30,7 @@ next begins.
 With Docker:
 
 ```bash
-docker compose exec integration php bin/bifrost-connect orders:report-collected \
+docker compose run --rm php php bin/bifrost-connect orders:report-collected \
   --days=3 \
   --timezone=Europe/Copenhagen \
   --limit=10
@@ -67,7 +67,7 @@ For machine-readable output:
 With Docker:
 
 ```bash
-docker compose exec integration php bin/bifrost-connect orders:report-collected \
+docker compose run --rm php php bin/bifrost-connect orders:report-collected \
   --days=3 --timezone=Europe/Copenhagen --limit=10 --json
 ```
 
@@ -119,7 +119,7 @@ API credentials.
 With Docker:
 
 ```bash
-docker compose exec integration composer test
+docker compose run --rm php composer test
 ```
 
 Without Docker:

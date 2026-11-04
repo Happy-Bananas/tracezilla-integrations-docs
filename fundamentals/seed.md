@@ -70,6 +70,3 @@ Without Docker:
 ```bash
 php bin/bifrost-connect tracezilla:seed --execute
 ```
-
-In a Shopify integration, the Docker commands start with
-`docker compose exec integration` instead of `docker compose run --rm php`.

@@ -66,8 +66,8 @@ Never commit this file; Git ignores it automatically.
 Install the PHP packages in the development container, then log in once:
 
 ```bash
-docker compose run --rm integration composer install
-docker compose run --rm integration php bin/bifrost-connect tracezilla:login
+docker compose run --rm php composer install
+docker compose run --rm php php bin/bifrost-connect tracezilla:login
 ```
 
 The first command builds the development container, so it can take a little
@@ -85,21 +85,14 @@ Mac and Linux:
 ./check-connection
 ```
 
-The first run builds and starts the development container, so it can take a
-little while. The command prints progress, waits until the integration is ready,
-and then performs one small read-only request against each service.
+The helper installs the PHP packages if needed and then performs one small
+read-only request against each service.
 
-Windows (PowerShell): start the container, wait until
-`docker compose logs integration` shows `THE INTEGRATION IS READY`, and then run
-the check:
+Windows (PowerShell):
 
 ```powershell
-docker compose up --build -d integration
-docker compose logs -f integration
-docker compose exec integration php bin/bifrost-connect connection:check
+docker compose run --rm php php bin/bifrost-connect connection:check
 ```
-
-Press Ctrl+C to stop following the log once it reports that it is ready.
 
 A successful result looks like:
 

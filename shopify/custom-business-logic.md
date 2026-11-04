@@ -18,7 +18,7 @@ Generate a scenario instead of copying framework classes by hand:
 With Docker:
 
 ```bash
-docker compose exec integration php bin/bifrost-connect scenario:create confirm-credentials --platform=shopify
+docker compose run --rm php php bin/bifrost-connect scenario:create confirm-credentials --platform=shopify
 ```
 
 Without Docker:
@@ -46,8 +46,8 @@ Run the generated test and scenario:
 With Docker:
 
 ```bash
-docker compose exec integration composer test
-docker compose exec integration php bin/bifrost-connect scenario:run confirm-credentials --platform=shopify
+docker compose run --rm php composer test
+docker compose run --rm php php bin/bifrost-connect scenario:run confirm-credentials --platform=shopify
 ```
 
 Without Docker:
@@ -176,7 +176,7 @@ Run the complete suite in the development container:
 With Docker:
 
 ```bash
-docker compose exec integration composer test
+docker compose run --rm php composer test
 ```
 
 Without Docker:
@@ -191,7 +191,7 @@ Run the command manually and verify its dry-run output before adding cron. A
 Docker-based production schedule can use `flock` to prevent overlapping runs:
 
 ```cron
-*/5 * * * * flock -n /tmp/tracezilla-orders.lock docker compose -f /opt/customer-integration/compose.yaml exec -T integration php bin/bifrost-connect orders:import-individual --customer='WEB-B2C' --warehouse=2 --days=1 --limit=100 --execute >> /var/log/tracezilla-orders.log 2>&1
+*/5 * * * * flock -n /tmp/tracezilla-orders.lock docker compose -f /opt/customer-integration/compose.yaml run --rm -T php php bin/bifrost-connect orders:import-individual --customer='WEB-B2C' --warehouse=2 --days=1 --limit=100 --execute >> /var/log/tracezilla-orders.log 2>&1
 ```
 
 When PHP and Composer are installed directly on the host, cron can invoke the

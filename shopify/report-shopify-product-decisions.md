@@ -28,7 +28,7 @@ From your project directory, run:
 With Docker:
 
 ```bash
-docker compose exec integration php bin/bifrost-connect catalog:report-shopify-decisions
+docker compose run --rm php php bin/bifrost-connect catalog:report-shopify-decisions
 ```
 
 Without Docker:
@@ -58,7 +58,7 @@ Display at most 25 candidates while retaining the complete candidate count:
 With Docker:
 
 ```bash
-docker compose exec integration php bin/bifrost-connect catalog:report-shopify-decisions --limit=25
+docker compose run --rm php php bin/bifrost-connect catalog:report-shopify-decisions --limit=25
 ```
 
 Without Docker:
@@ -74,7 +74,7 @@ manageable:
 With Docker:
 
 ```bash
-docker compose exec integration php bin/bifrost-connect catalog:report-shopify-decisions --limit=25 --json
+docker compose run --rm php php bin/bifrost-connect catalog:report-shopify-decisions --limit=25 --json
 ```
 
 Without Docker:
@@ -161,7 +161,7 @@ API clients and pagination remain outside the decision rule.
 With Docker:
 
 ```bash
-docker compose exec integration composer test
+docker compose run --rm php composer test
 ```
 
 Without Docker:

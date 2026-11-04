@@ -22,12 +22,11 @@ With Docker:
 ./check-connection
 ```
 
-This starts the Docker development service when needed, waits until it is
-ready, and runs `connection:check`. If the container is already running, the
-equivalent command is:
+The helper installs the PHP packages if needed and runs `connection:check`. On
+Windows (PowerShell), run it directly:
 
-```bash
-docker compose exec integration php bin/bifrost-connect connection:check
+```powershell
+docker compose run --rm php php bin/bifrost-connect connection:check
 ```
 
 Without Docker:

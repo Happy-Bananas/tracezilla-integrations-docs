@@ -23,7 +23,7 @@ From your project directory, run:
 With Docker:
 
 ```bash
-docker compose exec integration php bin/bifrost-connect catalog:compare
+docker compose run --rm php php bin/bifrost-connect catalog:compare
 ```
 
 Without Docker:
@@ -59,7 +59,7 @@ Display a different maximum number of rows from each category:
 With Docker:
 
 ```bash
-docker compose exec integration php bin/bifrost-connect catalog:compare --limit=25
+docker compose run --rm php php bin/bifrost-connect catalog:compare --limit=25
 ```
 
 Without Docker:
@@ -73,7 +73,7 @@ Return the complete result as machine-readable JSON:
 With Docker:
 
 ```bash
-docker compose exec integration php bin/bifrost-connect catalog:compare --json
+docker compose run --rm php php bin/bifrost-connect catalog:compare --json
 ```
 
 Without Docker:
@@ -149,7 +149,7 @@ normalize records, and the workflow contains the rule.
 With Docker:
 
 ```bash
-docker compose exec integration composer test
+docker compose run --rm php composer test
 ```
 
 Without Docker:

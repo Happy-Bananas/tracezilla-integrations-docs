@@ -54,8 +54,7 @@ Keep the branch focused on one bug, feature, or documentation improvement.
 For the PHP application:
 
 ```bash
-docker compose up -d integration
-docker compose exec integration composer test
+docker compose run --rm php composer test
 ```
 
 For the documentation:
