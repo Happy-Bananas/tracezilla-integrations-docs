@@ -42,7 +42,7 @@ sellable-quantity rules before writing.
 Find the target GraphQL ID with [List Shopify Locations](list-shopify-locations.html),
 then run a bounded preview:
 
-### With Docker
+With Docker:
 
 ```bash
 docker compose exec integration php bin/bifrost-connect inventory:sync \
@@ -51,10 +51,10 @@ docker compose exec integration php bin/bifrost-connect inventory:sync \
   --limit=10
 ```
 
-### Without Docker
+Without Docker:
 
 ```bash
-php bin/synchronize-inventory \
+php bin/bifrost-connect inventory:sync \
   --shopify-location=gid://shopify/Location/123 \
   --tracezilla-warehouse=2 \
   --limit=10
@@ -76,8 +76,19 @@ Both location arguments are mandatory to prevent an implicit destination.
 
 After reviewing the dry run, test at most one record in sandbox accounts:
 
+With Docker:
+
 ```bash
 docker compose exec integration php bin/bifrost-connect inventory:sync \
+  --shopify-location=gid://shopify/Location/123 \
+  --tracezilla-warehouse=2 \
+  --execute --confirm --limit=1
+```
+
+Without Docker:
+
+```bash
+php bin/bifrost-connect inventory:sync \
   --shopify-location=gid://shopify/Location/123 \
   --tracezilla-warehouse=2 \
   --execute --confirm --limit=1
@@ -125,8 +136,16 @@ transport-specific behavior.
 
 ## Tests
 
+With Docker:
+
 ```bash
 docker compose exec integration composer test
+```
+
+Without Docker:
+
+```bash
+composer test
 ```
 
 Tests verify quantity conversion, dry-run behavior, guarded execution, and

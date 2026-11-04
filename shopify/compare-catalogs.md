@@ -20,16 +20,16 @@ SKU codes, and reports differences without writing to either API.
 
 From your project directory, run:
 
-### With Docker
+With Docker:
 
 ```bash
 docker compose exec integration php bin/bifrost-connect catalog:compare
 ```
 
-### Without Docker
+Without Docker:
 
 ```bash
-php bin/compare-catalogs
+php bin/bifrost-connect catalog:compare
 ```
 
 The terminal output contains three categories:
@@ -56,14 +56,30 @@ produced them. It shows the PHP command, also when you run it through Docker.
 
 Display a different maximum number of rows from each category:
 
+With Docker:
+
 ```bash
 docker compose exec integration php bin/bifrost-connect catalog:compare --limit=25
 ```
 
+Without Docker:
+
+```bash
+php bin/bifrost-connect catalog:compare --limit=25
+```
+
 Return the complete result as machine-readable JSON:
+
+With Docker:
 
 ```bash
 docker compose exec integration php bin/bifrost-connect catalog:compare --json
+```
+
+Without Docker:
+
+```bash
+php bin/bifrost-connect catalog:compare --json
 ```
 
 JSON output remains valid JSON and includes the same execution context around
@@ -130,8 +146,16 @@ normalize records, and the workflow contains the rule.
 
 ## Tests
 
+With Docker:
+
 ```bash
 docker compose exec integration composer test
+```
+
+Without Docker:
+
+```bash
+composer test
 ```
 
 The tests use in-memory data and do not contact Shopify or tracezilla.

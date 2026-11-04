@@ -36,7 +36,7 @@ With Docker, two things must be running:
 
 ## Run the command
 
-### With Docker
+With Docker:
 
 Mac and Linux:
 
@@ -53,7 +53,7 @@ Windows (PowerShell), or anywhere without the helper:
 docker compose run --rm php php bin/bifrost-connect connection:check
 ```
 
-### Without Docker
+Without Docker:
 
 ```bash
 php bin/bifrost-connect connection:check
@@ -69,10 +69,24 @@ tracezilla:  connected to team your-development-company
 
 ## Options
 
-Request structured output:
+Request structured output.
+
+With Docker, Mac and Linux:
 
 ```bash
 ./check-connection --json
+```
+
+With Docker, Windows (PowerShell):
+
+```powershell
+docker compose run --rm php php bin/bifrost-connect connection:check --json
+```
+
+Without Docker:
+
+```bash
+php bin/bifrost-connect connection:check --json
 ```
 
 ```json
@@ -142,8 +156,16 @@ flowchart TB
 
 ## Tests
 
+With Docker:
+
 ```bash
 docker compose run --rm php composer test
+```
+
+Without Docker:
+
+```bash
+composer test
 ```
 
 The tests verify the combined result, that a failure in one system does not

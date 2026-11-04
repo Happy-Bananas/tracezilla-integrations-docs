@@ -17,14 +17,23 @@ shop sells to exist in tracezilla with the same SKU.
 
 ## Create and run it
 
+With Docker:
+
 ```bash
 docker compose run --rm php php bin/bifrost-connect scenario:create product-check --template=compare-catalogs
 docker compose run --rm php composer test
 docker compose run --rm php php bin/bifrost-connect scenario:run product-check
 ```
 
-Without Docker, leave out `docker compose run --rm php`. `product-check` is
-your scenario's name; choose any name.
+Without Docker:
+
+```bash
+php bin/bifrost-connect scenario:create product-check --template=compare-catalogs
+composer test
+php bin/bifrost-connect scenario:run product-check
+```
+
+`product-check` is your scenario's name; choose any name.
 
 ## What it reads
 

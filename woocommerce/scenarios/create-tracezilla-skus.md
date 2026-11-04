@@ -20,14 +20,23 @@ and agree the mapping rules below with the customer before you write anything.
 
 ## Create it and preview the plan
 
+With Docker:
+
 ```bash
 docker compose run --rm php php bin/bifrost-connect scenario:create sku-sync --template=create-tracezilla-skus
 docker compose run --rm php composer test
 docker compose run --rm php php bin/bifrost-connect scenario:run sku-sync
 ```
 
-Without Docker, leave out `docker compose run --rm php`. `sku-sync` is your
-scenario's name; choose any name.
+Without Docker:
+
+```bash
+php bin/bifrost-connect scenario:create sku-sync --template=create-tracezilla-skus
+composer test
+php bin/bifrost-connect scenario:run sku-sync
+```
+
+`sku-sync` is your scenario's name; choose any name.
 
 The last command is a dry run. It writes nothing and shows the plan:
 
@@ -77,8 +86,16 @@ The sandbox products have no weight, so every weight is assumed.
 
 Check the plan, then create one SKU and look at it in tracezilla:
 
+With Docker:
+
 ```bash
 docker compose run --rm php php bin/bifrost-connect scenario:run sku-sync --execute --confirm --limit=1
+```
+
+Without Docker:
+
+```bash
+php bin/bifrost-connect scenario:run sku-sync --execute --confirm --limit=1
 ```
 
 When it is right, run it without `--limit` to create the rest. Running it

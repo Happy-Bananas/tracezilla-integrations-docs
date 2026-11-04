@@ -27,8 +27,9 @@ the customer, test it, and run it, by hand or from cron.
 
 ## Create a scenario
 
-Give the scenario a name and choose a template. With Docker (Mac, Linux, and
-Windows PowerShell):
+Give the scenario a name and choose a template.
+
+With Docker:
 
 ```bash
 docker compose run --rm php php bin/bifrost-connect scenario:create hello --template=confirm-credentials
@@ -56,18 +57,33 @@ The command creates three files. They are yours to change:
 
 Run the tests first. They include the tests of every scenario:
 
+With Docker:
+
 ```bash
 docker compose run --rm php composer test
 ```
 
+Without Docker:
+
+```bash
+composer test
+```
+
 Then run the scenario against the real services:
+
+With Docker:
 
 ```bash
 docker compose run --rm php php bin/bifrost-connect scenario:run hello
 ```
 
-Without Docker, leave out `docker compose run --rm php`. With Docker, Docker
-and the sandbox must be running. The result is JSON:
+Without Docker:
+
+```bash
+php bin/bifrost-connect scenario:run hello
+```
+
+With Docker, Docker and the sandbox must be running. The result is JSON:
 
 ```json
 {
@@ -132,8 +148,16 @@ Without options, `scenario:run` is a dry run: every change is reported as
 `planned` and nothing is written. Review the plan, then write one change
 first:
 
+With Docker:
+
 ```bash
 docker compose run --rm php php bin/bifrost-connect scenario:run sku-sync --execute --confirm --limit=1
+```
+
+Without Docker:
+
+```bash
+php bin/bifrost-connect scenario:run sku-sync --execute --confirm --limit=1
 ```
 
 Both `--execute` and `--confirm` are required. `--limit` writes at most that

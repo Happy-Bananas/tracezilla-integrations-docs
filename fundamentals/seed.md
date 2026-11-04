@@ -28,8 +28,9 @@ platform-neutral and can be used with any integration.
   [Docker](../woocommerce/install-with-docker.html) or
   [without Docker](../woocommerce/install-without-docker.html).
 
-Add the exact partner name of your own company in tracezilla to `.env`. The
-seed adds its warehouse location to that partner:
+Add the exact partner name of your own company in tracezilla to the `.env` file
+in your integration project folder. The seed adds its warehouse location to
+that partner:
 
 ```dotenv
 TRACEZILLA_OWN_COMPANY=Your development company
@@ -37,25 +38,40 @@ TRACEZILLA_OWN_COMPANY=Your development company
 
 ## Run the seed
 
+Run these commands in your integration project folder: the folder you created
+with `create-project woocommerce`, under the name you chose. For example:
+
+```bash
+cd YOUR_INTEGRATION_NAME
+```
+
 Preview what would be created. Nothing is written:
 
-### With Docker
+With Docker:
 
 ```bash
 docker compose run --rm php php bin/bifrost-connect tracezilla:seed
 ```
 
-### Without Docker
+Without Docker:
 
 ```bash
 php bin/bifrost-connect tracezilla:seed
 ```
 
 Check that the first line names your development company, then write the
-data:
+data.
+
+With Docker:
 
 ```bash
 docker compose run --rm php php bin/bifrost-connect tracezilla:seed --execute --confirm
+```
+
+Without Docker:
+
+```bash
+php bin/bifrost-connect tracezilla:seed --execute --confirm
 ```
 
 Both `--execute` and `--confirm` are required. Running the command again
