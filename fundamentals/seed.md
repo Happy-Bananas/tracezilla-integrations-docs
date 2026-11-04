@@ -20,14 +20,10 @@ Every new project includes the `tracezilla:seed` command and the dataset,
 run `php bin/bifrost-connect help` (with Docker, prefixed as below) and look
 for `tracezilla:seed`.
 
-## Before you start
+Seed only a [development company](./development-company.html), never a
+production team.
 
-- A [development company](./development-company.html). Never seed a
-  production team.
-- [Credentials](./account-and-team.html) with the OAuth client, and a completed
-  `tracezilla:login`.
-- Your integration installed, as described in
-  [Getting Started](../getting-started.html), without `--without-seed`.
+## Name your own company
 
 Add the exact partner name of your own company in tracezilla to the `.env` file
 in your integration project folder. The seed adds its warehouse location to
@@ -36,13 +32,6 @@ that partner:
 ```dotenv
 TRACEZILLA_OWN_COMPANY=Your development company
 ```
-
-### Add the seed to an existing project
-
-If you created your project with `--without-seed`, create a second, temporary
-project of the same platform without that option, and copy these into your
-project: `bin/seed-tracezilla`, `src/Seed/`, `seeds/`, and `tests/Unit/Seed/`.
-Then add the `TRACEZILLA_OWN_COMPANY` line above to `.env`.
 
 ## Run the seed
 
@@ -132,3 +121,10 @@ errors, API errors, and failed or invalid records return a non-zero exit code.
 The seed takes the integration's run lock. If another command that writes is
 already running, the seed is skipped with exit code `75` and changes nothing;
 run it again when the other command has finished.
+
+## Add the seed to an existing project
+
+If you created your project with `--without-seed`, create a second, temporary
+project of the same platform without that option, and copy these into your
+project: `bin/seed-tracezilla`, `src/Seed/`, `seeds/`, and `tests/Unit/Seed/`.
+Then add the `TRACEZILLA_OWN_COMPANY` line above to `.env`.
