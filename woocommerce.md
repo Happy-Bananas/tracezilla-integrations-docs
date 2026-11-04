@@ -26,10 +26,30 @@ does not need to be installed as a WordPress plugin.
    company.
 6. Create and run your first [scenario](./scenarios.html).
 
+## Where to run the commands
+
+You work in two folders. Their names are the ones you chose when you created
+them, so yours may differ from the examples:
+
+| Folder | Created with | Run there |
+|:--|:--|:--|
+| Your integration project, for example `YOUR_INTEGRATION_NAME` | `create-project woocommerce YOUR_INTEGRATION_NAME` | Every `bin/bifrost-connect` command, `./check-connection`, `composer test`, and everything that starts with `docker compose run --rm php` |
+| The WooCommerce sandbox, for example `woocommerce-sandbox` | `create-project woocommerce-sandbox woocommerce-sandbox` | `docker compose up -d` and the other sandbox commands on [Development Store](./setup/store.html) |
+
+Change to the right folder before you run a command, for example:
+
+```bash
+cd YOUR_INTEGRATION_NAME
+```
+
+Each folder has its own `compose.yaml`, so a `docker compose` command acts on
+the folder you are in. In the wrong folder it starts the wrong containers, or
+fails with `no configuration file provided`.
+
 ## Coverage
 
-Every command runs through one entry point, `bin/bifrost-connect`. Run
-`php bin/bifrost-connect help` to list them.
+Every command runs through one entry point, `bin/bifrost-connect`, in your
+integration project folder. Run `php bin/bifrost-connect help` to list them.
 
 | Command | Purpose | Status |
 |:--|:--|:--|
