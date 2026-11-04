@@ -62,12 +62,13 @@ Do not start a customer project with `git clone` of a BifrostConnect
 repository. A clone stays connected to the public repository, so the customer's
 business rules could end up there. Use the create command below instead.
 
-Create every customer project with this command. Replace `woocommerce` with
-`shopify` for a Shopify project, and `YOUR_INTEGRATION_NAME` with the name of
+Create every customer project with this command. Replace `PLATFORM` with one
+of the [supported platforms](./getting-started.html#4-create-the-project), for
+example `woocommerce` or `shopify`, and `YOUR_INTEGRATION_NAME` with the name of
 your integration:
 
 ```bash
-curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce YOUR_INTEGRATION_NAME
+curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- PLATFORM YOUR_INTEGRATION_NAME
 ```
 
 On Windows, use the command in [Getting Started](./getting-started.html#4-create-the-project).

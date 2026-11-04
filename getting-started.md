@@ -35,13 +35,18 @@ Choose the service you are integrating with and complete its prerequisites:
 ## 4. Create the project
 
 Open a terminal in the folder where you keep your projects. In the commands
-below, replace `woocommerce` with `shopify` for a Shopify project, and
+below, replace `PLATFORM` with the platform you integrate with, and
 `YOUR_INTEGRATION_NAME` with the name of your integration.
+
+| Platform | `PLATFORM` | ZIP download (Windows without Docker) |
+|:--|:--|:--|
+| Shopify | `shopify` | [tracezilla-shopify-php](https://github.com/Happy-Bananas/tracezilla-shopify-php/archive/refs/heads/main.zip) |
+| WooCommerce | `woocommerce` | [tracezilla-woocommerce-php](https://github.com/Happy-Bananas/tracezilla-woocommerce-php/archive/refs/heads/main.zip) |
 
 ### Mac and Linux
 
 ```bash
-curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce YOUR_INTEGRATION_NAME
+curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- PLATFORM YOUR_INTEGRATION_NAME
 ```
 
 ### Windows with Docker
@@ -49,14 +54,12 @@ curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-p
 In PowerShell, the same command runs in a small container:
 
 ```powershell
-docker run --rm -v "${PWD}:/work" -w /work alpine:3 sh -c "wget -qO- https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce YOUR_INTEGRATION_NAME"
+docker run --rm -v "${PWD}:/work" -w /work alpine:3 sh -c "wget -qO- https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- PLATFORM YOUR_INTEGRATION_NAME"
 ```
 
 ### Windows without Docker
 
-1. Download the integration as a ZIP file:
-   [WooCommerce](https://github.com/Happy-Bananas/tracezilla-woocommerce-php/archive/refs/heads/main.zip)
-   or [Shopify](https://github.com/Happy-Bananas/tracezilla-shopify-php/archive/refs/heads/main.zip).
+1. Download the ZIP file for your platform from the table above.
 2. Extract it in the folder where you keep your projects and rename the
    extracted folder to `YOUR_INTEGRATION_NAME`.
 3. In PowerShell, create `.env` in the project folder:
