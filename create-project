@@ -140,10 +140,15 @@ mv "$source" "$project"
 # works directly on production data leaves it out. The sandbox has no seed.
 if [ "$platform" != woocommerce-sandbox ] && [ "$with_seed" = no ]; then
     rm -rf "$project/bin/seed-tracezilla" "$project/src/Seed" "$project/seeds" "$project/tests/Unit/Seed"
-    # TRACEZILLA_OWN_COMPANY and its comment are only used by the seed.
+    # TRACEZILLA_OWN_COMPANY is only used by the seed. Its comment is the block
+    # of # lines right above it, however the template wraps that text.
     if [ -f "$project/.env.example" ]; then
-        grep -v -e '^TRACEZILLA_OWN_COMPANY=' -e 'own partner in tracezilla' -e 'adds its warehouse location' \
-            "$project/.env.example" > "$project/.env.example.new" || true
+        awk '
+            /^#/ { comment = comment $0 "\n"; next }
+            /^TRACEZILLA_OWN_COMPANY=/ { comment = ""; next }
+            { printf "%s", comment; comment = ""; print }
+            END { printf "%s", comment }
+        ' "$project/.env.example" > "$project/.env.example.new"
         mv "$project/.env.example.new" "$project/.env.example"
     fi
 fi
@@ -155,6 +160,8 @@ if [ -f "$project/.env.example" ]; then
     if [ "$(id -u)" != 0 ]; then
         printf '\nTRACEZILLA_DOCKER_UID=%s\nTRACEZILLA_DOCKER_GID=%s\n' "$(id -u)" "$(id -g)" >> "$project/.env"
     fi
+    # .env will hold the API keys and the OAuth client secret.
+    chmod 600 "$project/.env"
 fi
 
 echo ""

@@ -108,6 +108,46 @@ mkdir -p repository/.git repository/sub
 refuses "refuses a project inside a Git repository" "is a Git repository" woocommerce repository/sub/Project
 [ ! -e repository/sub/Project ] || fail "left a project inside the Git repository"
 
+# The real templates, so the tests see their actual .env.example. They are
+# next to this repository in the BifrostConnect workspace; CI clones them
+# into TRACEZILLA_TEMPLATES_DIR.
+templates=${TRACEZILLA_TEMPLATES_DIR:-$(dirname "$script")/..}
+
+# Only the owner may read .env, because it holds the credentials.
+readable_only_by_owner() {
+    case "$(ls -l "$1")" in
+        -rw-------*) return 0 ;;
+        *) return 1 ;;
+    esac
+}
+
+for platform in woocommerce shopify; do
+    repository=tracezilla-$platform-php
+    if [ ! -d "$templates/$repository/.git" ] && [ ! -f "$templates/$repository/.git" ]; then
+        fail "$repository not found in $templates (set TRACEZILLA_TEMPLATES_DIR)"
+        continue
+    fi
+    git -C "$templates/$repository" archive --prefix="$repository-main/" HEAD | gzip > "$work/$platform.tar.gz"
+
+    if create "$platform.tar.gz" "$platform" "Real-$platform" >/dev/null 2>&1 \
+        && grep -q '^TRACEZILLA_OWN_COMPANY=' "Real-$platform/.env" \
+        && readable_only_by_owner "Real-$platform/.env"; then
+        pass "creates a $platform project whose .env only the owner can read"
+    else
+        fail "creates a $platform project whose .env only the owner can read"
+    fi
+
+    # The comment above TRACEZILLA_OWN_COMPANY mentions the own partner.
+    if create "$platform.tar.gz" "$platform" "Real-$platform-without-seed" --without-seed >/dev/null 2>&1 \
+        && ! grep -q 'OWN_COMPANY' "Real-$platform-without-seed/.env.example" \
+        && ! grep -q -i 'partner' "Real-$platform-without-seed/.env.example" \
+        && grep -q '^TRACEZILLA_TEAM_SLUG=' "Real-$platform-without-seed/.env.example"; then
+        pass "removes the seed setting and its whole comment from the $platform .env"
+    else
+        fail "removes the seed setting and its whole comment from the $platform .env"
+    fi
+done
+
 if [ "$failures" -gt 0 ]; then
     echo "$failures test(s) failed." >&2
     exit 1
