@@ -8,8 +8,8 @@ permalink: /shopify/
 
 # Shopify
 
-Use BifrostConnect to apply custom PHP business rules between Shopify and
-tracezilla.
+Use BifrostConnect to build an integration that applies custom PHP business
+rules between Shopify and tracezilla.
 
 ## Start here
 

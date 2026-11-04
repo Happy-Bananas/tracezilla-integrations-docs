@@ -15,7 +15,7 @@ This deployment guidance is an optional example. Hosting, security, backups,
 monitoring, and scheduled operation remain your or your customer's
 responsibility.
 
-This example installs BifrostConnect in a Hetzner hosting
+This example installs your integration in a Hetzner hosting
 account with SSH access. Replace every uppercase value with the value supplied
 for the hosting account.
 
@@ -131,7 +131,7 @@ The server receives only the version currently in your project directory.
 Nothing changes on an existing customer installation until you upload another
 tested version.
 
-## 10. Schedule BifrostConnect
+## 10. Schedule your integration
 
 The application is installed but does not run continuously. Follow
 [Set up a cron task](./cron/setup.html) after selecting and manually testing
