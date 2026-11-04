@@ -67,7 +67,7 @@ SKUs, make it:
 2. Classify missing, existing, blank, and duplicate records.
 3. Validate the mapped data.
 4. Preview the decision without writing.
-5. Write only with `--execute --confirm`, and start with a small limit.
+5. Write only with `--execute`, and start with a small limit.
 6. Report one result per selected source record.
 
 Consult the current [tracezilla API documentation](https://app.tracezilla.com/api/documentation)

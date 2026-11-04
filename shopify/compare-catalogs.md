@@ -103,7 +103,7 @@ counts always use the complete catalogs.
 The command requires Shopify `read_products` access and read access to the
 configured tracezilla team. It does not create or update data.
 
-Because the command cannot write, it has no `--execute` or `--confirm` flags.
+Because the command cannot write, it has no `--dry-run` or `--execute` options.
 
 Catalog differences are a successful result and return exit code `0`.
 Configuration, authentication, transport, or malformed-response errors return

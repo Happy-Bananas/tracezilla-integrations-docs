@@ -115,7 +115,7 @@ them with the customer.
 
 ## Safety and exit status
 
-The command is read-only and has no `--execute` or `--confirm` flags. It reads
+The command is read-only and has no `--dry-run` or `--execute` options. It reads
 both complete catalogs to calculate an accurate candidate count, while the
 limit bounds rendered candidate details. Credentials remain in `.env` and are
 not included in output.

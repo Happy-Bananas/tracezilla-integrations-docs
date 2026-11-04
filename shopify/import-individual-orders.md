@@ -8,13 +8,13 @@ nav_order: 60
 # Import individual Shopify orders
 
 {: .label .label-yellow }
-Writes with explicit confirmation
+Writes with `--execute`
 
 ## Behavior
 
 The command reads recently created Shopify orders and maps each selected order
 to one tracezilla sales order. Preview it with `--dry-run`; it writes only with
-`--execute --confirm`. Existing tracezilla
+`--execute`. Existing tracezilla
 orders are detected by the external reference `SHP<Shopify legacy order ID>`.
 
 ## Mapping assumptions
@@ -82,7 +82,7 @@ Mode: DRY RUN
 - `--days=N` selects recently created Shopify orders and defaults to `3`.
 - `--limit=N` bounds selected orders and defaults to `10`.
 - `--json` returns `command`, `mode`, and the complete structured result.
-- `--execute --confirm` enables tracezilla writes; both flags are required.
+- `--execute` enables tracezilla writes; `--dry-run` previews them.
 
 Credentials remain in `.env` and are never included in command output.
 
@@ -100,7 +100,7 @@ docker compose exec integration php bin/bifrost-connect orders:import-individual
   --warehouse=2 \
   --days=3 \
   --limit=1 \
-  --execute --confirm
+  --execute
 ```
 
 Without Docker:
@@ -111,7 +111,7 @@ php bin/bifrost-connect orders:import-individual \
   --warehouse=2 \
   --days=3 \
   --limit=1 \
-  --execute --confirm
+  --execute
 ```
 
 If either write flag is missing, the command exits before constructing API

@@ -8,7 +8,7 @@ nav_order: 40
 # Synchronize Shopify inventory from tracezilla
 
 {: .label .label-yellow }
-Writes with explicit confirmation
+Writes with `--execute`
 
 ## Behavior
 
@@ -68,7 +68,7 @@ php bin/bifrost-connect inventory:sync \
 - `--tracezilla-warehouse=N` selects the source warehouse by location number.
 - `--limit=N` bounds processed tracezilla records and defaults to `10`.
 - `--json` returns the complete structured result.
-- `--dry-run` or `--execute --confirm` is required: preview, or write the
+- `--dry-run` or `--execute` is required: preview, or write the
   changed quantities.
 
 Both location arguments are mandatory to prevent an implicit destination.
@@ -83,7 +83,7 @@ With Docker:
 docker compose exec integration php bin/bifrost-connect inventory:sync \
   --shopify-location=gid://shopify/Location/123 \
   --tracezilla-warehouse=2 \
-  --execute --confirm --limit=1
+  --execute --limit=1
 ```
 
 Without Docker:
@@ -92,7 +92,7 @@ Without Docker:
 php bin/bifrost-connect inventory:sync \
   --shopify-location=gid://shopify/Location/123 \
   --tracezilla-warehouse=2 \
-  --execute --confirm --limit=1
+  --execute --limit=1
 ```
 
 Both write flags are required. Shopify's mutation includes the quantity read

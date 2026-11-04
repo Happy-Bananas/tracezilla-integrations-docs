@@ -8,7 +8,7 @@ nav_order: 20
 # Create tracezilla SKUs from Shopify
 
 {: .label .label-yellow }
-Writes with explicit confirmation
+Writes with `--execute`
 
 ## Behavior
 
@@ -85,17 +85,16 @@ First inspect a dry run. For the first sandbox write, use a limit of one:
 With Docker:
 
 ```bash
-docker compose exec integration php bin/bifrost-connect catalog:create-tracezilla-skus --execute --confirm --limit=1
+docker compose exec integration php bin/bifrost-connect catalog:create-tracezilla-skus --execute --limit=1
 ```
 
 Without Docker:
 
 ```bash
-php bin/bifrost-connect catalog:create-tracezilla-skus --execute --confirm --limit=1
+php bin/bifrost-connect catalog:create-tracezilla-skus --execute --limit=1
 ```
 
-Both `--execute` and `--confirm` are required. Supplying `--execute` alone exits
-with an error and writes nothing. Increase the limit only after verifying the
+Increase the limit only after verifying the
 created tracezilla record and its unit mapping.
 
 The command requires Shopify `read_products` access and permission to list and

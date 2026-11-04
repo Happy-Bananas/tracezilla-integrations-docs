@@ -9,7 +9,7 @@ has_children: true
 # Scenarios
 
 {: .label .label-yellow }
-Writes with explicit confirmation
+Writes with `--execute`
 
 A scenario is where your customer's business rules live. It is ordinary PHP in
 the project's `custom/` folder, separate from the integration's own code, so
@@ -152,16 +152,16 @@ change first:
 With Docker:
 
 ```bash
-docker compose run --rm php php bin/bifrost-connect scenario:run sku-sync --execute --confirm --limit=1
+docker compose run --rm php php bin/bifrost-connect scenario:run sku-sync --execute --limit=1
 ```
 
 Without Docker:
 
 ```bash
-php bin/bifrost-connect scenario:run sku-sync --execute --confirm --limit=1
+php bin/bifrost-connect scenario:run sku-sync --execute --limit=1
 ```
 
-Both `--execute` and `--confirm` are required. `--limit` writes at most that
+`--limit` writes at most that
 many changes; leave it out to write all of them. Each change reports what
 happened:
 
