@@ -44,6 +44,10 @@ creates the `.env` configuration file. The project is a plain folder without
 Git history; see [Create the project](./getting-started.html#4-create-the-project).
 It will not replace a folder that already exists.
 
+Add `--with-seed` after the project name to include the tracezilla seed,
+which fills your development company with test data; see
+[Seed the Test Dataset](./fundamentals/seed.html).
+
 ## 2. Add credentials
 
 ```bash

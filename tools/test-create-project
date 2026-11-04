@@ -16,7 +16,15 @@ fail() { echo "FAIL $1" >&2; failures=$((failures + 1)); }
 # A GitHub-style archive: one top-level folder with the template inside.
 mkdir -p "$work/source/tracezilla-woocommerce-php-main/bin" \
     "$work/source/tracezilla-integrations-main/tracezilla-woocommerce-sandbox"
-printf 'WOOCOMMERCE_URL=http://host.docker.internal:8080\n' > "$work/source/tracezilla-woocommerce-php-main/.env.example"
+template="$work/source/tracezilla-woocommerce-php-main"
+printf 'WOOCOMMERCE_URL=http://host.docker.internal:8080\n# Exact name of your company'"'"'s own partner in tracezilla. The seed\n# adds its warehouse location to this partner.\nTRACEZILLA_OWN_COMPANY=\n' > "$template/.env.example"
+# The seed's files, which a project gets only with --with-seed.
+mkdir -p "$template/src/Seed" "$template/seeds" "$template/tests/Unit/Seed"
+printf '#!/bin/sh\n' > "$template/bin/seed-tracezilla"
+chmod +x "$template/bin/seed-tracezilla"
+printf '<?php\n' > "$template/src/Seed/Seeder.php"
+printf 'version: 1\n' > "$template/seeds/tracezilla.yaml"
+printf '<?php\n' > "$template/tests/Unit/Seed/SeederTest.php"
 printf '#!/bin/sh\n' > "$work/source/tracezilla-woocommerce-php-main/check-connection"
 chmod +x "$work/source/tracezilla-woocommerce-php-main/check-connection"
 printf 'services: {}\n' > "$work/source/tracezilla-integrations-main/tracezilla-woocommerce-sandbox/compose.yaml"
@@ -40,6 +48,29 @@ if create integration.tar.gz woocommerce YOUR_INTEGRATION_NAME >/dev/null 2>&1 \
     pass "creates a WooCommerce project without Git and with .env"
 else
     fail "creates a WooCommerce project without Git and with .env"
+fi
+
+# Leaves the seed out by default, including its setting in .env.
+if [ ! -e YOUR_INTEGRATION_NAME/bin/seed-tracezilla ] \
+    && [ ! -e YOUR_INTEGRATION_NAME/src/Seed ] \
+    && [ ! -e YOUR_INTEGRATION_NAME/seeds ] \
+    && [ ! -e YOUR_INTEGRATION_NAME/tests/Unit/Seed ] \
+    && ! grep -q OWN_COMPANY YOUR_INTEGRATION_NAME/.env; then
+    pass "leaves the seed out by default"
+else
+    fail "leaves the seed out by default"
+fi
+
+# Keeps the seed with --with-seed, wherever the option is given.
+if create integration.tar.gz --with-seed woocommerce WithSeed >/dev/null 2>&1 \
+    && [ -x WithSeed/bin/seed-tracezilla ] \
+    && [ -f WithSeed/src/Seed/Seeder.php ] \
+    && [ -f WithSeed/seeds/tracezilla.yaml ] \
+    && [ -f WithSeed/tests/Unit/Seed/SeederTest.php ] \
+    && grep -q '^TRACEZILLA_OWN_COMPANY=' WithSeed/.env; then
+    pass "keeps the seed with --with-seed"
+else
+    fail "keeps the seed with --with-seed"
 fi
 
 # Takes only the sandbox folder out of the workspace archive.
@@ -66,6 +97,8 @@ refuses() {
 
 refuses "refuses an existing folder" "already exists" woocommerce YOUR_INTEGRATION_NAME
 refuses "refuses an unknown platform" "Platforms:" magento Shop
+refuses "refuses an unknown option" "Usage:" woocommerce Other --with-everything
+refuses "refuses a third name" "Usage:" woocommerce One Two
 refuses "refuses a missing project name" "Usage:" woocommerce
 refuses "refuses a name starting with a dash" "must start with" woocommerce -x
 refuses "refuses a name with spaces" "use only" woocommerce "My Integration"

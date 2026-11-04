@@ -15,8 +15,15 @@ Populate your development company with the
 company, SKUs that match the external-service sandboxes, and received stock.
 
 The seed only talks to tracezilla, so it works the same in every integration.
-Every integration project ships the `tracezilla:seed` command and the dataset,
-`seeds/tracezilla.yaml`.
+It is optional: a project has the `tracezilla:seed` command and the dataset,
+`seeds/tracezilla.yaml`, only when you create it with `--with-seed`:
+
+```bash
+curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-project | sh -s -- woocommerce YOUR_INTEGRATION_NAME --with-seed
+```
+
+To check whether your project has the seed, run `php bin/bifrost-connect help`
+(with Docker, prefixed as below) and look for `tracezilla:seed`.
 
 ## Before you start
 
@@ -25,7 +32,7 @@ Every integration project ships the `tracezilla:seed` command and the dataset,
 - [Credentials](./account-and-team.html) with the OAuth client, and a completed
   `tracezilla:login`.
 - Your integration installed, as described in
-  [Getting Started](../getting-started.html).
+  [Getting Started](../getting-started.html), and created with `--with-seed`.
 
 Add the exact partner name of your own company in tracezilla to the `.env` file
 in your integration project folder. The seed adds its warehouse location to
@@ -34,6 +41,13 @@ that partner:
 ```dotenv
 TRACEZILLA_OWN_COMPANY=Your development company
 ```
+
+### Add the seed to an existing project
+
+If you created your project without the seed, create a second, temporary
+project of the same platform with `--with-seed`, and copy these into your
+project: `bin/seed-tracezilla`, `src/Seed/`, `seeds/`, and `tests/Unit/Seed/`.
+Then add the `TRACEZILLA_OWN_COMPANY` line above to `.env`.
 
 ## Run the seed
 

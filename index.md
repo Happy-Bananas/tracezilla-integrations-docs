@@ -73,6 +73,10 @@ curl -fsSL https://happy-bananas.github.io/tracezilla-integrations-docs/create-p
 
 On Windows, use the command in [Getting Started](./getting-started.html#4-create-the-project).
 
+Add `--with-seed` after the project name to include the tracezilla seed,
+which fills your development company with test data; see
+[Seed the Test Dataset](./fundamentals/seed.html).
+
 The command gives you a plain folder that belongs to you and your customer,
 with no Git history and no connection to the BifrostConnect repositories. If
 you want version control, put it in your own private Git repository.

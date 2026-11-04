@@ -74,6 +74,10 @@ yours: a plain folder on your computer, with no Git history and no connection
 to the BifrostConnect repositories. The command refuses to replace an existing
 folder or to create the project inside a Git repository.
 
+Add `--with-seed` after the project name to include the tracezilla seed,
+which fills your development company with test data; see
+[Seed the Test Dataset](./fundamentals/seed.html).
+
 If you later want backup, collaboration, or deployment through Git, run
 `git init` in the project and push it to a **private repository owned by you or
 the customer**. Never push customer business rules to the public BifrostConnect
