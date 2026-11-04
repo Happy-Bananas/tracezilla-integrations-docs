@@ -13,7 +13,7 @@ to use PHP and Composer directly on your computer.
 
 ## Requirements
 
-- [Docker](./your-computer.html#with-docker); nothing else on your computer
+- [Docker](./development-environment.html#with-docker); nothing else on your computer
 - [Shopify prerequisites](./shopify/setup.html): a development store and an
   installed app
 - [tracezilla prerequisites](./tracezilla-fundamentals.html): a development

@@ -13,7 +13,7 @@ and Composer directly on your computer.
 
 ## Requirements
 
-- [Docker](../your-computer.html#with-docker); nothing else on your computer
+- [Docker](../development-environment.html#with-docker); nothing else on your computer
 - [WooCommerce prerequisites](./setup.html): a development store and REST API
   keys
 - [tracezilla prerequisites](../tracezilla-fundamentals.html): a development
