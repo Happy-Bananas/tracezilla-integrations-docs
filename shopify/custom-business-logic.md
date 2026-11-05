@@ -187,25 +187,18 @@ composer test
 
 ## Schedule the command
 
-Run the command manually and verify its dry-run output before adding cron. A
-Docker-based production schedule can use `flock` to prevent overlapping runs:
+Run the command manually and verify its dry-run output before adding cron.
+Then follow [Set up a cron task](../deployment/cron/setup.html), which has
+the cron line and the exit codes to monitor.
 
-```cron
-*/5 * * * * flock -n /tmp/tracezilla-orders.lock docker compose -f /opt/customer-integration/compose.yaml run --rm -T php php bin/bifrost-connect orders:import-individual --customer='WEB-B2C' --warehouse=2 --days=1 --limit=100 --execute >> /var/log/tracezilla-orders.log 2>&1
-```
-
-When PHP and Composer are installed directly on the host, cron can invoke the
-same application without Docker:
-
-```cron
-*/5 * * * * flock -n /tmp/tracezilla-orders.lock /usr/bin/php /opt/customer-integration/bin/bifrost-connect orders:import-individual --customer='WEB-B2C' --warehouse=2 --days=1 --limit=100 --execute >> /var/log/tracezilla-orders.log 2>&1
-```
-
-Use absolute paths because cron has a minimal environment. Ensure failures are
-monitored rather than only written to an unread log.
+Every command that reads from or writes to the services takes the
+integration's run lock itself, whether cron starts it through
+`bin/bifrost-connect` or directly. A run that finds the lock taken stops with
+exit code `75` and changes nothing, so you need no extra `flock` around the
+cron line.
 
 {: .warning }
-The cron entries are examples; do not copy them into production unchanged. Before scheduling a workflow, verify that its pagination,
+Before scheduling a workflow, verify that its pagination,
 selection limit, lookback window, and idempotency rule cannot leave older
 eligible records permanently behind. Treat the example order command as a
 starting point that you harden for each customer.

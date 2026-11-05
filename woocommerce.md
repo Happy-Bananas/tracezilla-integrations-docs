@@ -74,5 +74,7 @@ php bin/bifrost-connect help
 | Template `create-tracezilla-skus` | [Create tracezilla SKUs](./scenarios/create-tracezilla-skus.html) | Available |
 | Your own catalog, inventory, and order rules | [Scenarios](./scenarios.html) | Write them as scenarios |
 
-Commands that write take a run lock, so scheduled runs never overlap. A run
-that finds the lock taken is skipped with exit code `75` and changes nothing.
+Commands that read from or write to the services take a run lock, so
+scheduled runs never overlap, also when a command is started directly instead
+of through `bin/bifrost-connect`. A run that finds the lock taken is skipped
+with exit code `75` and changes nothing.
