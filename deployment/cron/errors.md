@@ -15,6 +15,31 @@ Unsupported
 This page explains what the integration does with failures. To fix a failed
 run, start with [Troubleshoot scheduled runs](./troubleshooting.html).
 
+## Retries within one run
+
+Both integrations send a request to tracezilla again when tracezilla cannot
+handle it for the moment, before the run fails:
+
+| tracezilla answers | Read (GET) | Write (POST, PUT, DELETE) |
+|:--|:--|:--|
+| HTTP `429`, too many requests | Sent again | Sent again; tracezilla did not handle it |
+| HTTP `500`, `502`, `503` or `504` | Sent again | Not sent again; the write may already have been carried out |
+| No answer, or no connection | Sent again | Not sent again |
+| Anything else, for example `422` | Reported at once | Reported at once |
+
+A request is sent again up to three times, after 1, 2 and 4 seconds, or as long
+as tracezilla's `Retry-After` header asks, but never more than 60 seconds.
+Each retry writes one line to the cron log, for example:
+
+```text
+GET /skus: tracezilla answered HTTP 503. Trying again in 1 second.
+```
+
+A failure that remains after these retries, or one that is not retried, is
+handled as described in the rest of this page.
+
+## Retries on later runs
+
 {: .important }
 Shopify integration only. The WooCommerce integration has no retry queue
 yet: a failed change is reported in the run's output, and the next run plans
