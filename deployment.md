@@ -33,10 +33,8 @@ flowchart TB
 ## Remove the seed before deploying
 
 The [seed](./fundamentals/seed.html) fills a development company with test
-data and has no use on a production server. Its `--execute` already refuses to
-write unless `TRACEZILLA_SEED_ALLOWED_TEAM` in `.env` names the team, and a
-production `.env` never sets it. To leave nothing to chance, remove the command
-before the first deployment, in your integration project folder.
+data and has no use on a production server. If your project includes it,
+remove it before the first deployment, in your integration project folder.
 
 Mac and Linux:
 
@@ -50,10 +48,9 @@ Windows (PowerShell):
 Remove-Item bin/seed-tracezilla
 ```
 
-If you added your own `seeds/` folder, remove it too. Also remove the
-`TRACEZILLA_OWN_COMPANY` and `TRACEZILLA_SEED_ALLOWED_TEAM` lines from
-`.env.example`. `bin/bifrost-connect` then stops offering `tracezilla:seed`. A
-project created with `--without-seed` has no seed to remove.
+If you added your own `seeds/` folder, remove it too. `bin/bifrost-connect`
+then stops offering `tracezilla:seed`. A project created with `--without-seed`
+has no seed to remove.
 
 ## Deployment guides
 

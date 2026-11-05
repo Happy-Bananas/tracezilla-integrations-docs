@@ -17,7 +17,7 @@ fail() { echo "FAIL $1" >&2; failures=$((failures + 1)); }
 mkdir -p "$work/source/tracezilla-woocommerce-php-main/bin" \
     "$work/source/tracezilla-integrations-main/tracezilla-woocommerce-sandbox"
 template="$work/source/tracezilla-woocommerce-php-main"
-printf 'WOOCOMMERCE_URL=http://host.docker.internal:8080\n# Exact name of your company'"'"'s own partner in tracezilla. The seed\n# adds its warehouse location to this partner.\nTRACEZILLA_OWN_COMPANY=\n' > "$template/.env.example"
+printf 'WOOCOMMERCE_URL=http://host.docker.internal:8080\n' > "$template/.env.example"
 # The seed's command, which a project gets unless --without-seed is given,
 # and a project's own seed file.
 mkdir -p "$template/seeds"
@@ -49,10 +49,9 @@ else
     fail "creates a WooCommerce project without Git and with .env"
 fi
 
-# Includes the seed by default, with its setting in .env.
+# Includes the seed by default.
 if [ -x YOUR_INTEGRATION_NAME/bin/seed-tracezilla ] \
-    && [ -f YOUR_INTEGRATION_NAME/seeds/tracezilla.yaml ] \
-    && grep -q '^TRACEZILLA_OWN_COMPANY=' YOUR_INTEGRATION_NAME/.env; then
+    && [ -f YOUR_INTEGRATION_NAME/seeds/tracezilla.yaml ]; then
     pass "includes the seed by default"
 else
     fail "includes the seed by default"
@@ -61,8 +60,7 @@ fi
 # Leaves the seed out with --without-seed, wherever the option is given.
 if create integration.tar.gz --without-seed woocommerce WithoutSeed >/dev/null 2>&1 \
     && [ ! -e WithoutSeed/bin/seed-tracezilla ] \
-    && [ ! -e WithoutSeed/seeds ] \
-    && ! grep -q OWN_COMPANY WithoutSeed/.env; then
+    && [ ! -e WithoutSeed/seeds ]; then
     pass "leaves the seed out with --without-seed"
 else
     fail "leaves the seed out with --without-seed"
@@ -125,24 +123,19 @@ for platform in woocommerce shopify; do
     git -C "$templates/$repository" archive --prefix="$repository-main/" HEAD | gzip > "$work/$platform.tar.gz"
 
     if create "$platform.tar.gz" "$platform" "Real-$platform" >/dev/null 2>&1 \
-        && grep -q '^TRACEZILLA_OWN_COMPANY=' "Real-$platform/.env" \
-        && grep -q '^TRACEZILLA_SEED_ALLOWED_TEAM=' "Real-$platform/.env" \
+        && [ -x "Real-$platform/bin/seed-tracezilla" ] \
         && readable_only_by_owner "Real-$platform/.env"; then
         pass "creates a $platform project whose .env only the owner can read"
     else
         fail "creates a $platform project whose .env only the owner can read"
     fi
 
-    # The comments above the seed's settings mention the own partner and the
-    # seed itself.
     if create "$platform.tar.gz" "$platform" "Real-$platform-without-seed" --without-seed >/dev/null 2>&1 \
         && [ ! -e "Real-$platform-without-seed/bin/seed-tracezilla" ] \
-        && ! grep -q 'OWN_COMPANY\|SEED_ALLOWED_TEAM' "Real-$platform-without-seed/.env.example" \
-        && ! grep -q -i 'partner\|seed' "Real-$platform-without-seed/.env.example" \
-        && grep -q '^TRACEZILLA_TEAM_SLUG=' "Real-$platform-without-seed/.env.example"; then
-        pass "removes the seed settings and their whole comments from the $platform .env"
+        && [ -f "Real-$platform-without-seed/.env" ]; then
+        pass "leaves the seed out of a $platform project"
     else
-        fail "removes the seed settings and their whole comments from the $platform .env"
+        fail "leaves the seed out of a $platform project"
     fi
 done
 
