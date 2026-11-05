@@ -126,23 +126,22 @@ for platform in woocommerce shopify; do
 
     if create "$platform.tar.gz" "$platform" "Real-$platform" >/dev/null 2>&1 \
         && grep -q '^TRACEZILLA_OWN_COMPANY=' "Real-$platform/.env" \
-        && grep -q '^TRACEZILLA_SEED_ALLOWED_TEAM=' "Real-$platform/.env" \
         && readable_only_by_owner "Real-$platform/.env"; then
         pass "creates a $platform project whose .env only the owner can read"
     else
         fail "creates a $platform project whose .env only the owner can read"
     fi
 
-    # The comments above the seed's settings mention the own partner and the
+    # The comment above the seed's setting mentions the own partner and the
     # seed itself.
     if create "$platform.tar.gz" "$platform" "Real-$platform-without-seed" --without-seed >/dev/null 2>&1 \
         && [ ! -e "Real-$platform-without-seed/bin/seed-tracezilla" ] \
-        && ! grep -q 'OWN_COMPANY\|SEED_ALLOWED_TEAM' "Real-$platform-without-seed/.env.example" \
+        && ! grep -q 'OWN_COMPANY' "Real-$platform-without-seed/.env.example" \
         && ! grep -q -i 'partner\|seed' "Real-$platform-without-seed/.env.example" \
         && grep -q '^TRACEZILLA_TEAM_SLUG=' "Real-$platform-without-seed/.env.example"; then
-        pass "removes the seed settings and their whole comments from the $platform .env"
+        pass "removes the seed setting and its whole comment from the $platform .env"
     else
-        fail "removes the seed settings and their whole comments from the $platform .env"
+        fail "removes the seed setting and its whole comment from the $platform .env"
     fi
 done
 

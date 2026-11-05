@@ -141,13 +141,12 @@ mv "$source" "$project"
 if [ "$platform" != woocommerce-sandbox ] && [ "$with_seed" = no ]; then
     # The seed's code is in bifrost-core; without its command nothing can run it.
     rm -rf "$project/bin/seed-tracezilla" "$project/seeds"
-    # TRACEZILLA_OWN_COMPANY and TRACEZILLA_SEED_ALLOWED_TEAM are only used by
-    # the seed. Each one's comment is the block of # lines right above it,
-    # however the template wraps that text.
+    # TRACEZILLA_OWN_COMPANY is only used by the seed. Its comment is the block
+    # of # lines right above it, however the template wraps that text.
     if [ -f "$project/.env.example" ]; then
         awk '
             /^#/ { comment = comment $0 "\n"; next }
-            /^TRACEZILLA_(OWN_COMPANY|SEED_ALLOWED_TEAM)=/ { comment = ""; next }
+            /^TRACEZILLA_OWN_COMPANY=/ { comment = ""; next }
             { printf "%s", comment; comment = ""; print }
             END { printf "%s", comment }
         ' "$project/.env.example" > "$project/.env.example.new"

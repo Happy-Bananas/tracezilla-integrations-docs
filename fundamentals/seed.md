@@ -22,22 +22,15 @@ Docker, prefixed as below) and look for `tracezilla:seed`.
 Seed only a [development company](./development-company.html), never a
 production team.
 
-## Name your own company and allow the team
+## Name your own company
 
-Add two lines to the `.env` file in your integration project folder:
+Add the exact partner name of your own company in tracezilla to the `.env` file
+in your integration project folder. The seed adds its warehouse location to
+that partner:
 
 ```dotenv
 TRACEZILLA_OWN_COMPANY=Your development company
-TRACEZILLA_SEED_ALLOWED_TEAM=dev-woocommerce-abc1
 ```
-
-- `TRACEZILLA_OWN_COMPANY` is the exact partner name of your own company in
-  tracezilla. The seed adds its warehouse location to that partner.
-- `TRACEZILLA_SEED_ALLOWED_TEAM` is the team slug of your development company,
-  the same value as `TRACEZILLA_TEAM_SLUG`. The seed writes only into this
-  team. Never set it in a project that works on a customer's production team:
-  without it, `--execute` stops with exit code 2 before it contacts tracezilla,
-  so the test data cannot end up there by mistake.
 
 ## Run the seed
 
@@ -63,9 +56,7 @@ php bin/bifrost-connect tracezilla:seed --dry-run
 ```
 
 Check that the first line names your development company, then write the
-data. If the command says that `TRACEZILLA_SEED_ALLOWED_TEAM` is not set or
-names another team, nothing was written; check the two team settings in
-`.env`.
+data.
 
 With Docker:
 

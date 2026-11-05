@@ -30,7 +30,7 @@ php bin/bifrost-connect help
 
 To add the seed, create a second, temporary project of the same platform
 without `--without-seed`, and copy its `bin/seed-tracezilla` into your project.
-Then add `TRACEZILLA_OWN_COMPANY` and `TRACEZILLA_SEED_ALLOWED_TEAM` to `.env`;
+Then add `TRACEZILLA_OWN_COMPANY` to `.env`;
 see [Seed the Test Dataset](./fundamentals/seed.html).
 
 ### `Seed failed:` with a message about tracezilla
