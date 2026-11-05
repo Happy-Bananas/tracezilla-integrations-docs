@@ -139,13 +139,15 @@ mv "$source" "$project"
 # The seed only fills a development company with test data. A project that
 # works directly on production data leaves it out. The sandbox has no seed.
 if [ "$platform" != woocommerce-sandbox ] && [ "$with_seed" = no ]; then
-    rm -rf "$project/bin/seed-tracezilla" "$project/src/Seed" "$project/seeds" "$project/tests/Unit/Seed"
-    # TRACEZILLA_OWN_COMPANY is only used by the seed. Its comment is the block
-    # of # lines right above it, however the template wraps that text.
+    # The seed's code is in bifrost-core; without its command nothing can run it.
+    rm -rf "$project/bin/seed-tracezilla" "$project/seeds"
+    # TRACEZILLA_OWN_COMPANY and TRACEZILLA_SEED_ALLOWED_TEAM are only used by
+    # the seed. Each one's comment is the block of # lines right above it,
+    # however the template wraps that text.
     if [ -f "$project/.env.example" ]; then
         awk '
             /^#/ { comment = comment $0 "\n"; next }
-            /^TRACEZILLA_OWN_COMPANY=/ { comment = ""; next }
+            /^TRACEZILLA_(OWN_COMPANY|SEED_ALLOWED_TEAM)=/ { comment = ""; next }
             { printf "%s", comment; comment = ""; print }
             END { printf "%s", comment }
         ' "$project/.env.example" > "$project/.env.example.new"
