@@ -10,9 +10,10 @@ nav_order: 35
 Use this dataset in your development company so the catalog, inventory, and
 order examples all work against the same recognizable records.
 
-The dataset is described in a YAML file, `seeds/tracezilla.yaml`, and applied
-through the tracezilla API. Every integration project ships the file and the
-command that applies it; see [Seed the Test Dataset](./seed.html).
+The dataset is described in a YAML file,
+[`seeds/tracezilla.yaml`](https://github.com/Happy-Bananas/bifrost-core/blob/main/seeds/tracezilla.yaml)
+in bifrost-core, the code every integration shares, and applied through the
+tracezilla API with the seed command; see [Seed the Test Dataset](./seed.html).
 
 ## Naming rule
 
