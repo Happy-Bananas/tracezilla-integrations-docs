@@ -22,15 +22,8 @@ Docker, prefixed as below) and look for `tracezilla:seed`.
 Seed only a [development company](./development-company.html), never a
 production team.
 
-## Name your own company
-
-Add the exact partner name of your own company in tracezilla to the `.env` file
-in your integration project folder. The seed adds its warehouse location to
-that partner:
-
-```dotenv
-TRACEZILLA_OWN_COMPANY=Your development company
-```
+The seed needs no settings of its own. It adds its warehouse to your own
+company: partner number 1, which tracezilla creates together with every company.
 
 ## Run the seed
 
@@ -55,8 +48,16 @@ Without Docker:
 php bin/bifrost-connect tracezilla:seed --dry-run
 ```
 
-Check that the first line names your development company, then write the
-data.
+Check the first lines: they name the team, and your own company as partner
+number 1, for example:
+
+```text
+Dry run for tracezilla team [dev-woocommerce-abc1]
+
+partner         exists         own_company                         Banana McShopface (partner number 1)
+```
+
+If both are your development company, write the data.
 
 With Docker:
 

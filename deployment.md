@@ -48,9 +48,9 @@ Windows (PowerShell):
 Remove-Item bin/seed-tracezilla
 ```
 
-If you added your own `seeds/` folder, remove it too. Also remove the
-`TRACEZILLA_OWN_COMPANY` line from `.env.example`. `bin/bifrost-connect` then stops offering `tracezilla:seed`. A
-project created with `--without-seed` has no seed to remove.
+If you added your own `seeds/` folder, remove it too. `bin/bifrost-connect`
+then stops offering `tracezilla:seed`. A project created with `--without-seed`
+has no seed to remove.
 
 ## Deployment guides
 
