@@ -70,8 +70,9 @@ TRACEZILLA_CLIENT_SECRET=...
 ```
 
 Without Docker, the local sandbox is reached at `http://localhost:8080`. For an
-existing store, use its HTTPS URL and its own keys. Git ignores `.env`; never
-commit it.
+existing store, use its `https://` URL and its own keys; the integration
+refuses plain `http://` for anything but a store on this computer. Git ignores
+`.env`; never commit it.
 
 ## 4. Log in to tracezilla
 

@@ -112,6 +112,7 @@ The failing line explains the problem. Common causes:
 |:--|:--|
 | `Missing required environment variable: WOOCOMMERCE_CONSUMER_KEY` | Add the [REST API keys](./setup/rest-api-keys.html) to `.env`. |
 | WooCommerce `401` with `Consumer key is invalid` or `Consumer secret is invalid` | The key in `.env` does not match the store. For the sandbox, use `ck_sandbox` / `cs_sandbox`. |
+| `WOOCOMMERCE_URL must start with https://` | `.env` names a real store with `http://`. Use its `https://` address. Plain `http://` is allowed only for a store on this computer (`localhost` or `host.docker.internal`), such as the sandbox, because it would send the API keys unencrypted. |
 | WooCommerce `401` with `Sorry, you cannot list resources.` | The key was not accepted at all, usually because the store does not use HTTPS. Real stores must; the sandbox handles this itself. |
 | `Cannot connect to the Docker daemon` or `error during connect` | Docker is not running. Start Docker Desktop, or the Docker service on Linux. |
 | WooCommerce `Connection refused` or `Could not connect to server` | The store is not running. Start the sandbox with `docker compose up -d` in its folder. With Docker, `WOOCOMMERCE_URL` must be `http://host.docker.internal:8080`. |

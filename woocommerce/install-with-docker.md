@@ -65,7 +65,9 @@ TRACEZILLA_CLIENT_SECRET=...
 ```
 
 `host.docker.internal:8080` reaches the local sandbox from inside the
-container. For an existing store, use its HTTPS URL and its own keys. Git
+container. For an existing store, use its `https://` URL and its own keys;
+the integration refuses plain `http://` for anything but a store on this
+computer. Git
 ignores `.env`; never commit it.
 
 ## 3. Install the PHP packages
