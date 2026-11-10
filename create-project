@@ -63,13 +63,13 @@ github=https://github.com/Happy-Bananas
 case "$platform" in
     shopify)
         repository=tracezilla-shopify-php
-        version=v0.1.0
+        version=v0.2.1
         folder=
         label="Shopify integration"
         ;;
     woocommerce)
         repository=tracezilla-woocommerce-php
-        version=v0.1.0
+        version=v0.2.0
         folder=
         label="WooCommerce integration"
         ;;
