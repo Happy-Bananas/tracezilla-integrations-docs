@@ -17,6 +17,11 @@ to one tracezilla sales order. Preview it with `--dry-run`; it writes only with
 `--execute`. Existing tracezilla
 orders are detected by the external reference `SHP<Shopify legacy order ID>`.
 
+With `--execute`, an order that tracezilla rejected is remembered for a retry.
+When its retry is due, the next run reads that order from Shopify again by its
+ID and imports it first, also when it is older than `--days`; see
+[Retries](../deployment/cron/errors.html).
+
 ## Mapping assumptions
 
 This is an example mapping, not a universal Shopify-to-tracezilla contract:
@@ -126,7 +131,9 @@ Each selected order receives one status:
 - `created` — successfully created during explicit execution;
 - `skipped` — cancelled, truncated, duplicate, or already imported;
 - `invalid` — the example mapping cannot safely represent the order;
-- `failed` — tracezilla rejected the creation request.
+- `failed` — tracezilla rejected the creation request. The message is
+  tracezilla's own explanation, for example
+  `PUT /orders/sales failed with HTTP 422: {"message":"..."}`.
 
 An empty result and skipped duplicates are successful. Invalid records, failed
 writes, configuration errors, authentication errors, and unsafe options return
