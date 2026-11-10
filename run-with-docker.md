@@ -56,23 +56,20 @@ cd YOUR_INTEGRATION_NAME
 ```
 
 Open `.env` in your editor and complete the Shopify and tracezilla values. The
-tracezilla values are the team slug and the OAuth client
-(`TRACEZILLA_CLIENT_ID` and `TRACEZILLA_CLIENT_SECRET`); see
+tracezilla values are the team slug and the four Resource Owner Password
+Credentials (`TRACEZILLA_CLIENT_ID`, `TRACEZILLA_CLIENT_SECRET`,
+`TRACEZILLA_USERNAME`, and `TRACEZILLA_PASSWORD`); see
 [Credentials](./fundamentals/account-and-team.html).
 Never commit this file; Git ignores it automatically.
 
-## 3. Log in to tracezilla
-
-Install the PHP packages in the development container, then log in once:
+## 3. Install the PHP packages
 
 ```bash
 docker compose run --rm php composer install
-docker compose run --rm php php bin/bifrost-connect tracezilla:login
 ```
 
-The first command builds the development container, so it can take a little
-while. Enter your tracezilla username and password. The password is used once and
-never stored; see [Credentials](./fundamentals/account-and-team.html#oauth-client-and-login).
+The first run builds the development container, so it can take a little
+while.
 
 ## 4. Check both connections
 

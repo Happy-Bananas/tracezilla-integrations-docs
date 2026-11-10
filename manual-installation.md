@@ -58,21 +58,13 @@ This downloads the libraries the project uses into its `vendor/` folder.
 ## 3. Complete the local configuration
 
 Open `.env` in your editor and add the Shopify and tracezilla credentials. The
-tracezilla values are the team slug and the OAuth client
-(`TRACEZILLA_CLIENT_ID` and `TRACEZILLA_CLIENT_SECRET`); see
+tracezilla values are the team slug and the four Resource Owner Password
+Credentials (`TRACEZILLA_CLIENT_ID`, `TRACEZILLA_CLIENT_SECRET`,
+`TRACEZILLA_USERNAME`, and `TRACEZILLA_PASSWORD`); see
 [Credentials](./fundamentals/account-and-team.html).
 Git ignores this file automatically.
 
-## 4. Log in to tracezilla
-
-```bash
-php bin/bifrost-connect tracezilla:login
-```
-
-Enter your tracezilla username and password. The password is used once and
-never stored; see [Credentials](./fundamentals/account-and-team.html#oauth-client-and-login).
-
-## 5. Check the credentials
+## 4. Check the credentials
 
 ```bash
 php bin/bifrost-connect connection:check

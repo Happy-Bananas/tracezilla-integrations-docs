@@ -116,9 +116,8 @@ The failing line explains the problem. Common causes:
 | WooCommerce `401` with `Sorry, you cannot list resources.` | The key was not accepted at all, usually because the store does not use HTTPS. Real stores must; the sandbox handles this itself. |
 | `Cannot connect to the Docker daemon` or `error during connect` | Docker is not running. Start Docker Desktop, or the Docker service on Linux. |
 | WooCommerce `Connection refused` or `Could not connect to server` | The store is not running. Start the sandbox with `docker compose up -d` in its folder. With Docker, `WOOCOMMERCE_URL` must be `http://host.docker.internal:8080`. |
-| `No tracezilla token is stored. Run bin/bifrost-connect tracezilla:login first.` | Run the [login](../fundamentals/account-and-team.html#oauth-client-and-login). |
-| `The refresh token was rejected; run bin/bifrost-connect tracezilla:login again.` | The OAuth client was deleted or the session revoked. Log in again. |
-| `Missing required environment variable: TRACEZILLA_CLIENT_ID` | Add the [OAuth client](../fundamentals/account-and-team.html#oauth-client-and-login) to `.env`. |
+| `Missing required environment variable: TRACEZILLA_CLIENT_ID` (or `_USERNAME`, `_PASSWORD`) | Add the [Resource Owner Password Credentials](../fundamentals/account-and-team.html#oauth-client-and-api-user) to `.env`. |
+| `tracezilla token request failed with HTTP 400 … Check TRACEZILLA_CLIENT_ID, …` | tracezilla refused the login. Copy all four values again from tracezilla; the username ends in `@tracezilla.api`. |
 
 ## Safety and exit status
 

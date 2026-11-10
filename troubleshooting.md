@@ -40,7 +40,7 @@ stops with one of these messages, check the credentials as described in
 
 ```text
 Seed failed: Missing required environment variable: TRACEZILLA_CLIENT_ID
-Seed failed: No tracezilla token is stored. Run bin/bifrost-connect tracezilla:login first.
+Seed failed: tracezilla token request failed with HTTP 400: … Check TRACEZILLA_CLIENT_ID, …
 Seed failed: GET /partners failed with HTTP 404: { "message": "" }
 ```
 
@@ -78,31 +78,20 @@ php bin/bifrost-connect connection:check
 
 | Message | Cause | Fix |
 |:--|:--|:--|
-| `Missing required environment variable: TRACEZILLA_CLIENT_ID` (or `_CLIENT_SECRET`, `_TEAM_SLUG`, `_BASE_URL`) | The setting is missing from `.env` | Add it, see [Credentials](./fundamentals/account-and-team.html) |
-| `No tracezilla token is stored. Run bin/bifrost-connect tracezilla:login first.` | You have not logged in from this project, or `var/` was deleted | Log in, see below |
+| `Missing required environment variable: TRACEZILLA_CLIENT_ID` (or `_CLIENT_SECRET`, `_USERNAME`, `_PASSWORD`, `_TEAM_SLUG`, `_BASE_URL`) | The setting is missing from `.env` | Add it, see [Credentials](./fundamentals/account-and-team.html) |
+| `tracezilla token request failed with HTTP 400: {"error":"invalid_grant" …` | tracezilla refused the login: the API user's username or password is wrong | Copy `TRACEZILLA_USERNAME` and `TRACEZILLA_PASSWORD` again from the Resource Owner Password Credentials. Use the API user (`…@tracezilla.api`), never your own login |
+| `tracezilla token request failed with HTTP 401: {"error":"invalid_client" …` | The Client ID or Client Secret is wrong, or the client was deleted | Copy them again from tracezilla, or create new credentials and update `.env` |
 | `GET /skus failed with HTTP 404` | The team slug is wrong | Copy the team slug from the browser address when the company is open in tracezilla |
-| `The refresh token was rejected; run bin/bifrost-connect tracezilla:login again.` | The OAuth client was deleted, or the login was revoked | Log in again. If the client was deleted, create a new one and update `.env` first. |
-| `tracezilla token request failed with HTTP 401 … Check TRACEZILLA_CLIENT_ID, TRACEZILLA_CLIENT_SECRET, and the username and password.` | The login was refused | Check the Client ID and Client Secret in `.env`, and your tracezilla username and password |
 
 ### Check the credentials
 
-1. `.env` contains `TRACEZILLA_TEAM_SLUG`, `TRACEZILLA_CLIENT_ID`, and
-   `TRACEZILLA_CLIENT_SECRET`, copied exactly from tracezilla. See
+1. `.env` contains `TRACEZILLA_TEAM_SLUG`, `TRACEZILLA_CLIENT_ID`,
+   `TRACEZILLA_CLIENT_SECRET`, `TRACEZILLA_USERNAME`, and
+   `TRACEZILLA_PASSWORD`, copied exactly from tracezilla. See
    [Credentials](./fundamentals/account-and-team.html).
-2. You logged in from this project folder. The login stores its token in
-   `var/` of the project it ran in, so another project needs its own login.
-3. Log in again if you are unsure. The password is used once and not stored.
-
-With Docker:
-
-```bash
-docker compose run --rm php php bin/bifrost-connect tracezilla:login
-```
-
-Without Docker:
-
-```bash
-php bin/bifrost-connect tracezilla:login
-```
+2. The username is the API user that tracezilla created with the credentials
+   (it ends in `@tracezilla.api`), not the login you use in the browser.
+3. To start over, delete `var/tracezilla-token.json`. The next command logs in
+   again with the values in `.env`.
 
 Then run the connection check again.

@@ -32,41 +32,35 @@ TRACEZILLA_TEAM_SLUG=dev-woocommerce-abc1
 
 The team slug is not secret.
 
-## OAuth client and login
+## OAuth client and API user
 
-Every integration authenticates with an OAuth client and a one-time login. The
-integration then renews its own access token, so it never stops because a
-token expired.
+Every integration logs in to tracezilla with the **Resource Owner Password
+Credentials** you create in tracezilla. They have four values: an OAuth client
+(Client ID and Client Secret) and an API user that tracezilla generates with
+it (a username ending in `@tracezilla.api`, and a password). The API user is
+not a person's login, so the integration keeps working when employees leave,
+and nobody ever types a password into it.
 
-In a customer installation, use a dedicated integration user rather than a
-personal account, so the integration keeps working when employees leave.
-
-Create an OAuth client as described in the
+Create them as described in the
 [tracezilla API documentation](https://tech.tracezilla.com/docs/rest-api-v1/making-requests/authentication.html#bearer-token-and-resource-owner-password-credentials),
-and note its Client ID and Client Secret. In `.env`, they go here:
+and copy all four values into `.env`:
 
 ```dotenv
 TRACEZILLA_CLIENT_ID=...
 TRACEZILLA_CLIENT_SECRET=...
+TRACEZILLA_USERNAME=...@tracezilla.api
+TRACEZILLA_PASSWORD=...
 ```
 
-After installing the integration, log in once from its project folder:
-
-| | Command |
-|:--|:--|
-| With Docker | `docker compose run --rm php php bin/bifrost-connect tracezilla:login` |
-| Without Docker | `php bin/bifrost-connect tracezilla:login` |
-
-The command asks for your tracezilla username and password. The password is
-used once and never stored. The tokens are saved in
-`var/tracezilla-token.json`, and every integration command renews the access
-token 30 days before it expires. Run the login again only if a command reports
-that the refresh token was rejected, for example after the client was deleted
-in tracezilla.
+There is no separate login step. The first command that needs tracezilla logs
+in with these values and saves the tokens in `var/tracezilla-token.json`.
+Later commands use the saved token and renew it 30 days before it expires. If
+tracezilla refuses the renewal, or the token file is gone, the next command
+simply logs in again.
 
 ## Keep credentials secret
 
-The Client Secret and the token file are secrets. Never commit or share
+The Client Secret, the API user's password, and the token file are secrets. Never commit or share
 `.env` or `var/`. If a secret is exposed, revoke it in tracezilla immediately
 and create a new one.
 

@@ -132,8 +132,9 @@ run for a command that runs every 5 minutes. That covers every way a run can
 stop working:
 
 - A failed run (exit code `1` or `2`) does not call the URL.
-- If the tracezilla login can no longer be renewed, every run fails until
-  someone runs `tracezilla:login` again, so the calls stop.
+- If tracezilla refuses the credentials in `.env`, for example because the
+  API user was deleted, every run fails until `.env` is fixed, so the calls
+  stop.
 - A run skipped because another command held the lock (`75`) does not call
   the URL either, but one skip stays within the allowed missed calls. Only a
   command that stays stuck leads to an alert.

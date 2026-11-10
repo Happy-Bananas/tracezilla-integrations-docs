@@ -67,23 +67,20 @@ WOOCOMMERCE_CONSUMER_SECRET=cs_sandbox
 TRACEZILLA_TEAM_SLUG=your-development-company
 TRACEZILLA_CLIENT_ID=...
 TRACEZILLA_CLIENT_SECRET=...
+TRACEZILLA_USERNAME=...@tracezilla.api
+TRACEZILLA_PASSWORD=...
 ```
+
+The four tracezilla values are the
+[Resource Owner Password Credentials](../fundamentals/account-and-team.html#oauth-client-and-api-user)
+you create in tracezilla.
 
 Without Docker, the local sandbox is reached at `http://localhost:8080`. For an
 existing store, use its `https://` URL and its own keys; the integration
 refuses plain `http://` for anything but a store on this computer. Git ignores
 `.env`; never commit it.
 
-## 4. Log in to tracezilla
-
-```bash
-php bin/bifrost-connect tracezilla:login
-```
-
-Enter your tracezilla username and password. The password is used once and
-never stored; see [Credentials](../fundamentals/account-and-team.html#oauth-client-and-login).
-
-## 5. Check both connections
+## 4. Check both connections
 
 Make sure your WordPress store is running, then follow
 [Check Connections](./check-connections.html). Nothing else works until both
