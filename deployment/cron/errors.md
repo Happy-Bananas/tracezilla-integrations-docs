@@ -89,13 +89,15 @@ A retry file holds metadata about the failure, not a copy of the order:
   "last_error": {
     "code": "tracezilla_order_creation_failed",
     "category": "unexpected",
-    "message": "tracezilla rejected the sales-order creation request."
+    "message": "PUT /orders/sales failed with HTTP 422: {\"message\":\"The customer is blocked.\"}"
   },
   "attention_reason": null
 }
 ```
 
-On a retry, the integration reads the record from the source system again. No
+`message` is tracezilla's own explanation, so you can see what to fix. On a
+retry, the integration reads the record from the source system again, also
+when it is older than the command's `--days`. No
 customer addresses, order lines, or tokens are stored in these files.
 
 The files are written safely, so a crash never leaves a half-written file. Do

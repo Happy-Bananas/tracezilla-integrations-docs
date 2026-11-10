@@ -122,10 +122,10 @@ After the first scheduled time:
 3. Shopify only: run `php bin/bifrost-connect failures:list`.
 4. Check again after the next scheduled time.
 
-For the Shopify order import, the `--days` lookback must be comfortably longer
-than the cron interval and the complete automatic retry period. That overlap
-allows a later run to find work missed during an outage. Stable external
-references prevent duplicates.
+For the Shopify order import, keep the `--days` lookback comfortably longer
+than the cron interval, so a later run finds orders that were missed while the
+server was down. Orders that failed are retried on their own schedule, however
+old they are. Stable external references prevent duplicates.
 
 If a run does not behave as expected, continue with
 [Troubleshoot scheduled runs](./troubleshooting.html).
