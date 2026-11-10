@@ -56,20 +56,26 @@ fi
 github=https://github.com/Happy-Bananas
 
 # Each platform is a repository, or a folder inside one, plus what the project
-# needs after unpacking.
+# needs after unpacking. An integration is created from a released version of
+# its template, so every project from the same version starts the same; raise
+# the version here when a template is released. The sandbox is a test tool and
+# always comes from main.
 case "$platform" in
     shopify)
         repository=tracezilla-shopify-php
+        version=v0.1.0
         folder=
         label="Shopify integration"
         ;;
     woocommerce)
         repository=tracezilla-woocommerce-php
+        version=v0.1.0
         folder=
         label="WooCommerce integration"
         ;;
     woocommerce-sandbox)
         repository=tracezilla-integrations
+        version=
         folder=tracezilla-woocommerce-sandbox
         label="WooCommerce sandbox"
         ;;
@@ -79,8 +85,13 @@ case "$platform" in
         ;;
 esac
 
+if [ -n "$version" ]; then
+    download_url=$github/$repository/archive/refs/tags/$version.tar.gz
+else
+    download_url=$github/$repository/archive/refs/heads/main.tar.gz
+fi
 # Tests replace the download with a local archive.
-archive=${TRACEZILLA_TEMPLATE_ARCHIVE:-$github/$repository/archive/refs/heads/main.tar.gz}
+archive=${TRACEZILLA_TEMPLATE_ARCHIVE:-$download_url}
 
 name=$(basename -- "$project")
 case "$name" in
@@ -123,10 +134,14 @@ fi
 temporary=$(mktemp -d)
 trap 'rm -rf "$temporary"' EXIT
 
-echo "Creating $label in $project ..."
+if [ -n "$version" ]; then
+    echo "Creating $label $version in $project ..."
+else
+    echo "Creating $label in $project ..."
+fi
 download "$archive" | tar -xz -C "$temporary"
 
-# GitHub archives contain one top-level folder, e.g. tracezilla-shopify-php-main.
+# GitHub archives contain one top-level folder, e.g. tracezilla-shopify-php-0.1.0.
 source=$(find "$temporary" -mindepth 1 -maxdepth 1 -type d)
 if [ -n "$folder" ]; then
     source=$source/$folder
@@ -135,6 +150,11 @@ if [ ! -d "$source" ]; then
     fail "the downloaded template does not contain $folder."
 fi
 mv "$source" "$project"
+
+# Which template release the project started from, for later updates.
+if [ -n "$version" ]; then
+    printf '%s %s\n' "$repository" "$version" > "$project/TEMPLATE_VERSION"
+fi
 
 # The seed only fills a development company with test data. A project that
 # works directly on production data leaves it out. The sandbox has no seed.
