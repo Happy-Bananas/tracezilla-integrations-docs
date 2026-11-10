@@ -71,10 +71,11 @@ docker run --rm -v "${PWD}:/work" -w /work alpine:3 sh -c "wget -qO- https://hap
 
 ### What you get
 
-The command downloads the latest integration into a new `YOUR_INTEGRATION_NAME` folder
-and creates its `.env` file. The project is
-yours: a plain folder on your computer, with no Git history and no connection
-to the BifrostConnect repositories. The command refuses to replace an existing
+The command downloads the latest release of the integration into a new
+`YOUR_INTEGRATION_NAME` folder and creates its `.env` file. `TEMPLATE_VERSION`
+in the folder records the release; see [Update Your Integration](./update.html).
+The project is yours: a plain folder on your computer, with no Git history and
+no connection to the BifrostConnect repositories. The command refuses to replace an existing
 folder or to create the project inside a Git repository.
 
 The project includes the tracezilla seed, which fills a development company

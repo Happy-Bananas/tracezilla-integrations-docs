@@ -70,9 +70,18 @@ use local archives and the real templates, and run before every deployment:
 sh tools/test-create-project
 ```
 
+New projects are created from a released version of each template. To
+release a template:
+
+1. Add the release to the template's `CHANGELOG.md` and merge it.
+2. Tag `main` in the template repository, for example `git tag -a v0.2.0` and
+   `git push origin v0.2.0`.
+3. Set `version=v0.2.0` for that platform in `create-project`.
+
 To add a platform:
 
-1. Add it to the `case "$platform"` list and the usage text in `create-project`.
+1. Add it, with its released `version`, to the `case "$platform"` list and the
+   usage text in `create-project`.
 2. Add a row to the platform table in `getting-started.md` (step 4).
 3. Add the template to the real-template tests in `tools/test-create-project`
    and to the clone step in `.github/workflows/pages.yml`.

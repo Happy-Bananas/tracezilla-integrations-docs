@@ -6,6 +6,8 @@
 set -eu
 
 script=$(cd "$(dirname "$0")/.." && pwd -P)/create-project
+# The release that create-project downloads for WooCommerce.
+version=$(sed -n '/^    woocommerce)$/,/;;/s/^ *version=//p' "$script")
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT
 failures=0
@@ -43,6 +45,7 @@ create() {
 if create integration.tar.gz woocommerce YOUR_INTEGRATION_NAME >/dev/null 2>&1 \
     && [ -x YOUR_INTEGRATION_NAME/check-connection ] \
     && [ ! -e YOUR_INTEGRATION_NAME/.git ] \
+    && [ "$(cat YOUR_INTEGRATION_NAME/TEMPLATE_VERSION)" = "tracezilla-woocommerce-php $version" ] \
     && [ "$(cat YOUR_INTEGRATION_NAME/.env)" = "$(cat "$template/.env.example"; printf '\nTRACEZILLA_DOCKER_UID=%s\nTRACEZILLA_DOCKER_GID=%s' "$(id -u)" "$(id -g)")" ]; then
     pass "creates a WooCommerce project without Git and with .env"
 else
@@ -69,6 +72,7 @@ fi
 # Takes only the sandbox folder out of the workspace archive.
 if create umbrella.tar.gz woocommerce-sandbox my-sandbox >/dev/null 2>&1 \
     && [ -f my-sandbox/compose.yaml ] \
+    && [ ! -e my-sandbox/TEMPLATE_VERSION ] \
     && [ ! -e my-sandbox/.env ]; then
     pass "creates the WooCommerce sandbox"
 else
