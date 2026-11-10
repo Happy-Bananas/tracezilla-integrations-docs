@@ -66,7 +66,6 @@ php bin/bifrost-connect help
 | Command | Purpose | Status |
 |:--|:--|:--|
 | `connection:check` | [Check Connections](./check-connections.html) | Available |
-| `tracezilla:login` | [Log in to tracezilla](../fundamentals/account-and-team.html#oauth-client-and-login) | Available |
 | `tracezilla:seed` | [Seed the Test Dataset](../fundamentals/seed.html) | Available |
 | `scenario:create`, `scenario:run` | [Scenarios](./scenarios.html) | Available |
 | Template `compare-catalogs` | [Compare Catalogs](./scenarios/compare-catalogs.html) | Available |

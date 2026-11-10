@@ -62,7 +62,13 @@ WOOCOMMERCE_CONSUMER_SECRET=cs_sandbox
 TRACEZILLA_TEAM_SLUG=your-development-company
 TRACEZILLA_CLIENT_ID=...
 TRACEZILLA_CLIENT_SECRET=...
+TRACEZILLA_USERNAME=...@tracezilla.api
+TRACEZILLA_PASSWORD=...
 ```
+
+The four tracezilla values are the
+[Resource Owner Password Credentials](../fundamentals/account-and-team.html#oauth-client-and-api-user)
+you create in tracezilla.
 
 `host.docker.internal:8080` reaches the local sandbox from inside the
 container. For an existing store, use its `https://` URL and its own keys;
@@ -83,16 +89,7 @@ the create command stored your user and group IDs in `.env` as
 containers after the project folder, so several projects can exist side by
 side.
 
-## 4. Log in to tracezilla
-
-```bash
-docker compose run --rm php php bin/bifrost-connect tracezilla:login
-```
-
-Enter your tracezilla username and password. The password is used once and
-never stored; see [Credentials](../fundamentals/account-and-team.html#oauth-client-and-login).
-
-## 5. Check both connections
+## 4. Check both connections
 
 Make sure Docker and the sandbox are running, then follow
 [Check Connections](./check-connections.html). Nothing else works until both

@@ -107,21 +107,21 @@ Follow the setup page for your service and your choice of
 With Docker, start Docker first, and the WooCommerce sandbox if you use it.
 Neither starts by itself after the computer restarts.
 
-The check needs the PHP packages and a tracezilla login. The setup page in
-step 5 does both; if you skipped them, run these once from the new project
-folder. With Docker:
+The check needs the PHP packages. The setup page in step 5 installs them; if
+you skipped it, run this once from the new project folder. With Docker:
 
 ```bash
 docker compose run --rm php composer install
-docker compose run --rm php php bin/bifrost-connect tracezilla:login
 ```
 
 Without Docker:
 
 ```bash
 composer install
-php bin/bifrost-connect tracezilla:login
 ```
+
+There is no login step: the first command logs in to tracezilla by itself with
+the credentials in `.env`.
 
 Then run the check from the same folder:
 

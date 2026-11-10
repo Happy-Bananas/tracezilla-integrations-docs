@@ -94,17 +94,7 @@ chmod 700 var
 The same hosting user must own the application, runtime directory, and cron
 task.
 
-## 7. Log in to tracezilla
-
-```bash
-php bin/bifrost-connect tracezilla:login
-```
-
-Use the dedicated integration user's tracezilla login. The password is not
-stored. The tokens are saved in `var/`, which the upload never replaces, and
-renew themselves.
-
-## 8. Verify the deployment
+## 7. Verify the deployment
 
 ```bash
 php bin/bifrost-connect connection:check
@@ -120,7 +110,7 @@ when it reports `"ready": true`:
 php bin/bifrost-connect deployment:check
 ```
 
-## 9. Deploy an update
+## 8. Deploy an update
 
 Test the change locally, run the same `rsync` command again, and then run on
 the server:
@@ -137,7 +127,7 @@ The server receives only the version currently in your project directory.
 Nothing changes on an existing customer installation until you upload another
 tested version.
 
-## 10. Schedule your integration
+## 9. Schedule your integration
 
 The application is installed but does not run continuously. Follow
 [Set up a cron task](./cron/setup.html) after selecting and manually testing
