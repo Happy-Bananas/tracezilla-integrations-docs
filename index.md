@@ -76,7 +76,7 @@ Because you host it, you also own its operation:
 
 - The server, its security, and updates of PHP and the project.
 - The credentials in `.env` and the stored tracezilla token.
-- The cron schedule, and monitoring that the runs succeed.
+- The cron schedule, and [monitoring that the runs succeed](./deployment/cron/setup.html#get-an-alert-when-runs-stop-succeeding).
 - Backups of the project and its runtime files.
 
 The [Deployment](./deployment.html) guides show one way to do this; they are

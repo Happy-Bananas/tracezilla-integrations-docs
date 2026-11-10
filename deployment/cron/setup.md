@@ -111,7 +111,36 @@ Every command ends with an exit code that a monitoring tool can check:
 
 Because the command line above sends all output to `var/log/cron.log`, cron
 has nothing to email you. Nothing tells you about a failed run unless you set
-up monitoring that alerts on exit codes other than `0` and `75`.
+up an alert, as described next.
+
+### Get an alert when runs stop succeeding
+
+Use a heartbeat monitor: a service that gives you a URL and sends you an email
+or a message when that URL has not been called for a while. Healthchecks.io
+and Better Stack are examples; many hosting providers offer one too.
+
+Add the call to the end of the cron command with `&&`, so it happens only when
+the run succeeded:
+
+```bash
+cd /absolute/path/customer-integration && mkdir -p var/log && /absolute/path/php bin/bifrost-connect orders:import-individual --customer='Webshop customer' --warehouse=2 --days=3 --limit=100 --execute >> var/log/cron.log 2>&1 && curl -fsS -m 10 --retry 3 YOUR_HEARTBEAT_URL > /dev/null
+```
+
+In the monitor, set the expected interval to the cron interval and allow a
+few missed calls, for example an alert after 30 minutes without a successful
+run for a command that runs every 5 minutes. That covers every way a run can
+stop working:
+
+- A failed run (exit code `1` or `2`) does not call the URL.
+- If the tracezilla login can no longer be renewed, every run fails until
+  someone runs `tracezilla:login` again, so the calls stop.
+- A run skipped because another command held the lock (`75`) does not call
+  the URL either, but one skip stays within the allowed missed calls. Only a
+  command that stays stuck leads to an alert.
+- If the server, cron, or the integration stops entirely, nothing calls the
+  URL.
+
+When the alert arrives, read `var/log/cron.log` to see why.
 
 ## 5. Verify the scheduled run
 
