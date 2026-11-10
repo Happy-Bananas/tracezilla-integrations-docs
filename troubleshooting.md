@@ -29,8 +29,7 @@ php bin/bifrost-connect help
 ```
 
 To add the seed, create a second, temporary project of the same platform
-without `--without-seed`, and copy its `bin/seed-tracezilla` into your project.
-Then add `TRACEZILLA_OWN_COMPANY` and `TRACEZILLA_SEED_ALLOWED_TEAM` to `.env`;
+without `--without-seed`, and copy its `bin/seed-tracezilla` into your project;
 see [Seed the Test Dataset](./fundamentals/seed.html).
 
 ### `Seed failed:` with a message about tracezilla
@@ -45,14 +44,21 @@ Seed failed: No tracezilla token is stored. Run bin/bifrost-connect tracezilla:l
 Seed failed: GET /partners failed with HTTP 404: { "message": "" }
 ```
 
-### `No tracezilla partner is named […]`
+### `tracezilla has no partner number 1`
 
 ```text
-Seed failed: No tracezilla partner is named [Your company]. Check TRACEZILLA_OWN_COMPANY.
+Seed failed: tracezilla has no partner number 1, which is the own company of every tracezilla company.
 ```
 
-`TRACEZILLA_OWN_COMPANY` in `.env` must be the exact name of your own company's
-partner in tracezilla. Copy the name from tracezilla.
+The seed adds its warehouse to your own company's partner. tracezilla creates
+that partner, with number 1, together with every company, so the seed looks it
+up by that number. Check that the team in `TRACEZILLA_TEAM_SLUG` is the
+development company you created; see
+[Development Company](./fundamentals/development-company.html).
+
+The seed's output names the partner it uses on its first line, for example
+`own_company … Banana McShopface (partner number 1)`. If that is not your
+company, stop before `--execute` and check the team.
 
 ## The connection to tracezilla doesn't work
 
