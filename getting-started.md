@@ -132,8 +132,7 @@ Then run the check from the same folder:
 | Without Docker | `php bin/bifrost-connect connection:check` |
 
 The command makes one small read-only request to the external service and one
-to tracezilla. The WooCommerce check always reports both; the Shopify check
-stops at the first failure. **Nothing else works until both connections
+to tracezilla, and always reports both. **Nothing else works until both connections
 pass**, so fix any reported problem before continuing; see
 [Troubleshooting](./troubleshooting.html).
 

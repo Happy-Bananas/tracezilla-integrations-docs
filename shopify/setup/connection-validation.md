@@ -41,22 +41,32 @@ A successful result looks like:
 
 ```text
 Connection check passed.
-Shopify: Example Shop (example-shop.myshopify.com)
-tracezilla: connected
+Shopify:    connected to Example Shop (example-shop.myshopify.com)
+tracezilla: connected to team your-development-company
 ```
 
 ## What the check does
 
-1. Checks that the Shopify and tracezilla settings in `.env` are present.
+1. Reads the Shopify settings in `.env`.
 2. Requests a Shopify access token using the client credentials grant. The
    token expires after 24 hours, so the integration requests a new one on
    every run.
 3. Reads the shop name and permanent domain with a small GraphQL Admin API
    query.
-4. Reads one SKU from tracezilla, renewing the tracezilla token if needed.
+4. Reads the tracezilla settings in `.env` and one SKU from tracezilla,
+   logging in or renewing the tracezilla token if needed.
 
-The check stops at the first failure and prints its reason. Make sure the shop
-name and domain belong to your development store.
+Both connections are always checked, so a problem with one does not hide the
+state of the other. A failed connection is marked `FAILED` with its reason, and
+the command exits with code 1:
+
+```text
+Connection check failed.
+Shopify:    connected to Example Shop (example-shop.myshopify.com)
+tracezilla: FAILED - Missing required environment variable: TRACEZILLA_USERNAME
+```
+
+Make sure the shop name and domain belong to your development store.
 
 ## Check access for each command
 
