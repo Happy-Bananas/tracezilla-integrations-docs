@@ -95,8 +95,8 @@ A successful result looks like:
 
 ```text
 Connection check passed.
-Shopify: Example Shop (example-shop.myshopify.com)
-tracezilla: connected
+Shopify:    connected to Example Shop (example-shop.myshopify.com)
+tracezilla: connected to team your-development-company
 ```
 
 No products, orders, inventory, or settings are changed. Nothing else works
