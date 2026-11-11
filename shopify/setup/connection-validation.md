@@ -2,7 +2,7 @@
 title: Validate Connection
 layout: default
 parent: Shopify Prerequisites
-nav_order: 60
+nav_order: 10
 grand_parent: Shopify
 ---
 

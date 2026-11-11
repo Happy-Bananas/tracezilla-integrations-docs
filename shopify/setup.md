@@ -8,41 +8,89 @@ parent: Shopify
 
 # Shopify prerequisites
 
-Create a safe Shopify development environment, prepare predictable test data,
-and authorize the minimum Admin API access needed by the integration.
+Before your integration can connect, Shopify needs a development store and an
+app installed on it. This page lists what the integration needs; how to click
+your way there is in Shopify's own guides, linked below, because Shopify's
+dashboard changes often.
 
-No prior Shopify development experience is required. If a label in Shopify
-differs from these steps, look for the closest match; Shopify changes its
-dashboard from time to time.
+Use a development store throughout. Do not test inventory or order writes in
+a customer's production store.
 
-## Setup path
+## What you need
 
-Complete these guides in order:
+### 1. A development store
 
-1. [Create or join a Partner account](./setup/partner-account.html).
-2. [Create a development store](./setup/development-store.html).
-3. [Create products and locations](./setup/products-and-locations.html).
-4. [Prepare inventory tracking](./setup/inventory-setup.html) when the selected
-   workflow synchronizes inventory.
-5. [Create, release, and install an app](./setup/authorize-api.html).
-6. [Validate the Shopify connection](./setup/connection-validation.html).
+Create one in the [Shopify Dev Dashboard](https://dev.shopify.com/dashboard),
+in the same organization that will own the app. Note its permanent
+`myshopify.com` domain, not a custom storefront domain.
+
+Shopify's guide:
+[Create and use development stores](https://shopify.dev/docs/apps/build/dev-dashboard/development-stores).
+
+### 2. Test products and a location
+
+- At least one active location, for example `Development Warehouse`.
+- A few products whose variants have unique SKUs. Use SKUs from the
+  [standard test dataset](../fundamentals/test-data.html), so they match what
+  the [seed](../fundamentals/seed.html) creates in tracezilla:
+
+  ```text
+  TZ-COFFEE-001-01    House Blend Coffee Beans, 250 g
+  TZ-COFFEE-001-02    House Blend Coffee Beans, 1 kg
+  TZ-FRUIT-001        Fairtrade Bananas 1 kg
+  ```
+
+- For inventory sync: quantity tracking turned on for each variant, the
+  variant stocked at the location, and a quantity that differs from
+  tracezilla's, so the dry run has something to show.
+
+### 3. An app with the scopes your commands use
+
+Create the app in the Dev Dashboard, in the same organization as the store.
+The integration logs in with Shopify's client credentials grant, which works
+only for an app owned by the store's organization.
+
+Release an app version with the Admin API version from `.env.example` and only
+the scopes your commands need:
+
+| Command | Scopes |
+|:--|:--|
+| Connection check, catalog commands | `read_products` |
+| `shopify:locations` | `read_locations` |
+| `inventory:sync` | `read_products`, `read_locations`, `read_inventory`, `write_inventory` |
+| Order commands | `read_orders` |
+
+Then install the app on the development store. A new app version with more
+scopes must be approved on the store again.
+
+Shopify's guides:
+[Create apps using the Dev Dashboard](https://shopify.dev/docs/apps/build/dev-dashboard/create-apps-using-dev-dashboard),
+[Access scopes](https://shopify.dev/docs/api/usage/access-scopes),
+[Client credentials grant](https://shopify.dev/docs/apps/build/authentication-authorization/access-tokens/client-credentials-grant).
+
+### 4. The values for `.env`
+
+From the store and the app's settings:
+
+```dotenv
+SHOPIFY_SHOP_URL=example-integration-test.myshopify.com
+SHOPIFY_CLIENT_ID=...
+SHOPIFY_CLIENT_SECRET=...
+SHOPIFY_SCOPE=read_products,read_locations
+SHOPIFY_API_VERSION=2025-10
+```
+
+`SHOPIFY_SCOPE` lists the scopes of the released app version, separated by
+commas. The client secret is a secret: keep it out of Git, screenshots, and
+terminal output.
 
 ## Expected result
 
-At the end of setup, you should have:
+At the end, you have:
 
-- A Shopify Partner organization.
 - A development store with a permanent `myshopify.com` domain.
-- At least one active location and one product variant with a unique test SKU.
-- An installed app version with the minimum required access scopes.
-- A client ID and client secret stored outside version control.
-- A successful read-only authentication and API-version check.
-
-Use development data throughout this section. Do not test inventory or order
-writes in a customer's production store.
-
-## Official Shopify references
-
-- [Development stores](https://shopify.dev/docs/apps/build/dev-dashboard/development-stores)
-- [Create apps using the Dev Dashboard](https://shopify.dev/docs/apps/build/dev-dashboard/create-apps-using-dev-dashboard)
-- [Shopify API access scopes](https://shopify.dev/docs/api/usage/access-scopes)
+- At least one active location and one product variant with a test SKU.
+- An app, owned by the store's organization, installed with the scopes your
+  commands need.
+- Its client ID and secret in `.env`, and nowhere in Git.
+- A passing [connection check](./setup/connection-validation.html).
