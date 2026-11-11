@@ -66,11 +66,14 @@ SHOPIFY_SHOP_URL=example-integration-test.myshopify.com
 SHOPIFY_CLIENT_ID=secret-value
 SHOPIFY_CLIENT_SECRET=secret-value
 SHOPIFY_SCOPE=read_products,read_locations
-SHOPIFY_API_VERSION=reviewed-version
+SHOPIFY_API_VERSION=2025-10
 ```
 
-Choose scopes to match the released app version and selected workflow. A local
-scope setting cannot grant access that the installed app has not approved.
+Use the API version that `.env.example` names; the template is tested with
+it. Choose scopes to match the released app version and the commands you use:
+`read_products` (catalog), `read_locations` (locations), `read_inventory` and
+`write_inventory` (inventory sync), `read_orders` (orders). A local scope
+setting cannot grant access that the installed app has not approved.
 
 ## Access-token behavior
 
