@@ -80,6 +80,7 @@ php bin/bifrost-connect connection:check
 |:--|:--|:--|
 | `Missing required environment variable: TRACEZILLA_CLIENT_ID` (or `_CLIENT_SECRET`, `_USERNAME`, `_PASSWORD`, `_TEAM_SLUG`, `_BASE_URL`) | The setting is missing from `.env` | Add it, see [Credentials](./fundamentals/account-and-team.html) |
 | `tracezilla token request failed with HTTP 400: {"error":"invalid_grant" …` | tracezilla refused the login: the API user's username or password is wrong | Copy `TRACEZILLA_USERNAME` and `TRACEZILLA_PASSWORD` again from the Resource Owner Password Credentials. Use the API user (`…@tracezilla.api`), never your own login |
+| tracezilla showed only a Client ID and Client Secret, no username or password | The Client Credentials were created without a team, so they belong to your own account | Create them again and choose the team and a role, see [Credentials](./fundamentals/account-and-team.html#oauth-client-and-api-user) |
 | `tracezilla token request failed with HTTP 401: {"error":"invalid_client" …` | The Client ID or Client Secret is wrong, or the client was deleted | Copy them again from tracezilla, or create new credentials and update `.env` |
 | `GET /skus failed with HTTP 404` | The team slug is wrong | Copy the team slug from the browser address when the company is open in tracezilla |
 
