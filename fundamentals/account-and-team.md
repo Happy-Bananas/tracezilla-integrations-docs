@@ -41,9 +41,15 @@ it (a username ending in `@tracezilla.api`, and a password). The API user is
 not a person's login, so the integration keeps working when employees leave,
 and nobody ever types a password into it.
 
-Create them as described in the
-[tracezilla API documentation](https://tech.tracezilla.com/docs/rest-api-v1/making-requests/authentication.html#bearer-token-and-resource-owner-password-credentials),
-and copy all four values into `.env`:
+Create them in tracezilla:
+
+1. Open **My account → API tokens → Client Credentials**.
+2. Enter a name, for example the name of your integration.
+3. **Choose the team** the integration works with, and a role. Only with a
+   team does tracezilla generate the API user. Without one, the client
+   belongs to your own account and tracezilla shows only the Client ID and
+   Client Secret; the integration would then need your personal password.
+4. tracezilla shows the four values **once**. Copy them into `.env`:
 
 ```dotenv
 TRACEZILLA_CLIENT_ID=...
@@ -57,6 +63,10 @@ in with these values and saves the tokens in `var/tracezilla-token.json`.
 Later commands use the saved token and renew it 30 days before it expires. If
 tracezilla refuses the renewal, or the token file is gone, the next command
 simply logs in again.
+
+The role you choose limits what the integration may do in tracezilla. More
+details are in the
+[tracezilla API documentation](https://tech.tracezilla.com/docs/rest-api-v1/making-requests/authentication.html#bearer-token-and-resource-owner-password-credentials).
 
 ## Keep credentials secret
 
